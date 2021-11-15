@@ -30,12 +30,16 @@ public class MenuBar extends JMenuBar {
 		file_open.setMnemonic(KeyEvent.VK_O);
 		icn = new ImageIcon("ikonice/write.png");
 		JMenuItem open_studenti = new JMenuItem("Studenti", icn);
+		open_studenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
 		icn = new ImageIcon("ikonice/bookshelf.png");
 		JMenuItem open_predmeti = new JMenuItem("Predmeti", icn);
+		open_predmeti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J, InputEvent.CTRL_DOWN_MASK));
 		icn = new ImageIcon("ikonice/presentation.png");
 		JMenuItem open_profesori = new JMenuItem("Profesori", icn);
+		open_profesori.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
 		icn = new ImageIcon("ikonice/customer.png");
 		JMenuItem open_katedre = new JMenuItem("Katedre", icn);
+		open_katedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
 		file_open.add(open_studenti);
 		file_open.addSeparator();
 		file_open.add(open_predmeti);
