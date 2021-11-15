@@ -22,21 +22,21 @@ public class Toolbar extends JToolBar {
 		
 		addSeparator();
 		JButton btnAdd = new JButton();
-		btnAdd.setToolTipText("Dodaj");
+		btnAdd.setToolTipText("Add");
 		btnAdd.setIcon(new ImageIcon("ikonice/add copy.png"));
 		add(btnAdd);
 
 		addSeparator();
 
 		JButton btnEdit = new JButton();
-		btnEdit.setToolTipText("Izmeni");
+		btnEdit.setToolTipText("Edit");
 		btnEdit.setIcon(new ImageIcon("ikonice/writing copy.png"));
 		add(btnEdit);
 
 		addSeparator();
 
 		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Izbriši");
+		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
@@ -53,7 +53,7 @@ public class Toolbar extends JToolBar {
 		addSeparator();
 
 		JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Pretraži");
+		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		add(btnSearch);
 

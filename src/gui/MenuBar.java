@@ -13,7 +13,6 @@ import javax.swing.KeyStroke;
 import javax.swing.ImageIcon;
 
 public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -7863806568418316202L;
 
 	public MenuBar() {
 
