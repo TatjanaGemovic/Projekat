@@ -2,8 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
-enum Status_Studenta {Budzet, Samofinansiranje}
+enum Status_Studenta {B, S}
 
 public class Student extends Osoba {
 	private String broj_indeksa;
@@ -11,8 +12,9 @@ public class Student extends Osoba {
 	private int trenutna_god;
 	private double prosecna_ocena;
 	private Status_Studenta status; 
-	private ArrayList<OcenaNaIspitu> ocene = new ArrayList<OcenaNaIspitu>();
-	private ArrayList<Predmet> polozeni_ispiti = new ArrayList<Predmet>();
+	//private ArrayList<OcenaNaIspitu> ocene = new ArrayList<OcenaNaIspitu>();
+	//private ArrayList<Predmet> polozeni_ispiti = new ArrayList<Predmet>();
+	private HashMap<Predmet, Vrednost_Ocene> polozeni_ispiti = new HashMap<Predmet, Vrednost_Ocene>();
 	private ArrayList<Predmet> nepolozeni_ispiti = new ArrayList<Predmet>();
 	
 	public Student(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
@@ -68,19 +70,11 @@ public class Student extends Osoba {
 		this.status = status;
 	}
 
-	public ArrayList<OcenaNaIspitu> getOcene() {
-		return ocene;
-	}
-
-	public void setOcene(ArrayList<OcenaNaIspitu> ocene) {
-		this.ocene = ocene;
-	}
-
-	public ArrayList<Predmet> getPolozeni_ispiti() {
+	public HashMap<Predmet, Vrednost_Ocene> getPolozeni_ispiti() {
 		return polozeni_ispiti;
 	}
 
-	public void setPolozeni_ispiti(ArrayList<Predmet> polozeni_ispiti) {
+	public void setPolozeni_ispiti(HashMap<Predmet, Vrednost_Ocene> polozeni_ispiti) {
 		this.polozeni_ispiti = polozeni_ispiti;
 	}
 
@@ -95,7 +89,7 @@ public class Student extends Osoba {
 	@Override
 	public String toString() {
 		return "Student => broj indeksa:" + broj_indeksa + " || god upisa:" + god_upisa + " || trenutna god:" + trenutna_god
-				+ " || prosecna ocena:" + prosecna_ocena + " || status:" + status + " || ocene:" + ocene
+				+ " || prosecna ocena:" + prosecna_ocena + " || status:" + status 
 				+ " || polozeni ispiti:" + polozeni_ispiti + " || nepolozeni ispiti:" + nepolozeni_ispiti + " || ime:" + ime
 				+ " || prezime:" + prezime + " || datum rodjenja:" + datum_rodjenja + " || adresa:" + adresa
 				+ " || kontakt tel:" + kontakt_tel + " || email:" + email;
