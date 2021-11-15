@@ -32,12 +32,11 @@ public class Toolbar extends JToolBar {
 		addSeparator();
 
 		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Izbrisi");
+		btnDelete.setToolTipText("Izbriši");
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
-		//setFloatable(true);
-		//setBackground(new Color(255, 255, 204));
+		setFloatable(false);
 		setBackground(Color.WHITE);
 		
 		JTextField txt = new JTextField(25);
@@ -45,7 +44,7 @@ public class Toolbar extends JToolBar {
 		add(txt);
 
 		JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Pretrazi");
+		btnSearch.setToolTipText("Pretraži");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		add(btnSearch);
 
