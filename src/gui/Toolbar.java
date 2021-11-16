@@ -43,6 +43,7 @@ public class Toolbar extends JToolBar {
 		setFloatable(false);
 		setBackground(Color.LIGHT_GRAY);
 		
+		for(int i = 0; i<65; i++)
 		addSeparator();
 		
 		JTextField txt = new JTextField(25);
