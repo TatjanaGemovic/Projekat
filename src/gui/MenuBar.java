@@ -88,7 +88,7 @@ public class MenuBar extends JMenuBar {
 		help_help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
 		icn = new ImageIcon("ikonice/info.png");
 		JMenuItem help_about = new JMenuItem("About", icn);
-		help_about.setMnemonic(KeyEvent.VK_K);
+		help_about.setMnemonic(KeyEvent.VK_A);
 		help_about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 		help.add(help_help);
 		help.addSeparator();
