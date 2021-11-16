@@ -41,12 +41,12 @@ public class Toolbar extends JToolBar {
 		add(btnDelete);
 
 		setFloatable(false);
-		setBackground(Color.WHITE);
+		setBackground(Color.LIGHT_GRAY);
 		
 		addSeparator();
 		
 		JTextField txt = new JTextField(25);
-		txt.setMaximumSize(new Dimension(170,27));
+		txt.setMaximumSize(new Dimension(170,20));
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		add(txt);
 		
@@ -54,7 +54,7 @@ public class Toolbar extends JToolBar {
 
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
-		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
+		btnSearch.setIcon(new ImageIcon("ikonice/16x16.png"));
 		add(btnSearch);
 
 	}

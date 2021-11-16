@@ -2,18 +2,20 @@ package model;
 
 import java.util.ArrayList;
 
+enum Semestar {letnji, zimski}
+
 public class Predmet {
 	
 	private String sifra_predmeta;
 	private String naziv;
-	private String semestar;
+	private Semestar semestar;
 	private int godina_izvodjenja;
 	private Profesor predmetni_profesor;
 	private int espb;
 	private ArrayList<Student> polozili = new ArrayList<Student>();
 	private ArrayList<Student> nisu_polozili = new ArrayList<Student>();
 	
-	public Predmet(String sifra_predmeta, String naziv, String semestar, int godina_izvodjenja, Profesor profesor, int espb) {
+	public Predmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
 		super();
 		this.sifra_predmeta = sifra_predmeta;
 		this.naziv = naziv;
@@ -43,11 +45,11 @@ public class Predmet {
 		this.naziv = naziv;
 	}
 
-	public String getSemestar() {
+	public Semestar getSemestar() {
 		return semestar;
 	}
 
-	public void setSemestar(String semestar) {
+	public void setSemestar(Semestar semestar) {
 		this.semestar = semestar;
 	}
 

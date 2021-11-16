@@ -13,9 +13,9 @@ public class Student extends Osoba {
 	private double prosecna_ocena;
 	private Status_Studenta status; 
 	//private ArrayList<OcenaNaIspitu> ocene = new ArrayList<OcenaNaIspitu>();
-	//private ArrayList<Predmet> polozeni_ispiti = new ArrayList<Predmet>();
-	private HashMap<Predmet, Vrednost_Ocene> polozeni_ispiti = new HashMap<Predmet, Vrednost_Ocene>();
-	private ArrayList<Predmet> nepolozeni_ispiti = new ArrayList<Predmet>();
+	private ArrayList<OcenaNaIspitu> polozeni_ispiti = new ArrayList<OcenaNaIspitu>();
+	//private HashMap<Predmet, Vrednost_Ocene> polozeni_ispiti = new HashMap<Predmet, Vrednost_Ocene>();
+	private ArrayList<OcenaNaIspitu> nepolozeni_ispiti = new ArrayList<OcenaNaIspitu>();
 	
 	public Student(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
 			String broj_indeksa, int god_upisa, int trenutna_god, Status_Studenta status) {
@@ -70,19 +70,19 @@ public class Student extends Osoba {
 		this.status = status;
 	}
 
-	public HashMap<Predmet, Vrednost_Ocene> getPolozeni_ispiti() {
+	public ArrayList<OcenaNaIspitu> getPolozeni_ispiti() {
 		return polozeni_ispiti;
 	}
 
-	public void setPolozeni_ispiti(HashMap<Predmet, Vrednost_Ocene> polozeni_ispiti) {
+	public void setPolozeni_ispiti(ArrayList<OcenaNaIspitu> polozeni_ispiti) {
 		this.polozeni_ispiti = polozeni_ispiti;
 	}
 
-	public ArrayList<Predmet> getNepolozeni_ispiti() {
+	public ArrayList<OcenaNaIspitu> getNepolozeni_ispiti() {
 		return nepolozeni_ispiti;
 	}
 
-	public void setNepolozeni_ispiti(ArrayList<Predmet> nepolozeni_ispiti) {
+	public void setNepolozeni_ispiti(ArrayList<OcenaNaIspitu> nepolozeni_ispiti) {
 		this.nepolozeni_ispiti = nepolozeni_ispiti;
 	}
 
