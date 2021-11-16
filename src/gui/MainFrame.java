@@ -14,7 +14,7 @@ public class MainFrame extends JFrame{
 			int screenHeight = screenSize.height;
 			int screenWidth = screenSize.width;
 			
-			setSize(screenWidth / 3 * 2, screenHeight / 3 * 2);
+			setSize(screenWidth / 4 * 3, screenHeight / 4 * 3);
 			setTitle("Studentska sluzba");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setLocationRelativeTo(null);
