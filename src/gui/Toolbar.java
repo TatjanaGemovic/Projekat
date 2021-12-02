@@ -1,10 +1,15 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-
+import java.awt.LayoutManager;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -17,6 +22,9 @@ public class Toolbar extends JToolBar {
 	public Toolbar() {
 
 		super(SwingConstants.HORIZONTAL);
+		
+		addSeparator();
+
 		JButton btnAdd = new JButton();
 		btnAdd.setToolTipText("Add");
 		btnAdd.setIcon(new ImageIcon("ikonice/add copy.png"));
@@ -36,6 +44,7 @@ public class Toolbar extends JToolBar {
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
+
 		//setFloatable(true);
 		//setBackground(new Color(255, 255, 204));
 		setBackground(Color.WHITE);
@@ -45,8 +54,27 @@ public class Toolbar extends JToolBar {
 		tf1.setEditable(true);
 		add(tf1);
 		
-		 JButton search_btn=new JButton(new ImageIcon("ikonice/search-2.png"));  
-		 add(search_btn);
+		JButton search_btn=new JButton(new ImageIcon("ikonice/search-2.png"));  
+		add(search_btn);
+		 
+		setFloatable(false);
+		setBackground(Color.LIGHT_GRAY);
+		
+		add(Box.createHorizontalGlue());
+		
+		JTextField txt = new JTextField(16);
+		txt.setMaximumSize(new Dimension(170,24));
+		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		add(txt);
+		
+		addSeparator();
+
+		JButton btnSearch = new JButton();
+		btnSearch.setToolTipText("Search");
+		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
+		add(btnSearch);
+		
+		addSeparator();
 
 	}
 }
