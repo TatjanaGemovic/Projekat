@@ -21,10 +21,9 @@ public class Toolbar extends JToolBar {
 	
 	public Toolbar() {
 
-		super(SwingConstants.HORIZONTAL);
+super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
-
 		JButton btnAdd = new JButton();
 		btnAdd.setToolTipText("Add");
 		btnAdd.setIcon(new ImageIcon("ikonice/add copy.png"));
@@ -44,19 +43,6 @@ public class Toolbar extends JToolBar {
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
-
-		//setFloatable(true);
-		//setBackground(new Color(255, 255, 204));
-		setBackground(Color.WHITE);
-		
-		
-		JTextField tf1=new JTextField();
-		tf1.setEditable(true);
-		add(tf1);
-		
-		JButton search_btn=new JButton(new ImageIcon("ikonice/search-2.png"));  
-		add(search_btn);
-		 
 		setFloatable(false);
 		setBackground(Color.LIGHT_GRAY);
 		
@@ -75,6 +61,5 @@ public class Toolbar extends JToolBar {
 		add(btnSearch);
 		
 		addSeparator();
-
 	}
 }
