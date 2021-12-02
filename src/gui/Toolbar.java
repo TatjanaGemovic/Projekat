@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,11 +44,10 @@ public class Toolbar extends JToolBar {
 		setFloatable(false);
 		setBackground(Color.LIGHT_GRAY);
 		
-		for(int i = 0; i<65; i++)
-		addSeparator();
+		add(Box.createHorizontalGlue());
 		
-		JTextField txt = new JTextField(25);
-		txt.setMaximumSize(new Dimension(170,20));
+		JTextField txt = new JTextField(16);
+		txt.setMaximumSize(new Dimension(170,24));
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		add(txt);
 		
@@ -55,8 +55,10 @@ public class Toolbar extends JToolBar {
 
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
-		btnSearch.setIcon(new ImageIcon("ikonice/16x16.png"));
+		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		add(btnSearch);
+		
+		addSeparator();
 
 	}
 }
