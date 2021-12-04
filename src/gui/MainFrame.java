@@ -42,7 +42,8 @@ public class MainFrame extends JFrame{
 		
 		private void createTabbedPane() {
 			TabbedPane tabovi = new TabbedPane();
-			this.add(tabovi, BorderLayout.CENTER);
+			tabovi.setBackground(Color.WHITE);
+			this.add(tabovi);
 		}
 		
 		

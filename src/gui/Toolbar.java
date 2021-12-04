@@ -6,9 +6,11 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
 
 public class Toolbar extends JToolBar {
 	
@@ -43,7 +45,11 @@ public class Toolbar extends JToolBar {
 		
 		JTextField txt = new JTextField(16);
 		txt.setMaximumSize(new Dimension(170,24));
+		txt.setName("txtSearch");
+		txt.setText("Search");
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		MyFocusListener focusListener = new MyFocusListener();
+		txt.addFocusListener(focusListener);
 		add(txt);
 		
 		addSeparator();
