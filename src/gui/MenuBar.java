@@ -1,17 +1,10 @@
 package gui;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-<<<<<<< HEAD
-=======
 import java.awt.event.KeyEvent;
->>>>>>> 855ad18baabafc527d3877651c78340a16436aae
-import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
 import javax.swing.ImageIcon;
 
@@ -19,7 +12,7 @@ public class MenuBar extends JMenuBar {
 
 	public MenuBar() {
 
-ImageIcon icn = new ImageIcon("ikonice/new.png"); 
+		ImageIcon icn = new ImageIcon("ikonice/new.png"); 
 		
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -73,10 +66,6 @@ ImageIcon icn = new ImageIcon("ikonice/new.png");
 		edit.setMnemonic(KeyEvent.VK_E);
 		icn = new ImageIcon("ikonice/writing copy.png");
 		JMenuItem edit_entity = new JMenuItem("Edit", icn);
-<<<<<<< HEAD
-		edit_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
-=======
->>>>>>> 855ad18baabafc527d3877651c78340a16436aae
 		edit_entity.setMnemonic(KeyEvent.VK_E);
 		edit_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
 		icn = new ImageIcon("ikonice/trash.png");
@@ -96,10 +85,6 @@ ImageIcon icn = new ImageIcon("ikonice/new.png");
 		icn = new ImageIcon("ikonice/info.png");
 		JMenuItem help_about = new JMenuItem("About", icn);
 		help_about.setMnemonic(KeyEvent.VK_A);
-<<<<<<< HEAD
-
-=======
->>>>>>> 855ad18baabafc527d3877651c78340a16436aae
 		help_about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 		help.add(help_help);
 		help.addSeparator();
