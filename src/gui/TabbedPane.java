@@ -13,17 +13,18 @@ public class TabbedPane extends JTabbedPane{
 	
 	public TabbedPane() {
 		
-		JComponent studenti = new JTable();
-		//JScrollPane studentiP = new JScrollPane(studenti);
-		this.addTab("Studenti", studenti);
+		StudentiJTable studenti = new StudentiJTable();
+		JScrollPane studentiPane = new JScrollPane(studenti);
+		this.add("Studenti", studentiPane);
 		
-		JComponent profesori = new JTable();
-		//JScrollPane profesoriP = new JScrollPane(profesori);
-		this.addTab("Profesori", profesori);
+		ProfesoriJTable profesori = new ProfesoriJTable();
+		JScrollPane profesoriPane = new JScrollPane(profesori);
+		this.add("Profesori", profesoriPane);
 		
-		JComponent predmeti = new JTable();
-		//JScrollPane predmetiP = new JScrollPane(predmeti);
-		this.addTab("Predmeti", predmeti);
+		PredmetiJTable predmeti = new PredmetiJTable();
+		JScrollPane predmetiPane = new JScrollPane(predmeti);
+		this.add("Predmeti", predmetiPane);
+		
 		
 		
 	}
