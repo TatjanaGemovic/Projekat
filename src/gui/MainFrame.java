@@ -8,6 +8,7 @@ import javax.swing.JTabbedPane;
 public class MainFrame extends JFrame{
 
 	
+		private static final long serialVersionUID = -888790554862002427L;
 		private static MainFrame instance = null;
 		
 		private MainFrame() {
@@ -31,7 +32,7 @@ public class MainFrame extends JFrame{
 		}
 		
 		private void createMenu() {
-			MenuBar menu = new MenuBar();
+			MenuBar menu = new MenuBar(this);
 			this.setJMenuBar(menu);
 		}
 		
@@ -41,6 +42,12 @@ public class MainFrame extends JFrame{
 		}
 		
 		private void createTabbedPane() {
+			JPanel leftDummy = new JPanel();
+			JPanel rightDummy = new JPanel();
+			leftDummy.setPreferredSize(new Dimension(40,100));
+			rightDummy.setPreferredSize(new Dimension(40,100));
+			add(leftDummy, BorderLayout.WEST);
+			add(rightDummy, BorderLayout.EAST);
 			TabbedPane tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
