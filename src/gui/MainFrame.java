@@ -27,7 +27,7 @@ public class MainFrame extends JFrame{
 		}
 		
 		private void createToolbar() {
-			Toolbar toolbar = new Toolbar();
+			Toolbar toolbar = new Toolbar(this);
 			add(toolbar, BorderLayout.NORTH);
 		}
 		

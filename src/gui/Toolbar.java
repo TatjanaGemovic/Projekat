@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -9,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -17,7 +20,7 @@ import javax.swing.SwingConstants;
 
 public class Toolbar extends JToolBar {
 	
-	public Toolbar() {
+	public Toolbar(final JFrame parent) {
 
 		super(SwingConstants.HORIZONTAL);
 		
@@ -25,6 +28,15 @@ public class Toolbar extends JToolBar {
 		JButton btnAdd = new JButton();
 		btnAdd.setToolTipText("Add");
 		btnAdd.setIcon(new ImageIcon("ikonice/add copy.png"));
+		btnAdd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DijalogDodavanjaEntiteta dodajEntitet = new DijalogDodavanjaEntiteta(parent, "Dodavanje Entiteta", true);
+				dodajEntitet.setVisible(true);
+				
+			}
+		});
 		add(btnAdd);
 
 		addSeparator();
