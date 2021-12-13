@@ -13,9 +13,9 @@ public class MainFrame extends JFrame{
 		private MainFrame() {
 			this.createToolbar();
 			this.createMenu();
-			this.initPosition();
 			this.createStatusBar();
 			this.createTabbedPane();
+			this.initPosition();
 		}
 		
 		public static MainFrame getInstance() {
