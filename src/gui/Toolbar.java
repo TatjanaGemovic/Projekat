@@ -20,7 +20,7 @@ public class Toolbar extends JToolBar {
 	
 	public Toolbar(final JFrame parent) {
 
-		super(SwingConstants.HORIZONTAL);
+super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
 		JButton btnAdd = new JButton();
@@ -74,7 +74,6 @@ public class Toolbar extends JToolBar {
 		add(btnSearch);
 		
 		addSeparator();
-
 	}
 	
 	public class MyFocusListener implements FocusListener {

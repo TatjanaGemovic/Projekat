@@ -17,7 +17,7 @@ public class MenuBar extends JMenuBar {
 
 	public MenuBar(final JFrame parent) {
 
-		ImageIcon icn = new ImageIcon("ikonice/new.png"); 
+ImageIcon icn = new ImageIcon("ikonice/new.png"); 
 		
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
