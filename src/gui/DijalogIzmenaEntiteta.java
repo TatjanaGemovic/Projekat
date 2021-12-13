@@ -14,5 +14,8 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		int diaHeight = parentSize.height;
 		setSize(diaWidth*3/5, diaHeight*18/20);
 		setLocationRelativeTo(parent);
+		
+		DijalogIzmenaTabbedPane tabbedPane = new DijalogIzmenaTabbedPane();
+		this.add(tabbedPane);
 	}
 }
