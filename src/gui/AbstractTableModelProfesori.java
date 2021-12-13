@@ -1,12 +1,11 @@
 package gui;
 
 import javax.swing.table.AbstractTableModel;
-import model.BazaProfesora;
 
 public class AbstractTableModelProfesori extends AbstractTableModel{
 
 	public AbstractTableModelProfesori() {
-		BazaProfesora.getInstance();
+		//BazaProfesora.getInstance();
 	}
 
 	@Override
