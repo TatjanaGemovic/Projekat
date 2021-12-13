@@ -20,7 +20,8 @@ public class Toolbar extends JToolBar {
 	
 	public Toolbar(final JFrame parent) {
 
-super(SwingConstants.HORIZONTAL);
+
+		super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
 		JButton btnAdd = new JButton();
@@ -51,6 +52,10 @@ super(SwingConstants.HORIZONTAL);
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
+		//setFloatable(true);
+		//setBackground(new Color(255, 255, 204));
+		setBackground(Color.WHITE);
+		
 		setFloatable(false);
 		setBackground(Color.LIGHT_GRAY);
 		
@@ -72,6 +77,7 @@ super(SwingConstants.HORIZONTAL);
 		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		add(btnSearch);
+
 		
 		addSeparator();
 	}

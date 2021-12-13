@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
-	
+
 
 		private static MainFrame instance = null;
 		private static final long serialVersionUID = -888790554862002427L;
@@ -14,10 +14,10 @@ public class MainFrame extends JFrame{
 			this.createToolbar();
 			this.createMenu();
 			this.initPosition();
-			//this.createStatusBar();
+			this.createStatusBar();
 			this.createTabbedPane();
 		}
-	
+		
 		public static MainFrame getInstance() {
 			if(instance == null) {
 				instance = new MainFrame();
@@ -37,8 +37,8 @@ public class MainFrame extends JFrame{
 		}
 		
 		private void createStatusBar() {
-			//StatusBar statusbar = new StatusBar();
-			//add(statusBar, BorderLayout.SOUTH);
+			StatusBar statusBar = new StatusBar();
+			add(statusBar, BorderLayout.SOUTH);
 		}
 		
 		private void createTabbedPane() {
@@ -51,8 +51,8 @@ public class MainFrame extends JFrame{
 			TabbedPane tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
+
 		}
-		
 		
 		private void initPosition() {
 			Toolkit kit = Toolkit.getDefaultToolkit();
