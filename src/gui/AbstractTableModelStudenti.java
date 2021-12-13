@@ -1,13 +1,14 @@
 package gui;
 
 import javax.swing.table.AbstractTableModel;
+import model.BazaStudenata;
 
 
 public class AbstractTableModelStudenti extends AbstractTableModel {
 
 
 	public AbstractTableModelStudenti() {
-		//BazaStudenata.getInstance();
+		BazaStudenata.getInstance();
 	}
 
 	@Override

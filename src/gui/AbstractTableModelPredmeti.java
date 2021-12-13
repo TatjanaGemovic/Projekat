@@ -1,12 +1,13 @@
 package gui;
 
 import javax.swing.table.AbstractTableModel;
+import model.BazaPredmeta;
 
 
 public class AbstractTableModelPredmeti extends AbstractTableModel{
 
 	public AbstractTableModelPredmeti() {
-		//BazaPredmeta.getInstance();
+		BazaPredmeta.getInstance();
 	}
 
 	@Override

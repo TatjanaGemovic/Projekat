@@ -6,13 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -21,6 +19,7 @@ import javax.swing.SwingConstants;
 public class Toolbar extends JToolBar {
 	
 	public Toolbar(final JFrame parent) {
+
 
 		super(SwingConstants.HORIZONTAL);
 		
@@ -53,6 +52,10 @@ public class Toolbar extends JToolBar {
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		add(btnDelete);
 
+		//setFloatable(true);
+		//setBackground(new Color(255, 255, 204));
+		setBackground(Color.WHITE);
+		
 		setFloatable(false);
 		setBackground(Color.LIGHT_GRAY);
 		
@@ -60,6 +63,7 @@ public class Toolbar extends JToolBar {
 		
 		JTextField txt = new JTextField(16);
 		txt.setMaximumSize(new Dimension(170,24));
+
 		txt.setName("txtSearch");
 		txt.setText("Search");
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
@@ -74,8 +78,8 @@ public class Toolbar extends JToolBar {
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		add(btnSearch);
 
+		
 		addSeparator();
-
 	}
 	
 	public class MyFocusListener implements FocusListener {

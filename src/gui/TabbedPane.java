@@ -1,7 +1,10 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.LayoutManager;
+import java.awt.Toolkit;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -24,8 +27,6 @@ public class TabbedPane extends JTabbedPane{
 		PredmetiJTable predmeti = new PredmetiJTable();
 		JScrollPane predmetiPane = new JScrollPane(predmeti);
 		this.add("Predmeti", predmetiPane);
-		
-		
 		
 	}
 

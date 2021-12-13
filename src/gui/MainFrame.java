@@ -3,18 +3,17 @@ package gui;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 public class MainFrame extends JFrame{
 
-	
-		private static final long serialVersionUID = -888790554862002427L;
+
 		private static MainFrame instance = null;
+		private static final long serialVersionUID = -888790554862002427L;
 		
 		private MainFrame() {
 			this.createToolbar();
 			this.createMenu();
-			//this.createStatusBar();
+			this.createStatusBar();
 			this.createTabbedPane();
 			this.initPosition();
 		}
@@ -25,6 +24,7 @@ public class MainFrame extends JFrame{
 			}
 			return instance;
 		}
+			
 		
 		private void createToolbar() {
 			Toolbar toolbar = new Toolbar(this);
@@ -37,8 +37,8 @@ public class MainFrame extends JFrame{
 		}
 		
 		private void createStatusBar() {
-			//StatusBar statusbar = new StatusBar();
-			//add(statusBar, BorderLayout.SOUTH);
+			StatusBar statusBar = new StatusBar();
+			add(statusBar, BorderLayout.SOUTH);
 		}
 		
 		private void createTabbedPane() {
@@ -51,8 +51,8 @@ public class MainFrame extends JFrame{
 			TabbedPane tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
+
 		}
-		
 		
 		private void initPosition() {
 			Toolkit kit = Toolkit.getDefaultToolkit();
@@ -66,4 +66,5 @@ public class MainFrame extends JFrame{
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 		}
+	
 }
