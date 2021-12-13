@@ -3,19 +3,19 @@ package gui;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 public class MainFrame extends JFrame{
 
-	
+
 		private static MainFrame instance = null;
+		private static final long serialVersionUID = -888790554862002427L;
 		
 		private MainFrame() {
 			this.createToolbar();
 			this.createMenu();
-			this.initPosition();
-			//this.createStatusBar();
+			this.createStatusBar();
 			this.createTabbedPane();
+			this.initPosition();
 		}
 		
 		public static MainFrame getInstance() {
@@ -24,28 +24,35 @@ public class MainFrame extends JFrame{
 			}
 			return instance;
 		}
+			
 		
 		private void createToolbar() {
-			Toolbar toolbar = new Toolbar();
+			Toolbar toolbar = new Toolbar(this);
 			add(toolbar, BorderLayout.NORTH);
 		}
 		
 		private void createMenu() {
-			MenuBar menu = new MenuBar();
+			MenuBar menu = new MenuBar(this);
 			this.setJMenuBar(menu);
 		}
 		
 		private void createStatusBar() {
-			//StatusBar statusbar = new StatusBar();
-			//add(statusBar, BorderLayout.SOUTH);
+			StatusBar statusBar = new StatusBar();
+			add(statusBar, BorderLayout.SOUTH);
 		}
 		
 		private void createTabbedPane() {
+			JPanel leftDummy = new JPanel();
+			JPanel rightDummy = new JPanel();
+			leftDummy.setPreferredSize(new Dimension(40,100));
+			rightDummy.setPreferredSize(new Dimension(40,100));
+			add(leftDummy, BorderLayout.WEST);
+			add(rightDummy, BorderLayout.EAST);
 			TabbedPane tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
+
 		}
-		
 		
 		private void initPosition() {
 			Toolkit kit = Toolkit.getDefaultToolkit();
@@ -59,4 +66,5 @@ public class MainFrame extends JFrame{
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 		}
+	
 }

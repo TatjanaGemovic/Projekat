@@ -4,13 +4,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import javax.swing.KeyStroke;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 public class MenuBar extends JMenuBar {
 
-	public MenuBar() {
+	private static final long serialVersionUID = -9132887326381921444L;
+
+	public MenuBar(final JFrame parent) {
 
 		ImageIcon icn = new ImageIcon("ikonice/new.png"); 
 		
@@ -19,6 +24,17 @@ public class MenuBar extends JMenuBar {
 		JMenuItem file_new = new JMenuItem("New", icn);
 		file_new.setMnemonic(KeyEvent.VK_N);
 		file_new.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+		file_new.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DijalogDodavanjaEntiteta dodajEntitet = new DijalogDodavanjaEntiteta(parent, "Dodavanje Entiteta", true);
+				dodajEntitet.setVisible(true);
+				
+			}
+		});
+		
+		
 		icn = new ImageIcon("ikonice/save.png");
 		JMenuItem file_save = new JMenuItem("Save", icn);
 		file_save.setMnemonic(KeyEvent.VK_S);
