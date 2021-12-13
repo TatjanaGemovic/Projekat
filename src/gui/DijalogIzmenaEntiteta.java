@@ -17,5 +17,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		
 		DijalogIzmenaTabbedPane tabbedPane = new DijalogIzmenaTabbedPane();
 		this.add(tabbedPane);
+		
+		
 	}
 }
