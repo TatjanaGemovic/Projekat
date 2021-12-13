@@ -13,20 +13,21 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 10;
+		return BazaStudenata.getInstance().getRowCount();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return BazaStudenata.getInstance().getColumnCount();
+	}
+	
+	public String getColumnName(int column) {
+		return BazaStudenata.getInstance().getColumnName(column);
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return BazaStudenata.getInstance().getValueAt(rowIndex, columnIndex);	
 	}
 	
 }
