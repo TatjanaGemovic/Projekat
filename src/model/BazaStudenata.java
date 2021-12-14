@@ -34,6 +34,18 @@ public class BazaStudenata extends AbstractTableModel{
 	
 	private void initStudenti() {
 		this.studenti = new ArrayList<Student>();
+		
+		@SuppressWarnings("deprecation")
+		Date datum = new Date(2000, 16, 03);
+		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
+		Status_Studenta status = Status_Studenta.B;
+		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
+		@SuppressWarnings("deprecation")
+		Date datum2 = new Date(2000, 25, 05);
+		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
+		Status_Studenta status2 = Status_Studenta.S;
+		studenti.add(new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status));
+		
 	}
 
 	@Override
@@ -61,13 +73,13 @@ public class BazaStudenata extends AbstractTableModel{
 	@Override
 	public String getValueAt(int row, int column) {
 		Student student = this.studenti.get(row);
-		switch (column) {
+		switch (column) {	
 			case 0:
-				return student.getIme();
-			case 1:
-				return student.getPrezime();
-			case 2:
 				return student.getBroj_indeksa();
+			case 1:
+				return student.getIme();
+			case 2:
+				return student.getPrezime();
 			case 3:
 				return Integer.toString(student.getTrenutna_god());
 			case 4:

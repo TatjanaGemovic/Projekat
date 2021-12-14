@@ -32,6 +32,11 @@ public class BazaProfesora extends AbstractTableModel{
 	
 	private void initProfesori() {
 		this.profesori = new ArrayList<Profesor>();
+		@SuppressWarnings("deprecation")
+		Date datum = new Date(1970, 25, 04);
+		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
+		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
+		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
 	}
 	
 	
