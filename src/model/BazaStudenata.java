@@ -97,4 +97,13 @@ public class BazaStudenata extends AbstractTableModel{
 		this.studenti.add(new Student(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,broj_indeksa,god_upisa,trenutna_god,status));
 	}
 	
+	public void izbrisiStudenta(String naziv) {
+		for (Student i : studenti) {
+			if (i.getBroj_indeksa().equals(naziv)) {
+				studenti.remove(i);
+					break;
+			}
+		}
+	}
+	
 }
