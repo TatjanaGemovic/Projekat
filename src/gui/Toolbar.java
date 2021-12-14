@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -60,8 +61,19 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogIzmenaEntiteta izmeniEntitet = new DijalogIzmenaEntiteta(parent, "Izmena Entiteta", true);
-				izmeniEntitet.setVisible(true);
+				switch (TabbedPane.tabIndex) {
+				case Profesor:
+					DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
+					izmeniProfesora.setVisible(true);
+					break;
+				case Predmet:
+					DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
+					izmeniPredmet.setVisible(true);
+					break;
+				default:
+					DijalogIzmenaEntiteta izmeniStudenta = new DijalogIzmenaEntiteta(parent, "Izmena Studenta", true);
+					izmeniStudenta.setVisible(true);
+			}
 				
 			}
 		});

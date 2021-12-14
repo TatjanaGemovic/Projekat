@@ -94,6 +94,25 @@ public class MenuBar extends JMenuBar {
 		JMenuItem edit_entity = new JMenuItem("Edit", icn);
 		edit_entity.setMnemonic(KeyEvent.VK_E);
 		edit_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
+		edit_entity.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch (TabbedPane.tabIndex) {
+				case Profesor:
+					DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
+					izmeniProfesora.setVisible(true);
+					break;
+				case Predmet:
+					DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
+					izmeniPredmet.setVisible(true);
+					break;
+				default:
+					DijalogIzmenaEntiteta izmeniStudenta = new DijalogIzmenaEntiteta(parent, "Izmena Studenta", true);
+					izmeniStudenta.setVisible(true);
+				}
+			}
+		});
 		icn = new ImageIcon("ikonice/trash.png");
 		JMenuItem delete_entity = new JMenuItem("Delete", icn);
 		delete_entity.setMnemonic(KeyEvent.VK_D);

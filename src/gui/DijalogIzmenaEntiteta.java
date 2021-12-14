@@ -68,65 +68,65 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    GridBagConstraints gbcLblIme = new GridBagConstraints();
 		    gbcLblIme.gridx = 0;
 		    gbcLblIme.gridy = 0;
-		    gbcLblIme.insets = new Insets(10, 0, 0,0);
+		    gbcLblIme.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblIme, gbcLblIme);
 
 
 		    GridBagConstraints gbcLblPrezime = new GridBagConstraints();
 		    gbcLblPrezime.gridx = 0;
 		    gbcLblPrezime.gridy = 1;
-		    gbcLblPrezime.insets = new Insets(10, 0, 0,0);
+		    gbcLblPrezime.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblPrezime, gbcLblPrezime);
 
 
 		    GridBagConstraints gbcLbDatumRodjennja = new GridBagConstraints();
 		    gbcLbDatumRodjennja.gridx = 0;
 		    gbcLbDatumRodjennja.gridy = 2;
-		    gbcLbDatumRodjennja.insets = new Insets(10, 0, 0,0);
+		    gbcLbDatumRodjennja.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblDatumRodjenja, gbcLbDatumRodjennja);
 
 
 		    GridBagConstraints gbcLbAdresa = new GridBagConstraints();
 		    gbcLbAdresa.gridx = 0;
 		    gbcLbAdresa.gridy = 3;
-		    gbcLbAdresa.insets = new Insets(10, 0, 0,0);
+		    gbcLbAdresa.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblAdresa, gbcLbAdresa);
 
 
 		    GridBagConstraints gbcLbTelefon = new GridBagConstraints();
 		    gbcLbTelefon.gridx = 0;
 		    gbcLbTelefon.gridy = 4;
-		    gbcLbTelefon.insets = new Insets(10, 0, 0,0);
+		    gbcLbTelefon.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblTelefon, gbcLbTelefon);
 		    
 		    GridBagConstraints gbcLblEmailAdresa = new GridBagConstraints();
 		    gbcLblEmailAdresa.gridx = 0;
 		    gbcLblEmailAdresa.gridy = 6;
-		    gbcLblEmailAdresa.insets = new Insets(10, 0, 0,0);
+		    gbcLblEmailAdresa.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblEmailAdresa, gbcLblEmailAdresa);
 
 		    GridBagConstraints gbcLbBrojIndeksa = new GridBagConstraints();
 		    gbcLbBrojIndeksa.gridx = 0;
 		    gbcLbBrojIndeksa.gridy = 5;
-		    gbcLbBrojIndeksa.insets = new Insets(10, 0, 0,0);
+		    gbcLbBrojIndeksa.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblBrojIndeksa, gbcLbBrojIndeksa);
 		    
 		    GridBagConstraints gbcLblGodinaUpisa = new GridBagConstraints();
 		    gbcLblGodinaUpisa.gridx = 0;
 		    gbcLblGodinaUpisa.gridy = 7;
-		    gbcLblGodinaUpisa.insets = new Insets(10, 0, 0,0);
+		    gbcLblGodinaUpisa.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblGodinaUpisa, gbcLblGodinaUpisa);
 		    
 		    GridBagConstraints gbcLbTrenutnaGodinaStudija = new GridBagConstraints();
 		    gbcLbTrenutnaGodinaStudija.gridx = 0;
 		    gbcLbTrenutnaGodinaStudija.gridy = 9;
-		    gbcLbTrenutnaGodinaStudija.insets = new Insets(10, 0, 0,0);
+		    gbcLbTrenutnaGodinaStudija.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblTrenutnaGodinaStudija, gbcLbTrenutnaGodinaStudija);
 		    
 		    GridBagConstraints gbcLbNacinFinansiranja = new GridBagConstraints();
 		    gbcLbNacinFinansiranja.gridx = 0;
 		    gbcLbNacinFinansiranja.gridy = 10;
-		    gbcLbNacinFinansiranja.insets = new Insets(10, 0, 0,0);
+		    gbcLbNacinFinansiranja.insets = new Insets(10, 40, 0,0);
 		    panelCenter.add(lblNacinFinansiranja, gbcLbNacinFinansiranja);
 
 
@@ -135,7 +135,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtIme .gridy = 0;
 		    gbcTxtIme .weightx = 100;
 		    gbcTxtIme .fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtIme .insets = new Insets(10, 10, 0, 10);
+		    gbcTxtIme .insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtIme, gbcTxtIme );
 
 
@@ -144,7 +144,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtPrezime .gridy = 1;
 		    gbcTxtPrezime .weightx = 100;
 		    gbcTxtPrezime .fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtPrezime .insets = new Insets(10, 10, 0, 10);
+		    gbcTxtPrezime .insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtPrezime, gbcTxtPrezime );
 
 
@@ -153,7 +153,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtDatum .gridy = 2;
 		    gbcTxtDatum .weightx = 100;
 		    gbcTxtDatum.fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtDatum.insets = new Insets(10, 10, 0, 10);
+		    gbcTxtDatum.insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtDatumRodjenja, gbcTxtDatum );
 		    
 		    GridBagConstraints gbcTxtAdresa = new GridBagConstraints();
@@ -161,7 +161,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtAdresa .gridy = 3;
 		    gbcTxtAdresa .weightx = 100;
 		    gbcTxtAdresa.fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtAdresa.insets = new Insets(10, 10, 0, 10);
+		    gbcTxtAdresa.insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtAdresa, gbcTxtAdresa );
 		    
 		    GridBagConstraints gbcTxtEmailAdresa = new GridBagConstraints();
@@ -169,7 +169,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtEmailAdresa .gridy = 6;
 		    gbcTxtEmailAdresa .weightx = 100;
 		    gbcTxtEmailAdresa .fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtEmailAdresa .insets = new Insets(10, 10, 0, 10);
+		    gbcTxtEmailAdresa .insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtEmailAdresa, gbcTxtEmailAdresa );
 		    
 		    GridBagConstraints gbcTxtTelefon = new GridBagConstraints();
@@ -177,7 +177,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtTelefon .gridy = 4;
 		    gbcTxtTelefon .weightx = 100;
 		    gbcTxtTelefon.fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtTelefon.insets = new Insets(10, 10, 0, 10);
+		    gbcTxtTelefon.insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtTelefon, gbcTxtTelefon );
 		    
 		    GridBagConstraints gbcTxtBrojIndeksa = new GridBagConstraints();
@@ -185,7 +185,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtBrojIndeksa .gridy = 5;
 		    gbcTxtBrojIndeksa .weightx = 100;
 		    gbcTxtBrojIndeksa.fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtBrojIndeksa.insets = new Insets(10, 10, 0, 10);
+		    gbcTxtBrojIndeksa.insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtBrojIndeksa, gbcTxtBrojIndeksa );
 		    
 		    GridBagConstraints gbcTxtGodinaUpisa = new GridBagConstraints();
@@ -193,7 +193,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    gbcTxtGodinaUpisa .gridy = 7;
 		    gbcTxtGodinaUpisa .weightx = 100;
 		    gbcTxtGodinaUpisa .fill = GridBagConstraints.HORIZONTAL;
-		    gbcTxtGodinaUpisa .insets = new Insets(10, 10, 0, 10);
+		    gbcTxtGodinaUpisa .insets = new Insets(10, 120, 0, 70);
 		    panelCenter.add(txtGodinaUpisa, gbcTxtGodinaUpisa );
 		    
 		    String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
@@ -204,7 +204,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    grd1.gridy = 9;
 		    grd1.weightx = 100;
 		    grd1.fill = GridBagConstraints.HORIZONTAL;
-		    grd1.insets = new Insets(10, 10, 0, 10);
+		    grd1.insets = new Insets(10, 120, 0, 70);
 		    
 		    panelCenter.add(godStud,grd1);
 		    
@@ -216,9 +216,9 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    grd2.gridy = 10;
 		    grd2.weightx = 100;
 		    grd2.fill = GridBagConstraints.HORIZONTAL;
-		    grd2.insets = new Insets(10, 10, 0, 10);
+		    grd2.insets = new Insets(10, 120, 0, 70);
 		    
-		    panelCenter.add(NacinFinansiranja,grd2);
+		    panelCenter.add(NacinFinansiranja, grd2);
 		    
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
