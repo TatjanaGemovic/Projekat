@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-enum Semestar {letnji, zimski}
 
 public class Predmet {
 	

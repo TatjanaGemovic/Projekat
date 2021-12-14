@@ -31,7 +31,7 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogDodavanjaProfesora dodajEntitet = new DijalogDodavanjaProfesora(parent, "Dodavanje Profesora", true);
+				DijalogDodavanjaStudenta dodajEntitet = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
 				dodajEntitet.setVisible(true);
 				
 			}

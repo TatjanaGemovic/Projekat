@@ -1,8 +1,6 @@
 package controller;
 
 import java.util.Date;
-
-import gui.MainFrame;
 import model.Adresa;
 import model.BazaStudenata;
 import model.Status_Studenta;
@@ -10,7 +8,7 @@ import model.Status_Studenta;
 
 public class StudentKontroler {
 
-private static StudentKontroler instance = null;
+	private static StudentKontroler instance = null;
 	
 	public static StudentKontroler getInstance() {
 		if (instance == null) {
