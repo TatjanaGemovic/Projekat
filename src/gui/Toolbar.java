@@ -31,6 +31,7 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
 				DijalogDodavanjaStudenta dodajEntitet = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
 				dodajEntitet.setVisible(true);
 				
@@ -43,6 +44,15 @@ public class Toolbar extends JToolBar {
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Edit");
 		btnEdit.setIcon(new ImageIcon("ikonice/writing copy.png"));
+		btnEdit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DijalogIzmenaEntiteta izmeniEntitet = new DijalogIzmenaEntiteta(parent, "Izmena Entiteta", true);
+				izmeniEntitet.setVisible(true);
+				
+			}
+		});
 		add(btnEdit);
 
 		addSeparator();

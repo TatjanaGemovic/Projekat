@@ -1,16 +1,9 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
-import java.awt.Toolkit;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
 public class TabbedPane extends JTabbedPane{
 	
@@ -18,16 +11,33 @@ public class TabbedPane extends JTabbedPane{
 		
 		StudentiJTable studenti = new StudentiJTable();
 		JScrollPane studentiPane = new JScrollPane(studenti);
-		this.add("Studenti", studentiPane);
+		this.addTab("Studenti", studentiPane);
 		
 		ProfesoriJTable profesori = new ProfesoriJTable();
 		JScrollPane profesoriPane = new JScrollPane(profesori);
-		this.add("Profesori", profesoriPane);
+		this.addTab("Profesori", profesoriPane);
 		
 		PredmetiJTable predmeti = new PredmetiJTable();
 		JScrollPane predmetiPane = new JScrollPane(predmeti);
-		this.add("Predmeti", predmetiPane);
+		this.addTab("Predmeti", predmetiPane);
 		
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+	            int tabIndex = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
+	            if(tabIndex==0) {
+	            	System.out.println("0");
+	            	StatusBar.nazivTaba.setText("- Studenti");
+	            }
+	            else if(tabIndex==1) {
+	            	System.out.println("1");
+	            	StatusBar.nazivTaba.setText("- Profesori");
+	            }
+	            else if(tabIndex==2) {
+	            	System.out.println("2");
+	            	StatusBar.nazivTaba.setText("- Predmeti");
+	            }
+	            
+	        }
+		});
 	}
-
 }
