@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 
 public class BazaProfesora extends AbstractTableModel{
 
-	private static final long serialVersionUID = 1L;
 	private static BazaProfesora instance = null;
 	
 	public static BazaProfesora getInstance() {

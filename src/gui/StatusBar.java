@@ -12,9 +12,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 public class StatusBar extends JMenuBar {
-	
+	public JLabel nazivTaba = new JLabel("Trenutno otvoreni tab: Studenti");
 	public StatusBar() {
-		
 		JPanel nazivAplikacijePanel = new JPanel();
 		nazivAplikacijePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel nazivApp = new JLabel("  Studentska služba");
@@ -22,6 +21,13 @@ public class StatusBar extends JMenuBar {
 		nazivAplikacijePanel.add(nazivApp);
 		
 		add(nazivAplikacijePanel);
+		
+		JPanel trenutniTabPanel = new JPanel();
+		trenutniTabPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		trenutniTabPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,Color.BLACK));
+		trenutniTabPanel.add(nazivTaba);
+		add(trenutniTabPanel);
+		
 		
 		JPanel datumVremePanel = new JPanel();
 		datumVremePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -34,5 +40,8 @@ public class StatusBar extends JMenuBar {
 		
 		add(datumVremePanel);
 		
+	}
+	void setTab(String s) {
+		nazivTaba.setText(s);
 	}
 }
