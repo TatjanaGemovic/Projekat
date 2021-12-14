@@ -6,21 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 
 public class Toolbar extends JToolBar {
-	
+
 	public Toolbar(final JFrame parent) {
-
-
+		
+	
 		super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
@@ -31,10 +34,19 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				DijalogDodavanjaStudenta dodajEntitet = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
-				dodajEntitet.setVisible(true);
-				
+				switch (TabbedPane.tabIndex) {
+					case Profesor:
+						DijalogDodavanjaProfesora dodajEntitet1 = new DijalogDodavanjaProfesora(parent, "Dodavanje Profesora", true);
+						dodajEntitet1.setVisible(true);
+						break;
+					case Predmet:
+						DijalogDodavanjaPredmeta dodajEntitet2 = new DijalogDodavanjaPredmeta(parent, "Dodavanje Predmeta", true);
+						dodajEntitet2.setVisible(true);
+						break;
+					default:
+						DijalogDodavanjaStudenta dodajEntitet0 = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
+						dodajEntitet0.setVisible(true);
+				}
 			}
 		});
 		add(btnAdd);
