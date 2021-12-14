@@ -24,7 +24,7 @@ public class DijalogIzmenaEntiteta extends JDialog {
 			Dimension parentSize = parent.getSize();
 			int diaWidth = parentSize.width;
 			int diaHeight = parentSize.height;
-			setSize(diaWidth*3/5, diaHeight);
+			setSize(diaWidth*3/5, diaHeight*18/20);
 			setLocationRelativeTo(parent);
 			
 			JTabbedPane tabbedPane = new JTabbedPane();
@@ -36,11 +36,11 @@ public class DijalogIzmenaEntiteta extends JDialog {
 			panelBottom.add(potvrda);
 		    panelBottom.add(odustanak);
 		    
-		    infoPanel.add(panelBottom, BorderLayout.SOUTH);
+		    this.add(panelBottom, BorderLayout.SOUTH);
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
-		    infoPanel.add(panelCenter, BorderLayout.NORTH);
+		    
 		    
 		    JLabel lblIme = new JLabel("Ime:");
 		    JLabel lblPrezime = new JLabel("Prezime:");
@@ -220,7 +220,9 @@ public class DijalogIzmenaEntiteta extends JDialog {
 		    
 		    panelCenter.add(NacinFinansiranja,grd2);
 		    
-		    tabbedPane.add("Informacije", infoPanel);
+		    infoPanel.add(panelCenter, BorderLayout.CENTER);
+		    
+		    tabbedPane.add("Informacije", panelCenter);
 		    tabbedPane.add("Polozeni", new JPanel());
 		    tabbedPane.add("Nepolozeni", new JPanel());
 		    this.add(tabbedPane);
