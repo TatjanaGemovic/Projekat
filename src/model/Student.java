@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-enum Status_Studenta {B, S}
-
 public class Student extends Osoba {
 	private String broj_indeksa;
 	private int god_upisa;
