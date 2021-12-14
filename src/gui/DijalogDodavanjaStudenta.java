@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class DijalogDodavanjaEntiteta extends JDialog {
+public class DijalogDodavanjaStudenta extends JDialog {
 
-	public DijalogDodavanjaEntiteta(Frame parent, String title, boolean modal) {
+	public DijalogDodavanjaStudenta(Frame parent, String title, boolean modal) {
 		super(parent, "Dodavanje Studenta", modal);
 		
 		Dimension parentSize = parent.getSize();
@@ -57,9 +57,7 @@ public class DijalogDodavanjaEntiteta extends JDialog {
 	    final JTextField txtTelefon = new JTextField();
 	    final JTextField txtEmailAdresa = new JTextField();
 	    final JTextField txtBrojIndeksa = new JTextField();
-	    final JTextField txtTrenutnaGodinaStudija = new JTextField();
 	    final JTextField txtGodinaUpisa = new JTextField();
-	    final JTextField txtNacinFinansiranja = new JTextField();
 	    
 	    GridBagConstraints gbcLblIme = new GridBagConstraints();
 	    gbcLblIme.gridx = 0;

@@ -18,7 +18,6 @@ public class BazaStudenata extends AbstractTableModel{
 	
 	private List<Student> studenti;
 	public List<String> kolone;
-	private long generator;
 	
 	public BazaStudenata() {
 		

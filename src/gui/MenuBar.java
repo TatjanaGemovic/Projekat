@@ -28,7 +28,7 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogDodavanjaEntiteta dodajEntitet = new DijalogDodavanjaEntiteta(parent, "Dodavanje Entiteta", true);
+				DijalogDodavanjaPredmeta dodajEntitet = new DijalogDodavanjaPredmeta(parent, "Dodavanje Entiteta", true);
 				dodajEntitet.setVisible(true);
 				
 			}
