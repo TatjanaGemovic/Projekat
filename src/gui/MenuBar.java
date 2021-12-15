@@ -117,6 +117,18 @@ public class MenuBar extends JMenuBar {
 		JMenuItem delete_entity = new JMenuItem("Delete", icn);
 		delete_entity.setMnemonic(KeyEvent.VK_D);
 		delete_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
+		delete_entity.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(ProfesoriJTable.rowSelectedIndex==-1 && StudentiJTable.rowSelectedIndex==-1 && PredmetiJTable.rowSelectedIndex==-1) {
+					
+				}else {
+					DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje " + TabbedPane.tabIndex + "a", true);
+					obrisiEntitet.setVisible(true);
+				}
+			}
+		});
 		edit.add(edit_entity);
 		edit.addSeparator();
 		edit.add(delete_entity);

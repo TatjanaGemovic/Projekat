@@ -24,7 +24,7 @@ public class PredmetKontroler {
 		PredmetiJTable.azurirajPrikaz();	
 	}
 	
-	public void IzbrisiPredmet(int rowSelectedIndex) {
+	public void izbrisiPredmet(int rowSelectedIndex) {
 		if(rowSelectedIndex < 0) {
 				return;
 		}
