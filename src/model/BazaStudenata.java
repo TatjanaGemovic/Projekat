@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -17,10 +18,8 @@ public class BazaStudenata extends AbstractTableModel{
 	
 	private List<Student> studenti;
 	public List<String> kolone;
-	private long generator;
 	
 	public BazaStudenata() {
-		generator = 0;
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Indeks");
@@ -35,24 +34,67 @@ public class BazaStudenata extends AbstractTableModel{
 	
 	private void initStudenti() {
 		this.studenti = new ArrayList<Student>();
-	}
-	
-	@Override
-	public int getRowCount() {
-		return BazaStudenata.getInstance().getRowCount();
+		
+		@SuppressWarnings("deprecation")
+		Date datum = new Date(2000, 16, 03);
+		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
+		Status_Studenta status = Status_Studenta.B;
+		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
+		@SuppressWarnings("deprecation")
+		Date datum2 = new Date(2000, 25, 05);
+		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
+		Status_Studenta status2 = Status_Studenta.S;
+		studenti.add(new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status));
+		
 	}
 
 	@Override
 	public int getColumnCount() {
-		 return BazaStudenata.getInstance().getColumnCount();
+		 return 6;
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getRowCount() {
+		return BazaStudenata.getInstance().getStudenti().size();
+	}
+	
+	private List<Student> getStudenti() {
+		return studenti;
+	}
+	
+	public String getColumnName(int index) {
+		return this.kolone.get(index);
+	}
+	
+	public Student getRow(int rowIndex) {
+		return this.studenti.get(rowIndex);
 	}
 
+	@Override
+	public String getValueAt(int row, int column) {
+		Student student = this.studenti.get(row);
+		switch (column) {	
+			case 0:
+				return student.getBroj_indeksa();
+			case 1:
+				return student.getIme();
+			case 2:
+				return student.getPrezime();
+			case 3:
+				return Integer.toString(student.getTrenutna_god());
+			case 4:
+				return student.getStatus().toString();
+			case 5:
+				return Double.toString(student.getProsecna_ocena());
+			default:
+				return null;
+		}
+	}
+	
+	public void dodajStudenta(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
+			String broj_indeksa, int god_upisa, int trenutna_god, Status_Studenta status) {
 		
+		this.studenti.add(new Student(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,broj_indeksa,god_upisa,trenutna_god,status));
+	}
 	
 }

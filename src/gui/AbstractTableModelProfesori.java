@@ -11,20 +11,21 @@ public class AbstractTableModelProfesori extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 10;
+		return BazaProfesora.getInstance().getRowCount();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return BazaProfesora.getInstance().getColumnCount();
+	}
+	
+	public String getColumnName(int column) {
+		return BazaProfesora.getInstance().getColumnName(column);
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return BazaProfesora.getInstance().getValueAt(rowIndex, columnIndex);	
 	}
 	
 }

@@ -1,22 +1,13 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
 public class TabbedPane extends JTabbedPane{
+	
+	static public TrenTab tabIndex = TrenTab.Student;
 	
 	public TabbedPane() {
 		
@@ -34,45 +25,21 @@ public class TabbedPane extends JTabbedPane{
 		
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-	            int tabIndex = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
-	            if(tabIndex==0) {
-	            	System.out.println("0");
+	            int tabIndex1 = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
+	            if(tabIndex1==0) {
+	            	tabIndex = TrenTab.Student;
 	            	StatusBar.nazivTaba.setText("- Studenti");
 	            }
-	            else if(tabIndex==1) {
-	            	System.out.println("1");
+	            else if(tabIndex1==1) {
+	            	tabIndex = TrenTab.Profesor;
 	            	StatusBar.nazivTaba.setText("- Profesori");
 	            }
-	            else if(tabIndex==2) {
-	            	System.out.println("2");
+	            else if(tabIndex1==2) {
+	            	tabIndex = TrenTab.Predmet;
 	            	StatusBar.nazivTaba.setText("- Predmeti");
 	            }
 	            
 	        }
 		});
-		/*StudentiJTable studenti = new StudentiJTable();
-		JScrollPane studentiPane = new JScrollPane(studenti);
-		this.add("Studenti", studentiPane);
-		
-		ProfesoriJTable profesori = new ProfesoriJTable();
-		JScrollPane profesoriPane = new JScrollPane(profesori);
-		this.add("Profesori", profesoriPane);
-		
-		PredmetiJTable predmeti = new PredmetiJTable();
-		JScrollPane predmetiPane = new JScrollPane(predmeti);
-		this.add("Predmeti", predmetiPane);
-		
-		this.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-	            int tabIndex = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
-	            if(tabIndex==0) System.out.println("studenti");
-	            else if(tabIndex==0) System.out.println("profesori");
-	            else if(tabIndex==0) System.out.println("predmeti");
-	            
-	        }
-			
-			
-			
-		});*/
 	}
 }
