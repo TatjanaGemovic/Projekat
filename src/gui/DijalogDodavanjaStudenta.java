@@ -6,12 +6,15 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -29,6 +32,21 @@ public class DijalogDodavanjaStudenta extends JDialog {
 		JPanel panelBottom = new JPanel();
 		JButton potvrda=new JButton("Potvrdi");
 		JButton odustanak=new JButton("Odustani");
+		odustanak.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+
+			           if (dialogResult == JOptionPane.YES_OPTION) {
+			        	   dispose();
+			           }
+			             
+				}
+			});
+		
 		panelBottom.add(potvrda);
 	    panelBottom.add(odustanak);
 	    

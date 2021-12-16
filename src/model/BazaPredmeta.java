@@ -87,5 +87,14 @@ public class BazaPredmeta extends AbstractTableModel{
 	public void dodajPredmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
 			this.predmeti.add(new Predmet(sifra_predmeta,naziv,semestar,godina_izvodjenja,profesor,espb));
 	}
+	
+	public void izbrisiPredmet(String naziv) {
+		for (Predmet i : predmeti) {
+			if (i.getSifra_predmeta().equals(naziv)) {
+					predmeti.remove(i);
+						break;
+			}
+		}
+	}
 
 }
