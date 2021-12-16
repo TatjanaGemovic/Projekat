@@ -28,9 +28,19 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogDodavanjaEntiteta dodajEntitet = new DijalogDodavanjaEntiteta(parent, "Dodavanje Entiteta", true);
-				dodajEntitet.setVisible(true);
-				
+				switch (TabbedPane.tabIndex) {
+					case Profesor:
+						DijalogDodavanjaProfesora dodajEntitet1 = new DijalogDodavanjaProfesora(parent, "Dodavanje Profesora", true);
+						dodajEntitet1.setVisible(true);
+						break;
+					case Predmet:
+						DijalogDodavanjaPredmeta dodajEntitet2 = new DijalogDodavanjaPredmeta(parent, "Dodavanje Predmeta", true);
+						dodajEntitet2.setVisible(true);
+						break;
+					default:
+						DijalogDodavanjaStudenta dodajEntitet0 = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
+						dodajEntitet0.setVisible(true);
+				}
 			}
 		});
 		
@@ -84,10 +94,41 @@ public class MenuBar extends JMenuBar {
 		JMenuItem edit_entity = new JMenuItem("Edit", icn);
 		edit_entity.setMnemonic(KeyEvent.VK_E);
 		edit_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
+		edit_entity.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch (TabbedPane.tabIndex) {
+				case Profesor:
+					DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
+					izmeniProfesora.setVisible(true);
+					break;
+				case Predmet:
+					DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
+					izmeniPredmet.setVisible(true);
+					break;
+				default:
+					DijalogIzmenaEntiteta izmeniStudenta = new DijalogIzmenaEntiteta(parent, "Izmena Studenta", true);
+					izmeniStudenta.setVisible(true);
+				}
+			}
+		});
 		icn = new ImageIcon("ikonice/trash.png");
 		JMenuItem delete_entity = new JMenuItem("Delete", icn);
 		delete_entity.setMnemonic(KeyEvent.VK_D);
 		delete_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
+		delete_entity.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(ProfesoriJTable.rowSelectedIndex==-1 && StudentiJTable.rowSelectedIndex==-1 && PredmetiJTable.rowSelectedIndex==-1) {
+					
+				}else {
+					DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje " + TabbedPane.tabIndex + "a", true);
+					obrisiEntitet.setVisible(true);
+				}
+			}
+		});
 		edit.add(edit_entity);
 		edit.addSeparator();
 		edit.add(delete_entity);

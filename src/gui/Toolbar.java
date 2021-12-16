@@ -6,21 +6,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 
 public class Toolbar extends JToolBar {
-	
+
 	public Toolbar(final JFrame parent) {
-
-
+		
+	
 		super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
@@ -31,9 +35,19 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogDodavanjaEntiteta dodajEntitet = new DijalogDodavanjaEntiteta(parent, "Dodavanje Entiteta", true);
-				dodajEntitet.setVisible(true);
-				
+				switch (TabbedPane.tabIndex) {
+					case Profesor:
+					DijalogDodavanjaProfesora dodajEntitet1 = new DijalogDodavanjaProfesora(parent, "Dodavanje Profesora", true);
+					dodajEntitet1.setVisible(true);
+					break;
+				case Predmet:
+					DijalogDodavanjaPredmeta dodajEntitet2 = new DijalogDodavanjaPredmeta(parent, "Dodavanje Predmeta", true);
+					dodajEntitet2.setVisible(true);
+					break;
+				default:
+					DijalogDodavanjaStudenta dodajEntitet0 = new DijalogDodavanjaStudenta(parent, "Dodavanje Studenta", true);
+					dodajEntitet0.setVisible(true);
+				}
 			}
 		});
 		add(btnAdd);
@@ -43,6 +57,26 @@ public class Toolbar extends JToolBar {
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Edit");
 		btnEdit.setIcon(new ImageIcon("ikonice/writing copy.png"));
+		btnEdit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch (TabbedPane.tabIndex) {
+				case Profesor:
+					DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
+					izmeniProfesora.setVisible(true);
+					break;
+				case Predmet:
+					DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
+					izmeniPredmet.setVisible(true);
+					break;
+				default:
+					DijalogIzmenaEntiteta izmeniStudenta = new DijalogIzmenaEntiteta(parent, "Izmena Studenta", true);
+					izmeniStudenta.setVisible(true);
+			}
+				
+			}
+		});
 		add(btnEdit);
 
 		addSeparator();
@@ -50,6 +84,18 @@ public class Toolbar extends JToolBar {
 		JButton btnDelete = new JButton();
 		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
+		btnDelete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(ProfesoriJTable.rowSelectedIndex==-1 && StudentiJTable.rowSelectedIndex==-1 && PredmetiJTable.rowSelectedIndex==-1) {
+					
+				}else {
+					DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje " + TabbedPane.tabIndex + "a", true);
+					obrisiEntitet.setVisible(true);
+				}
+			}
+		});
 		add(btnDelete);
 
 		//setFloatable(true);

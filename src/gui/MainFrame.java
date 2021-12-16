@@ -3,6 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 public class MainFrame extends JFrame{
 
