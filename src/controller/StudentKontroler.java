@@ -27,6 +27,14 @@ public class StudentKontroler {
 		BazaStudenata.getInstance().dodajStudenta(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,broj_indeksa,god_upisa,trenutna_god,status);
 		StudentiJTable.azurirajPrikaz();		
 	}
+	public void izmeniStudenta(int rowSelectedIndex, Adresa adresa, String kontakt_tel, String email, int trenutna_god, Status_Studenta status) {
+		if (rowSelectedIndex < 0) {
+			return;
+		}
+		Student s = BazaStudenata.getInstance().getRow(rowSelectedIndex);
+		BazaStudenata.getInstance().izmeniStudenta(s.getBroj_indeksa(), adresa, kontakt_tel, email, trenutna_god, status);
+		StudentiJTable.azurirajPrikaz();
+	}
 	
 	public void izbrisiStudenta(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {

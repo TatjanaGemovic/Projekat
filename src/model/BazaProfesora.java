@@ -83,11 +83,29 @@ public class BazaProfesora extends AbstractTableModel{
 		this.profesori.add(new Profesor(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,adresa_kancelarije,broj_licne_karte,zvanje,godine_staza));
 	}
 	
+	public void izmeniProfesora(String licna_karta, Adresa adresa, String kontakt_tel, String email,
+			Adresa adresa_kancelarije, String zvanje, int godine_staza) {
+		
+		for (Profesor i : profesori) {
+			if(i.getBroj_licne_karte().equals(licna_karta)) {
+				int index = profesori.indexOf(i);
+				i.setAdresa(adresa);
+				i.setKontakt_tel(kontakt_tel);
+				i.setEmail(email);
+				i.setAdresa_kancelarije(adresa_kancelarije);
+				i.setZvanje(zvanje);
+				i.setGodine_staza(godine_staza);
+				profesori.set(index, i);
+				break;
+			}
+		}
+	}
+	
 	public void izbrisiProfesora(String licna_karta) {
 		for (Profesor i : profesori) {
-			if (i.getBroj_licne_karte()==licna_karta) {
-					profesori.remove(i);
-						break;
+			if (i.getBroj_licne_karte().equals(licna_karta)) {
+				profesori.remove(i);
+				break;
 			}
 		}
 	}

@@ -24,6 +24,15 @@ public class PredmetKontroler {
 		PredmetiJTable.azurirajPrikaz();	
 	}
 	
+	public void izmeniPredmet(int rowSelectedIndex, String naziv, int espb, int godina, Semestar semestar, Profesor profesor) {
+		if(rowSelectedIndex < 0) {
+			return;
+		}
+		Predmet predmet = BazaPredmeta.getInstance().getRow(rowSelectedIndex);
+		BazaPredmeta.getInstance().izmeniPredmet(predmet.getSifra_predmeta(), naziv, espb, godina, semestar, profesor);
+		PredmetiJTable.azurirajPrikaz();	
+	}
+	
 	public void izbrisiPredmet(int rowSelectedIndex) {
 		if(rowSelectedIndex < 0) {
 				return;
