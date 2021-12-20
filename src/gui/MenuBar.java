@@ -108,7 +108,7 @@ public class MenuBar extends JMenuBar {
 					izmeniPredmet.setVisible(true);
 					break;
 				default:
-					DijalogIzmenaEntiteta izmeniStudenta = new DijalogIzmenaEntiteta(parent, "Izmena Studenta", true);
+					DijalogIzmenaStudenta izmeniStudenta = new DijalogIzmenaStudenta(parent, "Izmena Studenta", true);
 					izmeniStudenta.setVisible(true);
 				}
 			}
