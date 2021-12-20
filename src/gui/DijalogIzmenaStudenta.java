@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-public class DijalogIzmenaEntiteta extends JDialog {
+public class DijalogIzmenaStudenta extends JDialog {
 
-	public DijalogIzmenaEntiteta(Frame parent, String title, boolean modal) {
+	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
 			
 			Dimension parentSize = parent.getSize();
