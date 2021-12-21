@@ -50,7 +50,7 @@ public class BazaProfesora extends AbstractTableModel{
 		return BazaProfesora.getInstance().getProfesori().size();
 	}
 	
-	private List<Profesor> getProfesori() {
+	public List<Profesor> getProfesori() {
 		return profesori;
 	}
 	

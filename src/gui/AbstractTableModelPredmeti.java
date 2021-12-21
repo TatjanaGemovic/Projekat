@@ -6,6 +6,8 @@ import model.BazaPredmeta;
 
 public class AbstractTableModelPredmeti extends AbstractTableModel{
 
+	private static final long serialVersionUID = -7674380857889541927L;
+
 	public AbstractTableModelPredmeti() {
 		BazaPredmeta.getInstance();
 	}

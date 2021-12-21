@@ -40,6 +40,10 @@ public class Osoba {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
+	
+	public String getImeIPrezime() {
+		return ime+" "+prezime;
+	}
 
 	public Date getDatum_rodjenja() {
 		return datum_rodjenja;

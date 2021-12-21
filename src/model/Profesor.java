@@ -23,6 +23,10 @@ public class Profesor extends Osoba {
 			String email) {
 		super(ime, prezime, datum_rodjenja, adresa, kontakt_tel, email);
 	}
+	
+	public Profesor() {
+		super();
+	}
 
 	public Adresa getAdresa_kancelarije() {
 		return adresa_kancelarije;

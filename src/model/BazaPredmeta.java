@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.PredmetiJTable;
+
 public class BazaPredmeta extends AbstractTableModel{
 
 	private static BazaPredmeta instance = null;
@@ -53,7 +55,7 @@ public class BazaPredmeta extends AbstractTableModel{
 		return BazaPredmeta.getInstance().getPredmeti().size();
 	}
 	
-	private List<Predmet> getPredmeti() {
+	public List<Predmet> getPredmeti() {
 		return predmeti;
 	}
 	
@@ -109,5 +111,4 @@ public class BazaPredmeta extends AbstractTableModel{
 			}
 		}
 	}
-
 }
