@@ -11,19 +11,23 @@ import javax.swing.table.TableCellRenderer;
 
 public class PredmetiJTable extends JTable{
 
-	private static PredmetiJTable tabelaPredmeta;
 	public static int rowSelectedIndex = -1;
+	public static JTable tabelaPredmeta;
+	public static AbstractTableModelPredmeti predmetModel;
 	
 	public PredmetiJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelPredmeti());
+		this.predmetModel = new AbstractTableModelPredmeti();
+		
+		predmetModel = (AbstractTableModelPredmeti) this.getModel();
 		
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				tabelaPredmeta = (PredmetiJTable) e.getComponent();
+				tabelaPredmeta = (JTable) e.getComponent();
 				if(tabelaPredmeta.getSelectedRow()!=-1) {
 					rowSelectedIndex = tabelaPredmeta.convertRowIndexToModel(tabelaPredmeta.getSelectedRow());
 				}
@@ -43,7 +47,6 @@ public class PredmetiJTable extends JTable{
 	}
 	
 	public static void azurirajPrikaz() {
-		AbstractTableModelPredmeti predmetModel = (AbstractTableModelPredmeti) tabelaPredmeta.getModel();
 		predmetModel.fireTableDataChanged();
 	}
 }

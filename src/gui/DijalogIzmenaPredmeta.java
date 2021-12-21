@@ -21,20 +21,29 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
 		int diaHeight = parentSize.height;
-		setSize(diaWidth*3/5, diaHeight*15/20);
+		setSize(diaWidth*3/5, diaHeight*11/20);
 		setLocationRelativeTo(parent);
 		
-		JPanel panelBottom = new JPanel();
 		JButton potvrda=new JButton("Potvrdi");
+		GridBagConstraints gbcPotvrda = new GridBagConstraints();
+		gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
+		gbcPotvrda.gridx = 0;
+		gbcPotvrda.gridy = 6;
+		gbcPotvrda.insets = new Insets(30, 190, 0,0);
+		
 		JButton odustanak=new JButton("Odustani");
-		panelBottom.add(potvrda);
-	    panelBottom.add(odustanak);
-	    
-	    this.add(panelBottom, BorderLayout.SOUTH);
+		GridBagConstraints gbcOdustanak = new GridBagConstraints();
+		gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
+		gbcOdustanak.gridx = 1;
+		gbcOdustanak.gridy = 6;
+		gbcOdustanak.insets = new Insets(30,30, 0,230);
 		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
 	    this.add(panelCenter, BorderLayout.CENTER);
+	    
+	    panelCenter.add(potvrda, gbcPotvrda);
+	    panelCenter.add(odustanak, gbcOdustanak);
 	    
 	    
 	    JLabel lblSifra = new JLabel("Sifra predmeta:");
@@ -53,37 +62,37 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		GridBagConstraints gbcLSifra = new GridBagConstraints();
 		gbcLSifra.gridx = 0;
 		gbcLSifra.gridy = 0;
-		gbcLSifra.insets = new Insets(20, 40, 0,0);
+		gbcLSifra.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblSifra, gbcLSifra);
 		 
 		GridBagConstraints gbcLNaziv = new GridBagConstraints();
 		gbcLNaziv.gridx = 0;
 		gbcLNaziv.gridy = 1;
-		gbcLNaziv.insets = new Insets(20, 40, 0,0);
+		gbcLNaziv.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblNaziv, gbcLNaziv);
 		
 		GridBagConstraints gbcLBrojESPB = new GridBagConstraints();
 		gbcLBrojESPB.gridx = 0;
 		gbcLBrojESPB.gridy = 2;
-		gbcLBrojESPB.insets = new Insets(20, 40, 0,0);
+		gbcLBrojESPB.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblBrojESPB, gbcLBrojESPB);
 		
 		GridBagConstraints gbcLGodina = new GridBagConstraints();
 		gbcLGodina.gridx = 0;
 		gbcLGodina.gridy = 3;
-		gbcLGodina.insets = new Insets(20, 40, 0,0);
+		gbcLGodina.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblGodina, gbcLGodina);
 		
 		GridBagConstraints gbcLSemestar = new GridBagConstraints();
 		gbcLSemestar.gridx = 0;
 		gbcLSemestar.gridy = 4;
-		gbcLSemestar.insets = new Insets(20, 40, 0,0);
+		gbcLSemestar.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblSemestar, gbcLSemestar);
 		
 		GridBagConstraints gbcLProfesor = new GridBagConstraints();
 		gbcLProfesor.gridx = 0;
 		gbcLProfesor.gridy = 5;
-		gbcLProfesor.insets = new Insets(20, 40, 0,0);
+		gbcLProfesor.insets = new Insets(10, 40, 0,0);
 		panelCenter.add(lblProfesor, gbcLProfesor);
 			
 		GridBagConstraints gbcTxtSifra = new GridBagConstraints();
@@ -91,7 +100,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtSifra .gridy = 0;
 		gbcTxtSifra .weightx = 100;
 		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
+		gbcTxtSifra .insets = new Insets(10,120, 0, 70);
 		panelCenter.add(txtSifra, gbcTxtSifra );
 		
 		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
@@ -99,7 +108,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtNaziv.gridy = 1;
 		gbcTxtNaziv .weightx = 100;
 		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
+		gbcTxtNaziv .insets = new Insets(10, 120, 0, 70);
 		panelCenter.add(txtNaziv, gbcTxtNaziv );
 		
 		GridBagConstraints gbcTxtBrojESPB = new GridBagConstraints();
@@ -107,7 +116,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtBrojESPB.gridy = 2;
 		gbcTxtBrojESPB .weightx = 100;
 		gbcTxtBrojESPB.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtBrojESPB .insets = new Insets(20, 120, 0, 70);
+		gbcTxtBrojESPB .insets = new Insets(10, 120, 0, 70);
 		panelCenter.add(txtBrojESPB, gbcTxtBrojESPB );
 		
 		
@@ -119,7 +128,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		grdGodina.gridy = 3;
 		grdGodina.weightx = 100;
 		grdGodina.fill = GridBagConstraints.HORIZONTAL;
-		grdGodina.insets = new Insets(20, 120, 0, 70);
+		grdGodina.insets = new Insets(10, 120, 0, 70);
 		   
 		panelCenter.add(godStud,grdGodina);
 		
@@ -133,7 +142,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		grdSemestar.gridy = 4;
 	    grdSemestar.weightx = 100;
 		grdSemestar.fill = GridBagConstraints.HORIZONTAL;
-		grdSemestar.insets = new Insets(20, 120, 0, 70);
+		grdSemestar.insets = new Insets(10, 120, 0, 70);
 		   
 		panelCenter.add(semestarStud,grdSemestar);
 		
@@ -143,7 +152,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtProfesor.gridy = 5;
 		gbcTxtProfesor .weightx = 100;
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtProfesor .insets = new Insets(20, 120, 0, 70);
+		gbcTxtProfesor .insets = new Insets(10, 120, 0, 70);
 		panelCenter.add(txtProfesor, gbcTxtProfesor );
 	}
 }

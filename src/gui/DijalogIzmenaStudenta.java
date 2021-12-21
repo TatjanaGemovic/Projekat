@@ -24,23 +24,31 @@ public class DijalogIzmenaStudenta extends JDialog {
 			Dimension parentSize = parent.getSize();
 			int diaWidth = parentSize.width;
 			int diaHeight = parentSize.height;
-			setSize(diaWidth*3/5, diaHeight*18/20);
+			setSize(diaWidth*3/5, diaHeight*16/20);
 			setLocationRelativeTo(parent);
 			
 			JTabbedPane tabbedPane = new JTabbedPane();
 			
 			JPanel infoPanel = new JPanel();
-			JPanel panelBottom = new JPanel();
 			JButton potvrda=new JButton("Potvrdi");
+			GridBagConstraints gbcPotvrda = new GridBagConstraints();
+			gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
+			gbcPotvrda.gridx = 0;
+			gbcPotvrda.gridy = 11;
+			gbcPotvrda.insets = new Insets(30, 190, 0,0);
+			
 			JButton odustanak=new JButton("Odustani");
-			panelBottom.add(potvrda);
-		    panelBottom.add(odustanak);
-		    
-		    this.add(panelBottom, BorderLayout.SOUTH);
+			GridBagConstraints gbcOdustanak = new GridBagConstraints();
+			gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
+			gbcOdustanak.gridx = 1;
+			gbcOdustanak.gridy = 11;
+			gbcOdustanak.insets = new Insets(30,30, 0,230);
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
 		    
+		    panelCenter.add(potvrda, gbcPotvrda);
+		    panelCenter.add(odustanak, gbcOdustanak);
 		    
 		    JLabel lblIme = new JLabel("Ime:");
 		    JLabel lblPrezime = new JLabel("Prezime:");

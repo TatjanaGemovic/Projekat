@@ -19,7 +19,6 @@ public class PredmetKontroler {
 	}
 	
 	public void dodajPredmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
-		
 		BazaPredmeta.getInstance().dodajPredmet(sifra_predmeta,naziv,semestar,godina_izvodjenja,profesor,espb);
 		PredmetiJTable.azurirajPrikaz();	
 	}

@@ -11,14 +11,18 @@ import javax.swing.table.TableCellRenderer;
 
 public class ProfesoriJTable extends JTable{
 
-	private static ProfesoriJTable tabelaProfesora;
+	private static JTable tabelaProfesora;
 	public static int rowSelectedIndex = -1;
+	public static AbstractTableModelProfesori profesorModel;
 	
 	public ProfesoriJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfesori());
+		this.profesorModel = new AbstractTableModelProfesori();
+		
+		profesorModel = (AbstractTableModelProfesori) this.getModel();
 		
 		this.addMouseListener(new MouseAdapter() {
 			@Override
@@ -43,7 +47,6 @@ public class ProfesoriJTable extends JTable{
 	}
 	
 	public static void azurirajPrikaz() {
-		AbstractTableModelProfesori profesorModel = (AbstractTableModelProfesori) tabelaProfesora.getModel();
 		profesorModel.fireTableDataChanged();
 	}
 }
