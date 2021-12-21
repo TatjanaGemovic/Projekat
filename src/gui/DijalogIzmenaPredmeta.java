@@ -6,13 +6,24 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.PredmetKontroler;
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.Predmet;
+import model.Profesor;
+import model.Semestar;
 
 public class DijalogIzmenaPredmeta extends JDialog {
 	public DijalogIzmenaPredmeta(Frame parent, String title, boolean modal) {
@@ -37,6 +48,20 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcOdustanak.gridx = 1;
 		gbcOdustanak.gridy = 6;
 		gbcOdustanak.insets = new Insets(30,30, 0,230);
+		odustanak.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+	
+				    if (dialogResult == JOptionPane.YES_OPTION) {
+				    	dispose();
+				    }
+			             
+				}
+			});
 		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
@@ -54,7 +79,8 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		JLabel lblProfesor = new JLabel("Profesor:");
 		 
 		 
-		final JTextField txtSifra = new JTextField();
+		final JTextField txtSifra = new JTextField(); //ne sme da se menja
+		//txtSifra.setEnabled(false);
 		final JTextField txtNaziv = new JTextField();
 		final JTextField txtBrojESPB = new JTextField();
 		final JTextField txtProfesor = new JTextField();
@@ -154,5 +180,85 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtProfesor .insets = new Insets(10, 120, 0, 70);
 		panelCenter.add(txtProfesor, gbcTxtProfesor );
+		
+		//ispis podataka za selektovani predmet
+		List<Predmet> predmeti = BazaPredmeta.getInstance().getPredmeti();
+    	Predmet predmet = BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex);
+    	for(Predmet p : predmeti) {
+    		predmet = p;
+    		if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta())) {
+    			txtSifra.setText(p.getSifra_predmeta());
+    			txtNaziv.setText(p.getNaziv());
+    			txtBrojESPB.setText(String.valueOf(p.getEspb()));
+    			if(p.getPredmetni_profesor()==null) {
+    				txtProfesor.setText("Nema profesora");
+    			}else {
+    				txtProfesor.setText(p.getPredmetni_profesor().getImeIPrezime());
+    			}
+    			godStud.setSelectedIndex(p.getGodina_izvodjenja()-1);
+    			//semestarStud.setSelectedIndex();
+				break;
+    		}
+    	}
+    	
+		potvrda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			    
+			    
+
+			    if (dialogResult == JOptionPane.YES_OPTION) {
+			    	
+			    	if(txtNaziv.getText().isEmpty() || txtBrojESPB.getText().isEmpty() || txtSifra.getText().isEmpty()) {
+			    		
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		return;
+			    	}
+			    	
+				    String sifra = txtSifra.getText();
+			    	if(!(sifra.equals(BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex).getSifra_predmeta()))) {
+			    		
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sifra predmeta se ne moze menjati", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		return;
+			    	}
+			    				    	
+			    	String naziv = txtNaziv.getText();
+			    	int brojEspb = Integer.parseInt(txtBrojESPB.getText());
+			    	int semestar_pom = semestarStud.getSelectedIndex()+1;
+			    	int god_izvodjenja = godStud.getSelectedIndex()+1;
+			    	Semestar semestar = null;
+			    	if(semestar_pom == 1 || semestar_pom == 3 || semestar_pom == 5 || semestar_pom == 7) {
+			    		semestar = Semestar.zimski;
+			    	} else if (semestar_pom == 2 || semestar_pom == 4 || semestar_pom == 6 || semestar_pom == 8){
+			    		semestar = Semestar.letnji;
+			    	}
+		
+			    	String profesor = txtProfesor.getText(); //provera jel postoji taj profesor?
+			    	Profesor p = new Profesor();
+			    	for (Profesor i : BazaProfesora.getInstance().getProfesori()) {
+						if(i.getImeIPrezime().equals(profesor)) {
+							p = i;
+							continue;
+						} else {
+							JOptionPane.showMessageDialog(MainFrame.getInstance(), "Dodati predmet nema imati profesora!");
+							p = null;
+						}
+					}
+			    	
+			    	
+
+			    	
+			    	PredmetKontroler.getInstance().izmeniPredmet(PredmetiJTable.rowSelectedIndex, naziv, semestar, god_izvodjenja, p, brojEspb);
+			    	dispose();
+			    	
+			    }
+				
+			}
+			
+		});
 	}
 }
