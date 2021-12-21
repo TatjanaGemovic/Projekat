@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class BazaStudenata extends AbstractTableModel{
+public class BazaStudenata{
 
 	private static BazaStudenata instance = null;
 	
@@ -48,17 +48,15 @@ public class BazaStudenata extends AbstractTableModel{
 		
 	}
 
-	@Override
 	public int getColumnCount() {
 		 return 6;
 	}
 
-	@Override
 	public int getRowCount() {
-		return BazaStudenata.getInstance().getStudenti().size();
+		return 50;
 	}
 	
-	private List<Student> getStudenti() {
+	public List<Student> getStudenti() {
 		return studenti;
 	}
 	
@@ -70,24 +68,42 @@ public class BazaStudenata extends AbstractTableModel{
 		return this.studenti.get(rowIndex);
 	}
 
-	@Override
 	public String getValueAt(int row, int column) {
-		Student student = this.studenti.get(row);
-		switch (column) {	
+		if(row < studenti.size()) {
+			Student student = this.studenti.get(row);
+			switch (column) {	
+				case 0:
+					return student.getBroj_indeksa();
+				case 1:
+					return student.getIme();
+				case 2:
+					return student.getPrezime();
+				case 3:
+					return Integer.toString(student.getTrenutna_god());
+				case 4:
+					return student.getStatus().toString();
+				case 5:
+					return Double.toString(student.getProsecna_ocena());
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
 			case 0:
-				return student.getBroj_indeksa();
+				return "";
 			case 1:
-				return student.getIme();
+				return "";
 			case 2:
-				return student.getPrezime();
+				return "";
 			case 3:
-				return Integer.toString(student.getTrenutna_god());
+				return "";
 			case 4:
-				return student.getStatus().toString();
+				return "";
 			case 5:
-				return Double.toString(student.getProsecna_ocena());
+				return "";
 			default:
 				return null;
+		}
 		}
 	}
 	

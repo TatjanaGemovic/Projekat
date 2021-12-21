@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import javax.swing.KeyStroke;
+
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenata;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -100,7 +105,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				switch (TabbedPane.tabIndex) {
 				case Profesor:
-					if(ProfesoriJTable.rowSelectedIndex==-1) {
+					if(ProfesoriJTable.rowSelectedIndex==-1 || ProfesoriJTable.rowSelectedIndex>=BazaProfesora.getInstance().getProfesori().size()) {
 						
 					} else {
 						DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
@@ -108,7 +113,7 @@ public class MenuBar extends JMenuBar {
 					}
 					break;
 				case Predmet:
-					if(PredmetiJTable.rowSelectedIndex==-1) {
+					if(PredmetiJTable.rowSelectedIndex==-1 || PredmetiJTable.rowSelectedIndex>=BazaPredmeta.getInstance().getPredmeti().size()) {
 						
 					} else {
 						DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
@@ -116,7 +121,7 @@ public class MenuBar extends JMenuBar {
 					}
 					break;
 				default:
-					if(StudentiJTable.rowSelectedIndex==-1) {
+					if(StudentiJTable.rowSelectedIndex==-1 || StudentiJTable.rowSelectedIndex>=BazaStudenata.getInstance().getStudenti().size()) {
 						
 					} else {
 						DijalogIzmenaStudenta izmeniStudenta = new DijalogIzmenaStudenta(parent, "Izmena Studenta", true);
@@ -135,7 +140,9 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				if(ProfesoriJTable.rowSelectedIndex==-1 && StudentiJTable.rowSelectedIndex==-1 && PredmetiJTable.rowSelectedIndex==-1) {
 					
-				}else {
+				}else if(PredmetiJTable.rowSelectedIndex<BazaPredmeta.getInstance().getPredmeti().size() &&
+						ProfesoriJTable.rowSelectedIndex<BazaProfesora.getInstance().getProfesori().size() &&
+						StudentiJTable.rowSelectedIndex<BazaStudenata.getInstance().getStudenti().size()) {
 					DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje " + TabbedPane.tabIndex + "a", true);
 					obrisiEntitet.setVisible(true);
 				}

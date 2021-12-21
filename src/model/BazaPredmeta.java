@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.PredmetiJTable;
 
-public class BazaPredmeta extends AbstractTableModel{
+public class BazaPredmeta{
 
 	private static BazaPredmeta instance = null;
 	
@@ -45,14 +45,12 @@ public class BazaPredmeta extends AbstractTableModel{
 	}
 	
 	
-	@Override
 	public int getColumnCount() {
 		 return 5;
 	}
 
-	@Override
 	public int getRowCount() {
-		return this.predmeti.size();
+		return 40;
 	}
 	
 	public List<Predmet> getPredmeti() {
@@ -67,10 +65,10 @@ public class BazaPredmeta extends AbstractTableModel{
 		return this.predmeti.get(rowIndex);
 	}
 
-	@Override
 	public String getValueAt(int row, int column) {
-		Predmet predmet = this.predmeti.get(row);
-		switch (column) {
+		if(row < predmeti.size()) {
+			Predmet predmet = this.predmeti.get(row);
+			switch (column) {
 			case 0:
 				return predmet.getSifra_predmeta();
 			case 1:
@@ -83,6 +81,22 @@ public class BazaPredmeta extends AbstractTableModel{
 				return predmet.getSemestar().toString();
 			default:
 				return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+				return "";
+			case 1:
+				return "";
+			case 2:
+				return "";
+			case 3:
+				return "";
+			case 4:
+				return "";
+			default:
+				return null;
+		}
 		}
 	}
 	

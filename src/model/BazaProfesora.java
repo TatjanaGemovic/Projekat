@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-public class BazaProfesora extends AbstractTableModel{
+public class BazaProfesora{
 
 	private static BazaProfesora instance = null;
 	
@@ -40,14 +40,12 @@ public class BazaProfesora extends AbstractTableModel{
 	}
 	
 	
-	@Override
 	public int getColumnCount() {
 		 return 3;
 	}
 
-	@Override
 	public int getRowCount() {
-		return BazaProfesora.getInstance().getProfesori().size();
+		return 40;
 	}
 	
 	public List<Profesor> getProfesori() {
@@ -62,18 +60,30 @@ public class BazaProfesora extends AbstractTableModel{
 		return this.profesori.get(rowIndex);
 	}
 
-	@Override
 	public String getValueAt(int row, int column) {
-		Profesor profesor = this.profesori.get(row);
-		switch (column) {
+		if(row < profesori.size()) {
+			Profesor profesor = this.profesori.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getIme();
+				case 1:
+					return profesor.getPrezime();
+				case 2:
+					return profesor.getZvanje();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
 			case 0:
-				return profesor.getIme();
+				return "";
 			case 1:
-				return profesor.getPrezime();
+				return "";
 			case 2:
-				return profesor.getZvanje();
+				return "";
 			default:
 				return null;
+			}
 		}
 	}
 	

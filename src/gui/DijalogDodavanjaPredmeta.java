@@ -160,7 +160,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		
 			
 		
-		String semestar[]= {"I (Prvi)","II (Drugi)","III (Treci)","IV (Cetvrti)","V (Peti)","VI (Sesti)","VII (Sedmi)","VIII (Osmi)"};
+		String semestar[]= {"Letnji","Zimski"};
 		JComboBox<String> semestarStud=new JComboBox<>(semestar);
 		   
 		GridBagConstraints grdSemestar= new GridBagConstraints();
@@ -208,9 +208,9 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			    	int semestar_pom = semestarStud.getSelectedIndex()+1;
 			    	int god_izvodjenja = godStud.getSelectedIndex()+1;
 			    	Semestar semestar = null;
-			    	if(semestar_pom == 1 || semestar_pom == 3 || semestar_pom == 5 || semestar_pom == 7) {
+			    	if(semestar_pom == 2) {
 			    		semestar = Semestar.zimski;
-			    	} else if (semestar_pom == 2 || semestar_pom == 4 || semestar_pom == 6 || semestar_pom == 8){
+			    	} else if (semestar_pom == 1){
 			    		semestar = Semestar.letnji;
 			    	}
 		
