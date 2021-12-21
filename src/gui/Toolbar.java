@@ -63,16 +63,28 @@ public class Toolbar extends JToolBar {
 			public void actionPerformed(ActionEvent arg0) {
 				switch (TabbedPane.tabIndex) {
 				case Profesor:
-					DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
-					izmeniProfesora.setVisible(true);
+					if(ProfesoriJTable.rowSelectedIndex==-1) {
+						
+					} else {
+						DijalogIzmenaProfesora izmeniProfesora = new DijalogIzmenaProfesora(parent, "Izmena Profesora", true);
+						izmeniProfesora.setVisible(true);
+					}
 					break;
 				case Predmet:
-					DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
-					izmeniPredmet.setVisible(true);
+					if(PredmetiJTable.rowSelectedIndex==-1) {
+						
+					} else {
+						DijalogIzmenaPredmeta izmeniPredmet = new DijalogIzmenaPredmeta(parent, "Izmena Predmeta", true);
+						izmeniPredmet.setVisible(true);
+					}
 					break;
 				default:
-					DijalogIzmenaStudenta izmeniStudenta = new DijalogIzmenaStudenta(parent, "Izmena Studenta", true);
-					izmeniStudenta.setVisible(true);
+					if(StudentiJTable.rowSelectedIndex==-1) {
+						
+					} else {
+						DijalogIzmenaStudenta izmeniStudenta = new DijalogIzmenaStudenta(parent, "Izmena Studenta", true);
+						izmeniStudenta.setVisible(true);
+					}
 			}
 				
 			}
