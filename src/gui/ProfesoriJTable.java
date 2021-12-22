@@ -20,6 +20,9 @@ public class ProfesoriJTable extends JTable{
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfesori());
+		this.setShowHorizontalLines(false);
+		this.setShowVerticalLines(false);
+		this.setGridColor(Color.LIGHT_GRAY);
 		this.profesorModel = new AbstractTableModelProfesori();
 		
 		profesorModel = (AbstractTableModelProfesori) this.getModel();

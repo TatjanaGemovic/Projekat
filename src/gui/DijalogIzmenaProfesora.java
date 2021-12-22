@@ -66,70 +66,69 @@ public class DijalogIzmenaProfesora extends JDialog {
 	    final JTextField txtZvanje = new JTextField();
 	    final JTextField txtGodineStaza = new JTextField();
 	    
-	    //Adresa adresa_kancelarije, String broj_licne_karte, String zvanje, int godine_staza
 	    
 	    GridBagConstraints gbcLblIme = new GridBagConstraints();
 	    gbcLblIme.gridx = 0;
 	    gbcLblIme.gridy = 0;
-	    gbcLblIme.insets = new Insets(10, 40, 0,0);
+	    gbcLblIme.insets = new Insets(10, 30, 0,64);
 	    panelCenter.add(lblIme, gbcLblIme);
 
 
 	    GridBagConstraints gbcLblPrezime = new GridBagConstraints();
 	    gbcLblPrezime.gridx = 0;
 	    gbcLblPrezime.gridy = 1;
-	    gbcLblPrezime.insets = new Insets(10, 40, 0,0);
+	    gbcLblPrezime.insets = new Insets(10, 30, 0,40);
 	    panelCenter.add(lblPrezime, gbcLblPrezime);
 
 
 	    GridBagConstraints gbcLbDatumRodjennja = new GridBagConstraints();
 	    gbcLbDatumRodjennja.gridx = 0;
 	    gbcLbDatumRodjennja.gridy = 2;
-	    gbcLbDatumRodjennja.insets = new Insets(10, 40, 0,0);
+	    gbcLbDatumRodjennja.insets = new Insets(10, 40, 0,2);
 	    panelCenter.add(lblDatumRodjenja, gbcLbDatumRodjennja);
 
 
 	    GridBagConstraints gbcLbAdresa = new GridBagConstraints();
 	    gbcLbAdresa.gridx = 0;
 	    gbcLbAdresa.gridy = 3;
-	    gbcLbAdresa.insets = new Insets(10, 40, 0,0);
+	    gbcLbAdresa.insets = new Insets(10, 56, 0,0);
 	    panelCenter.add(lblAdresa, gbcLbAdresa);
 
 
 	    GridBagConstraints gbcLbTelefon = new GridBagConstraints();
 	    gbcLbTelefon.gridx = 0;
 	    gbcLbTelefon.gridy = 4;
-	    gbcLbTelefon.insets = new Insets(10, 40, 0,0);
+	    gbcLbTelefon.insets = new Insets(10, 40, 0,20);
 	    panelCenter.add(lblTelefon, gbcLbTelefon);
 	    
 	    GridBagConstraints gbcLblEmailAdresa = new GridBagConstraints();
 	    gbcLblEmailAdresa.gridx = 0;
 	    gbcLblEmailAdresa.gridy = 5;
-	    gbcLblEmailAdresa.insets = new Insets(10, 40, 0,0);
+	    gbcLblEmailAdresa.insets = new Insets(10, 40, 0,20);
 	    panelCenter.add(lblEmailAdresa, gbcLblEmailAdresa);
 	    
 	    GridBagConstraints gbcLblAdresaKancelarije = new GridBagConstraints();
 	    gbcLblAdresaKancelarije.gridx = 0;
 	    gbcLblAdresaKancelarije.gridy = 6;
-	    gbcLblAdresaKancelarije.insets = new Insets(10, 40, 0,0);
+	    gbcLblAdresaKancelarije.insets = new Insets(10, 56, 0,0);
 	    panelCenter.add(lblAdresaKancelarije, gbcLblAdresaKancelarije);
 	    
 	    GridBagConstraints gbcLblBrLicneKarte = new GridBagConstraints();
 	    gbcLblBrLicneKarte.gridx = 0;
 	    gbcLblBrLicneKarte.gridy = 7;
-	    gbcLblBrLicneKarte.insets = new Insets(10, 40, 0,0);
+	    gbcLblBrLicneKarte.insets = new Insets(10, 38, 0,0);
 	    panelCenter.add(lblBrLicneKarte, gbcLblBrLicneKarte);
 	    
 	    GridBagConstraints gbcLblZvanje = new GridBagConstraints();
 	    gbcLblZvanje.gridx = 0;
 	    gbcLblZvanje.gridy = 8;
-	    gbcLblZvanje.insets = new Insets(10, 40, 0,0);
+	    gbcLblZvanje.insets = new Insets(10, 20, 0,40);
 	    panelCenter.add(lblZvanje, gbcLblZvanje);
 	    
 	    GridBagConstraints gbcLblGodineStaza = new GridBagConstraints();
 	    gbcLblGodineStaza.gridx = 0;
 	    gbcLblGodineStaza.gridy = 9;
-	    gbcLblGodineStaza.insets = new Insets(10, 40, 0,0);
+	    gbcLblGodineStaza.insets = new Insets(10, 45, 0,25);
 	    panelCenter.add(lblGodineStaza, gbcLblGodineStaza);
 	    
 	    

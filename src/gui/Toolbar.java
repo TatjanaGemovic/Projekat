@@ -104,13 +104,30 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(ProfesoriJTable.rowSelectedIndex==-1 && StudentiJTable.rowSelectedIndex==-1 && PredmetiJTable.rowSelectedIndex==-1) {
-					
-				}else if(PredmetiJTable.rowSelectedIndex<BazaPredmeta.getInstance().getPredmeti().size() &&
-						ProfesoriJTable.rowSelectedIndex<BazaProfesora.getInstance().getProfesori().size() &&
-						StudentiJTable.rowSelectedIndex<BazaStudenata.getInstance().getStudenti().size()) {
-					DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje " + TabbedPane.tabIndex + "a", true);
-					obrisiEntitet.setVisible(true);
+				switch (TabbedPane.tabIndex) {
+				case Profesor:
+					if(ProfesoriJTable.rowSelectedIndex==-1 || ProfesoriJTable.rowSelectedIndex>=BazaProfesora.getInstance().getProfesori().size()) {
+						
+					} else {
+						DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje Profesora", true);
+						obrisiEntitet.setVisible(true);
+					}
+					break;
+				case Predmet:
+					if(PredmetiJTable.rowSelectedIndex==-1 || PredmetiJTable.rowSelectedIndex>=BazaPredmeta.getInstance().getPredmeti().size()) {
+						
+					} else {
+						DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje Predmeta", true);
+						obrisiEntitet.setVisible(true);
+					}
+					break;
+				default:
+					if(StudentiJTable.rowSelectedIndex==-1 || StudentiJTable.rowSelectedIndex>=BazaStudenata.getInstance().getStudenti().size()) {
+						
+					} else {
+						DijalogBrisanjaEntiteta obrisiEntitet = new DijalogBrisanjaEntiteta(parent, "Brisanje Studenta", true);
+						obrisiEntitet.setVisible(true);
+					}
 				}
 			}
 		});

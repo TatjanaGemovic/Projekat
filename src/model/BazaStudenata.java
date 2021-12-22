@@ -53,7 +53,7 @@ public class BazaStudenata{
 	}
 
 	public int getRowCount() {
-		return 50;
+		return 40;
 	}
 	
 	public List<Student> getStudenti() {

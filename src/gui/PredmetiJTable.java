@@ -20,6 +20,9 @@ public class PredmetiJTable extends JTable{
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelPredmeti());
+		this.setShowHorizontalLines(false);
+		this.setShowVerticalLines(false);
+		this.setGridColor(Color.LIGHT_GRAY);
 		this.predmetModel = new AbstractTableModelPredmeti();
 		
 		predmetModel = (AbstractTableModelPredmeti) this.getModel();

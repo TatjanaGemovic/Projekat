@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -76,49 +77,48 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		JLabel lblBrojESPB = new JLabel("Broj ESPB bodova:");
 		JLabel lblGodina = new JLabel("Godina na kojoj se izvodi:");
 		JLabel lblSemestar = new JLabel("Semestar:");
-		JLabel lblProfesor = new JLabel("Profesor:");
+		JLabel lblProfesor = new JLabel("Profesor (ime i prezime):");
 		 
 		 
-		final JTextField txtSifra = new JTextField(); //ne sme da se menja
-		//txtSifra.setEnabled(false);
+		final JTextField txtSifra = new JTextField();
 		final JTextField txtNaziv = new JTextField();
 		final JTextField txtBrojESPB = new JTextField();
-		final JTextField txtProfesor = new JTextField();
+		//final JTextField txtProfesor = new JTextField();
 		
 		GridBagConstraints gbcLSifra = new GridBagConstraints();
 		gbcLSifra.gridx = 0;
 		gbcLSifra.gridy = 0;
-		gbcLSifra.insets = new Insets(10, 40, 0,0);
+		gbcLSifra.insets = new Insets(10, 30, 0,0);
 		panelCenter.add(lblSifra, gbcLSifra);
 		 
 		GridBagConstraints gbcLNaziv = new GridBagConstraints();
 		gbcLNaziv.gridx = 0;
 		gbcLNaziv.gridy = 1;
-		gbcLNaziv.insets = new Insets(10, 40, 0,0);
+		gbcLNaziv.insets = new Insets(10, 35, 0,0);
 		panelCenter.add(lblNaziv, gbcLNaziv);
 		
 		GridBagConstraints gbcLBrojESPB = new GridBagConstraints();
 		gbcLBrojESPB.gridx = 0;
 		gbcLBrojESPB.gridy = 2;
-		gbcLBrojESPB.insets = new Insets(10, 40, 0,0);
+		gbcLBrojESPB.insets = new Insets(10, 42, 0,0);
 		panelCenter.add(lblBrojESPB, gbcLBrojESPB);
 		
 		GridBagConstraints gbcLGodina = new GridBagConstraints();
 		gbcLGodina.gridx = 0;
 		gbcLGodina.gridy = 3;
-		gbcLGodina.insets = new Insets(10, 40, 0,0);
+		gbcLGodina.insets = new Insets(10, 95, 0,0);
 		panelCenter.add(lblGodina, gbcLGodina);
 		
 		GridBagConstraints gbcLSemestar = new GridBagConstraints();
 		gbcLSemestar.gridx = 0;
 		gbcLSemestar.gridy = 4;
-		gbcLSemestar.insets = new Insets(10, 40, 0,0);
+		gbcLSemestar.insets = new Insets(10, 20, 0,25);
 		panelCenter.add(lblSemestar, gbcLSemestar);
 		
 		GridBagConstraints gbcLProfesor = new GridBagConstraints();
 		gbcLProfesor.gridx = 0;
 		gbcLProfesor.gridy = 5;
-		gbcLProfesor.insets = new Insets(10, 40, 0,0);
+		gbcLProfesor.insets = new Insets(10, 88, 0,0);
 		panelCenter.add(lblProfesor, gbcLProfesor);
 			
 		GridBagConstraints gbcTxtSifra = new GridBagConstraints();
@@ -158,8 +158,6 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		   
 		panelCenter.add(godStud,grdGodina);
 		
-			
-		
 		String semestar[]= {"Letnji","Zimski"};
 		JComboBox<String> semestarStud=new JComboBox<>(semestar);
 		   
@@ -172,6 +170,15 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		   
 		panelCenter.add(semestarStud,grdSemestar);
 		
+		String[] dir = new String[100];
+		int i=0;
+		for(Profesor p : BazaProfesora.getInstance().getProfesori())
+        {
+            dir[i] = p.getImeIPrezime();
+            i++;
+        }
+		JComboBox<?> profesorLista = new JComboBox<Object>(dir);
+		
 		
 		GridBagConstraints gbcTxtProfesor = new GridBagConstraints();
 		gbcTxtProfesor .gridx = 1;
@@ -179,31 +186,20 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtProfesor .weightx = 100;
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtProfesor .insets = new Insets(10, 120, 0, 70);
-		panelCenter.add(txtProfesor, gbcTxtProfesor );
+		panelCenter.add(profesorLista, gbcTxtProfesor );
 		
 		//ispis podataka za selektovani predmet
 		List<Predmet> predmeti = BazaPredmeta.getInstance().getPredmeti();
     	Predmet predmet = BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex);
-    	for(Predmet p : predmeti) {
-    		predmet = p;
-    		if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta())) {
-    			txtSifra.setText(p.getSifra_predmeta());
-    			txtNaziv.setText(p.getNaziv());
-    			txtBrojESPB.setText(String.valueOf(p.getEspb()));
-    			if(p.getPredmetni_profesor()==null) {
-    				txtProfesor.setText("Nema profesora");
-    			}else {
-    				txtProfesor.setText(p.getPredmetni_profesor().getImeIPrezime());
-    			}
-    			godStud.setSelectedIndex(p.getGodina_izvodjenja()-1);
-    			int k=1;
-    			if(p.getSemestar().equals(Semestar.zimski)) {
-    				k=2;
-    			}
-    			semestarStud.setSelectedIndex(k-1);
-				break;
-    		}
-    	}
+    	txtSifra.setText(predmet.getSifra_predmeta());
+		txtNaziv.setText(predmet.getNaziv());
+		txtBrojESPB.setText(String.valueOf(predmet.getEspb()));
+		godStud.setSelectedIndex(predmet.getGodina_izvodjenja()-1);
+		int k=1;
+		if(predmet.getSemestar().equals(Semestar.zimski)) {
+			k=2;
+		}
+		semestarStud.setSelectedIndex(k-1);
     	
 		potvrda.addActionListener(new ActionListener() {
 
@@ -222,14 +218,14 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
 			    		return;
 			    	}
-			    	
-				    String sifra = txtSifra.getText();
-			    	if(!(sifra.equals(BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex).getSifra_predmeta()))) {
 			    		
-			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sifra predmeta se ne moze menjati", "Greska", JOptionPane.ERROR_MESSAGE);
-			    		return;
+			    	String sifra_new = txtSifra.getText();
+			    	for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+			    		if(sifra_new.equals(p.getSifra_predmeta()) && p!=predmet) {
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji predmet sa tom sifrom");
+			    			return;
+			    		}
 			    	}
-			    				    	
 			    	String naziv = txtNaziv.getText();
 			    	int brojEspb = Integer.parseInt(txtBrojESPB.getText());
 			    	int semestar_pom = semestarStud.getSelectedIndex()+1;
@@ -241,21 +237,15 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			    		semestar = Semestar.letnji;
 			    	}
 		
-			    	String profesor = txtProfesor.getText(); //provera jel postoji taj profesor?
+			    	String profesor = dir[profesorLista.getSelectedIndex()]; 
+			    	
 			    	Profesor p = new Profesor();
 			    	for (Profesor i : BazaProfesora.getInstance().getProfesori()) {
 						if(i.getImeIPrezime().equals(profesor)) {
 							p = i;
-							continue;
-						} else {
-							JOptionPane.showMessageDialog(MainFrame.getInstance(), "Dodati predmet nema imati profesora!");
-							p = null;
+							break;
 						}
 					}
-			    	
-			    	
-
-			    	
 			    	PredmetKontroler.getInstance().izmeniPredmet(PredmetiJTable.rowSelectedIndex, naziv, semestar, god_izvodjenja, p, brojEspb);
 			    	dispose();
 			    	

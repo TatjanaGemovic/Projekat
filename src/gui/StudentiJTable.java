@@ -21,6 +21,9 @@ public class StudentiJTable extends JTable{
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudenti());
+		this.setShowHorizontalLines(false);
+		this.setShowVerticalLines(false);
+		this.setGridColor(Color.LIGHT_GRAY);
 		this.studentModel = new AbstractTableModelStudenti();
 	
 		studentModel = (AbstractTableModelStudenti) this.getModel();

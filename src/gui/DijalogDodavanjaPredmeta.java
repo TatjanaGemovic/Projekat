@@ -84,42 +84,42 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		final JTextField txtSifra = new JTextField();
 		final JTextField txtNaziv = new JTextField();
 		final JTextField txtBrojESPB = new JTextField();
-		final JTextField txtProfesor = new JTextField();
+		//final JTextField txtProfesor = new JTextField();
 		
 		GridBagConstraints gbcLSifra = new GridBagConstraints();
 		gbcLSifra.gridx = 0;
 		gbcLSifra.gridy = 0;
-		gbcLSifra.insets = new Insets(10, 40, 0,0);
+		gbcLSifra.insets = new Insets(10, 30, 0,0);
 		panelCenter.add(lblSifra, gbcLSifra);
 		 
 		GridBagConstraints gbcLNaziv = new GridBagConstraints();
 		gbcLNaziv.gridx = 0;
 		gbcLNaziv.gridy = 1;
-		gbcLNaziv.insets = new Insets(10, 40, 0,0);
+		gbcLNaziv.insets = new Insets(10, 35, 0,0);
 		panelCenter.add(lblNaziv, gbcLNaziv);
 		
 		GridBagConstraints gbcLBrojESPB = new GridBagConstraints();
 		gbcLBrojESPB.gridx = 0;
 		gbcLBrojESPB.gridy = 2;
-		gbcLBrojESPB.insets = new Insets(10, 40, 0,0);
+		gbcLBrojESPB.insets = new Insets(10, 42, 0,0);
 		panelCenter.add(lblBrojESPB, gbcLBrojESPB);
 		
 		GridBagConstraints gbcLGodina = new GridBagConstraints();
 		gbcLGodina.gridx = 0;
 		gbcLGodina.gridy = 3;
-		gbcLGodina.insets = new Insets(10, 40, 0,0);
+		gbcLGodina.insets = new Insets(10, 95, 0,0);
 		panelCenter.add(lblGodina, gbcLGodina);
 		
 		GridBagConstraints gbcLSemestar = new GridBagConstraints();
 		gbcLSemestar.gridx = 0;
 		gbcLSemestar.gridy = 4;
-		gbcLSemestar.insets = new Insets(10, 40, 0,0);
+		gbcLSemestar.insets = new Insets(10, 20, 0,25);
 		panelCenter.add(lblSemestar, gbcLSemestar);
 		
 		GridBagConstraints gbcLProfesor = new GridBagConstraints();
 		gbcLProfesor.gridx = 0;
 		gbcLProfesor.gridy = 5;
-		gbcLProfesor.insets = new Insets(10, 40, 0,0);
+		gbcLProfesor.insets = new Insets(10, 88, 0,0);
 		panelCenter.add(lblProfesor, gbcLProfesor);
 			
 		GridBagConstraints gbcTxtSifra = new GridBagConstraints();
@@ -171,6 +171,14 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		grdSemestar.insets = new Insets(10, 120, 0, 70);
 		panelCenter.add(semestarStud,grdSemestar);
 		
+		String[] dir = new String[100];
+		int i=0;
+		for(Profesor p : BazaProfesora.getInstance().getProfesori())
+        {
+            dir[i] = p.getImeIPrezime();
+            i++;
+        }
+		JComboBox<?> profesorLista = new JComboBox<Object>(dir);
 		
 		GridBagConstraints gbcTxtProfesor = new GridBagConstraints();
 		gbcTxtProfesor .gridx = 1;
@@ -178,7 +186,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtProfesor .weightx = 100;
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtProfesor .insets = new Insets(10, 120, 0, 70);
-		panelCenter.add(txtProfesor, gbcTxtProfesor );
+		panelCenter.add(profesorLista, gbcTxtProfesor );
 		
 		potvrda.addActionListener(new ActionListener() {
 
@@ -214,18 +222,16 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			    		semestar = Semestar.letnji;
 			    	}
 		
-			    	String profesor = txtProfesor.getText(); //provera jel postoji taj profesor?
+			    	String profesor = dir[profesorLista.getSelectedIndex()]; 
+			    	
 			    	Profesor p = new Profesor();
 			    	for (Profesor i : BazaProfesora.getInstance().getProfesori()) {
 						if(i.getImeIPrezime().equals(profesor)) {
 							p = i;
-							continue;
-						} else {
-							JOptionPane.showMessageDialog(MainFrame.getInstance(), "Dodati predmet nece imati profesora!");
-							p = null;
+							break;
 						}
 					}
-			    	
+
 			    	PredmetKontroler.getInstance().dodajPredmet(sifra, naziv, semestar, god_izvodjenja, p, brojEspb);
 			    	dispose();
 			    	
