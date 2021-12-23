@@ -230,6 +230,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
+		    
+		    
 		    tabbedPane.add("Informacije", panelCenter);
 		    tabbedPane.add("Polozeni", new JPanel());
 		    tabbedPane.add("Nepolozeni", new JPanel());
