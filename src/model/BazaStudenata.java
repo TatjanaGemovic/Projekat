@@ -113,14 +113,19 @@ public class BazaStudenata{
 		this.studenti.add(new Student(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,broj_indeksa,god_upisa,trenutna_god,status));
 	}
 	
-	public void izmeniStudenta(String index, Adresa adresa, String kontakt_tel, String email, int trenutna_god,
-			Status_Studenta status) {
+	public void izmeniStudenta(Student student, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
+			String broj_indeksa, int god_upisa, int trenutna_god, Status_Studenta status) {
 		for(Student i : studenti) {
-			if(i.getBroj_indeksa().equals(index)) {
+			if(i.equals(student)) {
 				int index_list = studenti.indexOf(i);
+				i.setIme(ime);
+				i.setPrezime(prezime);
+				i.setDatum_rodjenja(datum_rodjenja);
 				i.setAdresa(adresa);
 				i.setKontakt_tel(kontakt_tel);
 				i.setEmail(email);
+				i.setBroj_indeksa(broj_indeksa);
+				i.setGod_upisa(god_upisa);
 				i.setTrenutna_god(trenutna_god);
 				i.setStatus(status);
 				studenti.set(index_list, i);

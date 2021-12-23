@@ -6,15 +6,35 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
+import controller.PredmetKontroler;
+import controller.StudentKontroler;
+import model.Adresa;
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenata;
+import model.Predmet;
+import model.Profesor;
+import model.Semestar;
+import model.Status_Studenta;
+import model.Student;
 
 public class DijalogIzmenaStudenta extends JDialog {
 
@@ -42,7 +62,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 			gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 			gbcOdustanak.gridx = 1;
 			gbcOdustanak.gridy = 11;
-			gbcOdustanak.insets = new Insets(30,30, 0,230);
+			gbcOdustanak.insets = new Insets(30, 130, 0,0);
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
@@ -230,7 +250,82 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
-		    
+		  //ispis podataka za selektovani predmet
+			List<Student> studenti = BazaStudenata.getInstance().getStudenti();
+	    	Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+	    	txtIme.setText(student.getIme());
+		    txtPrezime.setText(student.getPrezime());
+		    txtDatumRodjenja.setText(student.getDatum_rodjenja().toString());
+		    String adresa_string = student.getAdresa().getUlica() + ", " + student.getAdresa().getBroj() + ", "  + student.getAdresa().getGrad() + ", " + student.getAdresa().getDrava(); 
+		    txtAdresa.setText(adresa_string);;
+		    txtTelefon.setText(student.getKontakt_tel());
+		    txtEmailAdresa.setText(student.getEmail());;
+		    txtBrojIndeksa.setText(student.getBroj_indeksa());;
+		    txtGodinaUpisa.setText(Integer.toString(student.getGod_upisa()));
+		    godStud.setSelectedIndex(student.getTrenutna_god()-1);
+			int k=1;
+			if(student.getStatus().equals(Status_Studenta.S)) {
+				k=2;
+			}
+			NacinFinansiranja.setSelectedIndex(k-1);
+	    	
+			potvrda.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da postavite nove parametre?", "Potvrda izmene", dialogButton);
+				    
+				    
+
+				    if (dialogResult == JOptionPane.YES_OPTION) {
+				    	
+				    	if(txtIme.getText().isEmpty() || txtPrezime.getText().isEmpty() || txtDatumRodjenja.getText().isEmpty() || txtAdresa.getText().isEmpty() || txtTelefon.getText().isEmpty() || txtEmailAdresa.getText().isEmpty() || txtBrojIndeksa.getText().isEmpty() || txtGodinaUpisa.getText().isEmpty()) {
+				    		
+				    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+				    		return;
+				    	}
+				    		
+				    	String broj_index = txtBrojIndeksa.getText();
+				    	for(Student s : BazaStudenata.getInstance().getStudenti()) {
+				    		if(broj_index.equals(s.getBroj_indeksa()) && s!=student) {
+				    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji predmet sa tom sifrom");
+				    			return;
+				    		}
+				    	}
+				    	String ime = txtIme.getText();
+				    	String prezime = txtPrezime.getText();
+				    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+				    	Date datumRodjenja = new Date();
+				    	try {
+							datumRodjenja =  formatter.parse(txtDatumRodjenja.getText());
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+				    	String adresaStr = txtAdresa.getText();
+				    	String[] adresa_split = adresaStr.split(",");
+				    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[2], adresa_split[2], adresa_split[3]);
+				    	String telefon = txtTelefon.getText();
+				    	String mail = txtEmailAdresa.getText();
+				    	String br_indexa = txtBrojIndeksa.getText();
+				    	int god_upisa = Integer.parseInt(txtGodinaUpisa.getText());
+				    	int tren_god = godStud.getSelectedIndex()+1;
+				    	int status_pom = NacinFinansiranja.getSelectedIndex()+1;
+				    	Status_Studenta status = null;
+				    	if(status_pom == 2) {
+				    		status = Status_Studenta.S;
+				    	} else if (status_pom == 1){
+				    		status = Status_Studenta.B;
+				    	}
+				    	StudentKontroler.getInstance().izmeniStudenta(StudentiJTable.rowSelectedIndex, student, ime, prezime, datumRodjenja, adresa, telefon, mail, br_indexa, god_upisa, tren_god, status);
+				    	dispose();
+				    	
+				    }
+					
+				}
+				
+			});
 		    
 		    tabbedPane.add("Informacije", panelCenter);
 		    tabbedPane.add("Polozeni", new JPanel());

@@ -8,6 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,6 +21,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+
+import controller.StudentKontroler;
+import model.Adresa;
+
+import model.BazaStudenata;
+
+import model.Status_Studenta;
+import model.Student;
 
 public class DijalogDodavanjaStudenta extends JDialog {
 
@@ -240,6 +253,59 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    grd2.insets = new Insets(10, 120, 0, 70);
 	    
 	    panelCenter.add(NacinFinansiranja,grd2);
+	    
+	    potvrda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da u bazu dodajete studenta sa unetim podacima?", "Potvrda unosa", dialogButton);
+
+			    if (dialogResult == JOptionPane.YES_OPTION) {
+			    	if(txtIme.getText().isEmpty() || txtPrezime.getText().isEmpty() || txtDatumRodjenja.getText().isEmpty() || txtAdresa.getText().isEmpty() || txtTelefon.getText().isEmpty() || txtEmailAdresa.getText().isEmpty() || txtBrojIndeksa.getText().isEmpty() || txtGodinaUpisa.getText().isEmpty()) {
+			    		
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		return;
+			    	}
+			    	
+			    	String brojIndexa = txtBrojIndeksa.getText();
+			    	for(Student i : BazaStudenata.getInstance().getStudenti()) {
+			    		if(i.getBroj_indeksa().equals(brojIndexa)) {
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji student sa indeksom: " + brojIndexa);
+			    			return;
+			    		}
+			    	}
+			    	String ime = txtIme.getText();
+			    	String prezime = txtPrezime.getText();
+			    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+			    	Date datumRodjenja = new Date();
+			    	try {
+						datumRodjenja =  formatter.parse(txtDatumRodjenja.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+			    	String adresaStr = txtAdresa.getText();
+			    	String[] adresa_split = adresaStr.split(",");
+			    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[2], adresa_split[2], adresa_split[3]);
+			    	String telefon = txtTelefon.getText();
+			    	String mail = txtEmailAdresa.getText();
+			    	String br_indexa = txtBrojIndeksa.getText();
+			    	int god_upisa = Integer.parseInt(txtGodinaUpisa.getText());
+			    	int tren_god = godStud.getSelectedIndex()+1;
+			    	int status_pom = NacinFinansiranja.getSelectedIndex()+1;
+			    	Status_Studenta status = null;
+			    	if(status_pom == 2) {
+			    		status = Status_Studenta.S;
+			    	} else if (status_pom == 1){
+			    		status = Status_Studenta.B;
+			    	}
+			    	StudentKontroler.getInstance().dodajStudenta(ime, prezime, datumRodjenja, adresa, telefon, mail, br_indexa, god_upisa, tren_god, status);
+			    	dispose();
+			    }	
+			}
+			
+		});
 	}
 	
 }
