@@ -246,7 +246,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 							break;
 						}
 					}
-			    	PredmetKontroler.getInstance().izmeniPredmet(PredmetiJTable.rowSelectedIndex, naziv, semestar, god_izvodjenja, p, brojEspb);
+			    	PredmetKontroler.getInstance().izmeniPredmet(PredmetiJTable.rowSelectedIndex, sifra_new, naziv, semestar, god_izvodjenja, p, brojEspb);
 			    	dispose();
 			    	
 			    }
