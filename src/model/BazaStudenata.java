@@ -116,7 +116,7 @@ public class BazaStudenata{
 	public void izmeniStudenta(Student student, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
 			String broj_indeksa, int god_upisa, int trenutna_god, Status_Studenta status) {
 		for(Student i : studenti) {
-			if(i.equals(student)) {
+			if(i==student) {
 				int index_list = studenti.indexOf(i);
 				i.setIme(ime);
 				i.setPrezime(prezime);

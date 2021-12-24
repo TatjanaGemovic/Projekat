@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -250,12 +251,13 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
-		  //ispis podataka za selektovani predmet
 			List<Student> studenti = BazaStudenata.getInstance().getStudenti();
 	    	Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 	    	txtIme.setText(student.getIme());
 		    txtPrezime.setText(student.getPrezime());
-		    txtDatumRodjenja.setText(student.getDatum_rodjenja().toString());
+		    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+		    String strDate = dateFormat.format(student.getDatum_rodjenja());  
+		    txtDatumRodjenja.setText(strDate);
 		    String adresa_string = student.getAdresa().getUlica() + ", " + student.getAdresa().getBroj() + ", "  + student.getAdresa().getGrad() + ", " + student.getAdresa().getDrava(); 
 		    txtAdresa.setText(adresa_string);;
 		    txtTelefon.setText(student.getKontakt_tel());
@@ -296,7 +298,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				    	}
 				    	String ime = txtIme.getText();
 				    	String prezime = txtPrezime.getText();
-				    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+				    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 				    	Date datumRodjenja = new Date();
 				    	try {
 							datumRodjenja =  formatter.parse(txtDatumRodjenja.getText());
@@ -318,7 +320,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				    	} else if (status_pom == 1){
 				    		status = Status_Studenta.B;
 				    	}
-				    	StudentKontroler.getInstance().izmeniStudenta(StudentiJTable.rowSelectedIndex, student, ime, prezime, datumRodjenja, adresa, telefon, mail, br_indexa, god_upisa, tren_god, status);
+				    	StudentKontroler.getInstance().izmeniStudenta(StudentiJTable.rowSelectedIndex, ime, prezime, datumRodjenja, adresa, telefon, mail, br_indexa, god_upisa, tren_god, status);
 				    	dispose();
 				    	
 				    }

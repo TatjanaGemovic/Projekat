@@ -278,7 +278,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 			    	}
 			    	String ime = txtIme.getText();
 			    	String prezime = txtPrezime.getText();
-			    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+			    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			    	Date datumRodjenja = new Date();
 			    	try {
 						datumRodjenja =  formatter.parse(txtDatumRodjenja.getText());

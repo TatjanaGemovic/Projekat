@@ -27,13 +27,13 @@ public class StudentKontroler {
 		BazaStudenata.getInstance().dodajStudenta(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,broj_indeksa,god_upisa,trenutna_god,status);
 		StudentiJTable.azurirajPrikaz();		
 	}
-	public void izmeniStudenta(int rowSelectedIndex, Student student, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
+	public void izmeniStudenta(int rowSelectedIndex, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
 			String broj_indeksa, int god_upisa, int trenutna_god, Status_Studenta status) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		Student s = BazaStudenata.getInstance().getRow(rowSelectedIndex);
-		BazaStudenata.getInstance().izmeniStudenta(student, ime, prezime, datum_rodjenja, adresa, kontakt_tel, email, s.getBroj_indeksa(), god_upisa, trenutna_god,  status);
+		BazaStudenata.getInstance().izmeniStudenta(s, ime, prezime, datum_rodjenja, adresa, kontakt_tel, email, broj_indeksa, god_upisa, trenutna_god,  status);
 		StudentiJTable.azurirajPrikaz();
 	}
 	
