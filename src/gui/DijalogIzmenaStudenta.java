@@ -251,7 +251,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
-			List<Student> studenti = BazaStudenata.getInstance().getStudenti();
+			
 	    	Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 	    	txtIme.setText(student.getIme());
 		    txtPrezime.setText(student.getPrezime());
@@ -306,8 +306,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 							e1.printStackTrace();
 						}
 				    	String adresaStr = txtAdresa.getText();
-				    	String[] adresa_split = adresaStr.split(",");
-				    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[2], adresa_split[2], adresa_split[3]);
+				    	String[] adresa_split = adresaStr.split(", ");
+				    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[1], adresa_split[2], adresa_split[3]);
 				    	String telefon = txtTelefon.getText();
 				    	String mail = txtEmailAdresa.getText();
 				    	String br_indexa = txtBrojIndeksa.getText();

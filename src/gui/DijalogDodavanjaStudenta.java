@@ -287,7 +287,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 					}
 			    	String adresaStr = txtAdresa.getText();
 			    	String[] adresa_split = adresaStr.split(",");
-			    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[2], adresa_split[2], adresa_split[3]);
+			    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[1], adresa_split[2], adresa_split[3]);
 			    	String telefon = txtTelefon.getText();
 			    	String mail = txtEmailAdresa.getText();
 			    	String br_indexa = txtBrojIndeksa.getText();

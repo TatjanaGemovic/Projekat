@@ -6,12 +6,29 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.ProfesorKontroler;
+import controller.StudentKontroler;
+import model.Adresa;
+import model.BazaProfesora;
+import model.BazaStudenata;
+import model.Profesor;
+import model.Status_Studenta;
+import model.Student;
 
 public class DijalogIzmenaProfesora extends JDialog {
 	public DijalogIzmenaProfesora(Frame parent, String title, boolean modal) {
@@ -213,5 +230,74 @@ public class DijalogIzmenaProfesora extends JDialog {
 	    gbcTxtGodineStaza.fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtGodineStaza.insets = new Insets(10, 120, 0, 70);
 	    panelCenter.add(txtGodineStaza, gbcTxtGodineStaza);
+	    
+    	Profesor profesor = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+    	txtIme.setText(profesor.getIme());
+	    txtPrezime.setText(profesor.getPrezime());
+	    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+	    String strDate = dateFormat.format(profesor.getDatum_rodjenja());  
+	    txtDatumRodjenja.setText(strDate);
+	    String adresa_string = profesor.getAdresa().getUlica() + ", " + profesor.getAdresa().getBroj() + ", "  + profesor.getAdresa().getGrad() + ", " + profesor.getAdresa().getDrava(); 
+	    txtAdresa.setText(adresa_string);
+	    adresa_string = profesor.getAdresa_kancelarije().getUlica() + ", " + profesor.getAdresa_kancelarije().getBroj() + ", "  + profesor.getAdresa_kancelarije().getGrad() + ", " + profesor.getAdresa_kancelarije().getDrava(); 
+	    txtAdresaKancelarije.setText(adresa_string);
+	    txtTelefon.setText(profesor.getKontakt_tel());
+	    txtEmailAdresa.setText(profesor.getEmail());
+	    txtZvanje.setText(profesor.getZvanje());
+	    txtBrLicneKarte.setText(profesor.getBroj_licne_karte());
+	    txtGodineStaza.setText(Integer.toString(profesor.getGodine_staza()));
+	    
+	    potvrda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da postavite nove parametre?", "Potvrda izmene", dialogButton);
+			    
+			    
+
+			    if (dialogResult == JOptionPane.YES_OPTION) {
+			    	
+			    	if(txtIme.getText().isEmpty() || txtPrezime.getText().isEmpty() || txtDatumRodjenja.getText().isEmpty() || txtAdresa.getText().isEmpty() || txtTelefon.getText().isEmpty() || txtEmailAdresa.getText().isEmpty() || txtAdresaKancelarije.getText().isEmpty() || txtBrLicneKarte.getText().isEmpty() || txtZvanje.getText().isEmpty() || txtGodineStaza.getText().isEmpty()) {
+			    		
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		return;
+			    	}
+			    		
+			    	String brojLicneKarte = txtBrLicneKarte.getText();
+			    	for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			    		if(brojLicneKarte.equals(p.getBroj_licne_karte()) && p!=profesor) {
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji profesor sa unetim brojem licne karte");
+			    			return;
+			    		}
+			    	}
+			    	String ime = txtIme.getText();
+			    	String prezime = txtPrezime.getText();
+			    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			    	Date datumRodjenja = new Date();
+			    	try {
+						datumRodjenja =  formatter.parse(txtDatumRodjenja.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+			    	String adresaStr = txtAdresa.getText();
+			    	String[] adresa_split = adresaStr.split(", ");
+			    	Adresa adresa = new Adresa(adresa_split[0], adresa_split[1], adresa_split[2], adresa_split[3]);
+			    	String telefon = txtTelefon.getText();
+			    	String mail = txtEmailAdresa.getText();
+			    	adresaStr = txtAdresaKancelarije.getText();
+			    	adresa_split = adresaStr.split(", ");
+			    	Adresa adresa2 = new Adresa(adresa_split[0], adresa_split[1], adresa_split[2], adresa_split[3]);
+			    	String brLicneKarte = txtBrLicneKarte.getText();
+			    	String zvanje = txtZvanje.getText();
+			    	int god_staza = Integer.parseInt(txtGodineStaza.getText());
+			    	ProfesorKontroler.getInstance().izmeniProfesora(ProfesoriJTable.rowSelectedIndex, ime, prezime, datumRodjenja, adresa, telefon, mail, adresa2, brLicneKarte, zvanje, god_staza);
+			    	dispose();
+			    }
+				
+			}
+			
+		});
 	}
 }
