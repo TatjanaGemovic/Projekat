@@ -290,7 +290,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				    	String broj_index = txtBrojIndeksa.getText();
 				    	for(Student s : BazaStudenata.getInstance().getStudenti()) {
 				    		if(broj_index.equals(s.getBroj_indeksa()) && s!=student) {
-				    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji predmet sa tom sifrom");
+				    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji student sa tim indeksom");
 				    			return;
 				    		}
 				    	}
