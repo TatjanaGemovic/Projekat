@@ -264,7 +264,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
 
 			    if (dialogResult == JOptionPane.YES_OPTION) {
 
