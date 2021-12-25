@@ -269,7 +269,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtDatumRodjenja.getText()).matches("[0-3][0-9]/[0-1][0-9]/([19]|[20])[0-9][0-9]")) {
+				if((txtDatumRodjenja.getText()).matches("[0-3][0-9]/[0-1][0-9]/[12][0129][0-9][0-9]")) {
 					dobardatum = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);
@@ -378,7 +378,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{7}")) {
+				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{9}")) {
 					dobarbroj = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);
@@ -416,7 +416,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtBrojIndeksa.getText()).matches("[A-Z]{2}[0-9]{3}")) {
+				if((txtBrojIndeksa.getText()).matches("[A-Z][A-Z][0-9][0-9][0-9][/][0-9][0-9][0-9][0-9]")) {
 					dobarindex = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);

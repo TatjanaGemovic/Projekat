@@ -271,7 +271,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtDatumRodjenja.getText()).matches("[0-3][0-9]/[0-1][0-9]/([19]|[20])[0-9][0-9]")) {
+				if((txtDatumRodjenja.getText()).matches("[0-3][0-9]/[0-1][0-9]/[12][0129][0-9][0-9]")) {
 					dobardatum = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -344,7 +344,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{7}")) {
+				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{9}")) {
 					dobarbroj = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
