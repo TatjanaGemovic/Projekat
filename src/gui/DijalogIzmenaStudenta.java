@@ -54,7 +54,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 			Dimension parentSize = parent.getSize();
 			int diaWidth = parentSize.width;
 			int diaHeight = parentSize.height;
-			setSize(diaWidth*3/5, diaHeight*19/20);
+			setSize(diaWidth*3/5, diaHeight);
 			setLocationRelativeTo(parent);
 			
 			JTabbedPane tabbedPane = new JTabbedPane();
