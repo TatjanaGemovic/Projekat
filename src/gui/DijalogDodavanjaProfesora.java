@@ -56,18 +56,8 @@ public class DijalogDodavanjaProfesora extends JDialog{
 		
 		JButton potvrda=new JButton("Potvrdi");
 		potvrda.setEnabled(false);
-		GridBagConstraints gbcPotvrda = new GridBagConstraints();
-		gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
-		gbcPotvrda.gridx = 0;
-		gbcPotvrda.gridy = 10;
-		gbcPotvrda.insets = new Insets(30, 190, 0,0);
-		
 		JButton odustanak=new JButton("Odustani");
-		GridBagConstraints gbcOdustanak = new GridBagConstraints();
-		gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
-		gbcOdustanak.gridx = 1;
-		gbcOdustanak.gridy = 10;
-		gbcOdustanak.insets = new Insets(30,30, 0, 150);
+
 		odustanak.addActionListener(new ActionListener() {
 
 			@Override
@@ -83,12 +73,15 @@ public class DijalogDodavanjaProfesora extends JDialog{
 				}
 			});
 		
+		JPanel panelButton = new JPanel();
+		panelButton.add(potvrda);
+		panelButton.add(odustanak);
+	    
+	    this.add(panelButton, BorderLayout.SOUTH);
+	    
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
 	    this.add(panelCenter, BorderLayout.CENTER);
-	    
-	    panelCenter.add(potvrda, gbcPotvrda);
-	    panelCenter.add(odustanak, gbcOdustanak);
 	    
 	    JLabel lblIme = new JLabel("Ime:");
 	    JLabel lblPrezime = new JLabel("Prezime:");

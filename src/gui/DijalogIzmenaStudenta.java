@@ -54,25 +54,42 @@ public class DijalogIzmenaStudenta extends JDialog {
 			Dimension parentSize = parent.getSize();
 			int diaWidth = parentSize.width;
 			int diaHeight = parentSize.height;
-			setSize(diaWidth*3/5, diaHeight);
+			setSize(diaWidth*3/5, diaHeight*19/20);
 			setLocationRelativeTo(parent);
 			
 			JTabbedPane tabbedPane = new JTabbedPane();
 			
 			JPanel infoPanel = new JPanel();
 			JButton potvrda=new JButton("Potvrdi");
+			potvrda.setEnabled(true);
 			GridBagConstraints gbcPotvrda = new GridBagConstraints();
 			gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
 			gbcPotvrda.gridx = 0;
 			gbcPotvrda.gridy = 11;
-			gbcPotvrda.insets = new Insets(30, 190, 0,0);
+			gbcPotvrda.insets = new Insets(20, 190, 0,0);
 			
 			JButton odustanak=new JButton("Odustani");
 			GridBagConstraints gbcOdustanak = new GridBagConstraints();
 			gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 			gbcOdustanak.gridx = 1;
 			gbcOdustanak.gridy = 11;
-			gbcOdustanak.insets = new Insets(30, 30, 0, 150);
+			gbcOdustanak.insets = new Insets(20, 30, 0, 150);
+			
+			odustanak.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+
+				           if (dialogResult == JOptionPane.YES_OPTION) {
+				        	   dispose();
+				           }
+				             
+					}
+				});
+			
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
