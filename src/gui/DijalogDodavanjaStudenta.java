@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,8 +34,15 @@ import model.Status_Studenta;
 import model.Student;
 
 public class DijalogDodavanjaStudenta extends JDialog {
-
-	public DijalogDodavanjaStudenta(Frame parent, String title, boolean modal) {
+		private boolean dobroime = false;
+		private boolean dobroprezime = false;
+		private boolean dobardatum = false;
+		private boolean dobra_adresa = false;
+		private boolean dobarbroj = false;
+		private boolean dobarindex = false;
+		private boolean dobarmail = false;
+		private boolean dobragodina = false;
+		public DijalogDodavanjaStudenta(Frame parent, String title, boolean modal) {
 		super(parent, "Dodavanje Studenta", modal);
 		
 		Dimension parentSize = parent.getSize();
@@ -43,6 +52,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 		setLocationRelativeTo(parent);
 		
 		JButton potvrda=new JButton("Potvrdi");
+		potvrda.setEnabled(false);
 		GridBagConstraints gbcPotvrda = new GridBagConstraints();
 		gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
 		gbcPotvrda.gridx = 0;
@@ -54,7 +64,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 		gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 		gbcOdustanak.gridx = 1;
 		gbcOdustanak.gridy = 11;
-		gbcOdustanak.insets = new Insets(30,30, 0,230);
+		gbcOdustanak.insets = new Insets(30, 30, 0, 230);
 	    
 		odustanak.addActionListener(new ActionListener() {
 
@@ -181,6 +191,34 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtIme .fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtIme .insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtIme, gbcTxtIme );
+	    txtIme.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtIme.getText()).matches("[A-Z][a-z]+")) {
+					dobroime = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+						 dobroime = false;
+						 potvrda.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
 
 
 	    GridBagConstraints gbcTxtPrezime = new GridBagConstraints();
@@ -190,6 +228,34 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtPrezime .fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtPrezime .insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtPrezime, gbcTxtPrezime );
+	    txtPrezime.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtPrezime.getText()).matches("[A-Z][a-z]+")) {
+					dobroprezime = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+						 dobroprezime = false;
+						 potvrda.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
 
 
 	    GridBagConstraints gbcTxtDatum = new GridBagConstraints();
@@ -199,6 +265,34 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtDatum.fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtDatum.insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtDatumRodjenja, gbcTxtDatum );
+	    txtDatumRodjenja.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtDatumRodjenja.getText()).matches("[0-3][0-9]/[0-1][0-9]/([19]|[20])[0-9][0-9]")) {
+					dobardatum = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+						 dobardatum = false;
+						 potvrda.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
 	    
 	    GridBagConstraints gbcTxtAdresa = new GridBagConstraints();
 	    gbcTxtAdresa .gridx = 1;
@@ -207,6 +301,35 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtAdresa.fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtAdresa.insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtAdresa, gbcTxtAdresa );
+	    txtAdresa.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String[] splitovano = (txtAdresa.getText()).split(", ");
+				if(splitovano.length==4) {
+					dobra_adresa = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+						 dobra_adresa = false;
+						 potvrda.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
 	    
 	    GridBagConstraints gbcTxtEmailAdresa = new GridBagConstraints();
 	    gbcTxtEmailAdresa .gridx = 1;
@@ -215,6 +338,34 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtEmailAdresa .fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtEmailAdresa .insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtEmailAdresa, gbcTxtEmailAdresa );
+	    txtEmailAdresa.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9]+[.]?[a-zA-Z0-9]+[@]([a-z]+[.])+[a-z]+")) {
+					dobarmail = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+						 dobarmail = false;
+						 potvrda.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
 	    
 	    GridBagConstraints gbcTxtTelefon = new GridBagConstraints();
 	    gbcTxtTelefon .gridx = 1;
@@ -223,6 +374,36 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtTelefon.fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtTelefon.insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtTelefon, gbcTxtTelefon );
+	    txtTelefon.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{7}")) {
+					dobarbroj = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+					 dobarbroj = false;
+					 potvrda.setEnabled(false);
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
+	    
 	    
 	    GridBagConstraints gbcTxtBrojIndeksa = new GridBagConstraints();
 	    gbcTxtBrojIndeksa .gridx = 1;
@@ -231,6 +412,36 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtBrojIndeksa.fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtBrojIndeksa.insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtBrojIndeksa, gbcTxtBrojIndeksa );
+	    txtBrojIndeksa.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtBrojIndeksa.getText()).matches("[A-Z]{2}[0-9]{3}")) {
+					dobarindex = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+					 dobarindex = false;
+					 potvrda.setEnabled(false);
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
+	    
 	    
 	    GridBagConstraints gbcTxtGodinaUpisa = new GridBagConstraints();
 	    gbcTxtGodinaUpisa .gridx = 1;
@@ -239,6 +450,36 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    gbcTxtGodinaUpisa .fill = GridBagConstraints.HORIZONTAL;
 	    gbcTxtGodinaUpisa .insets = new Insets(20, 120, 0, 70);
 	    panelCenter.add(txtGodinaUpisa, gbcTxtGodinaUpisa );
+	    txtGodinaUpisa.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtGodinaUpisa.getText()).matches("[0-9]+")) {
+					dobragodina = true;
+					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
+						potvrda.setEnabled(true);
+				}
+				else {
+					 dobragodina = false;
+					 potvrda.setEnabled(false);
+				}
+					
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    } );
+	    
 	    
 	    String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
 	    JComboBox<String> godStud=new JComboBox<>(godinaStudija);
