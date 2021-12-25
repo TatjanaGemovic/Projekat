@@ -54,7 +54,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 			Dimension parentSize = parent.getSize();
 			int diaWidth = parentSize.width;
 			int diaHeight = parentSize.height;
-			setSize(diaWidth*3/5, diaHeight*19/20);
+			setSize(diaWidth*3/5, diaHeight);
 			setLocationRelativeTo(parent);
 			
 			JTabbedPane tabbedPane = new JTabbedPane();
@@ -72,7 +72,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 			gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 			gbcOdustanak.gridx = 1;
 			gbcOdustanak.gridy = 11;
-			gbcOdustanak.insets = new Insets(30, 30, 0, 230);
+			gbcOdustanak.insets = new Insets(30, 30, 0, 150);
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
@@ -373,7 +373,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{9}")) {
+					if((txtTelefon.getText()).matches("[0][0-9]{8}|[0][0-9]{9}")) {
 						dobarbroj = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);

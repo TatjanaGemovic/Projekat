@@ -67,7 +67,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 		gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 		gbcOdustanak.gridx = 1;
 		gbcOdustanak.gridy = 10;
-		gbcOdustanak.insets = new Insets(30,30, 0,230);
+		gbcOdustanak.insets = new Insets(30,30, 0, 150);
 		odustanak.addActionListener(new ActionListener() {
 
 			@Override
@@ -344,7 +344,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtTelefon.getText()).matches("[+][0-9]{11}|[0][0-9]{8}|[0][0-9]{9}")) {
+				if((txtTelefon.getText()).matches("[0][0-9]{8}|[0][0-9]{9}")) {
 					dobarbroj = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
