@@ -25,13 +25,13 @@ public class ProfesorKontroler {
 		BazaProfesora.getInstance().dodajProfesora(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,adresa_kancelarije,broj_licne_karte,zvanje,godine_staza);
 		ProfesoriJTable.azurirajPrikaz();
 	}
-	public void izmeniProfesora(int rowSelectedIndex, Adresa adresa, String kontakt_tel, String email,
-			Adresa adresa_kancelarije, String zvanje, int godine_staza) {
+	public void izmeniProfesora(int rowSelectedIndex, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
+			Adresa adresa_kancelarije, String broj_licne_karte, String zvanje, int godine_staza) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		Profesor profesor = BazaProfesora.getInstance().getRow(rowSelectedIndex);
-		BazaProfesora.getInstance().izmeniProfesora(profesor.getBroj_licne_karte(), adresa, kontakt_tel, email, adresa_kancelarije, zvanje, godine_staza);
+		BazaProfesora.getInstance().izmeniProfesora(profesor, ime, prezime, datum_rodjenja, adresa, kontakt_tel, email, adresa_kancelarije, broj_licne_karte, zvanje, godine_staza);
 		ProfesoriJTable.azurirajPrikaz();
 	}
 	

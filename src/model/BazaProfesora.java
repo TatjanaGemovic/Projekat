@@ -37,8 +37,8 @@ public class BazaProfesora{
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
-		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081525", "Doktor", 15));
-		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081525", "Doktor", 15));
+		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
+		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));
 	}
 	
 	
@@ -95,16 +95,20 @@ public class BazaProfesora{
 		this.profesori.add(new Profesor(ime,prezime,datum_rodjenja,adresa,kontakt_tel,email,adresa_kancelarije,broj_licne_karte,zvanje,godine_staza));
 	}
 	
-	public void izmeniProfesora(String licna_karta, Adresa adresa, String kontakt_tel, String email,
-			Adresa adresa_kancelarije, String zvanje, int godine_staza) {
+	public void izmeniProfesora(Profesor p, String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
+			Adresa adresa_kancelarije, String broj_licne_karte, String zvanje, int godine_staza) {
 		
 		for (Profesor i : profesori) {
-			if(i.getBroj_licne_karte().equals(licna_karta)) {
+			if(i==p) {
 				int index = profesori.indexOf(i);
+				i.setIme(ime);
+				i.setPrezime(prezime);
+				i.setDatum_rodjenja(datum_rodjenja);
 				i.setAdresa(adresa);
 				i.setKontakt_tel(kontakt_tel);
 				i.setEmail(email);
 				i.setAdresa_kancelarije(adresa_kancelarije);
+				i.setBroj_licne_karte(broj_licne_karte);
 				i.setZvanje(zvanje);
 				i.setGodine_staza(godine_staza);
 				profesori.set(index, i);
