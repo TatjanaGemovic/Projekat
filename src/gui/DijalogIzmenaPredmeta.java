@@ -8,7 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -27,6 +28,11 @@ import model.Profesor;
 import model.Semestar;
 
 public class DijalogIzmenaPredmeta extends JDialog {
+	
+	private boolean dobarbroj = true;
+	private boolean dobarnaziv = true;
+	private boolean dobrasifra = true;
+	
 	public DijalogIzmenaPredmeta(Frame parent, String title, boolean modal) {
 		super(parent, "Izmena Predmeta", modal);
 		
@@ -126,6 +132,28 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
 		panelCenter.add(txtSifra, gbcTxtSifra );
+		txtSifra.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtSifra.getText()).matches("[A-Za-z0-9 ]+")) {
+	                dobrasifra = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobrasifra = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
 		gbcTxtNaziv .gridx = 1;
@@ -134,6 +162,28 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtNaziv, gbcTxtNaziv );
+		txtNaziv.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtNaziv.getText()).matches("[A-Z][a-z0-9]+")) {
+	                dobarnaziv = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarnaziv = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtBrojESPB = new GridBagConstraints();
 		gbcTxtBrojESPB .gridx = 1;
@@ -142,6 +192,28 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtBrojESPB.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtBrojESPB .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtBrojESPB, gbcTxtBrojESPB );
+		txtBrojESPB.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtBrojESPB.getText()).matches("[0-9]+")) {
+	                dobarbroj = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarbroj = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		
 		String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};

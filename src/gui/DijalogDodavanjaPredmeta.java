@@ -8,7 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,6 +27,10 @@ import model.Profesor;
 import model.Semestar;
 
 public class DijalogDodavanjaPredmeta extends JDialog{
+	
+	private boolean dobarbroj = false;
+	private boolean dobarnaziv = false;
+	private boolean dobrasifra = false;
 
 	public DijalogDodavanjaPredmeta(Frame parent, String title, boolean modal) {
 		super(parent, "Dodavanje Predmeta", modal);
@@ -37,6 +42,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		setLocationRelativeTo(parent);
 		
 		JButton potvrda=new JButton("Potvrdi");
+		potvrda.setEnabled(false);
 		JButton odustanak=new JButton("Odustani");
 
 		odustanak.addActionListener(new ActionListener() {
@@ -127,6 +133,28 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
 		panelCenter.add(txtSifra, gbcTxtSifra );
+		txtSifra.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtSifra.getText()).matches("[A-Za-z0-9 ]+")) {
+	                dobrasifra = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobrasifra = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
 		gbcTxtNaziv .gridx = 1;
@@ -135,6 +163,28 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtNaziv, gbcTxtNaziv );
+		txtNaziv.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtNaziv.getText()).matches("[A-Z][a-z0-9]+")) {
+	                dobarnaziv = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarnaziv = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtBrojESPB = new GridBagConstraints();
 		gbcTxtBrojESPB .gridx = 1;
@@ -143,6 +193,28 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtBrojESPB.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtBrojESPB .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtBrojESPB, gbcTxtBrojESPB );
+		txtBrojESPB.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtBrojESPB.getText()).matches("[0-9]+")) {
+	                dobarbroj = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarbroj = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		
 		String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
