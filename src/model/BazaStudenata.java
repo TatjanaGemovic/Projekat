@@ -39,7 +39,20 @@ public class BazaStudenata{
 		Date datum = new Date(2000, 16, 03);
 		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
 		Status_Studenta status = Status_Studenta.B;
-		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
+		Student s = new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status);
+		studenti.add(s);
+		Semestar semestar = Semestar.zimski;
+		@SuppressWarnings("deprecation")
+		Date datum3 = new Date(1970, 25, 04);
+		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
+		Adresa adresa3 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
+		Profesor p = new Profesor("Milan", "Rapaic", datum3, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa3, "00081525", "Doktor", 15);
+		Predmet pred = new Predmet("E2 105", "Analiza1", semestar, 1, p, 9);
+		Vrednost_Ocene vred = Vrednost_Ocene.pet;
+		
+		studenti.get(0).getNepolozeni_ispiti().add(new OcenaNaIspitu(s, pred, vred, datum));
+		
+		
 		@SuppressWarnings("deprecation")
 		Date datum2 = new Date(2000, 25, 05);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");

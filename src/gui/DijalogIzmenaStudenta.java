@@ -24,6 +24,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -596,9 +597,27 @@ public class DijalogIzmenaStudenta extends JDialog {
 				
 			});
 		    
+			
 		    tabbedPane.add("Informacije", panelCenter);
 		    tabbedPane.add("Polozeni", new JPanel());
-		    tabbedPane.add("Nepolozeni", new JPanel());
+		    
+		    JPanel panelNepPred = new JPanel();
+		    panelNepPred.setLayout(new BorderLayout());
+		    JPanel panelDugmici = new JPanel();
+		    
+		    JButton dodaj = new JButton("Dodaj");
+		    panelDugmici.add(dodaj);
+		    JButton obrisi = new JButton("Obrisi");
+		    panelDugmici.add(obrisi);
+		    JButton polaganje = new JButton("Polaganje");
+		    panelDugmici.add(polaganje);
+		    
+		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
+
+			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
+			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
+		    tabbedPane.add("Nepolozeni", panelNepPred);
 		    this.add(tabbedPane);
 		}
 }
