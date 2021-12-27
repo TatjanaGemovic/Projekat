@@ -8,4 +8,6 @@ Funkcionalnosti koje su studenti implementirali:
 8.6 - Dodavanje novog entiteta => Dodavanje profesora, studenta - Filip; Dodavanje predmeta - Tatjana
 8.7 - Izmena informacija o entitetu => Izmena studenta, profesora - Filip; Izmena predmeta - Tatjana
 8.8 - Brisanje entiteta iz sistema => Tatjana
-
+8.9
+8.10
+8.11 - Prikaz Nepolozenih Ispita => Tatjana
