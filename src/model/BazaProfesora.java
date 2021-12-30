@@ -26,6 +26,7 @@ public class BazaProfesora{
 		this.kolone.add("Ime");
 		this.kolone.add("Prezime");
 		this.kolone.add("Zvanje");
+		this.kolone.add("Email");
 		
 		initProfesori();
 	}
@@ -43,7 +44,7 @@ public class BazaProfesora{
 	
 	
 	public int getColumnCount() {
-		 return 3;
+		 return 4;
 	}
 
 	public int getRowCount() {
@@ -72,6 +73,8 @@ public class BazaProfesora{
 					return profesor.getPrezime();
 				case 2:
 					return profesor.getZvanje();
+				case 3:
+					return profesor.getEmail();
 				default:
 					return null;
 			}
@@ -82,6 +85,8 @@ public class BazaProfesora{
 			case 1:
 				return "";
 			case 2:
+				return "";
+			case 3:
 				return "";
 			default:
 				return null;

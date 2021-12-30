@@ -23,12 +23,12 @@ public class PredmetKontroler {
 		PredmetiJTable.azurirajPrikaz();	
 	}
 	
-	public void izmeniPredmet(int rowSelectedIndex, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
+	public void izmeniPredmet(int rowSelectedIndex, String sifra, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
 		if(rowSelectedIndex < 0) {
 			return;
 		}
 		Predmet predmet = BazaPredmeta.getInstance().getRow(rowSelectedIndex);
-		BazaPredmeta.getInstance().izmeniPredmet(predmet.getSifra_predmeta(), naziv, espb, godina_izvodjenja, semestar, profesor);
+		BazaPredmeta.getInstance().izmeniPredmet(predmet, sifra, naziv, espb, godina_izvodjenja, semestar, profesor);
 		PredmetiJTable.azurirajPrikaz();	
 	}
 	

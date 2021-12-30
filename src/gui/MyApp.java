@@ -11,7 +11,6 @@ public class MyApp {
 		BazaStudenata.getInstance();
 		BazaProfesora.getInstance();
 		BazaPredmeta.getInstance();
-		PredmetKontroler.getInstance();
 		MainFrame.getInstance();
 	}
 }

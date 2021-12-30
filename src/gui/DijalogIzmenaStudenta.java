@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -63,18 +64,35 @@ public class DijalogIzmenaStudenta extends JDialog {
 			
 			JPanel infoPanel = new JPanel();
 			JButton potvrda=new JButton("Potvrdi");
+			potvrda.setEnabled(true);
 			GridBagConstraints gbcPotvrda = new GridBagConstraints();
 			gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
 			gbcPotvrda.gridx = 0;
 			gbcPotvrda.gridy = 11;
-			gbcPotvrda.insets = new Insets(30, 190, 0,0);
+			gbcPotvrda.insets = new Insets(20, 190, 0,0);
 			
 			JButton odustanak=new JButton("Odustani");
 			GridBagConstraints gbcOdustanak = new GridBagConstraints();
 			gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
 			gbcOdustanak.gridx = 1;
 			gbcOdustanak.gridy = 11;
-			gbcOdustanak.insets = new Insets(30, 30, 0, 150);
+			gbcOdustanak.insets = new Insets(20, 30, 0, 150);
+			
+			odustanak.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+
+				           if (dialogResult == JOptionPane.YES_OPTION) {
+				        	   dispose();
+				           }
+				             
+					}
+				});
+			
 			
 		    JPanel panelCenter = new JPanel();
 		    panelCenter.setLayout(new GridBagLayout());
@@ -581,15 +599,17 @@ public class DijalogIzmenaStudenta extends JDialog {
 				
 			});
 		    
+			
 		    tabbedPane.add("Informacije", panelCenter);
 		    
-		    JPanel panel_polozenih = new JPanel();
+		    JPanel panel_polozenih = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		    JButton btn_ponistiOcenu = new JButton("Poništi ocenu");
-		   
-		    panel_polozenih.add(btn_ponistiOcenu);
+		    JPanel panelPonistavanjeOcene = new JPanel();
+		    panelPonistavanjeOcene.add(btn_ponistiOcenu);
+		    panel_polozenih.add(panelPonistavanjeOcene, BorderLayout.NORTH);
 		    PolozeniIspitiJTable polozeni = new PolozeniIspitiJTable();
 			JScrollPane polozeniPane = new JScrollPane(polozeni);
-			panel_polozenih.add(polozeniPane);
+			panel_polozenih.add(polozeniPane, BorderLayout.SOUTH);
 			double prosecna_ocena = 0;
 			int broj_predmeta = 0;
 			int espb_ukupno=0;
@@ -617,14 +637,54 @@ public class DijalogIzmenaStudenta extends JDialog {
 				prosecna_ocena += ocena;
 			}
 			prosecna_ocena/=broj_predmeta;
+			JPanel panelIspisa = new JPanel();
 			JLabel prosek = new JLabel();
 			prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena));
 			JLabel espb = new JLabel();
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
-			panel_polozenih.add(prosek);
-			panel_polozenih.add(espb);
+			panelIspisa.add(prosek);
+			panelIspisa.add(espb);
+			panel_polozenih.add(panelIspisa, BorderLayout.SOUTH);
 		    tabbedPane.add("Polozeni", panel_polozenih);
-		    tabbedPane.add("Nepolozeni", new JPanel());
+		    
+		    JPanel panelNepPred = new JPanel();
+		    panelNepPred.setLayout(new BorderLayout());
+		    JPanel panelDugmici = new JPanel();
+		    
+		    JButton dodaj = new JButton("Dodaj");
+		    panelDugmici.add(dodaj);
+		    JButton obrisi = new JButton("Obrisi");
+		    panelDugmici.add(obrisi);
+		    JButton polaganje = new JButton("Polaganje");
+		    panelDugmici.add(polaganje);
+		    
+		    dodaj.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//dijalog sa tabelom
+					for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+						if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja()) {
+							//dodaje se u tabelu
+							//dodati predmete u listu predmeta tako da isti objekti postoje i u listama studenta i u listi predmeta	
+						}
+					}
+					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
+				}
+				
+			});
+		    
+		    
+		    
+		    
+		    
+		    
+		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
+
+			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
+			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
+		    tabbedPane.add("Nepolozeni", panelNepPred);
 		    this.add(tabbedPane);
 		}
 }

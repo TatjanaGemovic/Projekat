@@ -8,7 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,6 +27,10 @@ import model.Profesor;
 import model.Semestar;
 
 public class DijalogDodavanjaPredmeta extends JDialog{
+	
+	private boolean dobarbroj = false;
+	private boolean dobarnaziv = false;
+	private boolean dobrasifra = false;
 
 	public DijalogDodavanjaPredmeta(Frame parent, String title, boolean modal) {
 		super(parent, "Dodavanje Predmeta", modal);
@@ -33,22 +38,13 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
 		int diaHeight = parentSize.height;
-		setSize(diaWidth*3/5, diaHeight*11/20);
+		setSize(diaWidth*3/5, diaHeight*13/20);
 		setLocationRelativeTo(parent);
 		
 		JButton potvrda=new JButton("Potvrdi");
-		GridBagConstraints gbcPotvrda = new GridBagConstraints();
-		gbcPotvrda.fill = GridBagConstraints.HORIZONTAL;
-		gbcPotvrda.gridx = 0;
-		gbcPotvrda.gridy = 6;
-		gbcPotvrda.insets = new Insets(30, 190, 0,0);
-		
+		potvrda.setEnabled(false);
 		JButton odustanak=new JButton("Odustani");
-		GridBagConstraints gbcOdustanak = new GridBagConstraints();
-		gbcOdustanak.fill = GridBagConstraints.HORIZONTAL;
-		gbcOdustanak.gridx = 1;
-		gbcOdustanak.gridy = 6;
-		gbcOdustanak.insets = new Insets(30,30, 0,230);
+
 		odustanak.addActionListener(new ActionListener() {
 
 			@Override
@@ -64,12 +60,15 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 				}
 			});
 		
+		JPanel panelButton = new JPanel();
+		panelButton.add(potvrda);
+		panelButton.add(odustanak);
+	    
+	    this.add(panelButton, BorderLayout.SOUTH);
+		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
 	    this.add(panelCenter, BorderLayout.CENTER);
-	    
-	    panelCenter.add(potvrda, gbcPotvrda);
-	    panelCenter.add(odustanak, gbcOdustanak);
 
 	    
 	    
@@ -84,42 +83,47 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		final JTextField txtSifra = new JTextField();
 		final JTextField txtNaziv = new JTextField();
 		final JTextField txtBrojESPB = new JTextField();
-		//final JTextField txtProfesor = new JTextField();
 		
 		GridBagConstraints gbcLSifra = new GridBagConstraints();
+		gbcLSifra.fill = GridBagConstraints.HORIZONTAL;
 		gbcLSifra.gridx = 0;
 		gbcLSifra.gridy = 0;
-		gbcLSifra.insets = new Insets(10, 30, 0,0);
+		gbcLSifra.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblSifra, gbcLSifra);
 		 
 		GridBagConstraints gbcLNaziv = new GridBagConstraints();
+		gbcLNaziv.fill = GridBagConstraints.HORIZONTAL;
 		gbcLNaziv.gridx = 0;
 		gbcLNaziv.gridy = 1;
-		gbcLNaziv.insets = new Insets(10, 35, 0,0);
+		gbcLNaziv.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblNaziv, gbcLNaziv);
 		
 		GridBagConstraints gbcLBrojESPB = new GridBagConstraints();
+		gbcLBrojESPB.fill = GridBagConstraints.HORIZONTAL;
 		gbcLBrojESPB.gridx = 0;
 		gbcLBrojESPB.gridy = 2;
-		gbcLBrojESPB.insets = new Insets(10, 42, 0,0);
+		gbcLBrojESPB.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblBrojESPB, gbcLBrojESPB);
 		
 		GridBagConstraints gbcLGodina = new GridBagConstraints();
+		gbcLGodina.fill = GridBagConstraints.HORIZONTAL;
 		gbcLGodina.gridx = 0;
 		gbcLGodina.gridy = 3;
-		gbcLGodina.insets = new Insets(10, 95, 0,0);
+		gbcLGodina.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblGodina, gbcLGodina);
 		
 		GridBagConstraints gbcLSemestar = new GridBagConstraints();
+		gbcLSemestar.fill = GridBagConstraints.HORIZONTAL;
 		gbcLSemestar.gridx = 0;
 		gbcLSemestar.gridy = 4;
-		gbcLSemestar.insets = new Insets(10, 20, 0,25);
+		gbcLSemestar.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblSemestar, gbcLSemestar);
 		
 		GridBagConstraints gbcLProfesor = new GridBagConstraints();
+		gbcLProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcLProfesor.gridx = 0;
 		gbcLProfesor.gridy = 5;
-		gbcLProfesor.insets = new Insets(10, 88, 0,0);
+		gbcLProfesor.insets = new Insets(20,40, 0,0);
 		panelCenter.add(lblProfesor, gbcLProfesor);
 			
 		GridBagConstraints gbcTxtSifra = new GridBagConstraints();
@@ -127,24 +131,90 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtSifra .gridy = 0;
 		gbcTxtSifra .weightx = 100;
 		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtSifra .insets = new Insets(10,120, 0, 70);
+		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
 		panelCenter.add(txtSifra, gbcTxtSifra );
+		txtSifra.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtSifra.getText()).matches("[A-Za-z0-9 ]+")) {
+	                dobrasifra = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobrasifra = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
 		gbcTxtNaziv .gridx = 1;
 		gbcTxtNaziv.gridy = 1;
 		gbcTxtNaziv .weightx = 100;
 		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtNaziv .insets = new Insets(10, 120, 0, 70);
+		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtNaziv, gbcTxtNaziv );
+		txtNaziv.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtNaziv.getText()).matches("[A-Z][a-z0-9]+")) {
+	                dobarnaziv = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarnaziv = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		GridBagConstraints gbcTxtBrojESPB = new GridBagConstraints();
 		gbcTxtBrojESPB .gridx = 1;
 		gbcTxtBrojESPB.gridy = 2;
 		gbcTxtBrojESPB .weightx = 100;
 		gbcTxtBrojESPB.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtBrojESPB .insets = new Insets(10, 120, 0, 70);
+		gbcTxtBrojESPB .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(txtBrojESPB, gbcTxtBrojESPB );
+		txtBrojESPB.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if((txtBrojESPB.getText()).matches("[0-9]+")) {
+	                dobarbroj = true;
+	                if(dobarbroj && dobarnaziv && dobrasifra)
+	                    potvrda.setEnabled(true);
+	            }
+	            else {
+	                dobarbroj = false;
+	                potvrda.setEnabled(false);
+	            }
+			}
+				
+        } );
 		
 		
 		String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
@@ -155,7 +225,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		grdGodina.gridy = 3;
 		grdGodina.weightx = 100;
 		grdGodina.fill = GridBagConstraints.HORIZONTAL;
-		grdGodina.insets = new Insets(10, 120, 0, 70);
+		grdGodina.insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(godStud,grdGodina);
 		
 			
@@ -168,7 +238,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		grdSemestar.gridy = 4;
 	    grdSemestar.weightx = 100;
 		grdSemestar.fill = GridBagConstraints.HORIZONTAL;
-		grdSemestar.insets = new Insets(10, 120, 0, 70);
+		grdSemestar.insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(semestarStud,grdSemestar);
 		
 		String[] dir = new String[100];
@@ -185,7 +255,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		gbcTxtProfesor.gridy = 5;
 		gbcTxtProfesor .weightx = 100;
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtProfesor .insets = new Insets(10, 120, 0, 70);
+		gbcTxtProfesor .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(profesorLista, gbcTxtProfesor );
 		
 		potvrda.addActionListener(new ActionListener() {
@@ -194,7 +264,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
 
 			    if (dialogResult == JOptionPane.YES_OPTION) {
 

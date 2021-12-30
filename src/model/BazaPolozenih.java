@@ -36,7 +36,7 @@ public BazaPolozenih() {
 	}
 
 	public int getRowCount() {
-		return 20;
+		return 40;
 	}
 	
 	public List<OcenaNaIspitu> getPolozeni() {
