@@ -34,6 +34,7 @@ import model.Adresa;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
+import model.OcenaNaIspitu;
 import model.Predmet;
 import model.Profesor;
 import model.Semestar;
@@ -589,6 +590,39 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    PolozeniIspitiJTable polozeni = new PolozeniIspitiJTable();
 			JScrollPane polozeniPane = new JScrollPane(polozeni);
 			panel_polozenih.add(polozeniPane);
+			double prosecna_ocena = 0;
+			int broj_predmeta = 0;
+			int espb_ukupno=0;
+			for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+				espb_ukupno += o.getPredmet().getEspb();
+				broj_predmeta++;
+				int ocena = 0;
+				switch(o.getVrednost_ocene()) {
+				case sest: 
+					ocena = 6;
+					break;
+				case sedam: 
+					ocena = 7;
+					break;
+				case osam: 
+					ocena = 8;
+					break;
+				case devet: 
+					ocena = 9;	
+					break;
+				case deset: 
+					ocena = 10;
+					break;
+				}
+				prosecna_ocena += ocena;
+			}
+			prosecna_ocena/=broj_predmeta;
+			JLabel prosek = new JLabel();
+			prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena));
+			JLabel espb = new JLabel();
+			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
+			panel_polozenih.add(prosek);
+			panel_polozenih.add(espb);
 		    tabbedPane.add("Polozeni", panel_polozenih);
 		    tabbedPane.add("Nepolozeni", new JPanel());
 		    this.add(tabbedPane);

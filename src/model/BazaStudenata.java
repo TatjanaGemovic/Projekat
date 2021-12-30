@@ -36,20 +36,26 @@ public class BazaStudenata{
 		this.studenti = new ArrayList<Student>();
 		
 		@SuppressWarnings("deprecation")
-		Date datum = new Date(2000, 16, 03);
+		Date datum = new Date(2000, 03, 16);
 		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
 		Status_Studenta status = Status_Studenta.B;
 		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
 		@SuppressWarnings("deprecation")
 		
-		Date datum2 = new Date(2000, 25, 05);
+		
+		
+		Date datum2 = new Date(2000, 05, 27);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Status_Studenta status2 = Status_Studenta.S;
 		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status);
-		ArrayList<OcenaNaIspitu> polozeni = new ArrayList<OcenaNaIspitu>();
-		filip.setPolozeni_ispiti(polozeni);
 		studenti.add(filip);
-		
+		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
+		Predmet pred = new Predmet("E2 105", "Analiza1", Semestar.letnji, 1, p, 9);
+		Vrednost_Ocene vred = Vrednost_Ocene.devet;
+		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
+		pred = new Predmet("E2 101", "MISS", Semestar.letnji, 1, p, 10);
+		vred = Vrednost_Ocene.deset;
+		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
 	}
 
 	public int getColumnCount() {
