@@ -585,7 +585,6 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JPanel panel_polozenih = new JPanel();
 		    JButton btn_ponistiOcenu = new JButton("Poništi ocenu");
 		   
-		    //StudentiJTable.rowSelectedIndex
 		    panel_polozenih.add(btn_ponistiOcenu);
 		    PolozeniIspitiJTable polozeni = new PolozeniIspitiJTable();
 			JScrollPane polozeniPane = new JScrollPane(polozeni);

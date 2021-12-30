@@ -41,10 +41,14 @@ public class BazaStudenata{
 		Status_Studenta status = Status_Studenta.B;
 		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
 		@SuppressWarnings("deprecation")
+		
 		Date datum2 = new Date(2000, 25, 05);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Status_Studenta status2 = Status_Studenta.S;
-		studenti.add(new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status));
+		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status);
+		ArrayList<OcenaNaIspitu> polozeni = new ArrayList<OcenaNaIspitu>();
+		filip.setPolozeni_ispiti(polozeni);
+		studenti.add(filip);
 		
 	}
 

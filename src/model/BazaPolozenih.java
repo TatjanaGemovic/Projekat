@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import gui.StudentiJTable;
+
 public class BazaPolozenih {
 	private static BazaPolozenih instance = null;
 	
@@ -50,6 +52,8 @@ public BazaPolozenih() {
 	}
 
 	public String getValueAt(int row, int column) {
+		Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+		this.polozeniIspiti = s.getPolozeni_ispiti();
 		if(row < polozeniIspiti.size()) {
 			OcenaNaIspitu ocena = this.polozeniIspiti.get(row);
 			switch (column) {
