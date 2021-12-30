@@ -27,27 +27,7 @@ public BazaPolozenih() {
 		this.kolone.add("ESPB");
 		this.kolone.add("Ocena");
 		this.kolone.add("Datum");
-		
-		//initPolozeni();
 	}
-
-	/*private void initPolozeni() {
-		/*private Student student_polozio;
-		private Predmet predmet;
-		private Vrednost_Ocene vrednost_ocene; 
-		private Date datum_polaganja;
-		this.polozeniIspiti = new ArrayList<Predmet>();
-		Student s = BazaStudenata.getInstance().getRow(0);
-		Predmet p = BazaPredmeta.getInstance().getRow(0);
-		Vrednost_Ocene vocene = Vrednost_Ocene.devet;
-		Date datum_polaganja = new Date(2020, 7, 23);
-		OcenaNaIspitu ocena = new OcenaNaIspitu(s, p, vocene, datum_polaganja);
-		this.polozeniIspiti.add(ocena);
-		p = BazaPredmeta.getInstance().getRow(2);
-		vocene = Vrednost_Ocene.deset;
-		ocena = new OcenaNaIspitu(s, p, vocene, datum_polaganja);
-		this.polozeniIspiti.add(ocena);
-	}*/
 	
 	public int getColumnCount() {
 		 return 5;

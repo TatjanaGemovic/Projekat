@@ -24,6 +24,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -580,7 +581,16 @@ public class DijalogIzmenaStudenta extends JDialog {
 			});
 		    
 		    tabbedPane.add("Informacije", panelCenter);
-		    tabbedPane.add("Polozeni", new JPanel());
+		    
+		    JPanel panel_polozenih = new JPanel();
+		    JButton btn_ponistiOcenu = new JButton("Poništi ocenu");
+		   
+		    //StudentiJTable.rowSelectedIndex
+		    panel_polozenih.add(btn_ponistiOcenu);
+		    PolozeniIspitiJTable polozeni = new PolozeniIspitiJTable();
+			JScrollPane polozeniPane = new JScrollPane(polozeni);
+			panel_polozenih.add(polozeniPane);
+		    tabbedPane.add("Polozeni", panel_polozenih);
 		    tabbedPane.add("Nepolozeni", new JPanel());
 		    this.add(tabbedPane);
 		}
