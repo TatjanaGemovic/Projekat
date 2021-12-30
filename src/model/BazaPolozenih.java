@@ -16,7 +16,7 @@ public class BazaPolozenih {
 		return instance;
 	}
 	
-	private List<OcenaNaIspitu> polozeniIspiti;
+	private List<Predmet> polozeniIspiti;
 	public List<String> kolone;
 	
 public BazaPolozenih() {
@@ -36,7 +36,7 @@ public BazaPolozenih() {
 		private Predmet predmet;
 		private Vrednost_Ocene vrednost_ocene; 
 		private Date datum_polaganja;*/
-		this.polozeniIspiti = new ArrayList<OcenaNaIspitu>();
+		this.polozeniIspiti = new ArrayList<Predmet>();
 		Student s = BazaStudenata.getInstance().getRow(0);
 		Predmet p = BazaPredmeta.getInstance().getRow(0);
 		Vrednost_Ocene vocene = Vrednost_Ocene.devet;
