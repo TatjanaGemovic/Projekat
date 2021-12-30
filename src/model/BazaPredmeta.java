@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import gui.PredmetiJTable;
+import gui.StudentiJTable;
 
 public class BazaPredmeta{
 
@@ -96,6 +97,30 @@ public class BazaPredmeta{
 				return "";
 			case 4:
 				return "";
+			default:
+				return null;
+		}
+		}
+	}
+	
+	public String getValueAtZaDodavanje(int row, int column) {
+		List<Predmet> potencijalni = new ArrayList<Predmet>();
+		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+			if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
+			potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Predmet predmet = this.predmeti.get(row);
+			switch (column) {
+			case 0:
+				return predmet.getSifra_predmeta() + " - " + predmet.getNaziv();
+			default:
+				return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
 			default:
 				return null;
 		}

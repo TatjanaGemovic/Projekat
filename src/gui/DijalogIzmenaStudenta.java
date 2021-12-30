@@ -662,13 +662,14 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					//dijalog sa tabelom
-					for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-						if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja()) {
-							//dodaje se u tabelu
-							//dodati predmete u listu predmeta tako da isti objekti postoje i u listama studenta i u listi predmeta	
-						}
-					}
+					
+					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
+					dijalogDodavanjaNaStudenta.setLocationRelativeTo(null);
+					dijalogDodavanjaNaStudenta.setSize(diaWidth*2/5, diaHeight*3/5);
+					dijalogDodavanjaNaStudenta.setVisible(true);
+					
+					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+					dijalogDodavanjaNaStudenta.add(tabelaPotencijalnih);
 					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
 				}
 				
