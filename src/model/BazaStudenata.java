@@ -16,7 +16,7 @@ public class BazaStudenata{
 		return instance;
 	}
 	
-	private List<Student> studenti;
+	public List<Student> studenti;
 	public List<String> kolone;
 	
 	public BazaStudenata() {

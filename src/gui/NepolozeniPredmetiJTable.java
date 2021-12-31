@@ -12,7 +12,7 @@ import javax.swing.table.TableCellRenderer;
 public class NepolozeniPredmetiJTable extends JTable{
 
 	public static int rowSelectedIndex = -1;
-	public static JTable tabelaNepPredmeta;
+	private static JTable tabelaNepPredmeta;
 	public static AbstractTableModelNepolozeniPredmeti nep_predmetiModel;
 	
 	public NepolozeniPredmetiJTable() {

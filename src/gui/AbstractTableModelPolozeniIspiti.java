@@ -6,6 +6,8 @@ import model.BazaPolozenih;
 import model.BazaProfesora;
 
 public class AbstractTableModelPolozeniIspiti extends AbstractTableModel {
+	
+	
 	public AbstractTableModelPolozeniIspiti() {
 		BazaProfesora.getInstance();
 	}

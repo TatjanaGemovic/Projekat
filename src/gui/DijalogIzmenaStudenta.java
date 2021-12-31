@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -32,6 +33,8 @@ import javax.swing.JTextField;
 import controller.PredmetKontroler;
 import controller.StudentKontroler;
 import model.Adresa;
+import model.BazaNepolozenihPredmeta;
+import model.BazaPolozenih;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -41,6 +44,7 @@ import model.Profesor;
 import model.Semestar;
 import model.Status_Studenta;
 import model.Student;
+import model.Vrednost_Ocene;
 
 public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobroime = true;
@@ -603,7 +607,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    tabbedPane.add("Informacije", panelCenter);
 		    
 		    JPanel panel_polozenih = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		    JButton btn_ponistiOcenu = new JButton("Poništi ocenu");
+		    JButton btn_ponistiOcenu = new JButton("Poniï¿½ti ocenu");
 		    JPanel panelPonistavanjeOcene = new JPanel();
 		    panelPonistavanjeOcene.add(btn_ponistiOcenu);
 		    panel_polozenih.add(panelPonistavanjeOcene, BorderLayout.NORTH);
@@ -674,8 +678,38 @@ public class DijalogIzmenaStudenta extends JDialog {
 				}
 				
 			});
-		    
-		    
+		   
+		    btn_ponistiOcenu.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					if(PolozeniIspitiJTable.rowSelectedIndex < BazaPolozenih.getInstance().getPolozeni().size()) {
+				    	int dialogButton = JOptionPane.YES_NO_OPTION;
+					    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da ponistite ocenu?", "Ponistavanje ocene", dialogButton);
+					    
+					    if (dialogResult == JOptionPane.YES_OPTION) {
+					    	OcenaNaIspitu p = BazaPolozenih.getInstance().getRow(PolozeniIspitiJTable.rowSelectedIndex);
+					    	Predmet p1  = new Predmet();
+					    	Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+							s.getPolozeni_ispiti().remove(p);
+							PolozeniIspitiJTable.azurirajPrikaz();
+					    	for(Predmet p2 : BazaPredmeta.getInstance().getPredmeti()) {
+					    		if(p2.equals(p.getPredmet())) {
+					    			p1=p2;
+					    			break;
+					    		}
+					    	}
+							s.getNepolozeni_ispiti().add(p);
+							System.out.println(s.getNepolozeni_ispiti().get(1).getPredmet().getSifra_predmeta());
+					    	NepolozeniPredmetiJTable.azurirajPrikaz();
+					    }	
+				    }
+					
+				    
+				}
+		    	
+		    });
 		    
 		    
 		    
