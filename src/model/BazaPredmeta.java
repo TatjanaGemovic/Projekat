@@ -22,6 +22,7 @@ public class BazaPredmeta{
 	
 	private List<Predmet> predmeti;
 	public List<String> kolone;
+	public String kolonaZaDodavanje;
 	
 	public BazaPredmeta() {
 		 
@@ -32,19 +33,23 @@ public class BazaPredmeta{
 		this.kolone.add("Godina");
 		this.kolone.add("Semestar");
 		
+		this.kolonaZaDodavanje = "";
+		
 		initPredmeti();
 	}
 	
 	private void initPredmeti() {
 		this.predmeti = new ArrayList<Predmet>();
-		Semestar semestar = Semestar.zimski;
-		Date datum = new Date(1970, 25, 04);
-		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
-		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
-		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		predmeti.add(new Predmet("E2 105", "Analiza1", semestar, 1, p, 9));
-		predmeti.add(new Predmet("E2 101", "MISS", semestar, 1, p, 8));
-		predmeti.add(new Predmet("E2 103", "SAU", semestar, 1, p, 10));
+		Date datum = new Date(2000, 03, 16);
+		Date datum2 = new Date(2000, 05, 27);
+		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
+		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
+		Predmet pred = new Predmet("E2 105", "Analiza1", Semestar.letnji, 1, p, 9);
+		this.predmeti.add(pred);
+		pred = new Predmet("E2 101", "MISS", Semestar.letnji, 1, p, 10);
+		this.predmeti.add(pred);
+		pred = new Predmet("E2 100", "SPPuRV", Semestar.zimski, 1, p, 5);
+		this.predmeti.add(pred);
 	}
 	
 	
@@ -52,6 +57,11 @@ public class BazaPredmeta{
 		 return 5;
 	}
 
+	public int getColumnCountZaDodavanje() {
+		
+		return 1;
+	}
+	
 	public int getRowCount() {
 		return 40;
 	}
@@ -62,6 +72,11 @@ public class BazaPredmeta{
 	
 	public String getColumnName(int index) {
 		return this.kolone.get(index);
+	}
+	
+	public String getColumnNameZaDodavanje(int index) {
+		
+		return this.kolonaZaDodavanje;
 	}
 	
 	public Predmet getRow(int rowIndex) {
@@ -107,11 +122,12 @@ public class BazaPredmeta{
 		List<Predmet> potencijalni = new ArrayList<Predmet>();
 		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
+			
+			if (student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
 			potencijalni.add(p);
 		}
 		if(row < potencijalni.size()) {
-			Predmet predmet = this.predmeti.get(row);
+			Predmet predmet = potencijalni.get(row);
 			switch (column) {
 			case 0:
 				return predmet.getSifra_predmeta() + " - " + predmet.getNaziv();
@@ -120,7 +136,8 @@ public class BazaPredmeta{
 			}
 		} else {
 			switch (column) {
-			case 0:
+			case 0: 
+				return "";
 			default:
 				return null;
 		}

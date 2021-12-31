@@ -664,13 +664,17 @@ public class DijalogIzmenaStudenta extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					
 					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
-					dijalogDodavanjaNaStudenta.setLocationRelativeTo(null);
-					dijalogDodavanjaNaStudenta.setSize(diaWidth*2/5, diaHeight*3/5);
-					dijalogDodavanjaNaStudenta.setVisible(true);
+					dijalogDodavanjaNaStudenta.setLocationRelativeTo(parent);
+					dijalogDodavanjaNaStudenta.setSize(diaWidth*4/5, diaHeight*4/5);
 					
+					JPanel panelzaDodavanje = new JPanel();
 					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
-					dijalogDodavanjaNaStudenta.add(tabelaPotencijalnih);
-					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
+					JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+					panelzaDodavanje.add(panePotencijalni);
+					
+					dijalogDodavanjaNaStudenta.setContentPane(panelzaDodavanje);
+					dijalogDodavanjaNaStudenta.pack();
+					dijalogDodavanjaNaStudenta.setVisible(true);
 				}
 				
 			});
