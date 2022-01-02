@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +57,9 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobarindex = true;
 	private boolean dobarmail = true;
 	private boolean dobragodina = true;
+	private static final DecimalFormat df = new DecimalFormat("0.00");
+	static JLabel prosek = new JLabel();
+	static JLabel espb = new JLabel();
 	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
 			
@@ -644,14 +648,12 @@ public class DijalogIzmenaStudenta extends JDialog {
 			}
 			
 			JPanel panelIspisa = new JPanel();
-			JLabel prosek = new JLabel();
 			if(prosecna_ocena==0) {
 				prosek.setText("Prosecna ocena je 0");
 			}else {
 				prosecna_ocena/=broj_predmeta;
-				prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena));
+				prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena));
 			}
-			JLabel espb = new JLabel();
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
 			JLabel espb2 = new JLabel();
 			espb2.setText("");
@@ -670,12 +672,9 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JPanel panelDugmici = new JPanel();
 		    
 		    JButton dodaj = new JButton("Dodaj");
-		    panelDugmici.add(dodaj);
 		    JButton obrisi = new JButton("Obrisi");
-		    panelDugmici.add(obrisi);
 		    JButton polaganje = new JButton("Polaganje");
-		    panelDugmici.add(polaganje);
-		    
+
 		    dodaj.addActionListener(new ActionListener() {
 
 				@Override
@@ -692,7 +691,23 @@ public class DijalogIzmenaStudenta extends JDialog {
 				}
 				
 			});
-		   
+		    panelDugmici.add(dodaj);
+		    panelDugmici.add(obrisi);
+		    
+		    polaganje.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(NepolozeniPredmetiJTable.rowSelectedIndex!=-1 && NepolozeniPredmetiJTable.rowSelectedIndex < BazaNepolozenihPredmeta.getInstance().getNepolozeniPredmeti().size()) {
+						DijalogPolaganjePredmeta UnosOcene = new DijalogPolaganjePredmeta(parent, "Unos Ocene", true);
+						UnosOcene.setVisible(true);
+					}
+					
+				}
+		    	
+		    });
+		    panelDugmici.add(polaganje);
+		    
 		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
 
@@ -712,19 +727,12 @@ public class DijalogIzmenaStudenta extends JDialog {
 					    
 					    if (dialogResult == JOptionPane.YES_OPTION) {
 					    	OcenaNaIspitu p = BazaPolozenih.getInstance().getRow(PolozeniIspitiJTable.rowSelectedIndex);
-					    	Predmet p1  = new Predmet();
 					    	Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+					    	p.setVrednost_ocene(Vrednost_Ocene.pet);
 							s.getPolozeni_ispiti().remove(p);
 							PolozeniIspitiJTable.azurirajPrikaz();
-					    	for(Predmet p2 : BazaPredmeta.getInstance().getPredmeti()) {
-					    		if(p2.equals(p.getPredmet())) {
-					    			p1=p2;
-					    			break;
-					    		}
-					    	}
 							s.getNepolozeni_ispiti().add(p);
 							NepolozeniPredmetiJTable.azurirajPrikaz();
-							System.out.println(s.getNepolozeni_ispiti().get(1).getPredmet().getSifra_predmeta());
 							double prosecna_ocena2 = 0;
 							int broj_predmeta2 = 0;
 							int espb_ukupno2=0;
@@ -755,7 +763,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 								prosek.setText("Prosecna ocena je 0");
 							}else {
 								prosecna_ocena2/=broj_predmeta2;
-								prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena2));
+								prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
 							}
 							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					    }	
