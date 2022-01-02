@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -606,14 +607,15 @@ public class DijalogIzmenaStudenta extends JDialog {
 			
 		    tabbedPane.add("Informacije", panelCenter);
 		    
-		    JPanel panel_polozenih = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		    JButton btn_ponistiOcenu = new JButton("Poni�ti ocenu");
-		    JPanel panelPonistavanjeOcene = new JPanel();
-		    panelPonistavanjeOcene.add(btn_ponistiOcenu);
-		    panel_polozenih.add(panelPonistavanjeOcene, BorderLayout.NORTH);
+		    JPanel panel_polozenih = new JPanel();
+		    JPanel panelDugmici2 = new JPanel();
+		    panel_polozenih.setLayout(new BorderLayout());
+		    JButton btn_ponistiOcenu = new JButton("Ponisti ocenu");
+		    panelDugmici2.add(btn_ponistiOcenu);
+		    panel_polozenih.add(panelDugmici2, BorderLayout.NORTH);
 		    PolozeniIspitiJTable polozeni = new PolozeniIspitiJTable();
 			JScrollPane polozeniPane = new JScrollPane(polozeni);
-			panel_polozenih.add(polozeniPane, BorderLayout.SOUTH);
+			panel_polozenih.add(polozeniPane, BorderLayout.CENTER);
 			double prosecna_ocena = 0;
 			int broj_predmeta = 0;
 			int espb_ukupno=0;
@@ -640,14 +642,26 @@ public class DijalogIzmenaStudenta extends JDialog {
 				}
 				prosecna_ocena += ocena;
 			}
-			prosecna_ocena/=broj_predmeta;
+			
 			JPanel panelIspisa = new JPanel();
 			JLabel prosek = new JLabel();
-			prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena));
+			if(prosecna_ocena==0) {
+				prosek.setText("Prosecna ocena je 0");
+			}else {
+				prosecna_ocena/=broj_predmeta;
+				prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena));
+			}
 			JLabel espb = new JLabel();
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
+			JLabel espb2 = new JLabel();
+			espb2.setText("");
+			JLabel espb3 = new JLabel();
+			espb3.setText("");
+			panelIspisa.setLayout(new GridLayout(0, 1));
+			panelIspisa.add(espb2);
 			panelIspisa.add(prosek);
 			panelIspisa.add(espb);
+			panelIspisa.add(espb3);
 			panel_polozenih.add(panelIspisa, BorderLayout.SOUTH);
 		    tabbedPane.add("Polozeni", panel_polozenih);
 		    
@@ -679,12 +693,20 @@ public class DijalogIzmenaStudenta extends JDialog {
 				
 			});
 		   
+		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
+
+			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
+			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
+		    tabbedPane.add("Nepolozeni", panelNepPred);
+		    this.add(tabbedPane);
+		    
 		    btn_ponistiOcenu.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					if(PolozeniIspitiJTable.rowSelectedIndex < BazaPolozenih.getInstance().getPolozeni().size()) {
+					if(PolozeniIspitiJTable.rowSelectedIndex < BazaPolozenih.getInstance().getPolozeni().size() && PolozeniIspitiJTable.rowSelectedIndex!=-1) {
 				    	int dialogButton = JOptionPane.YES_NO_OPTION;
 					    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da ponistite ocenu?", "Ponistavanje ocene", dialogButton);
 					    
@@ -701,25 +723,48 @@ public class DijalogIzmenaStudenta extends JDialog {
 					    		}
 					    	}
 							s.getNepolozeni_ispiti().add(p);
+							NepolozeniPredmetiJTable.azurirajPrikaz();
 							System.out.println(s.getNepolozeni_ispiti().get(1).getPredmet().getSifra_predmeta());
-					    	NepolozeniPredmetiJTable.azurirajPrikaz();
+							double prosecna_ocena2 = 0;
+							int broj_predmeta2 = 0;
+							int espb_ukupno2=0;
+							for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+								espb_ukupno2 += o.getPredmet().getEspb();
+								broj_predmeta2++;
+								int ocena = 0;
+								switch(o.getVrednost_ocene()) {
+								case sest: 
+									ocena = 6;
+									break;
+								case sedam: 
+									ocena = 7;
+									break;
+								case osam: 
+									ocena = 8;
+									break;
+								case devet: 
+									ocena = 9;	
+									break;
+								case deset: 
+									ocena = 10;
+									break;
+								}
+								prosecna_ocena2 += ocena;
+							}
+							if(prosecna_ocena2==0) {
+								prosek.setText("Prosecna ocena je 0");
+							}else {
+								prosecna_ocena2/=broj_predmeta2;
+								prosek.setText("Prosecna ocena je " + Double.toString(prosecna_ocena2));
+							}
+							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					    }	
 				    }
-					
-				    
+					NepolozeniPredmetiJTable.azurirajPrikaz();
+ 
 				}
-		    	
+				
 		    });
 		    
-		    
-		    
-		    
-		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
-			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
-
-			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
-			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
-		    tabbedPane.add("Nepolozeni", panelNepPred);
-		    this.add(tabbedPane);
 		}
 }
