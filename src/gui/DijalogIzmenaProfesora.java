@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.ProfesorKontroler;
@@ -617,3 +619,117 @@ public class DijalogIzmenaProfesora extends JDialog {
 		});
 	}
 }
+
+class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
+	
+	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal) {
+		super(parent, "Odabir Profesora", modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*2/5, diaHeight*10/20);
+		setLocationRelativeTo(parent);
+		
+		JButton potvrda=new JButton("Potvrdi");
+		JButton odustanak=new JButton("Odustani");
+	
+		odustanak.addActionListener(new ActionListener() {
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+	
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+	
+				    if (dialogResult == JOptionPane.YES_OPTION) {
+				    	dispose();
+				    }
+			             
+				}
+			});
+		
+		JPanel panelButton = new JPanel();
+		panelButton.add(potvrda);
+		panelButton.add(odustanak);
+	    this.add(panelButton, BorderLayout.SOUTH);
+		
+	    ProfesoriNaPredmetuJTable profesori = new ProfesoriNaPredmetuJTable();
+		JScrollPane profesoriProzor = new JScrollPane(profesori);
+		this.add(profesoriProzor, BorderLayout.CENTER);
+		
+		potvrda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			    
+			    if(ProfesoriNaPredmetuJTable.rowSelectedIndex != -1 && ProfesoriNaPredmetuJTable.rowSelectedIndex < BazaProfesora.getInstance().getProfesori().size()) {
+			    	
+			    	int dialogButton = JOptionPane.YES_NO_OPTION;
+			    	int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
+			    	
+			    	if (dialogResult == JOptionPane.YES_OPTION) {
+			    		dispose();
+			    		Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    		DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
+			    		DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
+			    		DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
+			    		
+			    	}
+			    }
+			}
+			
+		});
+	}
+}
+
+
+class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
+	
+	public DijalogBrisanjaProfesoraSaPredmeta(Frame parent, String title, boolean modal) {
+		super(parent, "Ukloni Profesora", modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*2/5, diaHeight*5/20);
+		setLocationRelativeTo(parent);
+		
+		JButton potvrda=new JButton("Potvrdi");
+		JButton odustanak=new JButton("Odustani");
+	
+		odustanak.addActionListener(new ActionListener() {
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+	
+				    dispose();
+			             
+				}
+			});
+		
+		JPanel panelButton = new JPanel();
+		panelButton.add(potvrda);
+		panelButton.add(odustanak);
+	    this.add(panelButton, BorderLayout.SOUTH);
+		
+	    JLabel labela = new JLabel("Da li ste sigurni?");
+	    JPanel profesoriBrisanje = new JPanel();
+	    profesoriBrisanje.add(labela, BorderLayout.SOUTH);
+		this.add(profesoriBrisanje, BorderLayout.CENTER);
+		
+		potvrda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			    dispose();	
+			    DijalogIzmenaPredmeta.profesorLista.setText(null);
+			    DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(false);
+			    DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(true);
+			    
+			}
+			
+		});
+	}
+}
+

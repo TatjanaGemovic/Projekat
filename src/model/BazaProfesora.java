@@ -19,6 +19,7 @@ public class BazaProfesora{
 	
 	private List<Profesor> profesori;
 	public List<String> kolone;
+	public List<String> kolone2;
 	
 	public BazaProfesora() {
 		
@@ -27,6 +28,9 @@ public class BazaProfesora{
 		this.kolone.add("Prezime");
 		this.kolone.add("Zvanje");
 		this.kolone.add("Email");
+		
+		this.kolone2 = new ArrayList<String>();
+		this.kolone2.add(" ");
 		
 		initProfesori();
 	}
@@ -46,6 +50,10 @@ public class BazaProfesora{
 	public int getColumnCount() {
 		 return 4;
 	}
+	
+	public int getColumnCount2() {
+		 return 1;
+	}
 
 	public int getRowCount() {
 		return 40;
@@ -57,6 +65,10 @@ public class BazaProfesora{
 	
 	public String getColumnName(int index) {
 		return this.kolone.get(index);
+	}
+	
+	public String getColumnName2(int index) {
+		return this.kolone2.get(index);
 	}
 	
 	public Profesor getRow(int rowIndex) {
@@ -87,6 +99,25 @@ public class BazaProfesora{
 			case 2:
 				return "";
 			case 3:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	
+	public String getValueAt2(int row, int column) {
+		if(row < profesori.size()) {
+			Profesor profesor = this.profesori.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
 				return "";
 			default:
 				return null;

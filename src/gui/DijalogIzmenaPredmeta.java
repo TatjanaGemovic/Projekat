@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -42,6 +43,9 @@ public class DijalogIzmenaPredmeta extends JDialog {
 	private boolean dobarbroj = true;
 	private boolean dobarnaziv = true;
 	private boolean dobrasifra = true;
+	static JTextField profesorLista = new JTextField();
+	static JButton btnRemoveProfesor=new JButton("-");
+	static JButton btnAddProfesor=new JButton("+");
 	
 	public DijalogIzmenaPredmeta(Frame parent, String title, boolean modal) {
 		super(parent, "Izmena Predmeta", modal);
@@ -249,15 +253,17 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		grdSemestar.fill = GridBagConstraints.HORIZONTAL;
 		grdSemestar.insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(semestarStud,grdSemestar);
+
+		profesorLista.setEditable(false);
+		profesorLista.setPreferredSize(new Dimension(178,25));
 		
-		String[] dir = new String[100];
-		int i=0;
-		for(Profesor p : BazaProfesora.getInstance().getProfesori())
-        {
-            dir[i] = p.getImeIPrezime();
-            i++;
-        }
-		JComboBox<?> profesorLista = new JComboBox<Object>(dir);
+		btnAddProfesor.setPreferredSize(new Dimension(30,20));
+		btnRemoveProfesor.setPreferredSize(new Dimension(30,20));
+		JPanel panelButton2 = new JPanel();
+		panelButton2.setLayout(new FlowLayout());
+		panelButton2.add(btnRemoveProfesor, FlowLayout.LEFT);
+		panelButton2.add(btnAddProfesor, FlowLayout.LEFT);
+		panelButton2.add(profesorLista, FlowLayout.LEFT);
 		
 		GridBagConstraints gbcTxtProfesor = new GridBagConstraints();
 		gbcTxtProfesor .gridx = 1;
@@ -265,7 +271,27 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtProfesor .weightx = 100;
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtProfesor .insets = new Insets(20, 120, 0, 70);
-		panelCenter.add(profesorLista, gbcTxtProfesor );
+		panelCenter.add(panelButton2, gbcTxtProfesor);
+		
+		btnAddProfesor.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true);
+				OdabirProfesora.setVisible(true);
+			}
+			
+		});
+		
+		btnRemoveProfesor.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DijalogBrisanjaProfesoraSaPredmeta BrisanjeProfesora = new DijalogBrisanjaProfesoraSaPredmeta(parent, "Ukloni Profesora", true);
+				BrisanjeProfesora.setVisible(true);
+			}
+			
+		});
 		
 		//ispis podataka za selektovani predmet
 		List<Predmet> predmeti = BazaPredmeta.getInstance().getPredmeti();
@@ -279,7 +305,16 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			k=2;
 		}
 		semestarStud.setSelectedIndex(k-1);
-    	
+		if(predmet.getPredmetni_profesor()!=null) {
+			profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+			btnRemoveProfesor.setEnabled(true);
+			btnAddProfesor.setEnabled(false);
+		} else{
+			profesorLista.setText(null);
+			btnRemoveProfesor.setEnabled(false);
+			btnAddProfesor.setEnabled(true);
+		}
+		
 		potvrda.addActionListener(new ActionListener() {
 
 			@Override
@@ -316,9 +351,9 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			    		semestar = Semestar.letnji;
 			    	}
 		
-			    	String profesor = dir[profesorLista.getSelectedIndex()]; 
+			    	String profesor = profesorLista.getText(); 
 			    	
-			    	Profesor p = new Profesor();
+			    	Profesor p = null;
 			    	for (Profesor i : BazaProfesora.getInstance().getProfesori()) {
 						if(i.getImeIPrezime().equals(profesor)) {
 							p = i;

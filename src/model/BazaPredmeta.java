@@ -42,8 +42,8 @@ public class BazaPredmeta{
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		predmeti.add(new Predmet("E2 105", "Analiza1", semestar, 1, p, 9));
-		predmeti.add(new Predmet("E2 101", "MISS", semestar, 1, p, 8));
+		predmeti.add(new Predmet("E2 105", "Analiza1", semestar, 1, null, 9));
+		predmeti.add(new Predmet("E2 101", "MISS", semestar, 1, null, 8));
 		predmeti.add(new Predmet("E2 103", "SAU", semestar, 1, p, 10));
 	}
 	
