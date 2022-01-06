@@ -52,14 +52,14 @@ public class BazaStudenata{
 		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status);
 		studenti.add(filip);
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		Predmet pred = new Predmet("E2 105", "Analiza1", Semestar.letnji, 1, p, 9);
+		Predmet pred = new Predmet("E2 105", "Analiza1", 9, Semestar.letnji, 1, p);
 		Vrednost_Ocene vred = Vrednost_Ocene.devet;
 		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
-		pred = new Predmet("E2 101", "MISS", Semestar.letnji, 1, p, 10);
+		pred = new Predmet("E2 101", "MISS", 10, Semestar.letnji, 1, p);
 		vred = Vrednost_Ocene.deset;
 		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
 		vred = Vrednost_Ocene.pet;
-		pred = new Predmet("E2 100", "SPPuRV", Semestar.zimski, 1, p, 5);
+		pred = new Predmet("E2 100", "SPPuRV", 5, Semestar.zimski, 1, p);
 		studenti.get(1).getNepolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
 	}
 

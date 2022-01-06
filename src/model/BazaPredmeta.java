@@ -42,9 +42,9 @@ public class BazaPredmeta{
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		predmeti.add(new Predmet("E2 105", "Analiza1", semestar, 1, null, 9));
-		predmeti.add(new Predmet("E2 101", "MISS", semestar, 1, null, 8));
-		predmeti.add(new Predmet("E2 103", "SAU", semestar, 1, p, 10));
+		predmeti.add(new Predmet("E2 105", "Analiza1", 9, semestar, 1, null));
+		predmeti.add(new Predmet("E2 101", "Miss", 8, semestar, 1, null));
+		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));
 	}
 	
 	
@@ -128,7 +128,7 @@ public class BazaPredmeta{
 	}
 	
 	public void dodajPredmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
-			this.predmeti.add(new Predmet(sifra_predmeta,naziv,semestar,godina_izvodjenja,profesor,espb));
+			this.predmeti.add(new Predmet(sifra_predmeta,naziv,espb,semestar,godina_izvodjenja,profesor));
 	}
 	public void izmeniPredmet(Predmet p, String sifra_predmeta, String naziv, int espb, int godina, Semestar semestar, Profesor profesor) {
 		for (Predmet i : predmeti) {
