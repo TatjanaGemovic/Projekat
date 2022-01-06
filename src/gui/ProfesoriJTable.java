@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
@@ -17,6 +20,7 @@ public class ProfesoriJTable extends JTable{
 	private static JTable tabelaProfesora;
 	public static int rowSelectedIndex = -1;
 	public static AbstractTableModelProfesori profesorModel;
+	public static TableRowSorter<AbstractTableModelProfesori>sortiranje;
 	
 	public ProfesoriJTable() {
 		this.setRowSelectionAllowed(true);
@@ -68,6 +72,9 @@ public class ProfesoriJTable extends JTable{
             }
         };
         this.setRowSorter(sorter);
+        
+        sortiranje=new TableRowSorter<AbstractTableModelProfesori>(profesorModel);
+        this.setRowSorter(sortiranje);
 	}
 	
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -82,5 +89,30 @@ public class ProfesoriJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		profesorModel.fireTableDataChanged();
+	}
+	
+	public static void filterProfesora(String s) {
+	    RowFilter<AbstractTableModelProfesori, Object> rf = null;
+	    List<RowFilter<AbstractTableModelProfesori, Object>>rfs=new ArrayList<RowFilter<AbstractTableModelProfesori, Object>>();
+	    try {
+	    	String[] temp = s.split(",", 2);
+	    	if(temp.length == 1) { //samo prezime profesora
+	    		s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+	    		rf = RowFilter.regexFilter(s, 1);
+	    	} else if(temp.length == 2){
+	    			temp[0] = temp[0].substring(0,1).toUpperCase() + temp[0].substring(1).toLowerCase();
+	    			rfs.add(RowFilter.regexFilter(temp[0], 1)); // filter za prezime
+					temp[1] = temp[1].substring(0,1).toUpperCase() + temp[1].substring(1).toLowerCase();
+	    			rfs.add(RowFilter.regexFilter(temp[1], 0)); // filter za ime
+	    			rf = RowFilter.andFilter(rfs);
+	    	} else {
+	    		sortiranje.setRowFilter(null);
+	    		return;
+	    	}
+	    	
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        return;
+	    }
+	    sortiranje.setRowFilter(rf);
 	}
 }

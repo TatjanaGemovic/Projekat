@@ -143,7 +143,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtSifra.getText()).matches("[A-Za-z0-9 ]+")) {
+				if((txtSifra.getText()).matches("[A-Z0-9 ]+")) {
 	                dobrasifra = true;
 	                if(dobarbroj && dobarnaziv && dobrasifra)
 	                    potvrda.setEnabled(true);

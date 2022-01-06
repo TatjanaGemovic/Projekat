@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.BazaPredmeta;
 
 
