@@ -57,7 +57,7 @@ public class BazaStudenata{
 		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
 		pred = new Predmet("E2 101", "MISS", Semestar.letnji, 1, p, 10);
 		vred = Vrednost_Ocene.deset;
-		//studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
+		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
 		vred = Vrednost_Ocene.pet;
 		pred = new Predmet("E2 100", "SPPuRV", Semestar.zimski, 1, p, 5);
 		studenti.get(1).getNepolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));

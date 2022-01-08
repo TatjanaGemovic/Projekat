@@ -41,6 +41,7 @@ import model.Profesor;
 import model.Semestar;
 import model.Status_Studenta;
 import model.Student;
+import model.Vrednost_Ocene;
 
 public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobroime = true;
@@ -658,6 +659,13 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JButton polaganje = new JButton("Polaganje");
 		    panelDugmici.add(polaganje);
 		    
+		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
+
+			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
+			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
+		    tabbedPane.add("Nepolozeni", panelNepPred);
+		    
 		    dodaj.addActionListener(new ActionListener() {
 
 				@Override
@@ -672,24 +680,26 @@ public class DijalogIzmenaStudenta extends JDialog {
 					JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
 					panelzaDodavanje.add(panePotencijalni);
 					
+					JButton dodajPredmet = new JButton("Dodaj");
+					panelzaDodavanje.add(dodajPredmet);
 					dijalogDodavanjaNaStudenta.setContentPane(panelzaDodavanje);
 					dijalogDodavanjaNaStudenta.pack();
 					dijalogDodavanjaNaStudenta.setVisible(true);
+					dodajPredmet.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Predmet p = BazaPredmeta.getInstance().getRow(PotencijalniJTable.rowSelectedIndex);
+							Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+							OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, p, Vrednost_Ocene.pet, new Date(2000, 05, 27));
+							s.getNepolozeni_ispiti().add(noviNepolozeni);
+							dijalogDodavanjaNaStudenta.dispose();
+							nep_predmeti.azurirajPrikaz();
+						}
+					});
 				}
 				
 			});
-		    
-		    
-		    
-		    
-		    
-		    
-		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
-			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
-
-			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
-			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
-		    tabbedPane.add("Nepolozeni", panelNepPred);
 		    this.add(tabbedPane);
 		}
 }

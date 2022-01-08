@@ -50,6 +50,8 @@ public class BazaPredmeta{
 		this.predmeti.add(pred);
 		pred = new Predmet("E2 100", "SPPuRV", Semestar.zimski, 1, p, 5);
 		this.predmeti.add(pred);
+		pred = new Predmet("E2 103", "LPRS", Semestar.zimski, 2, p, 5);
+		this.predmeti.add(pred);
 	}
 	
 	
@@ -122,9 +124,19 @@ public class BazaPredmeta{
 		List<Predmet> potencijalni = new ArrayList<Predmet>();
 		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			
-			if (student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
-			potencijalni.add(p);
+			if(student.getTrenutna_god()<p.getGodina_izvodjenja()) continue;
+			int pronadjen = 0;
+			for(OcenaNaIspitu polozeni : student.getPolozeni_ispiti()) {
+				if(p.getNaziv() == polozeni.getPredmet().getNaziv()) {
+					pronadjen++;
+				}
+			}
+			for(OcenaNaIspitu nepolozeni : student.getNepolozeni_ispiti()) {
+				if(p.getNaziv() == nepolozeni.getPredmet().getNaziv()) {
+					pronadjen++;
+				}
+			}
+			if(pronadjen==0) potencijalni.add(p);
 		}
 		if(row < potencijalni.size()) {
 			Predmet predmet = potencijalni.get(row);
