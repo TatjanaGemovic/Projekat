@@ -21,6 +21,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.ProfesorKontroler;
@@ -49,6 +51,8 @@ public class DijalogIzmenaProfesora extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*19/20);
 		setLocationRelativeTo(parent);
 		
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
 		JButton potvrda=new JButton("Potvrdi");
 		potvrda.setEnabled(true);
 		JButton odustanak=new JButton("Odustani");
@@ -72,11 +76,10 @@ public class DijalogIzmenaProfesora extends JDialog {
 		panelButton.add(potvrda);
 		panelButton.add(odustanak);
 	    
-	    this.add(panelButton, BorderLayout.SOUTH);
+		JPanel panelInformacije = new JPanel();
 		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
-	    this.add(panelCenter, BorderLayout.CENTER);
 	    
 	    JLabel lblIme = new JLabel("Ime:");
 	    JLabel lblPrezime = new JLabel("Prezime:");
@@ -615,5 +618,28 @@ public class DijalogIzmenaProfesora extends JDialog {
 			    }
 			}
 		});
+	   panelInformacije.add(panelCenter, BorderLayout.CENTER);
+	   panelInformacije.add(panelButton, BorderLayout.SOUTH);
+	   tabbedPane.add("Informacije", panelInformacije); 
+	   
+	   
+	   
+	   JPanel panelPredmeta = new JPanel();
+	   panelPredmeta.setLayout(new BorderLayout());
+	   JPanel panelDugmici = new JPanel();
+	    
+	   JButton dodaj = new JButton("Dodaj predmet");
+	   panelDugmici.add(dodaj);
+	   JButton obrisi = new JButton("Ukloni predmet");
+	   panelDugmici.add(obrisi);
+	    
+	   ProfesorPredajeJTable profPredaje = new ProfesorPredajeJTable();
+	   JScrollPane profPredajePane = new JScrollPane(profPredaje);
+	   
+	   panelPredmeta.add(panelDugmici, BorderLayout.NORTH);
+	   panelPredmeta.add(profPredajePane, BorderLayout.CENTER);
+		
+	   tabbedPane.add("Predmeti", panelPredmeta);
+	   this.add(tabbedPane);
 	}
 }
