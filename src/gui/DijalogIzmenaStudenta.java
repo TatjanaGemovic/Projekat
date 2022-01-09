@@ -52,6 +52,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobarindex = true;
 	private boolean dobarmail = true;
 	private boolean dobragodina = true;
+	public NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
 			
@@ -659,7 +660,6 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JButton polaganje = new JButton("Polaganje");
 		    panelDugmici.add(polaganje);
 		    
-		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
 
 			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
@@ -670,44 +670,56 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
-					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
-					dijalogDodavanjaNaStudenta.setLocationRelativeTo(parent);
-					dijalogDodavanjaNaStudenta.setSize(diaWidth*4/5, diaHeight*4/5);
-					
-					JPanel panelzaDodavanje = new JPanel();
-					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
-					JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
-					panelzaDodavanje.add(panePotencijalni);
-					
-					JButton dodajPredmet = new JButton("Dodaj");
-					panelzaDodavanje.add(dodajPredmet);
-					dijalogDodavanjaNaStudenta.setContentPane(panelzaDodavanje);
-					dijalogDodavanjaNaStudenta.pack();
-					dodajPredmet.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
-							Predmet predmetKojiSeDodaje = new Predmet();
-							for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-								if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
-									predmetKojiSeDodaje = p;
-								}
-							}
-	
-							Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
-							OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
-							s.getNepolozeni_ispiti().add(noviNepolozeni);
-							tabelaPotencijalnih.azurirajPrikaz();
-							dijalogDodavanjaNaStudenta.dispose();
-							nep_predmeti.azurirajPrikaz();
-						}
-					});
-					dijalogDodavanjaNaStudenta.setVisible(true);
+					DijalogDodavanjaPredmetaStudentu dijalogDodavanja = new DijalogDodavanjaPredmetaStudentu(parent, "Dodavanje predmeta", modal, nep_predmeti);
 				}
 				
-			});
+		    });
 		    this.add(tabbedPane);
 		}
+}
+
+
+class DijalogDodavanjaPredmetaStudentu extends JDialog {
+	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal, NepolozeniPredmetiJTable nep_predmeti) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton("Dodaj");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+					}
+				}
+
+				Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+				OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
+				s.getNepolozeni_ispiti().add(noviNepolozeni);
+				tabelaPotencijalnih.azurirajPrikaz();
+				dispose();
+				nep_predmeti.azurirajPrikaz();
+			}
+		});
+		this.setVisible(true);
+	}
 }
