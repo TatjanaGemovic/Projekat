@@ -4,15 +4,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
-import javax.swing.DefaultRowSorter;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
-import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
@@ -22,7 +17,6 @@ public class PredmetiJTable extends JTable{
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaPredmeta;
 	public static AbstractTableModelPredmeti predmetModel;
-	public static TableRowSorter<AbstractTableModelPredmeti>sortiranje;
 	
 	public PredmetiJTable() {
 		this.setRowSelectionAllowed(true);
@@ -32,7 +26,6 @@ public class PredmetiJTable extends JTable{
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.predmetModel = new AbstractTableModelPredmeti();
 		
 		predmetModel = (AbstractTableModelPredmeti) this.getModel();
 		
@@ -46,7 +39,7 @@ public class PredmetiJTable extends JTable{
 
 			}
 		});
-
+		//link sajta: https://www.py4u.net/discuss/597623?fbclid=IwAR3UBeaXJxfMmgkIg47MrvCGO0mPQK4CuULvinA7uyDwnfN1OdYCbt21ygg
 		TableRowSorter<AbstractTableModelPredmeti> sorter = new TableRowSorter<AbstractTableModelPredmeti>(predmetModel) {
             @Override
             public Comparator<String> getComparator(int column) {
@@ -79,10 +72,8 @@ public class PredmetiJTable extends JTable{
             }
         };
         this.setRowSorter(sorter);
-        sorter.sort();
         
-        sortiranje=new TableRowSorter<AbstractTableModelPredmeti>(predmetModel);
-        this.setRowSorter(sortiranje);
+        
 	}
 	
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -97,30 +88,5 @@ public class PredmetiJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		predmetModel.fireTableDataChanged();
-	}
-	
-	public static void filterPredmeta(String s) {
-	    RowFilter<AbstractTableModelPredmeti, Object> rf = null;
-	    List<RowFilter<AbstractTableModelPredmeti, Object>>rfs=new ArrayList<RowFilter<AbstractTableModelPredmeti, Object>>();
-	    try {
-	    	String[] temp = s.split(",", 2);
-	    	if(temp.length == 1) { //samo nazivi predmeta
-	    		s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
-	    		rf = RowFilter.regexFilter(s, 1);
-	    	} else if(temp.length == 2){
-	    			temp[0] = temp[0].substring(0,1).toUpperCase() + temp[0].substring(1).toLowerCase();
-	    			rfs.add(RowFilter.regexFilter(temp[0], 1)); // filter za naziv
-					temp[1] = temp[1].toUpperCase();
-	    			rfs.add(RowFilter.regexFilter(temp[1], 0)); // filter za sifru
-	    			rf = RowFilter.andFilter(rfs);
-	    	} else{
-	    		sortiranje.setRowFilter(null);
-	    		return;
-	    	}
-	    	
-	    } catch (java.util.regex.PatternSyntaxException e) {
-	        return;
-	    }
-	    sortiranje.setRowFilter(rf);
 	}
 }

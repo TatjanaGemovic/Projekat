@@ -163,10 +163,10 @@ public class Toolbar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 					switch (TabbedPane.tabIndex) {
 					case Profesor:
-						ProfesoriJTable.filterProfesora(txt.getText());
+						TabbedPane.filterProfesora(txt.getText());
 						break;
 					case Predmet:
-						PredmetiJTable.filterPredmeta(txt.getText());
+						TabbedPane.filterPredmeta(txt.getText());
 						break;
 					default:
 						//StudentiJTable.filterStudenata(txt.getText());
