@@ -684,19 +684,27 @@ public class DijalogIzmenaStudenta extends JDialog {
 					panelzaDodavanje.add(dodajPredmet);
 					dijalogDodavanjaNaStudenta.setContentPane(panelzaDodavanje);
 					dijalogDodavanjaNaStudenta.pack();
-					dijalogDodavanjaNaStudenta.setVisible(true);
 					dodajPredmet.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							Predmet p = BazaPredmeta.getInstance().getRow(PotencijalniJTable.rowSelectedIndex);
+							String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+							Predmet predmetKojiSeDodaje = new Predmet();
+							for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+								if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+									predmetKojiSeDodaje = p;
+								}
+							}
+	
 							Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
-							OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, p, Vrednost_Ocene.pet, new Date(2000, 05, 27));
+							OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
 							s.getNepolozeni_ispiti().add(noviNepolozeni);
+							tabelaPotencijalnih.azurirajPrikaz();
 							dijalogDodavanjaNaStudenta.dispose();
 							nep_predmeti.azurirajPrikaz();
 						}
 					});
+					dijalogDodavanjaNaStudenta.setVisible(true);
 				}
 				
 			});
