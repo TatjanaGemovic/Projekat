@@ -17,7 +17,7 @@ public class BazaNepolozenihPredmeta {
 		return instance;
 	}
 	
-	private List<Predmet> nepolozeni_predmeti;
+	public List<Predmet> nepolozeni_predmeti;
 	public List<String> kolone;
 	
 	public BazaNepolozenihPredmeta() {
@@ -28,7 +28,9 @@ public class BazaNepolozenihPredmeta {
 		this.kolone.add("ESPB");
 		this.kolone.add("Godina studija");
 		this.kolone.add("Semestar");
+		
 	}
+
 
 	public int getColumnCount() {
 		 return 5;

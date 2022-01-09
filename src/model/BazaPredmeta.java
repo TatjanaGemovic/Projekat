@@ -45,18 +45,26 @@ public class BazaPredmeta{
 		Date datum2 = new Date(2000, 05, 27);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Profesor p1 = new Profesor("Nebojsa", "Ralevic", datum, adresa2, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15);
-		Predmet pred = new Predmet("E2 105", "Analiza1", Semestar.letnji, 1, p1, 9);
+		Predmet pred = new Predmet("E2 105", "Analiza1", 9, Semestar.letnji, 1, p1);
 		this.predmeti.add(pred);
-		Predmet pred1 = new Predmet("E2 103", "LPRS", Semestar.zimski, 2, p1, 5);
+		Predmet pred1 = new Predmet("E2 103", "LPRS", 5, Semestar.zimski, 2, p1);
 		this.predmeti.add(pred1);
 		
 		Profesor p2 = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		Predmet pred2 = new Predmet("E2 101", "SAU", Semestar.letnji, 1, p2, 10);
+		Predmet pred2 = new Predmet("E2 101", "SAU", 10, Semestar.letnji, 1, p2);
 		this.predmeti.add(pred2);
-		Predmet pred3 = new Predmet("E2 107", "MISS", Semestar.zimski, 1, p2, 10);
+		Predmet pred3 = new Predmet("E2 107", "MISS", 10, Semestar.zimski, 1, p2);
 		this.predmeti.add(pred3);
-		Predmet pred4 = new Predmet("E2 100", "SPPuRV", Semestar.zimski, 1, p2, 5);
+		Predmet pred4 = new Predmet("E2 100", "SPPuRV", 5, Semestar.zimski, 1, p2);
 		this.predmeti.add(pred4);
+		Semestar semestar = Semestar.zimski;
+		Date datum1 = new Date(1970, 25, 04);
+		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
+		Adresa adresa21 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
+		Profesor p = new Profesor("Milan", "Rapaic", datum1, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa21, "00081525", "Doktor", 15);
+		predmeti.add(new Predmet("E2 105", "Analiza1", 9, semestar, 1, null));
+		predmeti.add(new Predmet("E2 101", "Miss", 8, semestar, 1, null));
+		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));
 	}
 	
 	
@@ -213,7 +221,7 @@ public class BazaPredmeta{
 	}
 	
 	public void dodajPredmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
-			this.predmeti.add(new Predmet(sifra_predmeta,naziv,semestar,godina_izvodjenja,profesor,espb));
+			this.predmeti.add(new Predmet(sifra_predmeta,naziv,espb,semestar,godina_izvodjenja,profesor));
 	}
 	public void izmeniPredmet(Predmet p, String sifra_predmeta, String naziv, int espb, int godina, Semestar semestar, Profesor profesor) {
 		for (Predmet i : predmeti) {

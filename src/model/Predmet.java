@@ -14,7 +14,7 @@ public class Predmet {
 	private ArrayList<Student> polozili = new ArrayList<Student>();
 	private ArrayList<Student> nisu_polozili = new ArrayList<Student>();
 	
-	public Predmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
+	public Predmet(String sifra_predmeta, String naziv, int espb, Semestar semestar, int godina_izvodjenja, Profesor profesor) {
 		super();
 		this.sifra_predmeta = sifra_predmeta;
 		this.naziv = naziv;

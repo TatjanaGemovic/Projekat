@@ -9,30 +9,30 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class NepolozeniPredmetiJTable extends JTable{
+public class ProfesoriNaPredmetuJTable extends JTable{
 
+	private static JTable tabelaProfesora;
 	public static int rowSelectedIndex = -1;
-	private static JTable tabelaNepPredmeta;
-	public static AbstractTableModelNepolozeniPredmeti nep_predmetiModel;
+	public static AbstractTableModelProfesori2 profesorModel;
 	
-	public NepolozeniPredmetiJTable() {
+	public ProfesoriNaPredmetuJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelNepolozeniPredmeti());
+		this.setModel(new AbstractTableModelProfesori2());
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.nep_predmetiModel = new AbstractTableModelNepolozeniPredmeti();
+		this.profesorModel = new AbstractTableModelProfesori2();
 		
-		nep_predmetiModel = (AbstractTableModelNepolozeniPredmeti) this.getModel();
+		profesorModel = (AbstractTableModelProfesori2) this.getModel();
 		
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				tabelaNepPredmeta = (JTable) e.getComponent();
-				if(tabelaNepPredmeta.getSelectedRow()!=-1) {
-					rowSelectedIndex = tabelaNepPredmeta.convertRowIndexToModel(tabelaNepPredmeta.getSelectedRow());
+				tabelaProfesora = (ProfesoriNaPredmetuJTable) e.getComponent();
+				if(tabelaProfesora.getSelectedRow()!=-1) {
+					rowSelectedIndex = tabelaProfesora.convertRowIndexToModel(tabelaProfesora.getSelectedRow());
 				}
 
 			}
@@ -50,7 +50,7 @@ public class NepolozeniPredmetiJTable extends JTable{
 	}
 	
 	public static void azurirajPrikaz() {
-		nep_predmetiModel.fireTableDataChanged();
+		profesorModel.fireTableDataChanged();
 	}
 	
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import gui.NepolozeniPredmetiJTable;
+
 public class Student extends Osoba {
 	private String broj_indeksa;
 	private int god_upisa;

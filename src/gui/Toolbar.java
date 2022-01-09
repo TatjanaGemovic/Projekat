@@ -146,10 +146,10 @@ public class Toolbar extends JToolBar {
 		txt.setMaximumSize(new Dimension(170,24));
 
 		txt.setName("txtSearch");
-		txt.setText("Search");
+		//txt.setText("Search");
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-		MyFocusListener focusListener = new MyFocusListener();
-		txt.addFocusListener(focusListener);
+		//MyFocusListener focusListener = new MyFocusListener();
+		//txt.addFocusListener(focusListener);
 		add(txt);
 		
 		addSeparator();
@@ -157,6 +157,23 @@ public class Toolbar extends JToolBar {
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
+		btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					switch (TabbedPane.tabIndex) {
+					case Profesor:
+						TabbedPane.filterProfesora(txt.getText());
+						break;
+					case Predmet:
+						TabbedPane.filterPredmeta(txt.getText());
+						break;
+					default:
+						//StudentiJTable.filterStudenata(txt.getText());
+					}
+			}
+			
+		});
 		add(btnSearch);
 
 		
