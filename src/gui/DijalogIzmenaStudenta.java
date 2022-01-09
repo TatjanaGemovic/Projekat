@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import controller.PredmetKontroler;
 import controller.StudentKontroler;
 import model.Adresa;
+import model.BazaNepolozenihPredmeta;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -674,6 +675,37 @@ public class DijalogIzmenaStudenta extends JDialog {
 				}
 				
 		    });
+		    
+		    obrisi.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Object[] options = {"Da",
+	                "Ne"};
+					int n = JOptionPane.showOptionDialog(parent,
+							"Da li ste sigurni da zelita da uklonite predmet?",
+							"Uklanjanje predmeta",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,
+							null,     
+							options,  
+							options[0]);
+					
+					if(n==JOptionPane.YES_OPTION) {
+						Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+						Predmet zaBrisanje = BazaNepolozenihPredmeta.getInstance().getRow(NepolozeniPredmetiJTable.rowSelectedIndex);
+						OcenaNaIspitu trazena = new OcenaNaIspitu();
+						for(OcenaNaIspitu o : s.getNepolozeni_ispiti()) {
+							if(o.getPredmet().getSifra_predmeta()==zaBrisanje.getSifra_predmeta()) {
+								trazena = o;
+							}
+						}
+						s.getNepolozeni_ispiti().remove(trazena);
+						nep_predmeti.azurirajPrikaz();
+					}
+				}
+		    });
+		    
 		    this.add(tabbedPane);
 		}
 }
