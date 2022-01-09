@@ -9,6 +9,8 @@ import javax.swing.table.AbstractTableModel;
 import gui.PredmetiJTable;
 import gui.ProfesoriJTable;
 import gui.StudentiJTable;
+import gui.TabbedPane;
+import gui.TrenTab;
 
 public class BazaPredmeta{
 
@@ -49,6 +51,8 @@ public class BazaPredmeta{
 		this.predmeti.add(pred);
 		Predmet pred1 = new Predmet("E2 114", "Lprs", 5, Semestar.zimski, 2, p1);
 		this.predmeti.add(pred1);
+		p1.getProfesor_na_predmetu().add(pred);
+		p1.getProfesor_na_predmetu().add(pred1);
 		
 		Profesor p2 = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
 		Predmet pred2 = new Predmet("E2 108", "Sau", 10, Semestar.letnji, 1, p2);
@@ -57,14 +61,18 @@ public class BazaPredmeta{
 		this.predmeti.add(pred3);
 		Predmet pred4 = new Predmet("E2 100", "SPPuRV", 5, Semestar.zimski, 1, p2);
 		this.predmeti.add(pred4);
+		Predmet pred5 = new Predmet("E2 103", "OISISI", 10, Semestar.letnji, 1, p2);
+		this.predmeti.add(pred5);
+		p2.getProfesor_na_predmetu().add(pred2);
+		p2.getProfesor_na_predmetu().add(pred3);
+		p2.getProfesor_na_predmetu().add(pred4);
+		p2.getProfesor_na_predmetu().add(pred5);
 		Semestar semestar = Semestar.zimski;
 		Date datum1 = new Date(1970, 25, 04);
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
-		Adresa adresa21 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
-		Profesor p = new Profesor("Milan", "Rapaic", datum1, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa21, "00081525", "Doktor", 15);
-		predmeti.add(new Predmet("E2 111", "Analiza2", 9, semestar, 1, null));
-		predmeti.add(new Predmet("E2 101", "Miss2", 8, semestar, 1, null));
-		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));
+		Adresa adresa21 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");		
+		this.predmeti.add(new Predmet("E2 111", "Analiza2", 9, semestar, 1, null));
+		this.predmeti.add(new Predmet("E2 101", "MetodeOptimizacije", 8, semestar, 1, null));
 	}
 	
 	
@@ -147,21 +155,30 @@ public class BazaPredmeta{
 	
 	public String getValueAtZaDodavanje(int row, int column) {
 		List<Predmet> potencijalni = new ArrayList<Predmet>();
-		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
-		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			if(student.getTrenutna_god()<p.getGodina_izvodjenja()) continue;
-			int pronadjen = 0;
-			for(OcenaNaIspitu polozeni : student.getPolozeni_ispiti()) {
-				if(p.getNaziv() == polozeni.getPredmet().getNaziv()) {
-					pronadjen++;
+		if(TabbedPane.tabIndex==TrenTab.Student) {
+			Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(student.getTrenutna_god()<p.getGodina_izvodjenja()) continue;
+				int pronadjen = 0;
+				for(OcenaNaIspitu polozeni : student.getPolozeni_ispiti()) {
+					if(p.getNaziv() == polozeni.getPredmet().getNaziv()) {
+						pronadjen++;
+					}
 				}
-			}
-			for(OcenaNaIspitu nepolozeni : student.getNepolozeni_ispiti()) {
-				if(p.getNaziv() == nepolozeni.getPredmet().getNaziv()) {
-					pronadjen++;
+				for(OcenaNaIspitu nepolozeni : student.getNepolozeni_ispiti()) {
+					if(p.getNaziv() == nepolozeni.getPredmet().getNaziv()) {
+						pronadjen++;
+					}
 				}
+				if(pronadjen==0) potencijalni.add(p);
 			}
-			if(pronadjen==0) potencijalni.add(p);
+		}
+		else if(TabbedPane.tabIndex==TrenTab.Profesor) {
+			Profesor profesor = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getPredmetni_profesor()==null)
+					potencijalni.add(p);
+			}
 		}
 		if(row < potencijalni.size()) {
 			Predmet predmet = potencijalni.get(row);
@@ -185,8 +202,7 @@ public class BazaPredmeta{
 		Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
 		List<Predmet> predmeti = new ArrayList<Predmet>();
 		for(Predmet pred : BazaPredmeta.getInstance().getPredmeti()) {
-			if(pred.getPredmetni_profesor().getIme()==prof.getIme() && pred.getPredmetni_profesor().getPrezime()==prof.getPrezime()) {
-				System.out.printf("dodat na profesora %s\n", pred.getNaziv());
+			if(pred.getPredmetni_profesor()!=null && pred.getPredmetni_profesor().getIme()==prof.getIme() && pred.getPredmetni_profesor().getPrezime()==prof.getPrezime()) {
 				predmeti.add(pred);
 			}
 		}

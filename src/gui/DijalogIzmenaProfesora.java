@@ -28,8 +28,15 @@ import javax.swing.JTextField;
 
 import controller.ProfesorKontroler;
 import model.Adresa;
+import model.BazaNepolozenihPredmeta;
+import model.BazaPredmeta;
 import model.BazaProfesora;
+import model.BazaStudenata;
+import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Profesor;
+import model.Student;
+import model.Vrednost_Ocene;
 
 public class DijalogIzmenaProfesora extends JDialog {
 	private boolean dobroime = true;
@@ -42,7 +49,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 	private boolean dobarbrlicne = true;
 	private boolean dobrozvanje = true;
 	private boolean dobarstaz = true;
-	
+	public ProfesorPredajeJTable prof_predaje = new ProfesorPredajeJTable(); 
 	public DijalogIzmenaProfesora(Frame parent, String title, boolean modal) {
 		super(parent, "Izmena Profesora", modal);
 		
@@ -634,13 +641,56 @@ public class DijalogIzmenaProfesora extends JDialog {
 	   JButton obrisi = new JButton("Ukloni predmet");
 	   panelDugmici.add(obrisi);
 	    
-	   ProfesorPredajeJTable profPredaje = new ProfesorPredajeJTable();
-	   JScrollPane profPredajePane = new JScrollPane(profPredaje);
+	  // ProfesorPredajeJTable profPredaje = new ProfesorPredajeJTable();
+	   JScrollPane profPredajePane = new JScrollPane(prof_predaje);
 	   
 	   panelPredmeta.add(panelDugmici, BorderLayout.NORTH);
 	   panelPredmeta.add(profPredajePane, BorderLayout.CENTER);
 		
 	   tabbedPane.add("Predmeti", panelPredmeta);
+	   dodaj.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			DijalogDodavanjePredmetaProfesoru dijalogDodavanja = new DijalogDodavanjePredmetaProfesoru(parent, "Dodaj predmet", modal, prof_predaje);
+		}
+		   
+	   });
+	   obrisi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object[] options = {"Da",
+               "Ne"};
+				int n = JOptionPane.showOptionDialog(parent,
+						"Da li ste sigurni?",
+						"Uklanjanje predmeta",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,     
+						options,  
+						options[0]);
+				
+				if(n==JOptionPane.YES_OPTION) {
+					String sifrapredmeta = BazaPredmeta.getInstance().getValueAtProfesorPredaje(ProfesorPredajeJTable.rowSelectedIndex, 0);
+					Predmet predmetKojiSeBrise = new Predmet();
+					int index = 0;
+					for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+						if(sifrapredmeta==p.getSifra_predmeta()) {
+							predmetKojiSeBrise = p;
+							break;
+						}
+						index++;
+					}
+					Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+					prof.getProfesor_na_predmetu().remove(predmetKojiSeBrise);
+					predmetKojiSeBrise.setPredmetni_profesor(null);
+					BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeBrise);
+					prof_predaje.azurirajPrikaz();
+				}
+			}
+	    });
+	    
 	   this.add(tabbedPane);
 	}
 }
@@ -722,6 +772,8 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 		
 		JButton potvrda=new JButton("Potvrdi");
 		JButton odustanak=new JButton("Odustani");
+		
+		
 	
 		odustanak.addActionListener(new ActionListener() {
 	
@@ -755,6 +807,68 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 			}
 			
 		});
+	}
+}
+
+class DijalogDodavanjePredmetaProfesoru extends JDialog {
+	public DijalogDodavanjePredmetaProfesoru(Frame parent, String title, boolean modal, ProfesorPredajeJTable prof_predaje) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		if(tabelaPotencijalnih.getValueAt(0,0).toString()=="")
+			dodajPredmet.setEnabled(false);
+		
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+				int index = 0;
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+						break;
+					}
+					index++;
+				}
+				predmetKojiSeDodaje.setPredmetni_profesor(prof);
+				BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeDodaje);
+				prof.getProfesor_na_predmetu().add(predmetKojiSeDodaje);
+				tabelaPotencijalnih.azurirajPrikaz();
+				dispose();
+				prof_predaje.azurirajPrikaz();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+			
+		});
+		this.setVisible(true);
 	}
 }
 

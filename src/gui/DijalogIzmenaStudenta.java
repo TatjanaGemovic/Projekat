@@ -678,22 +678,6 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JButton polaganje = new JButton("Polaganje");
 		    panelDugmici.add(polaganje);
 		    
-		    dodaj.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
-					dijalogDodavanjaNaStudenta.setLocationRelativeTo(null);
-					dijalogDodavanjaNaStudenta.setSize(diaWidth*2/5, diaHeight*3/5);
-					dijalogDodavanjaNaStudenta.setVisible(true);
-					
-					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
-					dijalogDodavanjaNaStudenta.add(tabelaPotencijalnih);
-					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
-				}
-				
-			});
 		    panelDugmici.add(dodaj);
 		    panelDugmici.add(obrisi);
 		    
@@ -711,7 +695,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    });
 		    panelDugmici.add(polaganje);
 		    
-		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+		    
 			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
 
 			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
@@ -839,8 +823,10 @@ class DijalogDodavanjaPredmetaStudentu extends JDialog {
 		add(panelPotencijalni, BorderLayout.CENTER);
 		
 		JButton dodajPredmet = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
 		JPanel panelZaDugme = new JPanel();
 		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
 		add(panelZaDugme, BorderLayout.SOUTH);
 		dodajPredmet.addActionListener(new ActionListener() {
 
@@ -857,9 +843,16 @@ class DijalogDodavanjaPredmetaStudentu extends JDialog {
 				Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 				OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
 				s.getNepolozeni_ispiti().add(noviNepolozeni);
-				tabelaPotencijalnih.azurirajPrikaz();
 				dispose();
 				nep_predmeti.azurirajPrikaz();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
 			}
 		});
 		this.setVisible(true);
