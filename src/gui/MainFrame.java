@@ -95,8 +95,6 @@ public class MainFrame extends JFrame{
 							List<Student> listaStudenata=BazaStudenata.getInstance().getStudenti();
 							try {
 								out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
-								
-								 
 								out.writeObject(listaStudenata);
 								
 							} catch (Exception e1) {

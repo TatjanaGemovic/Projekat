@@ -3,16 +3,12 @@ package gui;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -21,9 +17,6 @@ import javax.swing.KeyStroke;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
-import model.Predmet;
-import model.Profesor;
-import model.Student;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -32,9 +25,9 @@ public class MenuBar extends JMenuBar {
 
 	private static final long serialVersionUID = -9132887326381921444L;
 	static File liste = new File("liste");
-	static File fileStudenti = new File(liste, "StudentiFile.txt");
-	static File fileProfesori = new File(liste, "ProfesoriFile.txt");
-	static File filePredmeti = new File(liste, "PredmetiFile.txt");
+	public static File fileStudenti = new File(liste, "StudentiFile.txt");
+	public static File fileProfesori = new File(liste, "ProfesoriFile.txt");
+	public static File filePredmeti = new File(liste, "PredmetiFile.txt");
 	
 	public MenuBar(final JFrame parent) {
 
@@ -75,6 +68,8 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 						
+						//https://rollbar.com/blog/java-exceptions-hierarchy-explained/
+						//Zasto Exception umesto IOException, FileNotFound i ClassNotFoundException
 						ObjectOutputStream outStudenti = null;
 						try {
 							outStudenti = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
@@ -89,6 +84,7 @@ public class MenuBar extends JMenuBar {
 					    			e1.printStackTrace();
 					            }
 					    }
+						
 						ObjectOutputStream outProfesori = null;
 						try {
 							outProfesori = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileProfesori)));
@@ -103,6 +99,7 @@ public class MenuBar extends JMenuBar {
 					    			e1.printStackTrace();
 					            }
 					    }
+						
 						ObjectOutputStream outPredmeti = null;
 						try {
 							outPredmeti = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.filePredmeti)));

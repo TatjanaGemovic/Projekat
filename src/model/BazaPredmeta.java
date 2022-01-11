@@ -1,9 +1,13 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import gui.MenuBar;
 import gui.StudentiJTable;
 
 public class BazaPredmeta{
@@ -34,14 +38,32 @@ public class BazaPredmeta{
 	
 	private void initPredmeti() {
 		this.predmeti = new ArrayList<Predmet>();
-		Semestar semestar = Semestar.zimski;
+		
+		/*Semestar semestar = Semestar.zimski;
 		Date datum = new Date(1970, 25, 04);
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
 		predmeti.add(new Predmet("E2 105", "Analiza1", 9, semestar, 1, null));
 		predmeti.add(new Predmet("E2 101", "Miss", 8, semestar, 1, null));
-		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));
+		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));*/
+		
+		ObjectInputStream inPredmeti = null;
+		try {
+			inPredmeti = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.filePredmeti)));
+			ArrayList<Predmet> listaPredmeta = (ArrayList<Predmet>) inPredmeti.readObject();
+			for(Predmet predmet : listaPredmeta) {
+				predmeti.add(predmet);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inPredmeti.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
 	}
 	
 	

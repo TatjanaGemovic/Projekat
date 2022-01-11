@@ -1,8 +1,13 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import gui.MenuBar;
 
 
 public class BazaProfesora{
@@ -36,13 +41,31 @@ public class BazaProfesora{
 	
 	private void initProfesori() {
 		this.profesori = new ArrayList<Profesor>();
-		@SuppressWarnings("deprecation")
+		
+		/*@SuppressWarnings("deprecation")
 		Date datum = new Date(1970, 25, 04);
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
 		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
-		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));
+		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));*/
+		
+		ObjectInputStream inProfesori = null;
+		try {
+			inProfesori = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.fileProfesori)));
+			ArrayList<Profesor> listaProfesora = (ArrayList<Profesor>) inProfesori.readObject();
+			for(Profesor profesor : listaProfesora) {
+				profesori.add(profesor);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inProfesori.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
 	}
 	
 	

@@ -1,8 +1,13 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import gui.MenuBar;
 
 public class BazaStudenata{
 
@@ -34,17 +39,12 @@ public class BazaStudenata{
 	private void initStudenti() {
 		this.studenti = new ArrayList<Student>();
 		
-		@SuppressWarnings("deprecation")
+		/*@SuppressWarnings("deprecation")
 		Date datum = new Date(2000, 03, 16);
 		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
 		Status_Studenta status = Status_Studenta.B;
 		Student s = new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status);
 		studenti.add(s);
-		
-		@SuppressWarnings("deprecation")
-		
-		
-		
 		Date datum2 = new Date(2000, 05, 27);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Status_Studenta status2 = Status_Studenta.S;
@@ -59,7 +59,28 @@ public class BazaStudenata{
 		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
 		vred = Vrednost_Ocene.pet;
 		pred = new Predmet("E2 100", "SPPuRV", 5, Semestar.zimski, 1, p);
-		studenti.get(1).getNepolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
+		studenti.get(1).getNepolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));*/
+		
+		//https://rollbar.com/blog/java-exceptions-hierarchy-explained/
+		//Zasto Exception umesto IOException, FileNotFound i ClassNotFoundException
+		ObjectInputStream inStudenti = null;
+		try {
+			inStudenti = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.fileStudenti)));
+			ArrayList<Student> listaStudenata = (ArrayList<Student>) inStudenti.readObject();
+			for(Student student : listaStudenata) {
+				studenti.add(student);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inStudenti.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
+		
+		
 	}
 
 	public int getColumnCount() {
@@ -156,6 +177,5 @@ public class BazaStudenata{
 			}
 		}
 	}
-
 	
 }
