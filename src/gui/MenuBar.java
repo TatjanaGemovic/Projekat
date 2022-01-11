@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
@@ -74,62 +75,48 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 						
-						ObjectOutputStream out = null;
-						List<Student> listaStudenata=BazaStudenata.getInstance().getStudenti();
+						ObjectOutputStream outStudenti = null;
 						try {
-							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
-							
-							 
-							out.writeObject(listaStudenata);
+							outStudenti = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
+							outStudenti.writeObject(BazaStudenata.getInstance().getStudenti());
 							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 					    } finally {
-					        if(out != null){
 					            try {
-					                out.close();
+					            	outStudenti.close();
 					            } catch (Exception e1) {
 					    			e1.printStackTrace();
 					            }
-					        }
 					    }
-						List<Profesor> listaProfesora=BazaProfesora.getInstance().getProfesori();
+						ObjectOutputStream outProfesori = null;
 						try {
-							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileProfesori)));
-							
-							 
-							out.writeObject(listaProfesora);
+							outProfesori = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileProfesori)));
+							outProfesori.writeObject(BazaProfesora.getInstance().getProfesori());
 							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 					    } finally {
-					        if(out != null){
 					            try {
-					                out.close();
+					            	outProfesori.close();
 					            } catch (Exception e1) {
 					    			e1.printStackTrace();
 					            }
-					        }
 					    }
-						List<Predmet> listaPredmeta=BazaPredmeta.getInstance().getPredmeti();
+						ObjectOutputStream outPredmeti = null;
 						try {
-							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.filePredmeti)));
-							
-							 
-							out.writeObject(listaPredmeta);
+							outPredmeti = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.filePredmeti)));
+							outPredmeti.writeObject(BazaPredmeta.getInstance().getPredmeti());
 							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 					    } finally {
-					        if(out != null){
 					            try {
-					                out.close();
+					            	outPredmeti.close();
 					            } catch (Exception e1) {
 					    			e1.printStackTrace();
 					            }
-					        }
-					    }
-					
+					    }	
 			}
 			
 			
