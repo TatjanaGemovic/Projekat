@@ -14,6 +14,7 @@ import javax.swing.table.TableRowSorter;
 
 public class PredmetiJTable extends JTable{
 
+	private static final long serialVersionUID = -1762254662891574565L;
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaPredmeta;
 	public static AbstractTableModelPredmeti predmetModel;

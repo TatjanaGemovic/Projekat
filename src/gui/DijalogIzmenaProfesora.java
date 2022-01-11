@@ -11,11 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -31,6 +29,9 @@ import model.BazaProfesora;
 import model.Profesor;
 
 public class DijalogIzmenaProfesora extends JDialog {
+
+	private static final long serialVersionUID = -8536276444786930551L;
+
 	private boolean dobroime = true;
 	private boolean dobroprezime = true;
 	private boolean dobardatum = true;

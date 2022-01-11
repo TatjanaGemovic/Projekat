@@ -27,7 +27,6 @@ import javax.swing.JTextField;
 
 import controller.PredmetKontroler;
 import model.BazaNepolozenihPredmeta;
-import model.BazaPolozenih;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -40,6 +39,7 @@ import model.Vrednost_Ocene;
 
 public class DijalogIzmenaPredmeta extends JDialog {
 	
+	private static final long serialVersionUID = 5611352467179239931L;
 	private boolean dobarbroj = true;
 	private boolean dobarnaziv = true;
 	private boolean dobrasifra = true;

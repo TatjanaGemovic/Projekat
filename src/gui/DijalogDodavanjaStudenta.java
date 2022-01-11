@@ -13,10 +13,8 @@ import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -34,6 +32,8 @@ import model.Status_Studenta;
 import model.Student;
 
 public class DijalogDodavanjaStudenta extends JDialog {
+
+		private static final long serialVersionUID = 1044721290558920630L;
 		private boolean dobroime = false;
 		private boolean dobroprezime = false;
 		private boolean dobardatum = false;

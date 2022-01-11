@@ -4,19 +4,17 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
 public class ProfesoriJTable extends JTable{
 
+	private static final long serialVersionUID = 5028665682816571467L;
 	private static JTable tabelaProfesora;
 	public static int rowSelectedIndex = -1;
 	public static AbstractTableModelProfesori profesorModel;

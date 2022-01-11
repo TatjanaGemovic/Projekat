@@ -3,7 +3,15 @@ package gui;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.KeyEvent;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -12,6 +20,9 @@ import javax.swing.KeyStroke;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
+import model.Predmet;
+import model.Profesor;
+import model.Student;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,7 +30,11 @@ import javax.swing.JFrame;
 public class MenuBar extends JMenuBar {
 
 	private static final long serialVersionUID = -9132887326381921444L;
-
+	static File liste = new File("liste");
+	static File fileStudenti = new File(liste, "StudentiFile.txt");
+	static File fileProfesori = new File(liste, "ProfesoriFile.txt");
+	static File filePredmeti = new File(liste, "PredmetiFile.txt");
+	
 	public MenuBar(final JFrame parent) {
 
 		ImageIcon icn = new ImageIcon("ikonice/new.png"); 
@@ -54,6 +69,72 @@ public class MenuBar extends JMenuBar {
 		JMenuItem file_save = new JMenuItem("Save", icn);
 		file_save.setMnemonic(KeyEvent.VK_S);
 		file_save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+		file_save.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+						
+						ObjectOutputStream out = null;
+						List<Student> listaStudenata=BazaStudenata.getInstance().getStudenti();
+						try {
+							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
+							
+							 
+							out.writeObject(listaStudenata);
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+					    } finally {
+					        if(out != null){
+					            try {
+					                out.close();
+					            } catch (Exception e1) {
+					    			e1.printStackTrace();
+					            }
+					        }
+					    }
+						List<Profesor> listaProfesora=BazaProfesora.getInstance().getProfesori();
+						try {
+							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileProfesori)));
+							
+							 
+							out.writeObject(listaProfesora);
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+					    } finally {
+					        if(out != null){
+					            try {
+					                out.close();
+					            } catch (Exception e1) {
+					    			e1.printStackTrace();
+					            }
+					        }
+					    }
+						List<Predmet> listaPredmeta=BazaPredmeta.getInstance().getPredmeti();
+						try {
+							out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.filePredmeti)));
+							
+							 
+							out.writeObject(listaPredmeta);
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+					    } finally {
+					        if(out != null){
+					            try {
+					                out.close();
+					            } catch (Exception e1) {
+					    			e1.printStackTrace();
+					            }
+					        }
+					    }
+					
+			}
+			
+			
+		});
+		
 		JMenu file_open = new JMenu("Open");
 		icn = new ImageIcon("ikonice/24x24.png");
 		file_open.setIcon(icn);

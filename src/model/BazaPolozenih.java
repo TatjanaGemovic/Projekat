@@ -3,7 +3,6 @@ package model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import gui.StudentiJTable;
@@ -24,7 +23,7 @@ public class BazaPolozenih {
 public BazaPolozenih() {
 		
 		this.kolone = new ArrayList<String>();
-		this.kolone.add("Šifra predmeta");
+		this.kolone.add("ï¿½ifra predmeta");
 		this.kolone.add("Naziv predmeta");
 		this.kolone.add("ESPB");
 		this.kolone.add("Ocena");

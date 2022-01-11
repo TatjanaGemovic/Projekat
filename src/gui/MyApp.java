@@ -1,6 +1,5 @@
 package gui;
 
-import controller.PredmetKontroler;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;

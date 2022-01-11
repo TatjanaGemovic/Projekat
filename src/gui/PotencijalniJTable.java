@@ -10,6 +10,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
 public class PotencijalniJTable extends JTable {
+
+	private static final long serialVersionUID = 7503488340915586556L;
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaZaDodavanje;
 	public static AbstractTableModelIspitiZaDodavanje zaDodavanjeModel;

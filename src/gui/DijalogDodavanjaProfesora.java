@@ -22,16 +22,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.ProfesorKontroler;
-import controller.StudentKontroler;
 import model.Adresa;
 import model.BazaProfesora;
-import model.BazaStudenata;
 import model.Profesor;
-import model.Status_Studenta;
-import model.Student;
 
 public class DijalogDodavanjaProfesora extends JDialog{
 	
+	private static final long serialVersionUID = 791224488161083459L;
 	private boolean dobroime = false;
 	private boolean dobroprezime = false;
 	private boolean dobardatum = false;

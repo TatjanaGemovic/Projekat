@@ -3,7 +3,6 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,9 +15,10 @@ import javax.swing.JPanel;
 import controller.PredmetKontroler;
 import controller.ProfesorKontroler;
 import controller.StudentKontroler;
-import model.BazaStudenata;
 
 public class DijalogBrisanjaEntiteta extends JDialog{
+
+	private static final long serialVersionUID = -4141971147148640617L;
 
 	public DijalogBrisanjaEntiteta(Frame parent, String title, boolean modal) {
 		super(parent, "Brisanje " + TabbedPane.tabIndex + "a", modal);

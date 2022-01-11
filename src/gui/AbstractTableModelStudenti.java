@@ -6,6 +6,7 @@ import model.BazaStudenata;
 
 public class AbstractTableModelStudenti extends AbstractTableModel {
 
+	private static final long serialVersionUID = -1704919633455966681L;
 
 	public AbstractTableModelStudenti() {
 		BazaStudenata.getInstance();

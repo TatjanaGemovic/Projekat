@@ -10,6 +10,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
 public class PolozeniIspitiJTable extends JTable {
+
+	private static final long serialVersionUID = 2689348604451178047L;
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaPolozenih;
 	public static AbstractTableModelPolozeniIspiti polozeniModel;

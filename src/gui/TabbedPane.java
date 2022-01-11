@@ -14,7 +14,8 @@ import javax.swing.SortOrder;
 import javax.swing.table.TableRowSorter;
 
 public class TabbedPane extends JTabbedPane{
-	
+
+	private static final long serialVersionUID = -5424422775845237928L;
 	static public TrenTab tabIndex = TrenTab.Student;
 	public static JTable predmeti;
 	public static JTable studenti;

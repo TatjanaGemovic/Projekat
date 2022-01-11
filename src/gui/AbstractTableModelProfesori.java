@@ -5,6 +5,8 @@ import model.BazaProfesora;
 
 public class AbstractTableModelProfesori extends AbstractTableModel{
 
+	private static final long serialVersionUID = 6795853659653572983L;
+
 	public AbstractTableModelProfesori() {
 		BazaProfesora.getInstance();
 	}
@@ -31,6 +33,8 @@ public class AbstractTableModelProfesori extends AbstractTableModel{
 }
 
 class AbstractTableModelProfesori2 extends AbstractTableModel{
+
+	private static final long serialVersionUID = -6127564438255403266L;
 
 	public AbstractTableModelProfesori2() {
 		BazaProfesora.getInstance();

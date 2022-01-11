@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,13 +15,9 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -32,23 +27,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import controller.PredmetKontroler;
 import controller.StudentKontroler;
 import model.Adresa;
 import model.BazaNepolozenihPredmeta;
 import model.BazaPolozenih;
-import model.BazaPredmeta;
-import model.BazaProfesora;
 import model.BazaStudenata;
 import model.OcenaNaIspitu;
-import model.Predmet;
-import model.Profesor;
-import model.Semestar;
 import model.Status_Studenta;
 import model.Student;
 import model.Vrednost_Ocene;
 
 public class DijalogIzmenaStudenta extends JDialog {
+
+	private static final long serialVersionUID = 2856663141396128798L;
 	private boolean dobroime = true;
 	private boolean dobroprezime = true;
 	private boolean dobardatum = true;

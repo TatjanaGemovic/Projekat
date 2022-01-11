@@ -5,7 +5,7 @@ import model.BazaNepolozenihPredmeta;
 
 public class AbstractTableModelNepolozeniPredmeti extends AbstractTableModel{
 
-	private static final long serialVersionUID = -7674380857889541927L;
+	private static final long serialVersionUID = -3542608387421982181L;
 
 	public AbstractTableModelNepolozeniPredmeti() {
 		BazaNepolozenihPredmeta.getInstance();

@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Osoba {
+public class Osoba implements Serializable{
 	
+	private static final long serialVersionUID = 7292958047341714525L;
 	protected String ime;
 	protected String prezime;
 	protected Date datum_rodjenja;

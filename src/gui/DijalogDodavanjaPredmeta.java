@@ -28,6 +28,7 @@ import model.Semestar;
 
 public class DijalogDodavanjaPredmeta extends JDialog{
 	
+	private static final long serialVersionUID = -4081368010887320976L;
 	private boolean dobarbroj = false;
 	private boolean dobarnaziv = false;
 	private boolean dobrasifra = false;

@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 
 public class NepolozeniPredmetiJTable extends JTable{
 
+	private static final long serialVersionUID = -3771680337955633981L;
 	public static int rowSelectedIndex = -1;
 	private static JTable tabelaNepPredmeta;
 	public static AbstractTableModelNepolozeniPredmeti nep_predmetiModel;
