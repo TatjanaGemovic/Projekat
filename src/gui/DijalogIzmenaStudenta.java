@@ -393,7 +393,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtTelefon.getText()).matches("[0][0-9]{8}|[0][0-9]{9}")) {
+					if((txtTelefon.getText()).matches("[0][0-9]{8}|[0][0-9]{9}|[0-9]{3}/[0-9]{3,4}\\\\-[0-9]{3,4}")) {
 						dobarbroj = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -430,7 +430,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtBrojIndeksa.getText()).matches("[A-Z][A-Z][0-9][0-9][0-9][/][0-9][0-9][0-9][0-9]")) {
+					if((txtBrojIndeksa.getText()).matches("[A-Z][A-Z][ ][0-9]{1,3}[/][0-9][0-9][0-9][0-9]")) {
 						dobarindex = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
