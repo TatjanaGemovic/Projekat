@@ -1,9 +1,13 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
+
+import gui.MenuBar;
 
 public class BazaStudenata{
 
@@ -16,7 +20,7 @@ public class BazaStudenata{
 		return instance;
 	}
 	
-	private List<Student> studenti;
+	public List<Student> studenti;
 	public List<String> kolone;
 	
 	public BazaStudenata() {
@@ -35,16 +39,47 @@ public class BazaStudenata{
 	private void initStudenti() {
 		this.studenti = new ArrayList<Student>();
 		
-		@SuppressWarnings("deprecation")
-		Date datum = new Date(2000, 16, 03);
+		/*@SuppressWarnings("deprecation")
+		Date datum = new Date(2000, 03, 16);
 		Adresa adresa = new Adresa("Otona Zupancica", "9", "Novi Sad", "Srbija");
 		Status_Studenta status = Status_Studenta.B;
-		studenti.add(new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status));
-		@SuppressWarnings("deprecation")
-		Date datum2 = new Date(2000, 25, 05);
+		Student s = new Student("Tatjana", "Gemovic", datum, adresa, "0691519911", "gemovictatjana@gmail.com", "RA105/2019", 2019, 3, status);
+		studenti.add(s);
+		Date datum2 = new Date(2000, 05, 27);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Status_Studenta status2 = Status_Studenta.S;
-		studenti.add(new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status));
+		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status);
+		studenti.add(filip);
+		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
+		Predmet pred = new Predmet("E2 105", "Analiza1", 9, Semestar.letnji, 1, p);
+		Vrednost_Ocene vred = Vrednost_Ocene.devet;
+		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));
+		pred = new Predmet("E2 101", "MISS", 10, Semestar.letnji, 1, p);
+		vred = Vrednost_Ocene.deset;
+		studenti.get(1).getPolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum2));
+		vred = Vrednost_Ocene.pet;
+		pred = new Predmet("E2 100", "SPPuRV", 5, Semestar.zimski, 1, p);
+		studenti.get(1).getNepolozeni_ispiti().add(new OcenaNaIspitu(filip, pred, vred, datum));*/
+		
+		//https://rollbar.com/blog/java-exceptions-hierarchy-explained/
+		//Zasto Exception umesto IOException, FileNotFound i ClassNotFoundException
+		ObjectInputStream inStudenti = null;
+		try {
+			inStudenti = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.fileStudenti)));
+			ArrayList<Student> listaStudenata = (ArrayList<Student>) inStudenti.readObject();
+			for(Student student : listaStudenata) {
+				studenti.add(student);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inStudenti.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
+		
 		
 	}
 
@@ -142,6 +177,5 @@ public class BazaStudenata{
 			}
 		}
 	}
-
 	
 }

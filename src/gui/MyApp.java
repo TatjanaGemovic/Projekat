@@ -1,6 +1,5 @@
 package gui;
 
-import controller.PredmetKontroler;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -11,7 +10,6 @@ public class MyApp {
 		BazaStudenata.getInstance();
 		BazaProfesora.getInstance();
 		BazaPredmeta.getInstance();
-		PredmetKontroler.getInstance();
 		MainFrame.getInstance();
 	}
 }

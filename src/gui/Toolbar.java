@@ -6,15 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -25,6 +22,8 @@ import model.BazaStudenata;
 
 
 public class Toolbar extends JToolBar {
+
+	private static final long serialVersionUID = 5574144676174518247L;
 
 	public Toolbar(final JFrame parent) {
 		
@@ -146,10 +145,10 @@ public class Toolbar extends JToolBar {
 		txt.setMaximumSize(new Dimension(170,24));
 
 		txt.setName("txtSearch");
-		txt.setText("Search");
+		//txt.setText("Search");
 		txt.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-		MyFocusListener focusListener = new MyFocusListener();
-		txt.addFocusListener(focusListener);
+		//MyFocusListener focusListener = new MyFocusListener();
+		//txt.addFocusListener(focusListener);
 		add(txt);
 		
 		addSeparator();
@@ -157,6 +156,23 @@ public class Toolbar extends JToolBar {
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
+		btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					switch (TabbedPane.tabIndex) {
+					case Profesor:
+						TabbedPane.filterProfesora(txt.getText());
+						break;
+					case Predmet:
+						TabbedPane.filterPredmeta(txt.getText());
+						break;
+					default:
+						//StudentiJTable.filterStudenata(txt.getText());
+					}
+			}
+			
+		});
 		add(btnSearch);
 
 		

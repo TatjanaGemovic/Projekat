@@ -1,15 +1,28 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import java.util.List;
+
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenata;
+import model.Predmet;
+import model.Profesor;
+import model.Student;
 
 public class MainFrame extends JFrame{
 
-
-		private static MainFrame instance = null;
 		private static final long serialVersionUID = -888790554862002427L;
+		private static MainFrame instance = null;
 		
 		private MainFrame() {
 			this.createToolbar();
@@ -66,6 +79,79 @@ public class MainFrame extends JFrame{
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
+			
+			/*this.addWindowListener(new WindowAdapter() {
+		    	
+				
+				@Override
+				public void windowClosing(WindowEvent e) {
+					
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+	
+				    if (dialogResult == JOptionPane.YES_OPTION) {
+							
+							ObjectOutputStream out = null;
+							List<Student> listaStudenata=BazaStudenata.getInstance().getStudenti();
+							try {
+								out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileStudenti)));
+								out.writeObject(listaStudenata);
+								
+							} catch (Exception e1) {
+								e1.printStackTrace();
+						    } finally {
+						        if(out != null){
+						            try {
+						                out.close();
+						            } catch (Exception e1) {
+						    			e1.printStackTrace();
+						            }
+						        }
+						    }
+							List<Profesor> listaProfesora=BazaProfesora.getInstance().getProfesori();
+							try {
+								out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileProfesori)));
+								
+								 
+								out.writeObject(listaProfesora);
+								
+							} catch (Exception e1) {
+								e1.printStackTrace();
+						    } finally {
+						        if(out != null){
+						            try {
+						                out.close();
+						            } catch (Exception e1) {
+						    			e1.printStackTrace();
+						            }
+						        }
+						    }
+							List<Predmet> listaPredmeta=BazaPredmeta.getInstance().getPredmeti();
+							try {
+								out = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.filePredmeti)));
+								
+								 
+								out.writeObject(listaPredmeta);
+								
+							} catch (Exception e1) {
+								e1.printStackTrace();
+						    } finally {
+						        if(out != null){
+						            try {
+						                out.close();
+						            } catch (Exception e1) {
+						    			e1.printStackTrace();
+						            }
+						        }
+						    }
+							
+							
+							e.getWindow().dispose();
+						}
+						
+				}
+		    	
+			});*/
 		}
 	
 }

@@ -1,10 +1,14 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
+import gui.MenuBar;
+
 
 public class BazaProfesora{
 
@@ -19,6 +23,7 @@ public class BazaProfesora{
 	
 	private List<Profesor> profesori;
 	public List<String> kolone;
+	public List<String> kolone2;
 	
 	public BazaProfesora() {
 		
@@ -28,23 +33,48 @@ public class BazaProfesora{
 		this.kolone.add("Zvanje");
 		this.kolone.add("Email");
 		
+		this.kolone2 = new ArrayList<String>();
+		this.kolone2.add(" ");
+		
 		initProfesori();
 	}
 	
 	private void initProfesori() {
 		this.profesori = new ArrayList<Profesor>();
-		@SuppressWarnings("deprecation")
+		
+		/*@SuppressWarnings("deprecation")
 		Date datum = new Date(1970, 25, 04);
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
 		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
-		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));
+		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));*/
+		
+		ObjectInputStream inProfesori = null;
+		try {
+			inProfesori = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.fileProfesori)));
+			ArrayList<Profesor> listaProfesora = (ArrayList<Profesor>) inProfesori.readObject();
+			for(Profesor profesor : listaProfesora) {
+				profesori.add(profesor);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inProfesori.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
 	}
 	
 	
 	public int getColumnCount() {
 		 return 4;
+	}
+	
+	public int getColumnCount2() {
+		 return 1;
 	}
 
 	public int getRowCount() {
@@ -57,6 +87,10 @@ public class BazaProfesora{
 	
 	public String getColumnName(int index) {
 		return this.kolone.get(index);
+	}
+	
+	public String getColumnName2(int index) {
+		return this.kolone2.get(index);
 	}
 	
 	public Profesor getRow(int rowIndex) {
@@ -87,6 +121,25 @@ public class BazaProfesora{
 			case 2:
 				return "";
 			case 3:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	
+	public String getValueAt2(int row, int column) {
+		if(row < profesori.size()) {
+			Profesor profesor = this.profesori.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
 				return "";
 			default:
 				return null;

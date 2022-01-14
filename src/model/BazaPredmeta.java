@@ -1,12 +1,14 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
-import gui.PredmetiJTable;
+import gui.MenuBar;
+import gui.StudentiJTable;
 
 public class BazaPredmeta{
 
@@ -23,7 +25,7 @@ public class BazaPredmeta{
 	public List<String> kolone;
 	
 	public BazaPredmeta() {
-		
+		 
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Sifra");
 		this.kolone.add("Naziv predmeta");
@@ -36,12 +38,32 @@ public class BazaPredmeta{
 	
 	private void initPredmeti() {
 		this.predmeti = new ArrayList<Predmet>();
-		Semestar semestar = Semestar.zimski;
+		
+		/*Semestar semestar = Semestar.zimski;
 		Date datum = new Date(1970, 25, 04);
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
-		predmeti.add(new Predmet("E2 105", "Analiza1", semestar, 1, p, 9));
+		predmeti.add(new Predmet("E2 105", "Analiza1", 9, semestar, 1, null));
+		predmeti.add(new Predmet("E2 101", "Miss", 8, semestar, 1, null));
+		predmeti.add(new Predmet("E2 103", "Sau", 10, semestar, 1, p));*/
+		
+		ObjectInputStream inPredmeti = null;
+		try {
+			inPredmeti = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.filePredmeti)));
+			ArrayList<Predmet> listaPredmeta = (ArrayList<Predmet>) inPredmeti.readObject();
+			for(Predmet predmet : listaPredmeta) {
+				predmeti.add(predmet);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inPredmeti.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
 	}
 	
 	
@@ -100,8 +122,32 @@ public class BazaPredmeta{
 		}
 	}
 	
+	public String getValueAtZaDodavanje(int row, int column) {
+		List<Predmet> potencijalni = new ArrayList<Predmet>();
+		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+			if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
+			potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Predmet predmet = this.predmeti.get(row);
+			switch (column) {
+			case 0:
+				return predmet.getSifra_predmeta() + " - " + predmet.getNaziv();
+			default:
+				return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+			default:
+				return null;
+		}
+		}
+	}
+	
 	public void dodajPredmet(String sifra_predmeta, String naziv, Semestar semestar, int godina_izvodjenja, Profesor profesor, int espb) {
-			this.predmeti.add(new Predmet(sifra_predmeta,naziv,semestar,godina_izvodjenja,profesor,espb));
+			this.predmeti.add(new Predmet(sifra_predmeta,naziv,espb,semestar,godina_izvodjenja,profesor));
 	}
 	public void izmeniPredmet(Predmet p, String sifra_predmeta, String naziv, int espb, int godina, Semestar semestar, Profesor profesor) {
 		for (Predmet i : predmeti) {

@@ -1,10 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
-public class Student extends Osoba {
+
+public class Student extends Osoba implements Serializable {
+
+	private static final long serialVersionUID = -5255677367858881770L;
 	private String broj_indeksa;
 	private int god_upisa;
 	private int trenutna_god;

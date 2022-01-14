@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 
 public class StudentiJTable extends JTable{
 
+	private static final long serialVersionUID = -3650605483760362243L;
 	private static JTable tabelaStudenata;
 	public static int rowSelectedIndex = -1;
 	public static AbstractTableModelStudenti studentModel;

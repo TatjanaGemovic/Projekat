@@ -14,11 +14,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 public class StatusBar extends JMenuBar {
+
+	private static final long serialVersionUID = 5640457214546211261L;
 	public static JLabel nazivTaba = new JLabel("- Studenti");
 	public StatusBar() {
 		JPanel nazivAplikacijePanel = new JPanel();
 		nazivAplikacijePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		JLabel nazivApp = new JLabel("  Studentska služba");
+		JLabel nazivApp = new JLabel("  Studentska sluï¿½ba");
 		nazivAplikacijePanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,Color.BLACK));
 		nazivAplikacijePanel.add(nazivApp);
 		nazivAplikacijePanel.add(nazivTaba);

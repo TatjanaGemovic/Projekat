@@ -1,10 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class OcenaNaIspitu {
+public class OcenaNaIspitu implements Serializable{
 
+	private static final long serialVersionUID = 7012912039507408942L;
 	private Student student_polozio;
 	private Predmet predmet;
 	private Vrednost_Ocene vrednost_ocene; 
