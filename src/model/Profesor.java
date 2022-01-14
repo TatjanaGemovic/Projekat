@@ -8,6 +8,8 @@ public class Profesor extends Osoba {
 	private String broj_licne_karte;
 	private String zvanje;
 	private int godine_staza;
+	private int id_katedre;
+	
 	private ArrayList<Predmet> profesor_na_predmetu = new ArrayList<Predmet>();
 	
 	public Profesor(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
@@ -28,6 +30,13 @@ public class Profesor extends Osoba {
 		super();
 	}
 
+	public int getId_katedre() {
+		return id_katedre;
+	}
+
+	public void setId_katedre(int id_katedre) {
+		this.id_katedre = id_katedre;
+	}
 
 	public Adresa getAdresa_kancelarije() {
 		return adresa_kancelarije;

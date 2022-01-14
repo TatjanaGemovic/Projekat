@@ -30,11 +30,11 @@ public class BazaKatedri{
 	
 	private void initKatedre() {
 		this.katedre = new ArrayList<Katedra>();
-		Katedra k = new Katedra("k1", "Automatika", null);
+		Katedra k = new Katedra(1, "k1", "Automatika", null);
 		this.katedre.add(k);
-		k = new Katedra("k2", "Fizika", null);
+		k = new Katedra(2, "k2", "Fizika", null);
 		this.katedre.add(k);
-		k = new Katedra("k3", "Matematika", null);
+		k = new Katedra(3, "k3", "Matematika", null);
 		this.katedre.add(k);
 	}
 
