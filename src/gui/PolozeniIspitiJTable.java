@@ -24,7 +24,6 @@ public class PolozeniIspitiJTable extends JTable {
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.polozeniModel = new AbstractTableModelPolozeniIspiti();
 		
 		polozeniModel = (AbstractTableModelPolozeniIspiti) this.getModel();
 		

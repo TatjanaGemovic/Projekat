@@ -1,23 +1,9 @@
 package gui;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.List;
-
-import model.BazaPredmeta;
-import model.BazaProfesora;
-import model.BazaStudenata;
-import model.Predmet;
-import model.Profesor;
-import model.Student;
 
 public class MainFrame extends JFrame{
 

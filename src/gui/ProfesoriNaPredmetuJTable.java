@@ -24,7 +24,6 @@ public class ProfesoriNaPredmetuJTable extends JTable{
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.profesorModel = new AbstractTableModelProfesori2();
 		
 		profesorModel = (AbstractTableModelProfesori2) this.getModel();
 		

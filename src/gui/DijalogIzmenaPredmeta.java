@@ -15,7 +15,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -294,7 +293,6 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		});
 		
 		//ispis podataka za selektovani predmet
-		List<Predmet> predmeti = BazaPredmeta.getInstance().getPredmeti();
     	Predmet predmet = BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex);
     	txtSifra.setText(predmet.getSifra_predmeta());
 		txtNaziv.setText(predmet.getNaziv());
@@ -372,6 +370,8 @@ public class DijalogIzmenaPredmeta extends JDialog {
 }
 
 class DijalogPolaganjePredmeta extends JDialog {
+
+	private static final long serialVersionUID = -4755581926104950937L;
 	private boolean dobardatum = false;
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	
@@ -584,6 +584,9 @@ class DijalogPolaganjePredmeta extends JDialog {
 								break;
 							case deset: 
 								ocena = 10;
+								break;
+							default:
+								ocena = 6;
 								break;
 						}
 						prosecna_ocena2 += ocena;

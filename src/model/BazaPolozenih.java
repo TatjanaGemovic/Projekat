@@ -74,6 +74,8 @@ public BazaPolozenih() {
 					return "9";	
 				case deset: 
 					return "10";
+				default:
+					return "6";
 				}
 			case 4: 
 				DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");  

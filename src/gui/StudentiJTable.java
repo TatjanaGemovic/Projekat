@@ -25,7 +25,6 @@ public class StudentiJTable extends JTable{
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.studentModel = new AbstractTableModelStudenti();
 	
 		studentModel = (AbstractTableModelStudenti) this.getModel();
 		

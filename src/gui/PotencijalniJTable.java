@@ -24,7 +24,6 @@ public class PotencijalniJTable extends JTable {
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.zaDodavanjeModel = new AbstractTableModelIspitiZaDodavanje();
 		
 		zaDodavanjeModel = (AbstractTableModelIspitiZaDodavanje) this.getModel();
 		

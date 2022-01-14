@@ -119,9 +119,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    final JTextField txtTelefon = new JTextField();
 		    final JTextField txtEmailAdresa = new JTextField();
 		    final JTextField txtBrojIndeksa = new JTextField();
-		    final JTextField txtTrenutnaGodinaStudija = new JTextField();
 		    final JTextField txtGodinaUpisa = new JTextField();
-		    final JTextField txtNacinFinansiranja = new JTextField();
 		    
 		    GridBagConstraints gbcLblIme = new GridBagConstraints();
 		    gbcLblIme.fill = GridBagConstraints.HORIZONTAL;
@@ -631,6 +629,9 @@ public class DijalogIzmenaStudenta extends JDialog {
 				case deset: 
 					ocena = 10;
 					break;
+				default:
+					ocena = 6;
+					break;
 				}
 				prosecna_ocena += ocena;
 			}
@@ -745,6 +746,10 @@ public class DijalogIzmenaStudenta extends JDialog {
 								case deset: 
 									ocena = 10;
 									break;
+								default:
+									ocena = 6;
+									break;
+									
 								}
 								prosecna_ocena2 += ocena;
 							}

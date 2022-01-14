@@ -24,7 +24,6 @@ public class NepolozeniPredmetiJTable extends JTable{
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.nep_predmetiModel = new AbstractTableModelNepolozeniPredmeti();
 		
 		nep_predmetiModel = (AbstractTableModelNepolozeniPredmeti) this.getModel();
 		
