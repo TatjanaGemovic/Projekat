@@ -623,6 +623,8 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 	
+	private static final long serialVersionUID = 6856523773615531190L;
+
 	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal) {
 		super(parent, "Odabir Profesora", modal);
 		
@@ -687,6 +689,8 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 
 class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 	
+	private static final long serialVersionUID = -5299494835204534699L;
+
 	public DijalogBrisanjaProfesoraSaPredmeta(Frame parent, String title, boolean modal) {
 		super(parent, "Ukloni Profesora", modal);
 		
@@ -727,6 +731,9 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 			    DijalogIzmenaPredmeta.profesorLista.setText(null);
 			    DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(false);
 			    DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(true);
+			    DijalogDodavanjaPredmeta.profesorLista.setText(null);
+			    DijalogDodavanjaPredmeta.btnRemoveProfesor.setEnabled(false);
+			    DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(true);
 			    
 			}
 			
