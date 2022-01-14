@@ -57,7 +57,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobarindex = true;
 	private boolean dobarmail = true;
 	private boolean dobragodina = true;
-	public NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
+	//public NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	static JLabel prosek = new JLabel();
 	static JLabel espb = new JLabel();
@@ -695,7 +695,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    });
 		    panelDugmici.add(polaganje);
 		    
-		    
+		    NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 			JScrollPane nep_predmetiPane = new JScrollPane(nep_predmeti);
 
 			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
@@ -706,7 +706,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					DijalogDodavanjaPredmetaStudentu dijalogDodavanja = new DijalogDodavanjaPredmetaStudentu(parent, "Dodavanje predmeta", modal, nep_predmeti);
+					DijalogDodavanjaPredmetaStudentu dijalogDodavanja = new DijalogDodavanjaPredmetaStudentu(parent, "Dodavanje predmeta", modal);
+					nep_predmeti.azurirajPrikaz();
 				}
 				
 		    });
@@ -806,7 +807,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 
 class DijalogDodavanjaPredmetaStudentu extends JDialog {
-	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal, NepolozeniPredmetiJTable nep_predmeti) {
+	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 		
 		Dimension parentSize = parent.getSize();
@@ -844,7 +845,7 @@ class DijalogDodavanjaPredmetaStudentu extends JDialog {
 				OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
 				s.getNepolozeni_ispiti().add(noviNepolozeni);
 				dispose();
-				nep_predmeti.azurirajPrikaz();
+				//nep_predmeti.azurirajPrikaz();
 			}
 		});
 		odustani.addActionListener(new ActionListener() {

@@ -28,6 +28,7 @@ public class Profesor extends Osoba {
 		super();
 	}
 
+
 	public Adresa getAdresa_kancelarije() {
 		return adresa_kancelarije;
 	}

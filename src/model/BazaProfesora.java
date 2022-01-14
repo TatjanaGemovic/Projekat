@@ -42,8 +42,8 @@ public class BazaProfesora{
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
-		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
-		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));
+		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Vanredni", 15));
+		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Redovni", 15));
 	}
 	
 	
@@ -109,6 +109,29 @@ public class BazaProfesora{
 	public String getValueAt2(int row, int column) {
 		if(row < profesori.size()) {
 			Profesor profesor = this.profesori.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	public String getValueAt3(int row, int column) {
+		List<Profesor> potencijalni = new ArrayList<Profesor>();
+		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			if((p.getZvanje()=="Redovni" || p.getZvanje()=="Vanredni") && p.getGodine_staza()>=5)
+				potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Profesor profesor = potencijalni.get(row);
 			switch (column) {
 				case 0:
 					return profesor.getImeIPrezime();
