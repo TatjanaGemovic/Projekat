@@ -169,7 +169,7 @@ public class Toolbar extends JToolBar {
 						TabbedPane.filterPredmeta(txt.getText());
 						break;
 					default:
-						//StudentiJTable.filterStudenata(txt.getText());
+						TabbedPane.filterStudenata(txt.getText());
 					}
 			}
 			

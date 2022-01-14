@@ -49,7 +49,9 @@ public class BazaStudenata{
 		Date datum2 = new Date(2000, 05, 27);
 		Adresa adresa2 = new Adresa("Rumenacki put", "1", "Novi Sad", "Srbija");
 		Status_Studenta status2 = Status_Studenta.S;
-		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 3, status);
+		Student filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA102/2019", 2019, 1, status);
+		studenti.add(filip);
+		filip = new Student("Filip", "Stefanov", datum2, adresa2, "0652388403", "stefanovfilip@gmail.com", "RA108/2019", 2019, 2, status);
 		studenti.add(filip);
 		Profesor p = new Profesor("Milan", "Rapaic", datum, adresa2, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15);
 		Predmet pred = new Predmet("E2 105", "Analiza1", 9, Semestar.letnji, 1, p);
