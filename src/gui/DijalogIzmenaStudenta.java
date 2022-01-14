@@ -645,6 +645,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				prosecna_ocena/=broj_predmeta;
 				prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena));
 			}
+			student.setProsecna_ocena(prosecna_ocena);
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
 			JLabel espb2 = new JLabel();
 			espb2.setText("");
@@ -752,9 +753,11 @@ public class DijalogIzmenaStudenta extends JDialog {
 							}
 							if(prosecna_ocena2==0) {
 								prosek.setText("Prosecna ocena je 0");
+								student.setProsecna_ocena(prosecna_ocena2);
 							}else {
 								prosecna_ocena2/=broj_predmeta2;
 								prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
+								student.setProsecna_ocena(prosecna_ocena2);
 							}
 							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					    }	
