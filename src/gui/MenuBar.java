@@ -44,7 +44,7 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				switch (TabbedPane.tabIndex) {
+				switch (TabbedPane.getTabIndex()) {
 					case Profesor:
 						DijalogDodavanjaProfesora dodajEntitet1 = new DijalogDodavanjaProfesora(parent, "Dodavanje Profesora", true);
 						dodajEntitet1.setVisible(true);
@@ -144,14 +144,35 @@ public class MenuBar extends JMenuBar {
 		JMenuItem open_studenti = new JMenuItem("Studenti", icn);
 		open_studenti.setMnemonic(KeyEvent.VK_M);
 		open_studenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
+		open_studenti.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.tabovi.setSelectedIndex(0);
+			}
+		});
 		icn = new ImageIcon("ikonice/bookshelf.png");
 		JMenuItem open_predmeti = new JMenuItem("Predmeti", icn);
 		open_predmeti.setMnemonic(KeyEvent.VK_J);
 		open_predmeti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J, InputEvent.CTRL_DOWN_MASK));
+		open_predmeti.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.tabovi.setSelectedIndex(1);
+			}
+		});
 		icn = new ImageIcon("ikonice/presentation.png");
 		JMenuItem open_profesori = new JMenuItem("Profesori", icn);
 		open_profesori.setMnemonic(KeyEvent.VK_L);
 		open_profesori.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
+		open_profesori.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.tabovi.setSelectedIndex(2);
+			}
+		});
 		icn = new ImageIcon("ikonice/customer.png");
 		JMenuItem open_katedre = new JMenuItem("Katedre", icn);
 		open_katedre.setMnemonic(KeyEvent.VK_K);

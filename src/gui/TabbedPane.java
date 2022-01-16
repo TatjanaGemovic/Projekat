@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
 public class TabbedPane extends JTabbedPane{
 
 	private static final long serialVersionUID = -5424422775845237928L;
-	static public TrenTab tabIndex = TrenTab.Student;
+	public static TrenTab tabIndex = TrenTab.Student;
 	public static JTable predmeti;
 	public static JTable studenti;
 	public static JTable profesori;
@@ -41,7 +41,7 @@ public class TabbedPane extends JTabbedPane{
 		
 		
 		this.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 	            int tabIndex1 = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
 	            if(tabIndex1==0) {
 	            	tabIndex = TrenTab.Student;
@@ -58,6 +58,8 @@ public class TabbedPane extends JTabbedPane{
 	            
 	        }
 		});
+		
+		
 	}
 	
 	public static void filterPredmeta(String s) {
@@ -246,5 +248,10 @@ public class TabbedPane extends JTabbedPane{
 	        return;
 	    }
 	    sortiranje.setRowFilter(rf);
+	}
+
+	public static TrenTab getTabIndex() {
+		// TODO Auto-generated method stub
+		return tabIndex;
 	}
 }

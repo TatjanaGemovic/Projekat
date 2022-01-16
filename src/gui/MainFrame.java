@@ -23,6 +23,7 @@ public class MainFrame extends JFrame{
 
 		private static final long serialVersionUID = -888790554862002427L;
 		private static MainFrame instance = null;
+		public static TabbedPane tabovi;
 		
 		private MainFrame() {
 			this.createToolbar();
@@ -62,7 +63,7 @@ public class MainFrame extends JFrame{
 			rightDummy.setPreferredSize(new Dimension(40,100));
 			add(leftDummy, BorderLayout.WEST);
 			add(rightDummy, BorderLayout.EAST);
-			TabbedPane tabovi = new TabbedPane();
+			tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
 
