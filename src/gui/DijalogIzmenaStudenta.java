@@ -31,8 +31,10 @@ import controller.StudentKontroler;
 import model.Adresa;
 import model.BazaNepolozenihPredmeta;
 import model.BazaPolozenih;
+import model.BazaPredmeta;
 import model.BazaStudenata;
 import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Status_Studenta;
 import model.Student;
 import model.Vrednost_Ocene;
@@ -48,9 +50,11 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobarindex = true;
 	private boolean dobarmail = true;
 	private boolean dobragodina = true;
+	//public NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	static JLabel prosek = new JLabel();
 	static JLabel espb = new JLabel();
+
 	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
 			
@@ -666,23 +670,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JButton dodaj = new JButton("Dodaj");
 		    JButton obrisi = new JButton("Obrisi");
 		    JButton polaganje = new JButton("Polaganje");
-
-		    dodaj.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
-					dijalogDodavanjaNaStudenta.setLocationRelativeTo(null);
-					dijalogDodavanjaNaStudenta.setSize(diaWidth*2/5, diaHeight*3/5);
-					dijalogDodavanjaNaStudenta.setVisible(true);
-					
-					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
-					dijalogDodavanjaNaStudenta.add(tabelaPotencijalnih);
-					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
-				}
-				
-			});
+		    panelDugmici.add(polaganje);
+		    
 		    panelDugmici.add(dodaj);
 		    panelDugmici.add(obrisi);
 		    
@@ -706,6 +695,47 @@ public class DijalogIzmenaStudenta extends JDialog {
 			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
 			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
 		    tabbedPane.add("Nepolozeni", panelNepPred);
+		    
+		    dodaj.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					DijalogDodavanjaPredmetaStudentu dijalogDodavanja = new DijalogDodavanjaPredmetaStudentu(parent, "Dodavanje predmeta", modal);
+					nep_predmeti.azurirajPrikaz();
+				}
+				
+		    });
+		    
+		    obrisi.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Object[] options = {"Da",
+	                "Ne"};
+					int n = JOptionPane.showOptionDialog(parent,
+							"Da li ste sigurni da zelita da uklonite predmet?",
+							"Uklanjanje predmeta",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,
+							null,     
+							options,  
+							options[0]);
+					
+					if(n==JOptionPane.YES_OPTION) {
+						Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+						Predmet zaBrisanje = BazaNepolozenihPredmeta.getInstance().getRow(NepolozeniPredmetiJTable.rowSelectedIndex);
+						OcenaNaIspitu trazena = new OcenaNaIspitu();
+						for(OcenaNaIspitu o : s.getNepolozeni_ispiti()) {
+							if(o.getPredmet().getSifra_predmeta()==zaBrisanje.getSifra_predmeta()) {
+								trazena = o;
+							}
+						}
+						s.getNepolozeni_ispiti().remove(trazena);
+						nep_predmeti.azurirajPrikaz();
+					}
+				}
+		    });
+		    
 		    this.add(tabbedPane);
 		    
 		    btn_ponistiOcenu.addActionListener(new ActionListener() {
@@ -769,4 +799,59 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    });
 		    
 		}
+}
+
+
+class DijalogDodavanjaPredmetaStudentu extends JDialog {
+	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+					}
+				}
+
+				Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+				OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
+				s.getNepolozeni_ispiti().add(noviNepolozeni);
+				dispose();
+				//nep_predmeti.azurirajPrikaz();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
+		this.setVisible(true);
+	}
 }

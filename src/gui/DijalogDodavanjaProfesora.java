@@ -485,7 +485,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtZvanje.getText()).matches("[a-zA-Z]+")) {
+				if((txtZvanje.getText()).matches("[a-zA-Z ]+")) {
 					dobrozvanje = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);

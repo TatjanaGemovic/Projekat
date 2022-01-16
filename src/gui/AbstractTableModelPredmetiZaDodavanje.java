@@ -1,14 +1,13 @@
 package gui;
 
 import javax.swing.table.AbstractTableModel;
+import model.BazaNepolozenihPredmeta;
 import model.BazaPredmeta;
 
-public class AbstractTableModelIspitiZaDodavanje extends AbstractTableModel{
+public class AbstractTableModelPredmetiZaDodavanje extends AbstractTableModel{
 
 
-	private static final long serialVersionUID = -5854601283189548106L;
-
-	public AbstractTableModelIspitiZaDodavanje() {
+	public AbstractTableModelPredmetiZaDodavanje() {
 		BazaPredmeta.getInstance();
 	}
 

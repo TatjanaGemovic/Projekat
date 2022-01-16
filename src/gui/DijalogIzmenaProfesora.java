@@ -21,12 +21,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.ProfesorKontroler;
 import model.Adresa;
+import model.BazaNepolozenihPredmeta;
+import model.BazaPredmeta;
 import model.BazaProfesora;
+import model.BazaStudenata;
+import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Profesor;
+import model.Student;
+import model.Vrednost_Ocene;
 
 public class DijalogIzmenaProfesora extends JDialog {
 
@@ -42,7 +50,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 	private boolean dobarbrlicne = true;
 	private boolean dobrozvanje = true;
 	private boolean dobarstaz = true;
-	
+	public ProfesorPredajeJTable prof_predaje = new ProfesorPredajeJTable(); 
 	public DijalogIzmenaProfesora(Frame parent, String title, boolean modal) {
 		super(parent, "Izmena Profesora", modal);
 		
@@ -51,6 +59,8 @@ public class DijalogIzmenaProfesora extends JDialog {
 		int diaHeight = parentSize.height;
 		setSize(diaWidth*3/5, diaHeight*19/20);
 		setLocationRelativeTo(parent);
+		
+		JTabbedPane tabbedPane = new JTabbedPane();
 		
 		JButton potvrda=new JButton("Potvrdi");
 		potvrda.setEnabled(true);
@@ -75,11 +85,10 @@ public class DijalogIzmenaProfesora extends JDialog {
 		panelButton.add(potvrda);
 		panelButton.add(odustanak);
 	    
-	    this.add(panelButton, BorderLayout.SOUTH);
+		JPanel panelInformacije = new JPanel();
 		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
-	    this.add(panelCenter, BorderLayout.CENTER);
 	    
 	    JLabel lblIme = new JLabel("Ime:");
 	    JLabel lblPrezime = new JLabel("Prezime:");
@@ -487,7 +496,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtZvanje.getText()).matches("[a-zA-Z]+")) {
+				if((txtZvanje.getText()).matches("[a-zA-Z ]+")) {
 					dobrozvanje = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -618,6 +627,72 @@ public class DijalogIzmenaProfesora extends JDialog {
 			    }
 			}
 		});
+	   panelInformacije.add(panelCenter, BorderLayout.CENTER);
+	   panelInformacije.add(panelButton, BorderLayout.SOUTH);
+	   tabbedPane.add("Informacije", panelInformacije); 
+	   
+	   
+	   
+	   JPanel panelPredmeta = new JPanel();
+	   panelPredmeta.setLayout(new BorderLayout());
+	   JPanel panelDugmici = new JPanel();
+	    
+	   JButton dodaj = new JButton("Dodaj predmet");
+	   panelDugmici.add(dodaj);
+	   JButton obrisi = new JButton("Ukloni predmet");
+	   panelDugmici.add(obrisi);
+	    
+	  // ProfesorPredajeJTable profPredaje = new ProfesorPredajeJTable();
+	   JScrollPane profPredajePane = new JScrollPane(prof_predaje);
+	   
+	   panelPredmeta.add(panelDugmici, BorderLayout.NORTH);
+	   panelPredmeta.add(profPredajePane, BorderLayout.CENTER);
+		
+	   tabbedPane.add("Predmeti", panelPredmeta);
+	   dodaj.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			DijalogDodavanjePredmetaProfesoru dijalogDodavanja = new DijalogDodavanjePredmetaProfesoru(parent, "Dodaj predmet", modal, prof_predaje);
+		}
+		   
+	   });
+	   obrisi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object[] options = {"Da",
+               "Ne"};
+				int n = JOptionPane.showOptionDialog(parent,
+						"Da li ste sigurni?",
+						"Uklanjanje predmeta",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,     
+						options,  
+						options[0]);
+				
+				if(n==JOptionPane.YES_OPTION) {
+					String sifrapredmeta = BazaPredmeta.getInstance().getValueAtProfesorPredaje(ProfesorPredajeJTable.rowSelectedIndex, 0);
+					Predmet predmetKojiSeBrise = new Predmet();
+					int index = 0;
+					for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+						if(sifrapredmeta==p.getSifra_predmeta()) {
+							predmetKojiSeBrise = p;
+							break;
+						}
+						index++;
+					}
+					Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+					prof.getProfesor_na_predmetu().remove(predmetKojiSeBrise);
+					predmetKojiSeBrise.setPredmetni_profesor(null);
+					BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeBrise);
+					prof_predaje.azurirajPrikaz();
+				}
+			}
+	    });
+	    
+	   this.add(tabbedPane);
 	}
 }
 
@@ -702,6 +777,8 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 		
 		JButton potvrda=new JButton("Potvrdi");
 		JButton odustanak=new JButton("Odustani");
+		
+		
 	
 		odustanak.addActionListener(new ActionListener() {
 	
@@ -738,6 +815,68 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 			}
 			
 		});
+	}
+}
+
+class DijalogDodavanjePredmetaProfesoru extends JDialog {
+	public DijalogDodavanjePredmetaProfesoru(Frame parent, String title, boolean modal, ProfesorPredajeJTable prof_predaje) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		if(tabelaPotencijalnih.getValueAt(0,0).toString()=="")
+			dodajPredmet.setEnabled(false);
+		
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+				int index = 0;
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+						break;
+					}
+					index++;
+				}
+				predmetKojiSeDodaje.setPredmetni_profesor(prof);
+				BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeDodaje);
+				prof.getProfesor_na_predmetu().add(predmetKojiSeDodaje);
+				tabelaPotencijalnih.azurirajPrikaz();
+				dispose();
+				prof_predaje.azurirajPrikaz();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+			
+		});
+		this.setVisible(true);
 	}
 }
 

@@ -139,6 +139,13 @@ public class MenuBar extends JMenuBar {
 		JMenuItem open_katedre = new JMenuItem("Katedre", icn);
 		open_katedre.setMnemonic(KeyEvent.VK_K);
 		open_katedre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
+		open_katedre.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DijalogKatedra dijalog = new DijalogKatedra(parent, "Lista katedri", true);
+			}
+		});
 		file_open.add(open_studenti);
 		file_open.addSeparator();
 		file_open.add(open_predmeti);

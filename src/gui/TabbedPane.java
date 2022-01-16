@@ -176,4 +176,71 @@ public class TabbedPane extends JTabbedPane{
 	    }
 	    sortiranje.setRowFilter(rf);
 	}
+	public static void filterStudenata(String s) {
+	    RowFilter<AbstractTableModelStudenti, Object> rf = null;
+	    List<RowFilter<AbstractTableModelStudenti, Object>>rfs=new ArrayList<RowFilter<AbstractTableModelStudenti, Object>>();
+	    TableRowSorter<AbstractTableModelStudenti>sortiranje=new TableRowSorter<AbstractTableModelStudenti>(StudentiJTable.studentModel);
+	    studenti.setRowSorter(sortiranje);
+	    if(s.isEmpty()) {
+	    	 sortiranje.setRowFilter(null);
+	    	 TableRowSorter<AbstractTableModelStudenti> sorter = new TableRowSorter<AbstractTableModelStudenti>(StudentiJTable.studentModel) {
+		            @Override
+		            public Comparator<String> getComparator(int column) {
+		                Comparator<String> c = new Comparator<String>() {
+		                    @Override
+		                    public int compare(String o1, String o2) {
+		                        boolean ascending = getSortKeys().get(0).getSortOrder() == SortOrder.ASCENDING;
+		                        if (o1==null || o1.equals("")) {
+		                            if(ascending)
+		                                return 1;
+		                            else
+		                                return -1;
+		                        } else if(o2==null || o2.equals("")) {
+		                        	if(ascending)
+		                                return -1;
+		                            else
+		                                return 1;
+		                        } else {
+		                        	return o1.compareTo(o2); 
+		                        }
+
+		                    }
+		                };
+		                return c;
+		            }
+		        };
+		     studenti.setRowSorter(sorter);
+	    	 return;
+	    }
+	    try {
+	    	String[] temp = s.split(",", 3);
+	    	if(temp.length == 1) { //samo prezime studenta
+	    		s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+	    		rf = RowFilter.regexFilter(s, 2);
+	    	} else if(temp.length == 2){
+	    			temp[0] = temp[0].substring(0,1).toUpperCase() + temp[0].substring(1).toLowerCase();
+	    			rfs.add(RowFilter.regexFilter(temp[0], 2)); // filter za prezime
+					temp[1] = temp[1].substring(0,1).toUpperCase() + temp[1].substring(1).toLowerCase();
+	    			rfs.add(RowFilter.regexFilter(temp[1], 1)); // filter za ime
+	    			rf = RowFilter.andFilter(rfs);
+	    	}
+	    	else if(temp.length==3){
+	    		temp[0] = temp[0].toUpperCase();
+    			rfs.add(RowFilter.regexFilter(temp[0], 0)); // filter za index
+	    		temp[1] = temp[1].substring(0,1).toUpperCase() + temp[1].substring(1).toLowerCase();
+    			rfs.add(RowFilter.regexFilter(temp[1], 2)); // filter za prezime
+				temp[2] = temp[2].substring(0,1).toUpperCase() + temp[2].substring(1).toLowerCase();
+    			rfs.add(RowFilter.regexFilter(temp[2], 1)); // filter za ime
+    			
+    			rf = RowFilter.andFilter(rfs);
+	    	} else {
+	    		sortiranje.setRowFilter(null);
+	    		return;
+	    	}
+	    	
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        return;
+	    }
+	    sortiranje.setRowFilter(rf);
+	}
 }
