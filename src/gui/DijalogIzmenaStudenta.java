@@ -54,6 +54,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	static JLabel prosek = new JLabel();
 	static JLabel espb = new JLabel();
+	public static Student student;
 
 	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
@@ -526,7 +527,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
 			
-	    	Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+	    	student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 	    	txtIme.setText(student.getIme());
 		    txtPrezime.setText(student.getPrezime());
 		    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
@@ -650,6 +651,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena));
 			}
 			student.setProsecna_ocena(prosecna_ocena);
+			StudentiJTable.azurirajPrikaz();
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
 			JLabel espb2 = new JLabel();
 			espb2.setText("");
@@ -789,6 +791,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 								prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
 								student.setProsecna_ocena(prosecna_ocena2);
 							}
+							student.setProsecna_ocena(prosecna_ocena2);
+							StudentiJTable.azurirajPrikaz();
 							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					    }	
 				    }

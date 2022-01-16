@@ -1,9 +1,14 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
+import gui.MenuBar;
 
 public class BazaKatedri{
 
@@ -23,19 +28,37 @@ public class BazaKatedri{
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Naziv katedre");
-		this.kolone.add("Šef katedre");
+		this.kolone.add("Sef katedre");
 		
 		initKatedre();
 	}
 	
 	private void initKatedre() {
 		this.katedre = new ArrayList<Katedra>();
-		Katedra k = new Katedra(1, "k1", "Automatika", null);
+		
+		/*Katedra k = new Katedra(1, "k1", "Automatika", null);
 		this.katedre.add(k);
 		k = new Katedra(2, "k2", "Fizika", null);
 		this.katedre.add(k);
 		k = new Katedra(3, "k3", "Matematika", null);
-		this.katedre.add(k);
+		this.katedre.add(k);*/
+		
+		ObjectInputStream inKatedre = null;
+		try {
+			inKatedre = new ObjectInputStream(new BufferedInputStream(new FileInputStream(MenuBar.fileKatedre)));
+			ArrayList<Katedra> listaKatedri = (ArrayList<Katedra>) inKatedre.readObject();
+			for(Katedra katedra : listaKatedri) {
+				katedre.add(katedra);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally {
+	            try {
+	            	inKatedre.close();
+	            } catch (Exception e) {
+	    			e.printStackTrace();
+	            }
+	    }
 	}
 
 	public int getColumnCount() {
@@ -66,7 +89,7 @@ public class BazaKatedri{
 					return katedra.getNaziv_katedre();
 				case 1:
 					if(katedra.getSef_katedre()==null)
-						return "nema šefa";
+						return "nema ï¿½efa";
 					return katedra.getSef_katedre().getImeIPrezime();
 				default:
 					return null;

@@ -595,7 +595,8 @@ class DijalogPolaganjePredmeta extends JDialog {
 						DijalogIzmenaStudenta.prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
 					}
 					DijalogIzmenaStudenta.espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
-			    	
+					DijalogIzmenaStudenta.student.setProsecna_ocena(prosecna_ocena2);
+					StudentiJTable.azurirajPrikaz();
 			    	dispose();
 			    	
 			    }

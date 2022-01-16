@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import javax.swing.KeyStroke;
 
+import model.BazaKatedri;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -28,6 +29,7 @@ public class MenuBar extends JMenuBar {
 	public static File fileStudenti = new File(liste, "StudentiFile.txt");
 	public static File fileProfesori = new File(liste, "ProfesoriFile.txt");
 	public static File filePredmeti = new File(liste, "PredmetiFile.txt");
+	public static File fileKatedre = new File(liste, "KatedreFile.txt");
 	
 	public MenuBar(final JFrame parent) {
 
@@ -114,6 +116,21 @@ public class MenuBar extends JMenuBar {
 					    			e1.printStackTrace();
 					            }
 					    }	
+						
+						ObjectOutputStream outKatedre = null;
+						try {
+							outKatedre = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileKatedre)));
+							outKatedre.writeObject(BazaKatedri.getInstance().getKatedre());
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+					    } finally {
+					            try {
+					            	outKatedre.close();
+					            } catch (Exception e1) {
+					    			e1.printStackTrace();
+					            }
+					    }
 			}
 			
 			

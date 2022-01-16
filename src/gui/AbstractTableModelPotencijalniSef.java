@@ -5,6 +5,9 @@ import javax.swing.table.AbstractTableModel;
 import model.BazaProfesora;
 
 public class AbstractTableModelPotencijalniSef extends AbstractTableModel {
+
+	private static final long serialVersionUID = 85207429949285330L;
+
 	public AbstractTableModelPotencijalniSef() {
 		BazaProfesora.getInstance();
 	}

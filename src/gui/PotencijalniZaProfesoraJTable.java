@@ -10,6 +10,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
 public class PotencijalniZaProfesoraJTable extends JTable {
+
+	private static final long serialVersionUID = -5307055024155260782L;
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaZaDodavanje;
 	public static AbstractTableModelPredmetiZaDodavanje zaDodavanjeModel;
@@ -22,7 +24,7 @@ public class PotencijalniZaProfesoraJTable extends JTable {
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.zaDodavanjeModel = new AbstractTableModelPredmetiZaDodavanje();
+		//this.zaDodavanjeModel = new AbstractTableModelPredmetiZaDodavanje();
 		
 		zaDodavanjeModel = (AbstractTableModelPredmetiZaDodavanje) this.getModel();
 		

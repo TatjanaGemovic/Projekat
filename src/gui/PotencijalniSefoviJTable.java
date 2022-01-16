@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 
 public class PotencijalniSefoviJTable extends JTable{
 
+	private static final long serialVersionUID = 3057837254453574988L;
 	public static int rowSelectedIndex = -1;
 	public static JTable tabelaPotencijalni;
 	public static AbstractTableModelPotencijalniSef potencijalniModel;
@@ -23,7 +24,7 @@ public class PotencijalniSefoviJTable extends JTable{
 		this.setShowHorizontalLines(false);
 		this.setShowVerticalLines(false);
 		this.setGridColor(Color.LIGHT_GRAY);
-		this.potencijalniModel = new AbstractTableModelPotencijalniSef();
+		//this.potencijalniModel = new AbstractTableModelPotencijalniSef();
 		
 		potencijalniModel = (AbstractTableModelPotencijalniSef) this.getModel();
 		

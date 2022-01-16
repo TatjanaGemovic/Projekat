@@ -36,7 +36,7 @@ public class DijalogKatedra extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*4/5);
 		setLocationRelativeTo(parent);
 		
-		JButton dodajSefa = new JButton("Dodaj šefa");
+		JButton dodajSefa = new JButton("Dodaj sefa");
 		JButton dodajProfesora = new JButton("Dodaj profesora");
 		JButton odustani = new JButton("Odustanak");
 		JPanel panelZaDugme = new JPanel();
@@ -64,7 +64,7 @@ public class DijalogKatedra extends JDialog {
 						katedra = k;
 					}
 				}
-				DijalogDodavanjaSefaKatedri dijalogDodavanja = new DijalogDodavanjaSefaKatedri(parent, "Dodavanje šefa", modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
+				DijalogDodavanjaSefaKatedri dijalogDodavanja = new DijalogDodavanjaSefaKatedri(parent, "Dodavanje sefa", modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
 				
 				
 				tabelaKatedri.azurirajPrikaz();
@@ -104,6 +104,9 @@ public class DijalogKatedra extends JDialog {
 }
 
 class DijalogDodavanjaSefaKatedri extends JDialog {
+
+	private static final long serialVersionUID = -1626335475126520489L;
+
 	public DijalogDodavanjaSefaKatedri(Frame parent, String title, boolean modal, int index_katedre) {
 		super(parent, title, modal);
 		
@@ -137,6 +140,7 @@ class DijalogDodavanjaSefaKatedri extends JDialog {
 				int i = 0;
 				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 					if(ime_prezime.contains(p.getIme()) && ime_prezime.contains(p.getPrezime())) {
+					//if(ime_prezime.equals(p.getImeIPrezime())) {
 						i = BazaProfesora.getInstance().getProfesori().indexOf(p);
 					}
 				}
