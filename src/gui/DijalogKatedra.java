@@ -135,25 +135,27 @@ class DijalogDodavanjaSefaKatedri extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String ime_prezime = BazaProfesora.getInstance().getValueAt3(PotencijalniSefoviJTable.rowSelectedIndex, 0);
-				
-				int i = 0;
-				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-					if(ime_prezime.contains(p.getIme()) && ime_prezime.contains(p.getPrezime())) {
-					//if(ime_prezime.equals(p.getImeIPrezime())) {
-						i = BazaProfesora.getInstance().getProfesori().indexOf(p);
+				if(PotencijalniSefoviJTable.rowSelectedIndex>=0 && PotencijalniSefoviJTable.rowSelectedIndex<BazaProfesora.getInstance().getPotencijalni().size()) {
+					String ime_prezime = BazaProfesora.getInstance().getValueAt3(PotencijalniSefoviJTable.rowSelectedIndex, 0);
+					
+					int i = 0;
+					for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+						if(ime_prezime.contains(p.getIme()) && ime_prezime.contains(p.getPrezime())) {
+						//if(ime_prezime.equals(p.getImeIPrezime())) {
+							i = BazaProfesora.getInstance().getProfesori().indexOf(p);
+						}
 					}
+					
+					Profesor sef = BazaProfesora.getInstance().getProfesori().get(i);
+					
+					Katedra k = BazaKatedri.getInstance().getKatedre().get(index_katedre);
+					sef.setId_katedre(k.getId());
+					BazaProfesora.getInstance().getProfesori().set(i, sef);
+					k.setSef_katedre(sef);
+					BazaKatedri.getInstance().getKatedre().set(index_katedre, k);
+					
+					dispose();
 				}
-				
-				Profesor sef = BazaProfesora.getInstance().getProfesori().get(i);
-				
-				Katedra k = BazaKatedri.getInstance().getKatedre().get(index_katedre);
-				sef.setId_katedre(k.getId());
-				BazaProfesora.getInstance().getProfesori().set(i, sef);
-				k.setSef_katedre(sef);
-				BazaKatedri.getInstance().getKatedre().set(index_katedre, k);
-				
-				dispose();
 			}
 		});
 		odustani.addActionListener(new ActionListener() {

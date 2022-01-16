@@ -22,6 +22,7 @@ public class BazaProfesora{
 	}
 	
 	private List<Profesor> profesori;
+	private List<Profesor> potencijalni;
 	public List<String> kolone;
 	public List<String> kolone2;
 	
@@ -151,13 +152,13 @@ public class BazaProfesora{
 		}
 	}
 	public String getValueAt3(int row, int column) {
-		List<Profesor> potencijalni = new ArrayList<Profesor>();
+		potencijalni = new ArrayList<Profesor>();
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-			if((p.getZvanje()=="Redovni" || p.getZvanje()=="Vanredni") && p.getGodine_staza()>=5)
+			if(p.getGodine_staza()>=5 && (p.getZvanje().equals("Vanredni") || p.getZvanje().equals("Redovni")))
 				potencijalni.add(p);
 		}
 		if(row < potencijalni.size()) {
-			Profesor profesor = potencijalni.get(row);
+			Profesor profesor = this.potencijalni.get(row);
 			switch (column) {
 				case 0:
 					return profesor.getImeIPrezime();
@@ -172,6 +173,10 @@ public class BazaProfesora{
 				return null;
 			}
 		}
+	}
+	
+	public List<Profesor> getPotencijalni() {
+		return potencijalni;
 	}
 	
 	public void dodajProfesora(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,
