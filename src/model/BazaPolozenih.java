@@ -20,7 +20,7 @@ public class BazaPolozenih {
 	private List<OcenaNaIspitu> polozeniIspiti;
 	public List<String> kolone;
 	
-public BazaPolozenih() {
+	public BazaPolozenih() {
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("�ifra predmeta");

@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -26,14 +27,17 @@ public class TabbedPane extends JTabbedPane{
 		studenti = new StudentiJTable();
 		JScrollPane studentiPane = new JScrollPane(studenti);
 		this.addTab("Studenti", studentiPane);
+		this.setMnemonicAt(0, KeyEvent.VK_M);
 		
 		profesori = new ProfesoriJTable();
 		JScrollPane profesoriPane = new JScrollPane(profesori);
 		this.addTab("Profesori", profesoriPane);
+		this.setMnemonicAt(1, KeyEvent.VK_L);
 		
 		predmeti = new PredmetiJTable();
 		JScrollPane predmetiPane = new JScrollPane(predmeti);
 		this.addTab("Predmeti", predmetiPane);
+		this.setMnemonicAt(2, KeyEvent.VK_L);
 		
 		
 		this.addMouseListener(new MouseAdapter() {
