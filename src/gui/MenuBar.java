@@ -127,14 +127,6 @@ public class MenuBar extends JMenuBar {
 		JMenuItem open_studenti = new JMenuItem("Studenti", icn);
 		open_studenti.setMnemonic(KeyEvent.VK_M);
 		open_studenti.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
-		open_studenti.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//TabbedPane.setMnemonicAt(1, KeyEvent.VK_M);
-				
-			}
-		});
 		icn = new ImageIcon("ikonice/bookshelf.png");
 		JMenuItem open_predmeti = new JMenuItem("Predmeti", icn);
 		open_predmeti.setMnemonic(KeyEvent.VK_J);

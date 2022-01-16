@@ -37,7 +37,7 @@ public class TabbedPane extends JTabbedPane{
 		predmeti = new PredmetiJTable();
 		JScrollPane predmetiPane = new JScrollPane(predmeti);
 		this.addTab("Predmeti", predmetiPane);
-		this.setMnemonicAt(2, KeyEvent.VK_L);
+		this.setMnemonicAt(2, KeyEvent.VK_K);
 		
 		
 		this.addMouseListener(new MouseAdapter() {
