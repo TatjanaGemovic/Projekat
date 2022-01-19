@@ -45,15 +45,15 @@ public class TabbedPane extends JTabbedPane{
 	            int tabIndex1 = (int) ((JTabbedPane) e.getComponent()).getSelectedIndex();
 	            if(tabIndex1==0) {
 	            	tabIndex = TrenTab.Student;
-	            	StatusBar.nazivTaba.setText("- Studenti");
+	            	StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_studenti"));
 	            }
 	            else if(tabIndex1==1) {
 	            	tabIndex = TrenTab.Profesor;
-	            	StatusBar.nazivTaba.setText("- Profesori");
+	            	StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_profesori"));
 	            }
 	            else if(tabIndex1==2) {
 	            	tabIndex = TrenTab.Predmet;
-	            	StatusBar.nazivTaba.setText("- Predmeti");
+	            	StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));
 	            }
 	            
 	        }
