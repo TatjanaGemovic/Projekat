@@ -178,6 +178,7 @@ public class MainFrame extends JFrame{
 			toolbar.updateComponent();
 			menu.updateComponent();
 			statusBar.updateComponent();
+			tabovi.updateComponent();
 		}
 	
 }

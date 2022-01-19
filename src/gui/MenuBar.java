@@ -171,6 +171,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainFrame.tabovi.setSelectedIndex(0);
+				StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_studenti"));
 			}
 		});
 		icn = new ImageIcon("ikonice/bookshelf.png");
@@ -182,6 +183,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainFrame.tabovi.setSelectedIndex(2);
+				StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));
 			}
 		});
 		icn = new ImageIcon("ikonice/presentation.png");
@@ -193,6 +195,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainFrame.tabovi.setSelectedIndex(1);
+				StatusBar.nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_profesori"));
 			}
 		});
 		icn = new ImageIcon("ikonice/customer.png");

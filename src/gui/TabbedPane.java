@@ -254,4 +254,11 @@ public class TabbedPane extends JTabbedPane{
 		// TODO Auto-generated method stub
 		return tabIndex;
 	}
+
+	public void updateComponent() {
+		 this.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("open_studenti"));
+		 this.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("open_profesori"));
+		 this.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));
+		
+	}
 }
