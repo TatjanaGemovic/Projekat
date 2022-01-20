@@ -700,7 +700,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 	
 	private static final long serialVersionUID = 6856523773615531190L;
 
-	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal) {
+	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal, int i) {
 		super(parent, title, modal);
 		
 		Dimension parentSize = parent.getSize();
@@ -747,20 +747,32 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    	int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 			    	
 			    	if (dialogResult == JOptionPane.YES_OPTION) {
-			    		dispose();
-			    		Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
-			    		Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
-			    		pred.setPredmetni_profesor(p);
-			    		DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
-			    		DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
-			    		DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
+			    		
+			    		if(i == 0) {
+			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    			Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
+			    			pred.setPredmetni_profesor(p);
+			    			DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
+			    			DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
+			    			DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
+			    			DijalogIzmenaPredmeta.k = 2;
+			    		} 
+			    		if(i == 1){
+			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    			DijalogDodavanjaPredmeta.profesorLista.setText(p.getImeIPrezime());
+			    			DijalogDodavanjaPredmeta.btnRemoveProfesor.setEnabled(true);
+			    			DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(false);
+			    			DijalogDodavanjaPredmeta.k = 2;
+			    		}
 			    		
 			    	}
 			    }
+			    dispose();
 			}
 			
 		});
 	}
+	
 }
 
 

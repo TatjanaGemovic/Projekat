@@ -33,6 +33,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 	private boolean dobarbroj = false;
 	private boolean dobarnaziv = false;
 	private boolean dobrasifra = false;
+	static int k = 2;
 	static JTextField profesorLista = new JTextField();
 	static JButton btnRemoveProfesor=new JButton("-");
 	static JButton btnAddProfesor=new JButton("+");
@@ -248,6 +249,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		
 		profesorLista.setEditable(false);
 		profesorLista.setPreferredSize(new Dimension(178,25));
+		profesorLista.setText("");
 		
 		btnAddProfesor.setPreferredSize(new Dimension(30,20));
 		btnRemoveProfesor.setPreferredSize(new Dimension(30,20));
@@ -271,12 +273,9 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, MainFrame.getInstance().getResourceBundle().getString("odabir_profesora"), true);
+				k = 1;
+				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, MainFrame.getInstance().getResourceBundle().getString("odabir_profesora"), true, k);
 				OdabirProfesora.setVisible(true);
-				Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
-				profesorLista.setText(p.getImeIPrezime());
-				btnRemoveProfesor.setEnabled(true);
-				btnAddProfesor.setEnabled(false);
 			}
 			
 		});

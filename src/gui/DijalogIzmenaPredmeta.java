@@ -43,6 +43,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 	private boolean dobarbroj = true;
 	private boolean dobarnaziv = true;
 	private boolean dobrasifra = true;
+	static int k = 2;
 	static JTextField profesorLista = new JTextField();
 	static JButton btnRemoveProfesor=new JButton("-");
 	static JButton btnAddProfesor=new JButton("+");
@@ -277,7 +278,8 @@ public class DijalogIzmenaPredmeta extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true);
+				k = 0;
+				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true, k);
 				OdabirProfesora.setVisible(true);
 			}
 			
