@@ -388,7 +388,6 @@ public class MenuBar extends JMenuBar {
 				int diaHeight = parentSize.height;
 				d.setSize(diaWidth*2/4, diaHeight*10/20);
 				d.setLocationRelativeTo(MainFrame.getInstance());
-				//d.add(new JLabel(new ImageIcon("slika1.jpg")));
 				JTextArea textArea = new JTextArea();
 				textArea.setEditable(false);
 				textArea.setText("\n\n"
@@ -399,13 +398,12 @@ public class MenuBar extends JMenuBar {
 								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n"
 								+"     - aktivno se bavi sportom - Odbojka\n"
 								+ "\n\n     Filip Stefanov\n"
-								+"     - rodjen 18.05.2000. u Novom Sadu\n"
+								+"     - rodjen 27.05.2000. u Pirotu\n"
 								+"     - zavrsio je gimnaziju 'Jovan Jovanovic Zmaj' u Novom Sadu\n"
 								+"     - upisao je Fakultet tehnickih nauka 2019. godine\n"
 								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n");
 								
 				d.add(textArea);
-				//d.add(new JLabel(new ImageIcon("slika1.jpg")));
 				d.setVisible(true);
 				
 			}

@@ -39,5 +39,9 @@ public class PredmetKontroler {
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifra_predmeta());
 		PredmetiJTable.azurirajPrikaz();
 	}
+
+	public void dodajProfesoraNaPredmet(Profesor p, Predmet pred) {
+		pred.setPredmetni_profesor(p);
+	}
 	
 }

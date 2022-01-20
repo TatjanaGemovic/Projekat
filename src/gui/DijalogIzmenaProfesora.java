@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import controller.PredmetKontroler;
 import controller.ProfesorKontroler;
 import model.Adresa;
 import model.BazaNepolozenihPredmeta;
@@ -751,7 +752,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    		if(i == 0) {
 			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
 			    			Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
-			    			pred.setPredmetni_profesor(p);
+			    			PredmetKontroler.getInstance().dodajProfesoraNaPredmet(p, pred);
 			    			DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
 			    			DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
 			    			DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
