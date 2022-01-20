@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import gui.MenuBar;
 import gui.ProfesoriJTable;
 import gui.StudentiJTable;
@@ -270,5 +271,16 @@ public class BazaPredmeta{
 				break;
 			}
 		}
+	}
+
+	public void initKolone() {
+		this.kolone = new ArrayList<String>();
+		
+		
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("sifra2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("naziv2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("espb2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("god2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("semester2"));
 	}
 }

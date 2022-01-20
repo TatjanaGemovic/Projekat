@@ -82,5 +82,6 @@ public class ProfesoriJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		profesorModel.fireTableDataChanged();
+		profesorModel.fireTableChanged(null);
 	}
 }

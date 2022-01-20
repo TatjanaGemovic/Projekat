@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import gui.KatedreJTable;
+import gui.MainFrame;
 import gui.MenuBar;
 
 
@@ -238,6 +239,15 @@ public class BazaProfesora{
 				break;
 			}
 		}
+	}
+
+	public void initKolone() {
+		this.kolone = new ArrayList<String>();
+		
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("ime"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("title2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("mejl"));
 	}
 
 }

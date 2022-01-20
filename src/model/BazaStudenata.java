@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import gui.MainFrame;
 import gui.MenuBar;
 
 public class BazaStudenata{
@@ -178,6 +179,17 @@ public class BazaStudenata{
 					break;
 			}
 		}
+	}
+	
+	public void initKolone() {
+		this.kolone = new ArrayList<String>();
+		
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("index"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("ime"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("god_stud"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("status"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("prosek"));
 	}
 	
 }

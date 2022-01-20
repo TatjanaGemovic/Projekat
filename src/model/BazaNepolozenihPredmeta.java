@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import gui.StudentiJTable;
 
 public class BazaNepolozenihPredmeta {
@@ -23,7 +24,7 @@ public class BazaNepolozenihPredmeta {
 	public BazaNepolozenihPredmeta() {
 		
 		this.kolone = new ArrayList<String>();
-		this.kolone.add("Sifra predmeta");
+		this.kolone.add("Šifra predmeta");
 		this.kolone.add("Naziv predmeta");
 		this.kolone.add("ESPB");
 		this.kolone.add("Godina studija");
@@ -100,5 +101,14 @@ public class BazaNepolozenihPredmeta {
 				return null;
 		}
 		}
+	}
+	public void initKolone() {
+		this.kolone = new ArrayList<String>();
+		
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("sifra2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("naziv2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("espb2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("god2"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("semester2"));
 	}
 }

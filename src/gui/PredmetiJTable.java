@@ -89,5 +89,6 @@ public class PredmetiJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		predmetModel.fireTableDataChanged();
+		predmetModel.fireTableChanged(null);
 	}
 }

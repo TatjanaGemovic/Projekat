@@ -3,6 +3,8 @@ package gui;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +15,10 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableRowSorter;
+
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenata;
 
 public class TabbedPane extends JTabbedPane{
 
@@ -255,10 +261,15 @@ public class TabbedPane extends JTabbedPane{
 		return tabIndex;
 	}
 
-	public void updateComponent() {
+	public void updateComponent() throws FileNotFoundException, ClassNotFoundException, IOException {
 		 this.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("open_studenti"));
+		 BazaStudenata.getInstance().initKolone();
+		 StudentiJTable.azurirajPrikaz();
 		 this.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("open_profesori"));
+		 BazaProfesora.getInstance().initKolone();
+		 ProfesoriJTable.azurirajPrikaz();
 		 this.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));
-		
+		 BazaPredmeta.getInstance().initKolone();
+		 PredmetiJTable.azurirajPrikaz();
 	}
 }
