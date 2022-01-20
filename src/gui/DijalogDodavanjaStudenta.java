@@ -43,7 +43,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 		private boolean dobarmail = false;
 		private boolean dobragodina = false;
 		public DijalogDodavanjaStudenta(Frame parent, String title, boolean modal) {
-		super(parent, "Dodavanje Studenta", modal);
+		super(parent, MainFrame.getInstance().getResourceBundle().getString("dodavanje_studenta"), modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
@@ -51,9 +51,9 @@ public class DijalogDodavanjaStudenta extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*19/20);
 		setLocationRelativeTo(parent);
 		
-		JButton potvrda=new JButton("Potvrdi");
+		JButton potvrda=new JButton(MainFrame.getInstance().getResourceBundle().getString("potvrda"));
 		potvrda.setEnabled(false);
-		JButton odustanak=new JButton("Odustani");
+		JButton odustanak=new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 	    
 		odustanak.addActionListener(new ActionListener() {
 
@@ -61,7 +61,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 
 			int dialogButton = JOptionPane.YES_NO_OPTION;
-			           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			           int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			           if (dialogResult == JOptionPane.YES_OPTION) {
 			        	   dispose();
@@ -80,16 +80,16 @@ public class DijalogDodavanjaStudenta extends JDialog {
 	    panelCenter.setLayout(new GridBagLayout());
 	    this.add(panelCenter, BorderLayout.CENTER);
 	    
-	    JLabel lblIme = new JLabel("Ime:");
-	    JLabel lblPrezime = new JLabel("Prezime:");
-	    JLabel lblDatumRodjenja = new JLabel("Datum rodjenja:");
-	    JLabel lblAdresa = new JLabel("Adresa stanovanja:");
-	    JLabel lblTelefon = new JLabel("Broj telefona:");
-	    JLabel lblEmailAdresa = new JLabel("Email adresa:");
-	    JLabel lblBrojIndeksa = new JLabel("Broj indeksa:");
-	    JLabel lblGodinaUpisa = new JLabel("Godina upisa:");
-	    JLabel lblTrenutnaGodinaStudija = new JLabel("Trenutna godina studija:");
-	    JLabel lblNacinFinansiranja = new JLabel("Nacin finansiranja:");
+	    JLabel lblIme = new JLabel( MainFrame.getInstance().getResourceBundle().getString("ime"));
+	    JLabel lblPrezime = new JLabel(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+	    JLabel lblDatumRodjenja = new JLabel(MainFrame.getInstance().getResourceBundle().getString("dat_rodjenja"));
+	    JLabel lblAdresa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("adresa_stan"));
+	    JLabel lblTelefon = new JLabel(MainFrame.getInstance().getResourceBundle().getString("telefon"));
+	    JLabel lblEmailAdresa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("mail"));
+	    JLabel lblBrojIndeksa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("br_indexa"));
+	    JLabel lblGodinaUpisa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("god_upisa"));
+	    JLabel lblTrenutnaGodinaStudija = new JLabel(MainFrame.getInstance().getResourceBundle().getString("tren_god"));
+	    JLabel lblNacinFinansiranja = new JLabel(MainFrame.getInstance().getResourceBundle().getString("finans"));
 
 
 	    final JTextField txtIme = new JTextField();
@@ -187,7 +187,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
+				if((txtIme.getText()).matches("[A-ZÄŒÄ†Å Ä�Å½][a-zÄ�Ä‡Å¾Å¡Ä‘]+")) {
 					dobroime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);
@@ -224,7 +224,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
+				if((txtPrezime.getText()).matches("[A-ZÄŒÄ†Å Ä�Å½][a-zÄ�Ä‡Å¾Å¡Ä‘]+")) {
 					dobroprezime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);
@@ -334,7 +334,7 @@ public class DijalogDodavanjaStudenta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[.]?[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[@]([a-z]+[.])+[a-z]+")) {
+				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ÄŒÄ†Å Ä�Å½Ä�Ä‡Å¾Å¡Ä‘]+[.]?[a-zA-Z0-9ÄŒÄ†Å Ä�Å½Ä�Ä‡Å¾Å¡Ä‘]+[@]([a-z]+[.])+[a-z]+")) {
 					dobarmail = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 						potvrda.setEnabled(true);
@@ -503,19 +503,19 @@ public class DijalogDodavanjaStudenta extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da u bazu dodajete studenta sa unetim podacima?", "Potvrda unosa", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("params"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			    if (dialogResult == JOptionPane.YES_OPTION) {
 			    	if(txtIme.getText().isEmpty() || txtPrezime.getText().isEmpty() || txtDatumRodjenja.getText().isEmpty() || txtAdresa.getText().isEmpty() || txtTelefon.getText().isEmpty() || txtEmailAdresa.getText().isEmpty() || txtBrojIndeksa.getText().isEmpty() || txtGodinaUpisa.getText().isEmpty()) {
 			    		
-			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("mora_popunjeno"), MainFrame.getInstance().getResourceBundle().getString("greska"), JOptionPane.ERROR_MESSAGE);
 			    		return;
 			    	}
 			    	
 			    	String brojIndexa = txtBrojIndeksa.getText();
 			    	for(Student i : BazaStudenata.getInstance().getStudenti()) {
 			    		if(i.getBroj_indeksa().equals(brojIndexa)) {
-			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji student sa indeksom: " + brojIndexa);
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("postoji_student") + " " + brojIndexa);
 			    			return;
 			    		}
 			    	}
