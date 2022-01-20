@@ -247,10 +247,7 @@ class DijalogDodavanjaSefaKatedri extends JDialog {
 					Profesor sef = BazaProfesora.getInstance().getProfesori().get(i);
 					
 					Katedra k = BazaKatedri.getInstance().getKatedre().get(index_katedre);
-					sef.setId_katedre(k.getId());
-					BazaProfesora.getInstance().getProfesori().set(i, sef);
-					k.setSef_katedre(sef);
-					BazaKatedri.getInstance().getKatedre().set(index_katedre, k);
+					KatedraKontroler.getInstance().dodajSefaKatedre(i, sef, k, index_katedre);
 					
 					dispose();
 				}
@@ -269,6 +266,9 @@ class DijalogDodavanjaSefaKatedri extends JDialog {
 }
 
 class DijalogDodavanjaProfesoraKatedri extends JDialog {
+
+	private static final long serialVersionUID = -631884414161135429L;
+
 	public DijalogDodavanjaProfesoraKatedri(Frame parent, String title, boolean modal, int index_katedre) {
 		super(parent, title, modal);
 		
@@ -308,10 +308,7 @@ class DijalogDodavanjaProfesoraKatedri extends JDialog {
 				
 				Profesor prof = BazaProfesora.getInstance().getProfesori().get(i);
 				Katedra k = BazaKatedri.getInstance().getKatedre().get(index_katedre);
-				prof.setId_katedre(k.getId());
-				k.dodaj_Profesora_na_katedru(prof);
-				BazaProfesora.getInstance().getProfesori().set(i, prof);
-				BazaKatedri.getInstance().getKatedre().set(index_katedre, k);
+				KatedraKontroler.getInstance().dodajProfesoraNaKatedru(i, prof, k, index_katedre);
 				
 				dispose();
 			}

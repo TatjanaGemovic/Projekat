@@ -762,6 +762,43 @@ public class DijalogIzmenaStudenta extends JDialog {
 							if(!moze) {
 								s.getPolozeni_ispiti().remove(p);
 								PolozeniIspitiJTable.azurirajPrikaz();
+								double prosecna_ocena2 = 0;
+								int broj_predmeta2 = 0;
+								int espb_ukupno2=0;
+								for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+									espb_ukupno2 += o.getPredmet().getEspb();
+									broj_predmeta2++;
+									int ocena = 0;
+									switch(o.getVrednost_ocene()) {
+									case sest: 
+										ocena = 6;
+										break;
+									case sedam: 
+										ocena = 7;
+										break;
+									case osam: 
+										ocena = 8;
+										break;
+									case devet: 
+										ocena = 9;	
+										break;
+									case deset: 
+										ocena = 10;
+										break;
+									}
+									prosecna_ocena2 += ocena;
+								}
+								if(prosecna_ocena2==0) {
+									prosek.setText("Prosecna ocena je 0");
+									student.setProsecna_ocena(prosecna_ocena2);
+								}else {
+									prosecna_ocena2/=broj_predmeta2;
+									prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
+									student.setProsecna_ocena(prosecna_ocena2);
+								}
+								student.setProsecna_ocena(prosecna_ocena2);
+								StudentiJTable.azurirajPrikaz();
+								espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 								return;
 							}
 					    	p.setVrednost_ocene(Vrednost_Ocene.pet);
@@ -769,45 +806,46 @@ public class DijalogIzmenaStudenta extends JDialog {
 							PolozeniIspitiJTable.azurirajPrikaz();
 							s.getNepolozeni_ispiti().add(p);
 							NepolozeniPredmetiJTable.azurirajPrikaz();
-							double prosecna_ocena2 = 0;
-							int broj_predmeta2 = 0;
-							int espb_ukupno2=0;
-							for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
-								espb_ukupno2 += o.getPredmet().getEspb();
-								broj_predmeta2++;
-								int ocena = 0;
-								switch(o.getVrednost_ocene()) {
-								case sest: 
-									ocena = 6;
-									break;
-								case sedam: 
-									ocena = 7;
-									break;
-								case osam: 
-									ocena = 8;
-									break;
-								case devet: 
-									ocena = 9;	
-									break;
-								case deset: 
-									ocena = 10;
-									break;
-								}
-								prosecna_ocena2 += ocena;
-							}
-							if(prosecna_ocena2==0) {
-								prosek.setText("Prosecna ocena je 0");
-								student.setProsecna_ocena(prosecna_ocena2);
-							}else {
-								prosecna_ocena2/=broj_predmeta2;
-								prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
-								student.setProsecna_ocena(prosecna_ocena2);
-							}
-							student.setProsecna_ocena(prosecna_ocena2);
-							StudentiJTable.azurirajPrikaz();
-							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
+							
 					    }	
 				    }
+					double prosecna_ocena2 = 0;
+					int broj_predmeta2 = 0;
+					int espb_ukupno2=0;
+					for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+						espb_ukupno2 += o.getPredmet().getEspb();
+						broj_predmeta2++;
+						int ocena = 0;
+						switch(o.getVrednost_ocene()) {
+						case sest: 
+							ocena = 6;
+							break;
+						case sedam: 
+							ocena = 7;
+							break;
+						case osam: 
+							ocena = 8;
+							break;
+						case devet: 
+							ocena = 9;	
+							break;
+						case deset: 
+							ocena = 10;
+							break;
+						}
+						prosecna_ocena2 += ocena;
+					}
+					if(prosecna_ocena2==0) {
+						prosek.setText("Prosecna ocena je 0");
+						student.setProsecna_ocena(prosecna_ocena2);
+					}else {
+						prosecna_ocena2/=broj_predmeta2;
+						prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
+						student.setProsecna_ocena(prosecna_ocena2);
+					}
+					student.setProsecna_ocena(prosecna_ocena2);
+					StudentiJTable.azurirajPrikaz();
+					espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					NepolozeniPredmetiJTable.azurirajPrikaz();
  
 				}
@@ -819,6 +857,9 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 
 class DijalogDodavanjaPredmetaStudentu extends JDialog {
+
+	private static final long serialVersionUID = 784055322302314127L;
+
 	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal) {
 		super(parent, title, modal);
 		
@@ -853,11 +894,9 @@ class DijalogDodavanjaPredmetaStudentu extends JDialog {
 					}
 				}
 
-				Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
-				OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, new Date(2000, 05, 27));
-				s.getNepolozeni_ispiti().add(noviNepolozeni);
+				
+				StudentKontroler.getInstance().dodajNepolozeniIspit(StudentiJTable.rowSelectedIndex, predmetKojiSeDodaje, Vrednost_Ocene.pet);
 				dispose();
-				//nep_predmeti.azurirajPrikaz();
 			}
 		});
 		odustani.addActionListener(new ActionListener() {

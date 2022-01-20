@@ -158,12 +158,12 @@ public class BazaPredmeta{
 				if(student.getTrenutna_god()<p.getGodina_izvodjenja()) continue;
 				int pronadjen = 0;
 				for(OcenaNaIspitu polozeni : student.getPolozeni_ispiti()) {
-					if(p.getNaziv() == polozeni.getPredmet().getNaziv()) {
+					if(p.getNaziv().equals(polozeni.getPredmet().getNaziv())) {
 						pronadjen++;
 					}
 				}
 				for(OcenaNaIspitu nepolozeni : student.getNepolozeni_ispiti()) {
-					if(p.getNaziv() == nepolozeni.getPredmet().getNaziv()) {
+					if(p.getNaziv().equals(nepolozeni.getPredmet().getNaziv())) {
 						pronadjen++;
 					}
 				}

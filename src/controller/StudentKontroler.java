@@ -3,11 +3,15 @@ package controller;
 import java.util.Date;
 
 import gui.MainFrame;
+import gui.PolozeniIspitiJTable;
 import gui.StudentiJTable;
 import model.Adresa;
 import model.BazaStudenata;
+import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Status_Studenta;
 import model.Student;
+import model.Vrednost_Ocene;
 
 
 public class StudentKontroler {
@@ -46,5 +50,18 @@ public class StudentKontroler {
 		StudentiJTable.azurirajPrikaz();
 
 		}
+
+	public void dodajNepolozeniIspit(int rowSelectedIndex, Predmet predmetKojiSeDodaje, Vrednost_Ocene pet) {
+		Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+		OcenaNaIspitu noviNepolozeni = new OcenaNaIspitu(s, predmetKojiSeDodaje, Vrednost_Ocene.pet, null);
+		s.getNepolozeni_ispiti().add(noviNepolozeni);
+	}
+
+	public void dodajPolozeniIspit(Student s, OcenaNaIspitu o1) {
+		s.getPolozeni_ispiti().add(o1);
+		PolozeniIspitiJTable.azurirajPrikaz();
+	}
+	
+	
 	
 }

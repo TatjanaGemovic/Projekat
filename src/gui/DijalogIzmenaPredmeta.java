@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PredmetKontroler;
+import controller.StudentKontroler;
 import model.BazaNepolozenihPredmeta;
 import model.BazaPredmeta;
 import model.BazaProfesora;
@@ -378,6 +379,8 @@ public class DijalogIzmenaPredmeta extends JDialog {
 }
 
 class DijalogPolaganjePredmeta extends JDialog {
+
+	private static final long serialVersionUID = -4755581926104950937L;
 	private boolean dobardatum = false;
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	
@@ -566,8 +569,8 @@ class DijalogPolaganjePredmeta extends JDialog {
 					}
 			    	
 					OcenaNaIspitu o1 = new OcenaNaIspitu(s, p, vred, datum);
-					s.getPolozeni_ispiti().add(o1);
-					PolozeniIspitiJTable.azurirajPrikaz();
+					StudentKontroler.getInstance().dodajPolozeniIspit(s, o1);
+					
 					double prosecna_ocena2 = 0;
 					int broj_predmeta2 = 0;
 					int espb_ukupno2=0;

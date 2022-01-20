@@ -1,6 +1,5 @@
 package controller;
 
-import gui.MainFrame;
 import gui.PredmetiJTable;
 import model.BazaPredmeta;
 import model.Predmet;
