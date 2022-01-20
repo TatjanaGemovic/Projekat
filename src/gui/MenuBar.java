@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
 
 import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
@@ -11,6 +12,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Locale;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -22,8 +27,11 @@ import model.BazaProfesora;
 import model.BazaStudenata;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class MenuBar extends JMenuBar {
 
@@ -219,6 +227,15 @@ public class MenuBar extends JMenuBar {
 		file_close = new JMenuItem("Zatvori", icn);
 		file_close.setMnemonic(KeyEvent.VK_C);
 		file_close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
+		file_close.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+				
+			}
+		});
 		file.add(file_new);
 		file.addSeparator();
 		file.add(file_save);
@@ -309,10 +326,90 @@ public class MenuBar extends JMenuBar {
 		help_help = new JMenuItem("Pomoc", icn);
 		help_help.setMnemonic(KeyEvent.VK_H);
 		help_help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
+		help_help.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JDialog d = new JDialog(new JFrame(),"Pomoc");
+				Dimension parentSize = parent.getSize();
+				int diaWidth = parentSize.width;
+				int diaHeight = parentSize.height;
+				d.setSize(diaWidth*3/5, diaHeight*15/20); 
+				d.setLocationRelativeTo(MainFrame.getInstance());
+				JTextArea textArea = new JTextArea();
+				textArea.setEditable(false);
+				textArea.setText("\n     Funkcionalnosti koje aplikacija poseduje:\n"
+		                 +"     - Za cuvanje programa kliknite 'File'->'Save'\n"
+		                 +"     - Za prikaz taba studenati kliknite 'Edit'->'Open'->'Students'\n"
+		                 +"     - Za prikaz taba profesori kliknite 'Edit'->'Open'->'Profesors'\n"
+		                 +"     - Za prikaz taba predmeti kliknite 'Edit'->'Open'->'Subjects'\n"
+		                 +"     - Za prikaz katedri kliknite 'Edit'->'Open'->'Chairs'\n"
+		                 +"     - Za gasenje programa kliknite 'File'->'Close'\n"
+		                 +"     - Za dodavanje novog entiteta kliknite 'File'->'Add'\n"
+		                 +"     - Za izmenu postojeceg entiteta kliknite 'Edit'->'Edit'\n"
+						 +"     - Za brisanje postojeceg entiteta kliknite 'Edit'->'Delete'\n"
+						 +"     - Za pomoc pri radu kliknite 'Help'->'Help'\n"
+						 +"     - Za informacije o nama kliknite 'Help'->'About'\n"
+
+
+						 +"\n    Precice koje aplikacija poseduje:\n"
+		                 +"     - Za cuvanje podataka: (CTRL + S)\n"
+		                 +"     - Za prikaz taba studenati: (CTRL + M)\n"
+		                 +"     - Za prikaz taba profesori: (CTRL + L) \n"
+		                 +"     - Za prikaz taba predmeti: (CTRL + J)\n"
+		                 +"     - Za prikaz katedri: (CTRL + K)\n"
+		                 +"     - Za gasenje programa: (CTRL + C)\n"
+		                 +"     - Za dodavanje novog entiteta: (CTRL + N)\n"
+		                 +"     - Za izmenu postojeceg entiteta: (CTRL + E)\n"
+						 +"     - Za brisanje postojeceg entiteta: (CTRL + D)\n"
+						 +"     - Za pomoc pri radu: (CTRL + H)\n"
+						 +"     - Za informacije o nama: (CTRL + A) \n"
+				
+						 +"\n\n     * Postoji mogucnost izmene jezika u programu na opciju 'Jezik' u MenuBar-u");
+								
+				d.add(textArea);
+				d.setVisible(true);
+				
+			}
+		});
 		icn = new ImageIcon("ikonice/info.png");
 		help_about = new JMenuItem("O nama", icn);
 		help_about.setMnemonic(KeyEvent.VK_A);
 		help_about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+		help_about.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JDialog d = new JDialog(new JFrame(),"O Nama");
+				Dimension parentSize = parent.getSize();
+				int diaWidth = parentSize.width;
+				int diaHeight = parentSize.height;
+				d.setSize(diaWidth*2/4, diaHeight*10/20);
+				d.setLocationRelativeTo(MainFrame.getInstance());
+				//d.add(new JLabel(new ImageIcon("slika1.jpg")));
+				JTextArea textArea = new JTextArea();
+				textArea.setEditable(false);
+				textArea.setText("\n\n"
+								+"     Autori:\n\n     Tatjana Gemovic\n"
+								+"     - rodjena 16.03.2000. u Novom Sadu\n"
+								+"     - zavrsila je gimnaziju 'Jovan Jovanovic Zmaj' u Novom Sadu\n"
+								+"     - upisala je Fakultet tehnickih nauka 2019. godine\n"
+								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n"
+								+"     - aktivno se bavi sportom - Odbojka\n"
+								+ "\n\n     Filip Stefanov\n"
+								+"     - rodjen 18.05.2000. u Novom Sadu\n"
+								+"     - zavrsio je gimnaziju 'Jovan Jovanovic Zmaj' u Novom Sadu\n"
+								+"     - upisao je Fakultet tehnickih nauka 2019. godine\n"
+								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n");
+								
+				d.add(textArea);
+				//d.add(new JLabel(new ImageIcon("slika1.jpg")));
+				d.setVisible(true);
+				
+			}
+		});
 		help.add(help_help);
 		help.addSeparator();
 		help.add(help_about);
