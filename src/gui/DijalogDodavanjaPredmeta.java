@@ -38,7 +38,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 	static JButton btnAddProfesor=new JButton("+");
 
 	public DijalogDodavanjaPredmeta(Frame parent, String title, boolean modal) {
-		super(parent, "Dodavanje Predmeta", modal);
+		super(parent, MainFrame.getInstance().getResourceBundle().getString("dodavanje_predmeta"), modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
@@ -46,9 +46,9 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		setSize(diaWidth*3/5, diaHeight*13/20);
 		setLocationRelativeTo(parent);
 		
-		JButton potvrda=new JButton("Potvrdi");
+		JButton potvrda=new JButton(MainFrame.getInstance().getResourceBundle().getString("potvrda"));
 		potvrda.setEnabled(false);
-		JButton odustanak=new JButton("Odustani");
+		JButton odustanak=new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 
 		odustanak.addActionListener(new ActionListener() {
 
@@ -56,7 +56,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 
 					int dialogButton = JOptionPane.YES_NO_OPTION;
-				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+				    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 	
 				    if (dialogResult == JOptionPane.YES_OPTION) {
 				    	dispose();
@@ -77,12 +77,12 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 	    
 	    
-	    JLabel lblSifra = new JLabel("Sifra predmeta:");
-		JLabel lblNaziv = new JLabel("Naziv predmeta:");
-		JLabel lblBrojESPB = new JLabel("Broj ESPB bodova:");
-		JLabel lblGodina = new JLabel("Godina na kojoj se izvodi:");
-		JLabel lblSemestar = new JLabel("Semestar:");
-		JLabel lblProfesor = new JLabel("Profesor (ime i prezime):");
+	    JLabel lblSifra = new JLabel(MainFrame.getInstance().getResourceBundle().getString("sifra_predmeta"));
+		JLabel lblNaziv = new JLabel(MainFrame.getInstance().getResourceBundle().getString("naziv_predmeta"));
+		JLabel lblBrojESPB = new JLabel(MainFrame.getInstance().getResourceBundle().getString("br_espb"));
+		JLabel lblGodina = new JLabel(MainFrame.getInstance().getResourceBundle().getString("god_izvodjenja"));
+		JLabel lblSemestar = new JLabel(MainFrame.getInstance().getResourceBundle().getString("semestar"));
+		JLabel lblProfesor = new JLabel(MainFrame.getInstance().getResourceBundle().getString("prof_ime_prez"));
 		 
 		 
 		final JTextField txtSifra = new JTextField();
@@ -222,7 +222,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
         } );
 		
 		
-		String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
+		String godinaStudija[]= {"I "+MainFrame.getInstance().getResourceBundle().getString("prva_god"),"II "+MainFrame.getInstance().getResourceBundle().getString("druga_god"),"III "+MainFrame.getInstance().getResourceBundle().getString("treca_god"),"IV "+MainFrame.getInstance().getResourceBundle().getString("cetvrta_god")};
 		JComboBox<String> godStud=new JComboBox<>(godinaStudija);
 		   
 		GridBagConstraints grdGodina = new GridBagConstraints();
@@ -235,7 +235,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 		
 			
 		
-		String semestar[]= {"Letnji","Zimski"};
+		String semestar[]= {MainFrame.getInstance().getResourceBundle().getString("letnji"), MainFrame.getInstance().getResourceBundle().getString("zimski")};
 		JComboBox<String> semestarStud=new JComboBox<>(semestar);
 		   
 		GridBagConstraints grdSemestar= new GridBagConstraints();
@@ -271,7 +271,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true);
+				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, MainFrame.getInstance().getResourceBundle().getString("odabir_profesora"), true);
 				OdabirProfesora.setVisible(true);
 				Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
 				profesorLista.setText(p.getImeIPrezime());
@@ -285,7 +285,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogBrisanjaProfesoraSaPredmeta BrisanjeProfesora = new DijalogBrisanjaProfesoraSaPredmeta(parent, "Ukloni Profesora", true);
+				DijalogBrisanjaProfesoraSaPredmeta BrisanjeProfesora = new DijalogBrisanjaProfesoraSaPredmeta(parent, MainFrame.getInstance().getResourceBundle().getString("ukloni_profesora"), true);
 				BrisanjeProfesora.setVisible(true);
 			}
 			
@@ -297,20 +297,20 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			    if (dialogResult == JOptionPane.YES_OPTION) {
 
 			    	if(txtSifra.getText().isEmpty() || txtNaziv.getText().isEmpty() || txtBrojESPB.getText().isEmpty()) {
 			    		
-			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("mora_popunjeno"), MainFrame.getInstance().getResourceBundle().getString("greska"), JOptionPane.ERROR_MESSAGE);
 			    		return;
 			    	}
 			    	
 			    	String sifra = txtSifra.getText();
 			    	for(Predmet i : BazaPredmeta.getInstance().getPredmeti()) {
 			    		if(i.getSifra_predmeta().equals(sifra)) {
-			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji predmet pod sifrom: " + sifra);
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("postoji") + sifra);
 			    			return;
 			    		}
 			    	}

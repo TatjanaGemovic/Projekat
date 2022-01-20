@@ -205,7 +205,7 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DijalogKatedra dijalog = new DijalogKatedra(parent, "Lista katedri", true);
+				DijalogKatedra dijalog = new DijalogKatedra(parent,MainFrame.getInstance().getResourceBundle().getString("open_katedre"), true);
 			}
 		});
 		file_open.add(open_studenti);

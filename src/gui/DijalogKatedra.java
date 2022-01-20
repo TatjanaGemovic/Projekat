@@ -45,9 +45,9 @@ public class DijalogKatedra extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*4/5);
 		setLocationRelativeTo(parent);
 		
-		JButton dodajSefa = new JButton("Dodaj sefa");
-		JButton dodajProfesora = new JButton("Dodaj profesora");
-		JButton dodajKatedru = new JButton("Dodaj katedru");
+		JButton dodajSefa = new JButton( MainFrame.getInstance().getResourceBundle().getString("dodaj_sefa"));
+		JButton dodajProfesora = new JButton( MainFrame.getInstance().getResourceBundle().getString("dodaj_profesora"));
+		JButton dodajKatedru = new JButton( MainFrame.getInstance().getResourceBundle().getString("dodaj_katedru"));
 		JPanel panelZaDugme = new JPanel();
 		panelZaDugme.add(dodajKatedru);
 		panelZaDugme.add(dodajSefa);
@@ -73,7 +73,7 @@ public class DijalogKatedra extends JDialog {
 						katedra = k;
 					}
 				}
-				DijalogDodavanjaSefaKatedri dijalogDodavanja = new DijalogDodavanjaSefaKatedri(parent, "Dodavanje sefa", modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
+				DijalogDodavanjaSefaKatedri dijalogDodavanja = new DijalogDodavanjaSefaKatedri(parent,  MainFrame.getInstance().getResourceBundle().getString("dodavanje_sefa"), modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
 				
 				
 				tabelaKatedri.azurirajPrikaz();
@@ -92,7 +92,7 @@ public class DijalogKatedra extends JDialog {
 							katedra = k;
 						}
 					}
-					DijalogDodavanjaProfesoraKatedri dijalogDodavanja = new DijalogDodavanjaProfesoraKatedri(parent, "Dodavanje profesora", modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
+					DijalogDodavanjaProfesoraKatedri dijalogDodavanja = new DijalogDodavanjaProfesoraKatedri(parent, MainFrame.getInstance().getResourceBundle().getString("dodavanje_profesora"), modal, BazaKatedri.getInstance().getKatedre().indexOf(katedra));
 					
 					
 					ProfesoriJTable.azurirajPrikaz();
@@ -104,7 +104,7 @@ public class DijalogKatedra extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogDodavanjaKatedre dij = new DijalogDodavanjaKatedre(parent, "Dodavanje katedre", modal);
+				DijalogDodavanjaKatedre dij = new DijalogDodavanjaKatedre(parent, MainFrame.getInstance().getResourceBundle().getString("dodavanje_katedre"), modal);
 			}
 		});
 		this.setVisible(true);
@@ -121,8 +121,8 @@ class DijalogDodavanjaKatedre extends JDialog {
 		setSize(diaWidth*2/5, diaHeight*2/5);
 		setLocationRelativeTo(parent);
 		
-		JButton dodajKatedru = new JButton("Dodaj");
-		JButton odustani = new JButton("Odustani");
+		JButton dodajKatedru = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton odustani = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		JPanel panelZaDugme = new JPanel();
 		panelZaDugme.add(dodajKatedru);
 		panelZaDugme.add(odustani);
@@ -132,8 +132,8 @@ class DijalogDodavanjaKatedre extends JDialog {
 		panelPotencijalni.setLayout(new GridBagLayout());
 		add(panelPotencijalni, BorderLayout.CENTER);
 		
-		JLabel lblSifra = new JLabel("Sifra katedre:");
-		JLabel lblNaziv = new JLabel("Naziv katedre:");
+		JLabel lblSifra = new JLabel(MainFrame.getInstance().getResourceBundle().getString("sifra_katedre"));
+		JLabel lblNaziv = new JLabel(MainFrame.getInstance().getResourceBundle().getString("naziv_katedre"));
 		 
 		final JTextField txtSifra = new JTextField();
 		final JTextField txtNaziv = new JTextField();
@@ -174,13 +174,13 @@ class DijalogDodavanjaKatedre extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			    if (dialogResult == JOptionPane.YES_OPTION) {
 
 			    	if(txtSifra.getText().isEmpty() || txtNaziv.getText().isEmpty()) {
 			    		
-			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("mora_popunjeno"),MainFrame.getInstance().getResourceBundle().getString("greska"), JOptionPane.ERROR_MESSAGE);
 			    		return;
 			    	}
 			    	
@@ -214,8 +214,8 @@ class DijalogDodavanjaSefaKatedri extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*4/5);
 		setLocationRelativeTo(parent);
 		
-		JButton dodajSefa = new JButton("Dodaj");
-		JButton odustani = new JButton("Odustani");
+		JButton dodajSefa = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton odustani = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		JPanel panelZaDugme = new JPanel();
 		panelZaDugme.add(dodajSefa);
 		panelZaDugme.add(odustani);
@@ -278,8 +278,8 @@ class DijalogDodavanjaProfesoraKatedri extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*4/5);
 		setLocationRelativeTo(parent);
 		
-		JButton dodaj = new JButton("Dodaj");
-		JButton odustani = new JButton("Odustani");
+		JButton dodaj = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton odustani = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		JPanel panelZaDugme = new JPanel();
 		panelZaDugme.add(dodaj);
 		panelZaDugme.add(odustani);

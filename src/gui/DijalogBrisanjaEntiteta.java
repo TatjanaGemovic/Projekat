@@ -43,28 +43,28 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 	    JLabel brisanje = new JLabel();
 	    switch (TabbedPane.tabIndex) {
 		case Profesor:
-			brisanje = new JLabel("Da li ste sigurni da zelite da obrisete profesora?");
+			brisanje = new JLabel(MainFrame.getInstance().getResourceBundle().getString("siguran_profesor"));
 			break;
 		case Predmet:
-			brisanje = new JLabel("Da li ste sigurni da zelite da obrisete predmet?");
+			brisanje = new JLabel(MainFrame.getInstance().getResourceBundle().getString("siguran_predmet"));
 			break;
 		default:
-			brisanje = new JLabel("Da li ste sigurni da zelite da obrisete studenta?");
+			brisanje = new JLabel(MainFrame.getInstance().getResourceBundle().getString("siguran_student"));
 	   }
 		
 		panelCenter.add(brisanje, BorderLayout.CENTER);
 	    this.add(panelCenter, BorderLayout.CENTER);
 	    
 	    JPanel panelBottom = new JPanel();
-		JButton potvrda=new JButton("Potvrdi");
-		JButton odustanak=new JButton("Odustani");
+		JButton potvrda=new JButton(MainFrame.getInstance().getResourceBundle().getString("potvrda"));
+		JButton odustanak=new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		odustanak.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 			int dialogButton = JOptionPane.YES_NO_OPTION;
-			           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			           int dialogResult = JOptionPane.showConfirmDialog(null, "siguran", "potvrda", dialogButton);
 
 			           if (dialogResult == JOptionPane.YES_OPTION) {
 			        	   dispose();
@@ -83,7 +83,7 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 			public void actionPerformed(ActionEvent arg0) {
 	    		
 	    		int dialogButton = JOptionPane.YES_NO_OPTION;
-		           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda brisanja", dialogButton);
+		           int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 		           if (dialogResult == JOptionPane.YES_OPTION) {
 		        	   switch (TabbedPane.tabIndex) {
