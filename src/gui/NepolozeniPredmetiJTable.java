@@ -51,6 +51,7 @@ public class NepolozeniPredmetiJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		nep_predmetiModel.fireTableDataChanged();
+		nep_predmetiModel.fireTableChanged(null);
 	}
 	
 }

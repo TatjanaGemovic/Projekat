@@ -108,7 +108,7 @@ public class BazaPolozenih {
 		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("sifra2"));
 		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("naziv2"));
 		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("espb2"));
-		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("ocena"));
-		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("datum"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("ocenaa"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("datumm"));
 	}
 }

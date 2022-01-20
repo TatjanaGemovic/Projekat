@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import gui.MainFrame;
 import gui.MenuBar;
 
 public class BazaKatedri{
@@ -105,5 +106,11 @@ public class BazaKatedri{
 		Katedra k = new Katedra(id, sifra, naziv, null);
 		id++;
 		this.katedre.add(k);
+	}
+
+	public void initKolone() {
+		this.kolone = new ArrayList<String>();
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("naz_kat"));
+		this.kolone.add(MainFrame.getInstance().getResourceBundle().getString("sef_kat"));
 	}
 }

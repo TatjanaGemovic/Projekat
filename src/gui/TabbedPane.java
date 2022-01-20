@@ -16,6 +16,9 @@ import javax.swing.RowFilter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableRowSorter;
 
+import model.BazaKatedri;
+import model.BazaNepolozenihPredmeta;
+import model.BazaPolozenih;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
@@ -271,5 +274,10 @@ public class TabbedPane extends JTabbedPane{
 		 this.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));
 		 BazaPredmeta.getInstance().initKolone();
 		 PredmetiJTable.azurirajPrikaz();
+		 BazaPolozenih.getInstance().initKolone();
+		 //PolozeniIspitiJTable.azurirajPrikaz();
+		 BazaNepolozenihPredmeta.getInstance().initKolone();
+		 //NepolozeniPredmetiJTable.azurirajPrikaz();
+		 BazaKatedri.getInstance().initKolone();
 	}
 }

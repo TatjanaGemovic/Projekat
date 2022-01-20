@@ -53,5 +53,6 @@ public class KatedreJTable extends JTable{
 	
 	public static void azurirajPrikaz() {
 		katedraModel.fireTableDataChanged();
+		katedraModel.fireTableChanged(null);
 	}
 }

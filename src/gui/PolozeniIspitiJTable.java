@@ -51,5 +51,6 @@ public class PolozeniIspitiJTable extends JTable {
 	
 	public static void azurirajPrikaz() {
 		polozeniModel.fireTableDataChanged();
+		polozeniModel.fireTableChanged(null);
 	}
 }
