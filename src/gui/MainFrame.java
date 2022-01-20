@@ -1,16 +1,29 @@
 package gui;
 
 import java.awt.*;
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainFrame extends JFrame{
 
 		private static final long serialVersionUID = -888790554862002427L;
 		private static MainFrame instance = null;
+		public static TabbedPane tabovi;
+		public Toolbar toolbar;
+		public MenuBar menu;
+		public StatusBar statusBar;
+		
+		private ResourceBundle resourceBundle;
+		
 		
 		private MainFrame() {
+			Locale.setDefault(new Locale("sr", "RS"));
+			resourceBundle = ResourceBundle.getBundle("gui.MessageResources.MessageResources", Locale.getDefault());
+			
 			this.createToolbar();
 			this.createMenu();
 			this.createStatusBar();
@@ -27,17 +40,17 @@ public class MainFrame extends JFrame{
 			
 		
 		private void createToolbar() {
-			Toolbar toolbar = new Toolbar(this);
+			toolbar = new Toolbar(this);
 			add(toolbar, BorderLayout.NORTH);
 		}
 		
 		private void createMenu() {
-			MenuBar menu = new MenuBar(this);
+			menu = new MenuBar(this);
 			this.setJMenuBar(menu);
 		}
 		
 		private void createStatusBar() {
-			StatusBar statusBar = new StatusBar();
+			statusBar = new StatusBar();
 			add(statusBar, BorderLayout.SOUTH);
 		}
 		
@@ -48,7 +61,7 @@ public class MainFrame extends JFrame{
 			rightDummy.setPreferredSize(new Dimension(40,100));
 			add(leftDummy, BorderLayout.WEST);
 			add(rightDummy, BorderLayout.EAST);
-			TabbedPane tabovi = new TabbedPane();
+			tabovi = new TabbedPane();
 			tabovi.setBackground(Color.WHITE);
 			this.add(tabovi);
 
@@ -138,6 +151,19 @@ public class MainFrame extends JFrame{
 				}
 		    	
 			});*/
+		}
+		
+		public ResourceBundle getResourceBundle() {
+			return resourceBundle;
+		}
+
+		public void changeLang() throws FileNotFoundException, ClassNotFoundException, IOException {
+			resourceBundle = ResourceBundle.getBundle("gui.MessageResources.MessageResources", Locale.getDefault());
+			setTitle(resourceBundle.getString("naslovAplikacije"));
+			toolbar.updateComponent();
+			menu.updateComponent();
+			statusBar.updateComponent();
+			tabovi.updateComponent();
 		}
 	
 }

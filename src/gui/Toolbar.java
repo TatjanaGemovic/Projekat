@@ -25,14 +25,19 @@ public class Toolbar extends JToolBar {
 
 	private static final long serialVersionUID = 5574144676174518247L;
 
+	private JButton btnAdd = new JButton();
+	private JButton btnEdit= new JButton();
+	private JButton btnDelete= new JButton();
+	private JButton btnSearch= new JButton();
+	
 	public Toolbar(final JFrame parent) {
 		
 	
 		super(SwingConstants.HORIZONTAL);
 		
 		addSeparator();
-		JButton btnAdd = new JButton();
-		btnAdd.setToolTipText("Add");
+		btnAdd = new JButton();
+		btnAdd.setToolTipText("Dodaj");
 		btnAdd.setIcon(new ImageIcon("ikonice/add copy.png"));
 		btnAdd.addActionListener(new ActionListener() {
 
@@ -57,8 +62,8 @@ public class Toolbar extends JToolBar {
 
 		addSeparator();
 
-		JButton btnEdit = new JButton();
-		btnEdit.setToolTipText("Edit");
+		btnEdit = new JButton();
+		btnEdit.setToolTipText("Izmeni");
 		btnEdit.setIcon(new ImageIcon("ikonice/writing copy.png"));
 		btnEdit.addActionListener(new ActionListener() {
 
@@ -96,8 +101,8 @@ public class Toolbar extends JToolBar {
 
 		addSeparator();
 
-		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Delete");
+		btnDelete = new JButton();
+		btnDelete.setToolTipText("Obrisi");
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		btnDelete.addActionListener(new ActionListener() {
 
@@ -153,8 +158,8 @@ public class Toolbar extends JToolBar {
 		
 		addSeparator();
 
-		JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Search");
+		btnSearch = new JButton();
+		btnSearch.setToolTipText("Pretrazi");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		btnSearch.addActionListener(new ActionListener() {
 
@@ -168,7 +173,7 @@ public class Toolbar extends JToolBar {
 						TabbedPane.filterPredmeta(txt.getText());
 						break;
 					default:
-						//StudentiJTable.filterStudenata(txt.getText());
+						TabbedPane.filterStudenata(txt.getText());
 					}
 			}
 			
@@ -192,7 +197,14 @@ public class Toolbar extends JToolBar {
 		public void focusLost(FocusEvent arg0) {
 			JTextField txt = (JTextField) arg0.getComponent();
 			txt.setBackground(Color.WHITE);
-			txt.setText("Search");
+			txt.setText(MainFrame.getInstance().getResourceBundle().getString("search"));
 		}
+	}
+
+	public void updateComponent() {
+		btnAdd.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("file_new"));
+		btnEdit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("edit"));
+		btnDelete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		btnSearch.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("search"));
 	}
 }

@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PredmetKontroler;
+import controller.StudentKontroler;
 import model.BazaNepolozenihPredmeta;
 import model.BazaPredmeta;
 import model.BazaProfesora;
@@ -42,6 +43,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 	private boolean dobarbroj = true;
 	private boolean dobarnaziv = true;
 	private boolean dobrasifra = true;
+	static int k = 2;
 	static JTextField profesorLista = new JTextField();
 	static JButton btnRemoveProfesor=new JButton("-");
 	static JButton btnAddProfesor=new JButton("+");
@@ -155,7 +157,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtSifra.getText()).matches("[A-Za-z0-9 ]+")) {
+				if((txtSifra.getText()).matches("[A-ZČĆŠĐŽa-zčćžšđ0-9 ]+")) {
 	                dobrasifra = true;
 	                if(dobarbroj && dobarnaziv && dobrasifra)
 	                    potvrda.setEnabled(true);
@@ -185,7 +187,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtNaziv.getText()).matches("([A-Z][a-z0-9 ]+)+")) {
+				if((txtNaziv.getText()).matches("([A-ZČĆŠĐŽ][a-zčćžšđ0-9 ]+)+")) {
 	                dobarnaziv = true;
 	                if(dobarbroj && dobarnaziv && dobrasifra)
 	                    potvrda.setEnabled(true);
@@ -276,7 +278,8 @@ public class DijalogIzmenaPredmeta extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true);
+				k = 0;
+				DijalogDodavanjeProfesoraNaPredmet OdabirProfesora = new DijalogDodavanjeProfesoraNaPredmet(parent, "Odaberi Profesora", true, k);
 				OdabirProfesora.setVisible(true);
 			}
 			
@@ -304,9 +307,13 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		}
 		semestarStud.setSelectedIndex(k-1);
 		if(predmet.getPredmetni_profesor()!=null) {
-			profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+			for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+				if(p.getBroj_licne_karte().equals(predmet.getPredmetni_profesor().getBroj_licne_karte())) {
+					profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+				}
+			}
 			btnRemoveProfesor.setEnabled(true);
-			btnAddProfesor.setEnabled(false);
+					btnAddProfesor.setEnabled(false);
 		} else{
 			profesorLista.setText(null);
 			btnRemoveProfesor.setEnabled(false);
@@ -560,8 +567,8 @@ class DijalogPolaganjePredmeta extends JDialog {
 					}
 			    	
 					OcenaNaIspitu o1 = new OcenaNaIspitu(s, p, vred, datum);
-					s.getPolozeni_ispiti().add(o1);
-					PolozeniIspitiJTable.azurirajPrikaz();
+					StudentKontroler.getInstance().dodajPolozeniIspit(s, o1);
+					
 					double prosecna_ocena2 = 0;
 					int broj_predmeta2 = 0;
 					int espb_ukupno2=0;
@@ -598,7 +605,8 @@ class DijalogPolaganjePredmeta extends JDialog {
 						DijalogIzmenaStudenta.prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
 					}
 					DijalogIzmenaStudenta.espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
-			    	
+					DijalogIzmenaStudenta.student.setProsecna_ocena(prosecna_ocena2);
+					StudentiJTable.azurirajPrikaz();
 			    	dispose();
 			    	
 			    }

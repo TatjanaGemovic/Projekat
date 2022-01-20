@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import gui.KatedreJTable;
 import gui.MenuBar;
 
 
@@ -22,6 +23,7 @@ public class BazaProfesora{
 	}
 	
 	private List<Profesor> profesori;
+	private List<Profesor> potencijalni;
 	public List<String> kolone;
 	public List<String> kolone2;
 	
@@ -47,8 +49,11 @@ public class BazaProfesora{
 		Adresa adresa1 = new Adresa("Futoska", "9", "Novi Sad", "Srbija");
 		Adresa adresa2 = new Adresa("NTP", "kabinet 3", "Novi Sad", "Srbija");
 		profesori.add(new Profesor("Milan", "Rapaic", datum, adresa1, "0693792839", "rapaicmilan@gmail.com", adresa2, "00081525", "Doktor", 15));
-		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
-		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));*/
+		//profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Doktor", 15));
+		//profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Doktor", 15));
+		profesori.add(new Profesor("Nebojsa", "Ralevic", datum, adresa1, "0693792839", "nralevicn@gmail.com", adresa2, "00081526", "Vanredni", 15));
+		profesori.add(new Profesor("Zoran", "Jelicic", datum, adresa1, "0693792839", "zjelicic@gmail.com", adresa2, "00081527", "Redovni", 15));*/
+		
 		
 		ObjectInputStream inProfesori = null;
 		try {
@@ -66,6 +71,7 @@ public class BazaProfesora{
 	    			e.printStackTrace();
 	            }
 	    }
+
 	}
 	
 	
@@ -145,6 +151,56 @@ public class BazaProfesora{
 				return null;
 			}
 		}
+	}
+	public String getValueAt4(int row, int column) {
+		potencijalni = new ArrayList<Profesor>();
+		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			if(p.getId_katedre()!=BazaKatedri.getInstance().getRow(KatedreJTable.rowSelectedIndex).getId())
+				potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Profesor profesor = this.potencijalni.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	public String getValueAt3(int row, int column) {
+		potencijalni = new ArrayList<Profesor>();
+		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			if(p.getGodine_staza()>=5 && (p.getZvanje().equals("Vanredni") || p.getZvanje().equals("Redovni")))
+				potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Profesor profesor = this.potencijalni.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	
+	public List<Profesor> getPotencijalni() {
+		return potencijalni;
 	}
 	
 	public void dodajProfesora(String ime, String prezime, Date datum_rodjenja, Adresa adresa, String kontakt_tel, String email,

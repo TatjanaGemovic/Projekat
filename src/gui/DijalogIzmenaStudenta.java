@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -31,8 +32,10 @@ import controller.StudentKontroler;
 import model.Adresa;
 import model.BazaNepolozenihPredmeta;
 import model.BazaPolozenih;
+import model.BazaPredmeta;
 import model.BazaStudenata;
 import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Status_Studenta;
 import model.Student;
 import model.Vrednost_Ocene;
@@ -48,9 +51,12 @@ public class DijalogIzmenaStudenta extends JDialog {
 	private boolean dobarindex = true;
 	private boolean dobarmail = true;
 	private boolean dobragodina = true;
+	//public NepolozeniPredmetiJTable nep_predmeti = new NepolozeniPredmetiJTable();
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	static JLabel prosek = new JLabel();
 	static JLabel espb = new JLabel();
+	public static Student student;
+
 	public DijalogIzmenaStudenta(Frame parent, String title, boolean modal) {
 			super(parent, "Izmena Studenta", modal);
 			
@@ -207,7 +213,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtIme.getText()).matches("[A-Z][a-z]+")) {
+					if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
 						dobroime = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -241,7 +247,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtPrezime.getText()).matches("[A-Z][a-z]+")) {
+					if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
 						dobroprezime = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -351,8 +357,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    txtEmailAdresa.addKeyListener(new KeyListener() {
 
 				@Override
-				public void keyReleased(KeyEvent e) {
-					if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9]+[.]?[a-zA-Z0-9]+[@]([a-z]+[.])+[a-z]+")) {
+				public void keyReleased(KeyEvent e) {//[A-ZČĆŠĐŽ][a-zčćžšđ]+
+					if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[.]?[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[@]([a-z]+[.])+[a-z]+")) {
 						dobarmail = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -517,7 +523,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    infoPanel.add(panelCenter, BorderLayout.CENTER);
 		    
 			
-	    	Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+	    	student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 	    	txtIme.setText(student.getIme());
 		    txtPrezime.setText(student.getPrezime());
 		    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
@@ -644,6 +650,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 				prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena));
 			}
 			student.setProsecna_ocena(prosecna_ocena);
+			StudentiJTable.azurirajPrikaz();
 			espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno));
 			JLabel espb2 = new JLabel();
 			espb2.setText("");
@@ -664,23 +671,8 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    JButton dodaj = new JButton("Dodaj");
 		    JButton obrisi = new JButton("Obrisi");
 		    JButton polaganje = new JButton("Polaganje");
-
-		    dodaj.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-					JDialog dijalogDodavanjaNaStudenta = new JDialog(parent, "Dodavanje predmeta", modal);
-					dijalogDodavanjaNaStudenta.setLocationRelativeTo(null);
-					dijalogDodavanjaNaStudenta.setSize(diaWidth*2/5, diaHeight*3/5);
-					dijalogDodavanjaNaStudenta.setVisible(true);
-					
-					PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
-					dijalogDodavanjaNaStudenta.add(tabelaPotencijalnih);
-					//omoguciti selekciju predmeta i dodavanje u nepolozene na klik dodaj
-				}
-				
-			});
+		    panelDugmici.add(polaganje);
+		    
 		    panelDugmici.add(dodaj);
 		    panelDugmici.add(obrisi);
 		    
@@ -704,6 +696,47 @@ public class DijalogIzmenaStudenta extends JDialog {
 			panelNepPred.add(panelDugmici, BorderLayout.NORTH);
 			panelNepPred.add(nep_predmetiPane, BorderLayout.CENTER);
 		    tabbedPane.add("Nepolozeni", panelNepPred);
+		    
+		    dodaj.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					DijalogDodavanjaPredmetaStudentu dijalogDodavanja = new DijalogDodavanjaPredmetaStudentu(parent, "Dodavanje predmeta", modal);
+					nep_predmeti.azurirajPrikaz();
+				}
+				
+		    });
+		    
+		    obrisi.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Object[] options = {"Da",
+	                "Ne"};
+					int n = JOptionPane.showOptionDialog(parent,
+							"Da li ste sigurni da zelita da uklonite predmet?",
+							"Uklanjanje predmeta",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,
+							null,     
+							options,  
+							options[0]);
+					
+					if(n==JOptionPane.YES_OPTION) {
+						Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+						Predmet zaBrisanje = BazaNepolozenihPredmeta.getInstance().getRow(NepolozeniPredmetiJTable.rowSelectedIndex);
+						OcenaNaIspitu trazena = new OcenaNaIspitu();
+						for(OcenaNaIspitu o : s.getNepolozeni_ispiti()) {
+							if(o.getPredmet().getSifra_predmeta()==zaBrisanje.getSifra_predmeta()) {
+								trazena = o;
+							}
+						}
+						s.getNepolozeni_ispiti().remove(trazena);
+						nep_predmeti.azurirajPrikaz();
+					}
+				}
+		    });
+		    
 		    this.add(tabbedPane);
 		    
 		    btn_ponistiOcenu.addActionListener(new ActionListener() {
@@ -718,52 +751,98 @@ public class DijalogIzmenaStudenta extends JDialog {
 					    if (dialogResult == JOptionPane.YES_OPTION) {
 					    	OcenaNaIspitu p = BazaPolozenih.getInstance().getRow(PolozeniIspitiJTable.rowSelectedIndex);
 					    	Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+					    	boolean moze = false;
+							for(Predmet pr : BazaPredmeta.getInstance().getPredmeti()) {
+								if(p.getPredmet().getSifra_predmeta().equals(pr.getSifra_predmeta()) || p.getPredmet().getNaziv().equals(pr.getNaziv())) {
+									moze = true;
+								}
+							}
+							if(!moze) {
+								s.getPolozeni_ispiti().remove(p);
+								PolozeniIspitiJTable.azurirajPrikaz();
+								double prosecna_ocena2 = 0;
+								int broj_predmeta2 = 0;
+								int espb_ukupno2=0;
+								for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+									espb_ukupno2 += o.getPredmet().getEspb();
+									broj_predmeta2++;
+									int ocena = 0;
+									switch(o.getVrednost_ocene()) {
+									case sest: 
+										ocena = 6;
+										break;
+									case sedam: 
+										ocena = 7;
+										break;
+									case osam: 
+										ocena = 8;
+										break;
+									case devet: 
+										ocena = 9;	
+										break;
+									case deset: 
+										ocena = 10;
+										break;
+									}
+									prosecna_ocena2 += ocena;
+								}
+								if(prosecna_ocena2==0) {
+									prosek.setText("Prosecna ocena je 0");
+									student.setProsecna_ocena(prosecna_ocena2);
+								}else {
+									prosecna_ocena2/=broj_predmeta2;
+									prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
+									student.setProsecna_ocena(prosecna_ocena2);
+								}
+								student.setProsecna_ocena(prosecna_ocena2);
+								StudentiJTable.azurirajPrikaz();
+								espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
+								return;
+							}
 					    	p.setVrednost_ocene(Vrednost_Ocene.pet);
 							s.getPolozeni_ispiti().remove(p);
 							PolozeniIspitiJTable.azurirajPrikaz();
 							s.getNepolozeni_ispiti().add(p);
 							NepolozeniPredmetiJTable.azurirajPrikaz();
-							double prosecna_ocena2 = 0;
-							int broj_predmeta2 = 0;
-							int espb_ukupno2=0;
-							for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
-								espb_ukupno2 += o.getPredmet().getEspb();
-								broj_predmeta2++;
-								int ocena = 0;
-								switch(o.getVrednost_ocene()) {
-								case sest: 
-									ocena = 6;
-									break;
-								case sedam: 
-									ocena = 7;
-									break;
-								case osam: 
-									ocena = 8;
-									break;
-								case devet: 
-									ocena = 9;	
-									break;
-								case deset: 
-									ocena = 10;
-									break;
-								default:
-									ocena = 6;
-									break;
-									
-								}
-								prosecna_ocena2 += ocena;
-							}
-							if(prosecna_ocena2==0) {
-								prosek.setText("Prosecna ocena je 0");
-								student.setProsecna_ocena(prosecna_ocena2);
-							}else {
-								prosecna_ocena2/=broj_predmeta2;
-								prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
-								student.setProsecna_ocena(prosecna_ocena2);
-							}
-							espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					    }	
 				    }
+					double prosecna_ocena2 = 0;
+					int broj_predmeta2 = 0;
+					int espb_ukupno2=0;
+					for(OcenaNaIspitu o : student.getPolozeni_ispiti()) {
+						espb_ukupno2 += o.getPredmet().getEspb();
+						broj_predmeta2++;
+						int ocena = 0;
+						switch(o.getVrednost_ocene()) {
+						case sest: 
+							ocena = 6;
+							break;
+						case sedam: 
+							ocena = 7;
+							break;
+						case osam: 
+							ocena = 8;
+							break;
+						case devet: 
+							ocena = 9;	
+							break;
+						case deset: 
+							ocena = 10;
+							break;
+						}
+						prosecna_ocena2 += ocena;
+					}
+					if(prosecna_ocena2==0) {
+						prosek.setText("Prosecna ocena je 0");
+						student.setProsecna_ocena(prosecna_ocena2);
+					}else {
+						prosecna_ocena2/=broj_predmeta2;
+						prosek.setText("Prosecna ocena je " + df.format(prosecna_ocena2));
+						student.setProsecna_ocena(prosecna_ocena2);
+					}
+					student.setProsecna_ocena(prosecna_ocena2);
+					StudentiJTable.azurirajPrikaz();
+					espb.setText("Ukupan broj ESPB bodova je " + Integer.toString(espb_ukupno2));
 					NepolozeniPredmetiJTable.azurirajPrikaz();
  
 				}
@@ -771,4 +850,60 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    });
 		    
 		}
+}
+
+
+class DijalogDodavanjaPredmetaStudentu extends JDialog {
+
+	private static final long serialVersionUID = 784055322302314127L;
+
+	public DijalogDodavanjaPredmetaStudentu(Frame parent, String title, boolean modal) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+					}
+				}
+
+				
+				StudentKontroler.getInstance().dodajNepolozeniIspit(StudentiJTable.rowSelectedIndex, predmetKojiSeDodaje, Vrednost_Ocene.pet);
+				dispose();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
+		this.setVisible(true);
+	}
 }

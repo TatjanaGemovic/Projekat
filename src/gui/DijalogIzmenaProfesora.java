@@ -21,12 +21,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import controller.PredmetKontroler;
 import controller.ProfesorKontroler;
 import model.Adresa;
+import model.BazaNepolozenihPredmeta;
+import model.BazaPredmeta;
 import model.BazaProfesora;
+import model.BazaStudenata;
+import model.OcenaNaIspitu;
+import model.Predmet;
 import model.Profesor;
+import model.Student;
+import model.Vrednost_Ocene;
 
 public class DijalogIzmenaProfesora extends JDialog {
 
@@ -42,9 +51,9 @@ public class DijalogIzmenaProfesora extends JDialog {
 	private boolean dobarbrlicne = true;
 	private boolean dobrozvanje = true;
 	private boolean dobarstaz = true;
-	
+	public ProfesorPredajeJTable prof_predaje = new ProfesorPredajeJTable(); 
 	public DijalogIzmenaProfesora(Frame parent, String title, boolean modal) {
-		super(parent, "Izmena Profesora", modal);
+		super(parent, MainFrame.getInstance().getResourceBundle().getString("izmena_profesora"), modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
@@ -52,9 +61,11 @@ public class DijalogIzmenaProfesora extends JDialog {
 		setSize(diaWidth*3/5, diaHeight*19/20);
 		setLocationRelativeTo(parent);
 		
-		JButton potvrda=new JButton("Potvrdi");
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		JButton potvrda=new JButton(MainFrame.getInstance().getResourceBundle().getString("potvrda"));
 		potvrda.setEnabled(true);
-		JButton odustanak=new JButton("Odustani");
+		JButton odustanak=new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 		
 		odustanak.addActionListener(new ActionListener() {
 
@@ -62,7 +73,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 
 			int dialogButton = JOptionPane.YES_NO_OPTION;
-			           int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+			           int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			           if (dialogResult == JOptionPane.YES_OPTION) {
 			        	   dispose();
@@ -75,22 +86,21 @@ public class DijalogIzmenaProfesora extends JDialog {
 		panelButton.add(potvrda);
 		panelButton.add(odustanak);
 	    
-	    this.add(panelButton, BorderLayout.SOUTH);
+		JPanel panelInformacije = new JPanel();
 		
 	    JPanel panelCenter = new JPanel();
 	    panelCenter.setLayout(new GridBagLayout());
-	    this.add(panelCenter, BorderLayout.CENTER);
 	    
-	    JLabel lblIme = new JLabel("Ime:");
-	    JLabel lblPrezime = new JLabel("Prezime:");
-	    JLabel lblDatumRodjenja = new JLabel("Datum rodjenja:");
-	    JLabel lblAdresa = new JLabel("Adresa stanovanja:");
-	    JLabel lblTelefon = new JLabel("Broj telefona:");
-	    JLabel lblEmailAdresa = new JLabel("Email adresa:");
-	    JLabel lblAdresaKancelarije= new JLabel("Adresa kancelarije:");
-	    JLabel lblBrLicneKarte = new JLabel("Broj Licne Karte:");
-	    JLabel lblZvanje = new JLabel("Zvanje:");
-	    JLabel lblGodineStaza = new JLabel("Godine staza:");
+	    JLabel lblIme = new JLabel( MainFrame.getInstance().getResourceBundle().getString("ime"));
+	    JLabel lblPrezime = new JLabel(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+	    JLabel lblDatumRodjenja = new JLabel(MainFrame.getInstance().getResourceBundle().getString("dat_rodjenja"));
+	    JLabel lblAdresa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("adresa_stan"));
+	    JLabel lblTelefon = new JLabel(MainFrame.getInstance().getResourceBundle().getString("telefon"));
+	    JLabel lblEmailAdresa = new JLabel(MainFrame.getInstance().getResourceBundle().getString("mail"));
+	    JLabel lblAdresaKancelarije= new JLabel(MainFrame.getInstance().getResourceBundle().getString("adresa_kanc"));
+	    JLabel lblBrLicneKarte = new JLabel(MainFrame.getInstance().getResourceBundle().getString("br_licne"));
+	    JLabel lblZvanje = new JLabel(MainFrame.getInstance().getResourceBundle().getString("zvanje"));
+	    JLabel lblGodineStaza = new JLabel(MainFrame.getInstance().getResourceBundle().getString("god_staza"));
 	    
 	    final JTextField txtIme = new JTextField();
 	    final JTextField txtPrezime = new JTextField();
@@ -191,7 +201,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtIme.getText()).matches("[A-Z][a-z]+")) {
+				if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
 					dobroime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -227,7 +237,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtPrezime.getText()).matches("[A-Z][a-z]+")) {
+				if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
 					dobroprezime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -339,7 +349,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtTelefon.getText()).matches("[0][0-9]{9}|[0][0-9]{8}")) {
+				if((txtTelefon.getText()).matches("[0][0-9]{8}|[0][0-9]{9}|[0-9]{3}/[0-9]{3,4}\\-[0-9]{3,4}")) {
 					dobarbroj = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -377,7 +387,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9]+[.]?[a-zA-Z0-9]+[@]([a-z]+[.])+[a-z]+")) {
+				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[.]?[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[@]([a-z]+[.])+[a-z]+")) {
 					dobarmail = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -451,7 +461,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtBrLicneKarte.getText()).matches("[0-9]{8}")) {
+				if((txtBrLicneKarte.getText()).matches("[0-9]{9}")) {
 					dobarbrlicne = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -487,7 +497,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtZvanje.getText()).matches("[a-zA-Z]+")) {
+				if((txtZvanje.getText()).matches("[a-zA-Z ]+")) {
 					dobrozvanje = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -574,7 +584,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da postavite nove parametre?", "Potvrda izmene", dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("novi_param"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 			    
 			    
 
@@ -582,14 +592,14 @@ public class DijalogIzmenaProfesora extends JDialog {
 			    	
 			    	if(txtIme.getText().isEmpty() || txtPrezime.getText().isEmpty() || txtDatumRodjenja.getText().isEmpty() || txtAdresa.getText().isEmpty() || txtTelefon.getText().isEmpty() || txtEmailAdresa.getText().isEmpty() || txtAdresaKancelarije.getText().isEmpty() || txtBrLicneKarte.getText().isEmpty() || txtZvanje.getText().isEmpty() || txtGodineStaza.getText().isEmpty()) {
 			    		
-			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(),  MainFrame.getInstance().getResourceBundle().getString("mora_popunjeno"), MainFrame.getInstance().getResourceBundle().getString("greska"), JOptionPane.ERROR_MESSAGE);
 			    		return;
 			    	}
 			    		
 			    	String brojLicneKarte = txtBrLicneKarte.getText();
 			    	for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			    		if(brojLicneKarte.equals(p.getBroj_licne_karte()) && p!=profesor) {
-			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Vec postoji profesor sa unetim brojem licne karte");
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(),  MainFrame.getInstance().getResourceBundle().getString("br_licne_postoji"));
 			    			return;
 			    		}
 			    	}
@@ -618,6 +628,72 @@ public class DijalogIzmenaProfesora extends JDialog {
 			    }
 			}
 		});
+	   panelInformacije.add(panelCenter, BorderLayout.CENTER);
+	   panelInformacije.add(panelButton, BorderLayout.SOUTH);
+	   tabbedPane.add( MainFrame.getInstance().getResourceBundle().getString("informacije"), panelInformacije); 
+	   
+	   
+	   
+	   JPanel panelPredmeta = new JPanel();
+	   panelPredmeta.setLayout(new BorderLayout());
+	   JPanel panelDugmici = new JPanel();
+	    
+	   JButton dodaj = new JButton( MainFrame.getInstance().getResourceBundle().getString("dodaj_predmet"));
+	   panelDugmici.add(dodaj);
+	   JButton obrisi = new JButton( MainFrame.getInstance().getResourceBundle().getString("ukloni_predmet"));
+	   panelDugmici.add(obrisi);
+	    
+	  // ProfesorPredajeJTable profPredaje = new ProfesorPredajeJTable();
+	   JScrollPane profPredajePane = new JScrollPane(prof_predaje);
+	   
+	   panelPredmeta.add(panelDugmici, BorderLayout.NORTH);
+	   panelPredmeta.add(profPredajePane, BorderLayout.CENTER);
+		
+	   tabbedPane.add( MainFrame.getInstance().getResourceBundle().getString("open_predmeti"), panelPredmeta);
+	   dodaj.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			DijalogDodavanjePredmetaProfesoru dijalogDodavanja = new DijalogDodavanjePredmetaProfesoru(parent,  MainFrame.getInstance().getResourceBundle().getString("dodavanje_predmeta"), modal, prof_predaje);
+		}
+		   
+	   });
+	   obrisi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object[] options = { MainFrame.getInstance().getResourceBundle().getString("da"),
+						 MainFrame.getInstance().getResourceBundle().getString("ne")};
+				int n = JOptionPane.showOptionDialog(parent,
+						 MainFrame.getInstance().getResourceBundle().getString("siguran"),
+						 MainFrame.getInstance().getResourceBundle().getString("odabir_profesora"),
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,     
+						options,  
+						options[0]);
+				
+				if(n==JOptionPane.YES_OPTION) {
+					String sifrapredmeta = BazaPredmeta.getInstance().getValueAtProfesorPredaje(ProfesorPredajeJTable.rowSelectedIndex, 0);
+					Predmet predmetKojiSeBrise = new Predmet();
+					int index = 0;
+					for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+						if(sifrapredmeta==p.getSifra_predmeta()) {
+							predmetKojiSeBrise = p;
+							break;
+						}
+						index++;
+					}
+					Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+					prof.getProfesor_na_predmetu().remove(predmetKojiSeBrise);
+					predmetKojiSeBrise.setPredmetni_profesor(null);
+					BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeBrise);
+					prof_predaje.azurirajPrikaz();
+				}
+			}
+	    });
+	    
+	   this.add(tabbedPane);
 	}
 }
 
@@ -625,8 +701,8 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 	
 	private static final long serialVersionUID = 6856523773615531190L;
 
-	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal) {
-		super(parent, "Odabir Profesora", modal);
+	public DijalogDodavanjeProfesoraNaPredmet(Frame parent, String title, boolean modal, int i) {
+		super(parent, title, modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
@@ -634,8 +710,8 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 		setSize(diaWidth*2/5, diaHeight*10/20);
 		setLocationRelativeTo(parent);
 		
-		JButton potvrda=new JButton("Potvrdi");
-		JButton odustanak=new JButton("Odustani");
+		JButton potvrda=new JButton( MainFrame.getInstance().getResourceBundle().getString("potvrda"));
+		JButton odustanak=new JButton( MainFrame.getInstance().getResourceBundle().getString("cancel"));
 	
 		odustanak.addActionListener(new ActionListener() {
 	
@@ -643,7 +719,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 	
 					int dialogButton = JOptionPane.YES_NO_OPTION;
-				    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda odustanka", dialogButton);
+				    int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 	
 				    if (dialogResult == JOptionPane.YES_OPTION) {
 				    	dispose();
@@ -669,21 +745,35 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    if(ProfesoriNaPredmetuJTable.rowSelectedIndex != -1 && ProfesoriNaPredmetuJTable.rowSelectedIndex < BazaProfesora.getInstance().getProfesori().size()) {
 			    	
 			    	int dialogButton = JOptionPane.YES_NO_OPTION;
-			    	int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
+			    	int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 			    	
 			    	if (dialogResult == JOptionPane.YES_OPTION) {
-			    		dispose();
-			    		Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
-			    		DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
-			    		DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
-			    		DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
+			    		
+			    		if(i == 0) {
+			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    			Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
+			    			PredmetKontroler.getInstance().dodajProfesoraNaPredmet(p, pred);
+			    			DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
+			    			DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
+			    			DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);
+			    			DijalogIzmenaPredmeta.k = 2;
+			    		} 
+			    		if(i == 1){
+			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    			DijalogDodavanjaPredmeta.profesorLista.setText(p.getImeIPrezime());
+			    			DijalogDodavanjaPredmeta.btnRemoveProfesor.setEnabled(true);
+			    			DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(false);
+			    			DijalogDodavanjaPredmeta.k = 2;
+			    		}
 			    		
 			    	}
 			    }
+			    dispose();
 			}
 			
 		});
 	}
+	
 }
 
 
@@ -692,7 +782,7 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 	private static final long serialVersionUID = -5299494835204534699L;
 
 	public DijalogBrisanjaProfesoraSaPredmeta(Frame parent, String title, boolean modal) {
-		super(parent, "Ukloni Profesora", modal);
+		super(parent, title, modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
@@ -700,8 +790,10 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 		setSize(diaWidth*2/5, diaHeight*5/20);
 		setLocationRelativeTo(parent);
 		
-		JButton potvrda=new JButton("Potvrdi");
-		JButton odustanak=new JButton("Odustani");
+		JButton potvrda=new JButton( MainFrame.getInstance().getResourceBundle().getString("potvrda"));
+		JButton odustanak=new JButton( MainFrame.getInstance().getResourceBundle().getString("cancel"));
+		
+		
 	
 		odustanak.addActionListener(new ActionListener() {
 	
@@ -718,7 +810,7 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 		panelButton.add(odustanak);
 	    this.add(panelButton, BorderLayout.SOUTH);
 		
-	    JLabel labela = new JLabel("Da li ste sigurni?");
+	    JLabel labela = new JLabel( MainFrame.getInstance().getResourceBundle().getString("siguran"));
 	    JPanel profesoriBrisanje = new JPanel();
 	    profesoriBrisanje.add(labela, BorderLayout.SOUTH);
 		this.add(profesoriBrisanje, BorderLayout.CENTER);
@@ -738,6 +830,71 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 			}
 			
 		});
+	}
+}
+
+class DijalogDodavanjePredmetaProfesoru extends JDialog {
+
+	private static final long serialVersionUID = 1290256926537686357L;
+
+	public DijalogDodavanjePredmetaProfesoru(Frame parent, String title, boolean modal, ProfesorPredajeJTable prof_predaje) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*3/5, diaHeight*4/5);
+		setLocationRelativeTo(parent);
+		
+		//JPanel panelzaDodavanje = new JPanel();
+		PotencijalniJTable tabelaPotencijalnih = new PotencijalniJTable();
+		JScrollPane panePotencijalni = new JScrollPane(tabelaPotencijalnih);
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.add(panePotencijalni);
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JButton dodajPredmet = new JButton( MainFrame.getInstance().getResourceBundle().getString("add"));
+		JButton odustani = new JButton( MainFrame.getInstance().getResourceBundle().getString("cancel"));
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajPredmet);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		if(tabelaPotencijalnih.getValueAt(0,0).toString()=="")
+			dodajPredmet.setEnabled(false);
+		
+		dodajPredmet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sifra_naziv_predmeta = BazaPredmeta.getInstance().getValueAtZaDodavanje(PotencijalniJTable.rowSelectedIndex, 0);
+				Predmet predmetKojiSeDodaje = new Predmet();
+				Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+				int index = 0;
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					if(sifra_naziv_predmeta.contains(p.getSifra_predmeta())) {
+						predmetKojiSeDodaje = p;
+						break;
+					}
+					index++;
+				}
+				predmetKojiSeDodaje.setPredmetni_profesor(prof);
+				BazaPredmeta.getInstance().getPredmeti().set(index, predmetKojiSeDodaje);
+				prof.getProfesor_na_predmetu().add(predmetKojiSeDodaje);
+				tabelaPotencijalnih.azurirajPrikaz();
+				dispose();
+				prof_predaje.azurirajPrikaz();
+			}
+		});
+		odustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+			
+		});
+		this.setVisible(true);
 	}
 }
 

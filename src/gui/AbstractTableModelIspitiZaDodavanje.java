@@ -19,11 +19,11 @@ public class AbstractTableModelIspitiZaDodavanje extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return BazaPredmeta.getInstance().getColumnCount();
+		return BazaPredmeta.getInstance().getColumnCountZaDodavanje();
 	}
 	
 	public String getColumnName(int column) {
-		return BazaPredmeta.getInstance().getColumnName(column);
+		return BazaPredmeta.getInstance().getColumnNameZaDodavanje(column);
 	}
 
 	@Override

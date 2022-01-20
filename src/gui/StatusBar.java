@@ -16,11 +16,12 @@ import javax.swing.JPanel;
 public class StatusBar extends JMenuBar {
 
 	private static final long serialVersionUID = 5640457214546211261L;
+	private JLabel nazivApp;
 	public static JLabel nazivTaba = new JLabel("- Studenti");
 	public StatusBar() {
 		JPanel nazivAplikacijePanel = new JPanel();
 		nazivAplikacijePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		JLabel nazivApp = new JLabel("  Studentska slu�ba");
+		nazivApp = new JLabel("  Studentska sluzba");
 		nazivAplikacijePanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,Color.BLACK));
 		nazivAplikacijePanel.add(nazivApp);
 		nazivAplikacijePanel.add(nazivTaba);
@@ -45,5 +46,14 @@ public class StatusBar extends JMenuBar {
 		
 		add(datumVremePanel);
 		
+	}
+	public void updateComponent() {
+		nazivApp.setText(MainFrame.getInstance().getResourceBundle().getString("naslovAplikacije"));
+		if(TabbedPane.tabIndex==TrenTab.Student)
+			nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_studenti"));
+		else if(TabbedPane.tabIndex==TrenTab.Profesor)
+			nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_profesori"));
+		else if(TabbedPane.tabIndex==TrenTab.Predmet)
+			nazivTaba.setText("- " + MainFrame.getInstance().getResourceBundle().getString("open_predmeti"));	
 	}
 }

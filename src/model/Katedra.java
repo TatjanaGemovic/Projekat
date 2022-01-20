@@ -5,14 +5,16 @@ import java.util.ArrayList;
 
 public class Katedra implements Serializable{
 
-	private static final long serialVersionUID = 7920837647787869436L;
+	private static final long serialVersionUID = -6887287643096525038L;
+	private int id;
 	private String sifra;
 	private String naziv_katedre;
 	private Profesor sef_katedre;
 	private ArrayList<Profesor> profesori_na_katedri = new ArrayList<Profesor>();
 	
-	public Katedra(String sifra, String naziv_katedre, Profesor sef_katedre) {
+	public Katedra(int id, String sifra, String naziv_katedre, Profesor sef_katedre) {
 		super();
+		this.id = id;
 		this.sifra = sifra;
 		this.naziv_katedre = naziv_katedre;
 		this.sef_katedre = sef_katedre;
@@ -29,6 +31,14 @@ public class Katedra implements Serializable{
 			}
 		}
 		profesori_na_katedri.add(p);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getSifra() {
@@ -69,6 +79,5 @@ public class Katedra implements Serializable{
 				+ " || profesori na katedri:" + profesori_na_katedri;
 	}
 	
-	
-
 }
+

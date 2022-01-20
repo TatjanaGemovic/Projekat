@@ -1,6 +1,5 @@
 package controller;
 
-import gui.MainFrame;
 import gui.PredmetiJTable;
 import model.BazaPredmeta;
 import model.Predmet;
@@ -39,6 +38,10 @@ public class PredmetKontroler {
 	    Predmet predmet = BazaPredmeta.getInstance().getRow(rowSelectedIndex);
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifra_predmeta());
 		PredmetiJTable.azurirajPrikaz();
+	}
+
+	public void dodajProfesoraNaPredmet(Profesor p, Predmet pred) {
+		pred.setPredmetni_profesor(p);
 	}
 	
 }

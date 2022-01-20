@@ -4,11 +4,13 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import gui.MenuBar;
+import gui.ProfesoriJTable;
 import gui.StudentiJTable;
+import gui.TabbedPane;
+import gui.TrenTab;
 
 public class BazaPredmeta{
 
@@ -22,7 +24,9 @@ public class BazaPredmeta{
 	}
 	
 	private List<Predmet> predmeti;
+	private List<Predmet> potencijalni;
 	public List<String> kolone;
+	public String kolonaZaDodavanje;
 	
 	public BazaPredmeta() {
 		 
@@ -32,6 +36,8 @@ public class BazaPredmeta{
 		this.kolone.add("Broj ESPB bodova");
 		this.kolone.add("Godina");
 		this.kolone.add("Semestar");
+		
+		this.kolonaZaDodavanje = "";
 		
 		initPredmeti();
 	}
@@ -71,6 +77,16 @@ public class BazaPredmeta{
 		 return 5;
 	}
 
+	public int getColumnCountZaDodavanje() {
+		
+		return 1;
+	}
+	
+	public int getColumnCountProfPredaje() {
+		// TODO Auto-generated method stub
+		return 4;
+	}
+	
 	public int getRowCount() {
 		return 40;
 	}
@@ -81,6 +97,18 @@ public class BazaPredmeta{
 	
 	public String getColumnName(int index) {
 		return this.kolone.get(index);
+	}
+	
+	public String getColumnNameProfPredaje(int index) {
+		if(index>=2)
+			return this.kolone.get(index+1);
+		else
+			return this.kolone.get(index);
+	}
+	
+	public String getColumnNameZaDodavanje(int index) {
+		
+		return this.kolonaZaDodavanje;
 	}
 	
 	public Predmet getRow(int rowIndex) {
@@ -123,23 +151,94 @@ public class BazaPredmeta{
 	}
 	
 	public String getValueAtZaDodavanje(int row, int column) {
-		List<Predmet> potencijalni = new ArrayList<Predmet>();
-		Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
-		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			if(!student.getPolozeni_ispiti().contains(p) && !student.getNepolozeni_ispiti().contains(p) && student.getTrenutna_god()>=p.getGodina_izvodjenja())
-			potencijalni.add(p);
+		potencijalni = new ArrayList<Predmet>();
+		if(TabbedPane.tabIndex==TrenTab.Student) {
+			Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(student.getTrenutna_god()<p.getGodina_izvodjenja()) continue;
+				int pronadjen = 0;
+				for(OcenaNaIspitu polozeni : student.getPolozeni_ispiti()) {
+					if(p.getNaziv().equals(polozeni.getPredmet().getNaziv())) {
+						pronadjen++;
+					}
+				}
+				for(OcenaNaIspitu nepolozeni : student.getNepolozeni_ispiti()) {
+					if(p.getNaziv().equals(nepolozeni.getPredmet().getNaziv())) {
+						pronadjen++;
+					}
+				}
+				if(pronadjen==0) this.potencijalni.add(p);
+			}
+		}
+		else if(TabbedPane.tabIndex==TrenTab.Profesor) {
+			Profesor profesor = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getPredmetni_profesor()==null)
+					this.potencijalni.add(p);
+			}
 		}
 		if(row < potencijalni.size()) {
-			Predmet predmet = this.predmeti.get(row);
+			Predmet predmet = this.potencijalni.get(row);
+			Predmet p2 = null;
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta()) || p.getNaziv().equals(predmet.getNaziv())) {
+					p2 = p;
+				}
+			}
 			switch (column) {
 			case 0:
-				return predmet.getSifra_predmeta() + " - " + predmet.getNaziv();
+				return p2.getSifra_predmeta() + " - " + p2.getNaziv();
+			default:
+				return null;
+			}
+		} else {
+			switch (column) {
+			case 0: 
+				return "";
+			default:
+				return null;
+		}
+		}
+	}
+
+	public String getValueAtProfesorPredaje(int row, int column) {
+		Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
+		List<Predmet> predmeti = new ArrayList<Predmet>();
+		for(Predmet pred : BazaPredmeta.getInstance().getPredmeti()) {
+			if(pred.getPredmetni_profesor()!=null && (pred.getPredmetni_profesor().getIme().equals(prof.getIme()) || pred.getPredmetni_profesor().getPrezime().equals(prof.getPrezime()))) {
+				predmeti.add(pred);
+			}
+		}
+		if(row < predmeti.size()) {
+			Predmet predmet = predmeti.get(row);
+			Predmet p2 = null;
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta()) || p.getNaziv().equals(predmet.getNaziv())) {
+					p2 = p;
+				}
+			}
+			switch (column) {
+			case 0:
+				return p2.getSifra_predmeta();
+			case 1:
+				return p2.getNaziv();
+			case 2:
+				return Integer.toString(p2.getGodina_izvodjenja());
+			case 3:
+				return p2.getSemestar().toString();
 			default:
 				return null;
 			}
 		} else {
 			switch (column) {
 			case 0:
+				return "";
+			case 1:
+				return "";
+			case 2:
+				return "";
+			case 3:
+				return "";
 			default:
 				return null;
 		}
@@ -172,5 +271,4 @@ public class BazaPredmeta{
 			}
 		}
 	}
-
 }
