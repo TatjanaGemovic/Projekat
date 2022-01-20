@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import gui.KatedreJTable;
 import gui.MenuBar;
 
 
@@ -136,6 +137,29 @@ public class BazaProfesora{
 	public String getValueAt2(int row, int column) {
 		if(row < profesori.size()) {
 			Profesor profesor = this.profesori.get(row);
+			switch (column) {
+				case 0:
+					return profesor.getImeIPrezime();
+				default:
+					return null;
+			}
+		} else {
+			switch (column) {
+			case 0:
+				return "";
+			default:
+				return null;
+			}
+		}
+	}
+	public String getValueAt4(int row, int column) {
+		potencijalni = new ArrayList<Profesor>();
+		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			if(p.getId_katedre()!=BazaKatedri.getInstance().getRow(KatedreJTable.rowSelectedIndex).getId())
+				potencijalni.add(p);
+		}
+		if(row < potencijalni.size()) {
+			Profesor profesor = this.potencijalni.get(row);
 			switch (column) {
 				case 0:
 					return profesor.getImeIPrezime();

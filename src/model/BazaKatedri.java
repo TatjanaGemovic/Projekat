@@ -23,25 +23,20 @@ public class BazaKatedri{
 	
 	public List<Katedra> katedre;
 	public List<String> kolone;
+	public int id;
 	
 	public BazaKatedri() {
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Naziv katedre");
 		this.kolone.add("Sef katedre");
+		id=0;
 		
 		initKatedre();
 	}
 	
 	private void initKatedre() {
 		this.katedre = new ArrayList<Katedra>();
-		
-		/*Katedra k = new Katedra(1, "k1", "Automatika", null);
-		this.katedre.add(k);
-		k = new Katedra(2, "k2", "Fizika", null);
-		this.katedre.add(k);
-		k = new Katedra(3, "k3", "Matematika", null);
-		this.katedre.add(k);*/
 		
 		ObjectInputStream inKatedre = null;
 		try {
@@ -89,7 +84,7 @@ public class BazaKatedri{
 					return katedra.getNaziv_katedre();
 				case 1:
 					if(katedra.getSef_katedre()==null)
-						return "nema �efa";
+						return "nema sefa";
 					return katedra.getSef_katedre().getImeIPrezime();
 				default:
 					return null;
@@ -104,5 +99,11 @@ public class BazaKatedri{
 				return null;
 		}
 		}
+	}
+	
+	public void dodajKatedru(String sifra,String naziv) {
+		Katedra k = new Katedra(id, sifra, naziv, null);
+		id++;
+		this.katedre.add(k);
 	}
 }

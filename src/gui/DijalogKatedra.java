@@ -3,15 +3,23 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
+import controller.KatedraKontroler;
+import controller.PredmetKontroler;
 import model.Adresa;
 import model.BazaKatedri;
 import model.BazaNepolozenihPredmeta;
@@ -22,6 +30,7 @@ import model.Katedra;
 import model.OcenaNaIspitu;
 import model.Predmet;
 import model.Profesor;
+import model.Semestar;
 import model.Student;
 import model.Vrednost_Ocene;
 
@@ -38,11 +47,11 @@ public class DijalogKatedra extends JDialog {
 		
 		JButton dodajSefa = new JButton("Dodaj sefa");
 		JButton dodajProfesora = new JButton("Dodaj profesora");
-		JButton odustani = new JButton("Odustanak");
+		JButton dodajKatedru = new JButton("Dodaj katedru");
 		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajKatedru);
 		panelZaDugme.add(dodajSefa);
 		panelZaDugme.add(dodajProfesora);
-		panelZaDugme.add(odustani);
 		add(panelZaDugme, BorderLayout.NORTH);
 		
 		KatedreJTable tabelaKatedri = new KatedreJTable();
@@ -91,16 +100,105 @@ public class DijalogKatedra extends JDialog {
 				
 			}
 		});
-		odustani.addActionListener(new ActionListener() {
+		dodajKatedru.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				
+				DijalogDodavanjaKatedre dij = new DijalogDodavanjaKatedre(parent, "Dodavanje katedre", modal);
 			}
 		});
 		this.setVisible(true);
 	}
+}
+
+class DijalogDodavanjaKatedre extends JDialog {
+	public DijalogDodavanjaKatedre(Frame parent, String title, boolean modal) {
+		super(parent, title, modal);
+		
+		Dimension parentSize = parent.getSize();
+		int diaWidth = parentSize.width;
+		int diaHeight = parentSize.height;
+		setSize(diaWidth*2/5, diaHeight*2/5);
+		setLocationRelativeTo(parent);
+		
+		JButton dodajKatedru = new JButton("Dodaj");
+		JButton odustani = new JButton("Odustani");
+		JPanel panelZaDugme = new JPanel();
+		panelZaDugme.add(dodajKatedru);
+		panelZaDugme.add(odustani);
+		add(panelZaDugme, BorderLayout.SOUTH);
+		
+		JPanel panelPotencijalni = new JPanel();
+		panelPotencijalni.setLayout(new GridBagLayout());
+		add(panelPotencijalni, BorderLayout.CENTER);
+		
+		JLabel lblSifra = new JLabel("Sifra katedre:");
+		JLabel lblNaziv = new JLabel("Naziv katedre:");
+		 
+		final JTextField txtSifra = new JTextField();
+		final JTextField txtNaziv = new JTextField();
+		
+		GridBagConstraints gbcLSifra = new GridBagConstraints();
+		gbcLSifra.fill = GridBagConstraints.HORIZONTAL;
+		gbcLSifra.gridx = 0;
+		gbcLSifra.gridy = 0;
+		gbcLSifra.insets = new Insets(20,40, 0,0);
+		panelPotencijalni.add(lblSifra, gbcLSifra);
+		 
+		GridBagConstraints gbcLNaziv = new GridBagConstraints();
+		gbcLNaziv.fill = GridBagConstraints.HORIZONTAL;
+		gbcLNaziv.gridx = 0;
+		gbcLNaziv.gridy = 1;
+		gbcLNaziv.insets = new Insets(20,40, 0,0);
+		panelPotencijalni.add(lblNaziv, gbcLNaziv);
+		
+		GridBagConstraints gbcTxtSifra = new GridBagConstraints();
+		gbcTxtSifra .gridx = 1;
+		gbcTxtSifra .gridy = 0;
+		gbcTxtSifra .weightx = 100;
+		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
+		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
+		panelPotencijalni.add(txtSifra, gbcTxtSifra );
+		
+		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
+		gbcTxtNaziv .gridx = 1;
+		gbcTxtNaziv.gridy = 1;
+		gbcTxtNaziv .weightx = 100;
+		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
+		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
+		panelPotencijalni.add(txtNaziv, gbcTxtNaziv );
+		
+		dodajKatedru.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+			    int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Potvrda", dialogButton);
+
+			    if (dialogResult == JOptionPane.YES_OPTION) {
+
+			    	if(txtSifra.getText().isEmpty() || txtNaziv.getText().isEmpty()) {
+			    		
+			    		JOptionPane.showMessageDialog(MainFrame.getInstance(), "Sva polja moraju biti popunjena", "Greska", JOptionPane.ERROR_MESSAGE);
+			    		return;
+			    	}
+			    	
+			    	String sifra = txtSifra.getText();
+			    	String naziv = txtNaziv.getText();
+			    	
+			    	KatedraKontroler.getInstance().dodajKatedru(sifra, naziv);
+			    	dispose();
+			    	
+			    }
+				
+			}
+			
+		});
+		
+		this.setVisible(true);
+	}
+	
 }
 
 class DijalogDodavanjaSefaKatedri extends JDialog {
@@ -188,7 +286,7 @@ class DijalogDodavanjaProfesoraKatedri extends JDialog {
 		add(panelZaDugme, BorderLayout.NORTH);
 		
 		//JPanel panelzaDodavanje = new JPanel();
-		ProfesoriNaPredmetuJTable profesoriTable = new ProfesoriNaPredmetuJTable();
+		ProfesoriNaKatedriJTable profesoriTable = new ProfesoriNaKatedriJTable();
 		JScrollPane paneProfesora = new JScrollPane(profesoriTable);
 		JPanel panelProfesora = new JPanel();
 		panelProfesora.add(paneProfesora);

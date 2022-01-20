@@ -306,9 +306,13 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		}
 		semestarStud.setSelectedIndex(k-1);
 		if(predmet.getPredmetni_profesor()!=null) {
-			profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+			for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+				if(p.getBroj_licne_karte().equals(predmet.getPredmetni_profesor().getBroj_licne_karte())) {
+					profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+				}
+			}
 			btnRemoveProfesor.setEnabled(true);
-			btnAddProfesor.setEnabled(false);
+					btnAddProfesor.setEnabled(false);
 		} else{
 			profesorLista.setText(null);
 			btnRemoveProfesor.setEnabled(false);

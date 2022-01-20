@@ -749,6 +749,8 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    	if (dialogResult == JOptionPane.YES_OPTION) {
 			    		dispose();
 			    		Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
+			    		Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
+			    		pred.setPredmetni_profesor(p);
 			    		DijalogIzmenaPredmeta.profesorLista.setText(p.getImeIPrezime());
 			    		DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(true);
 			    		DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(false);

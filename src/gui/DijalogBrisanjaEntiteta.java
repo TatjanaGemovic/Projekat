@@ -16,9 +16,11 @@ import javax.swing.JPanel;
 import controller.PredmetKontroler;
 import controller.ProfesorKontroler;
 import controller.StudentKontroler;
+import model.BazaKatedri;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaStudenata;
+import model.Katedra;
 import model.OcenaNaIspitu;
 import model.Predmet;
 import model.Profesor;
@@ -86,6 +88,16 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 		           if (dialogResult == JOptionPane.YES_OPTION) {
 		        	   switch (TabbedPane.tabIndex) {
 						case Profesor:
+							for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+								if(p.getPredmetni_profesor()!=null && (p.getPredmetni_profesor().getImeIPrezime().equals(BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex).getImeIPrezime()) || p.getPredmetni_profesor().getBroj_licne_karte().equals(BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex).getBroj_licne_karte()))) {
+									p.setPredmetni_profesor(null);
+								}
+							}
+							for(Katedra k : BazaKatedri.getInstance().getKatedre()) {
+								if(k.getSef_katedre()!= null && k.getSef_katedre().getBroj_licne_karte().equals(BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex).getBroj_licne_karte())) {
+									k.setSef_katedre(null);
+								}
+							}
 							ProfesorKontroler.getInstance().izbrisiProfesora(ProfesoriJTable.rowSelectedIndex);
 							ProfesoriJTable.rowSelectedIndex=-1;
 							break;
