@@ -64,17 +64,23 @@ public class BazaNepolozenihPredmeta {
 		if(row < nepolozeni_predmeti.size()) {
 			
 			Predmet predmet = this.nepolozeni_predmeti.get(row);
+			Predmet p2 = null;
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta()) || p.getNaziv().equals(predmet.getNaziv())) {
+					p2 = p;
+				}
+			}
 			switch (column) {	
 				case 0:
-					return predmet.getSifra_predmeta();
+					return p2.getSifra_predmeta();
 				case 1:
-					return predmet.getNaziv();
+					return p2.getNaziv();
 				case 2:
-					return Integer.toString(predmet.getEspb());
+					return Integer.toString(p2.getEspb());
 				case 3:
-					return Integer.toString(predmet.getGodina_izvodjenja());
+					return Integer.toString(p2.getGodina_izvodjenja());
 				case 4:
-					return predmet.getSemestar().toString();
+					return p2.getSemestar().toString();
 				default:
 					return null;
 			}

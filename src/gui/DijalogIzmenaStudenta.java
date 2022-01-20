@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -752,6 +753,17 @@ public class DijalogIzmenaStudenta extends JDialog {
 					    if (dialogResult == JOptionPane.YES_OPTION) {
 					    	OcenaNaIspitu p = BazaPolozenih.getInstance().getRow(PolozeniIspitiJTable.rowSelectedIndex);
 					    	Student s = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
+					    	boolean moze = false;
+							for(Predmet pr : BazaPredmeta.getInstance().getPredmeti()) {
+								if(p.getPredmet().getSifra_predmeta().equals(pr.getSifra_predmeta()) || p.getPredmet().getNaziv().equals(pr.getNaziv())) {
+									moze = true;
+								}
+							}
+							if(!moze) {
+								s.getPolozeni_ispiti().remove(p);
+								PolozeniIspitiJTable.azurirajPrikaz();
+								return;
+							}
 					    	p.setVrednost_ocene(Vrednost_Ocene.pet);
 							s.getPolozeni_ispiti().remove(p);
 							PolozeniIspitiJTable.azurirajPrikaz();

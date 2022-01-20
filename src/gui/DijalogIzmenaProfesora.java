@@ -819,6 +819,9 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 }
 
 class DijalogDodavanjePredmetaProfesoru extends JDialog {
+
+	private static final long serialVersionUID = 1290256926537686357L;
+
 	public DijalogDodavanjePredmetaProfesoru(Frame parent, String title, boolean modal, ProfesorPredajeJTable prof_predaje) {
 		super(parent, title, modal);
 		

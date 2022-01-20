@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Katedra implements Serializable{
 
-	private static final long serialVersionUID = 7920837647787869436L;
-
+	private static final long serialVersionUID = -6887287643096525038L;
 	private int id;
 	private String sifra;
 	private String naziv_katedre;

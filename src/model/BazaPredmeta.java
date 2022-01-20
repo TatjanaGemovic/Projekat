@@ -24,6 +24,7 @@ public class BazaPredmeta{
 	}
 	
 	private List<Predmet> predmeti;
+	private List<Predmet> potencijalni;
 	public List<String> kolone;
 	public String kolonaZaDodavanje;
 	
@@ -150,7 +151,7 @@ public class BazaPredmeta{
 	}
 	
 	public String getValueAtZaDodavanje(int row, int column) {
-		List<Predmet> potencijalni = new ArrayList<Predmet>();
+		potencijalni = new ArrayList<Predmet>();
 		if(TabbedPane.tabIndex==TrenTab.Student) {
 			Student student = BazaStudenata.getInstance().getRow(StudentiJTable.rowSelectedIndex);
 			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
@@ -166,21 +167,27 @@ public class BazaPredmeta{
 						pronadjen++;
 					}
 				}
-				if(pronadjen==0) potencijalni.add(p);
+				if(pronadjen==0) this.potencijalni.add(p);
 			}
 		}
 		else if(TabbedPane.tabIndex==TrenTab.Profesor) {
 			Profesor profesor = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
 			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
 				if(p.getPredmetni_profesor()==null)
-					potencijalni.add(p);
+					this.potencijalni.add(p);
 			}
 		}
 		if(row < potencijalni.size()) {
-			Predmet predmet = potencijalni.get(row);
+			Predmet predmet = this.potencijalni.get(row);
+			Predmet p2 = null;
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta()) || p.getNaziv().equals(predmet.getNaziv())) {
+					p2 = p;
+				}
+			}
 			switch (column) {
 			case 0:
-				return predmet.getSifra_predmeta() + " - " + predmet.getNaziv();
+				return p2.getSifra_predmeta() + " - " + p2.getNaziv();
 			default:
 				return null;
 			}
@@ -193,26 +200,32 @@ public class BazaPredmeta{
 		}
 		}
 	}
-	
+
 	public String getValueAtProfesorPredaje(int row, int column) {
 		Profesor prof = BazaProfesora.getInstance().getRow(ProfesoriJTable.rowSelectedIndex);
 		List<Predmet> predmeti = new ArrayList<Predmet>();
 		for(Predmet pred : BazaPredmeta.getInstance().getPredmeti()) {
-			if(pred.getPredmetni_profesor()!=null && pred.getPredmetni_profesor().getIme()==prof.getIme() && pred.getPredmetni_profesor().getPrezime()==prof.getPrezime()) {
+			if(pred.getPredmetni_profesor()!=null && (pred.getPredmetni_profesor().getIme().equals(prof.getIme()) || pred.getPredmetni_profesor().getPrezime().equals(prof.getPrezime()))) {
 				predmeti.add(pred);
 			}
 		}
 		if(row < predmeti.size()) {
 			Predmet predmet = predmeti.get(row);
+			Predmet p2 = null;
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getSifra_predmeta().equals(predmet.getSifra_predmeta()) || p.getNaziv().equals(predmet.getNaziv())) {
+					p2 = p;
+				}
+			}
 			switch (column) {
 			case 0:
-				return predmet.getSifra_predmeta();
+				return p2.getSifra_predmeta();
 			case 1:
-				return predmet.getNaziv();
+				return p2.getNaziv();
 			case 2:
-				return Integer.toString(predmet.getGodina_izvodjenja());
+				return Integer.toString(p2.getGodina_izvodjenja());
 			case 3:
-				return predmet.getSemestar().toString();
+				return p2.getSemestar().toString();
 			default:
 				return null;
 			}

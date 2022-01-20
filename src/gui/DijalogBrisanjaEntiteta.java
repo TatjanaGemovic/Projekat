@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -15,6 +16,13 @@ import javax.swing.JPanel;
 import controller.PredmetKontroler;
 import controller.ProfesorKontroler;
 import controller.StudentKontroler;
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenata;
+import model.OcenaNaIspitu;
+import model.Predmet;
+import model.Profesor;
+import model.Student;
 
 public class DijalogBrisanjaEntiteta extends JDialog{
 
@@ -82,6 +90,24 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 							ProfesoriJTable.rowSelectedIndex=-1;
 							break;
 						case Predmet:
+							for(Student s : BazaStudenata.getInstance().getStudenti()) {
+								ArrayList<OcenaNaIspitu> nep_ispiti = s.getNepolozeni_ispiti();
+								for(OcenaNaIspitu o : nep_ispiti) {
+									if(o.getPredmet().getSifra_predmeta().equals(BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex).getSifra_predmeta())) {
+										s.getNepolozeni_ispiti().remove(o);
+										break;
+									}
+								}
+							}
+							for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+								ArrayList<Predmet> predmeti = p.getProfesor_na_predmetu();
+								for(Predmet pred : predmeti) {
+									if(pred.getSifra_predmeta().equals(BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex).getSifra_predmeta())) {
+										p.getProfesor_na_predmetu().remove(pred);
+										break;
+									}
+								}
+							}
 							PredmetKontroler.getInstance().izbrisiPredmet(PredmetiJTable.rowSelectedIndex);
 							PredmetiJTable.rowSelectedIndex=-1;
 							break;

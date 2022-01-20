@@ -123,6 +123,20 @@ public class MenuBar extends JMenuBar {
 					    			e1.printStackTrace();
 					            }
 					    }
+						ObjectOutputStream outKatedre = null;
+						try {
+							outKatedre = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileKatedre)));
+							outKatedre.writeObject(BazaKatedri.getInstance().getKatedre());
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+					    } finally {
+					            try {
+					            	outKatedre.close();
+					            } catch (Exception e1) {
+					    			e1.printStackTrace();
+					            }
+					    }
 						
 						ObjectOutputStream outPredmeti = null;
 						try {
@@ -138,21 +152,6 @@ public class MenuBar extends JMenuBar {
 					    			e1.printStackTrace();
 					            }
 					    }	
-						
-						ObjectOutputStream outKatedre = null;
-						try {
-							outKatedre = new ObjectOutputStream(new BufferedOutputStream( new FileOutputStream(MenuBar.fileKatedre)));
-							outKatedre.writeObject(BazaKatedri.getInstance().getKatedre());
-							
-						} catch (Exception e1) {
-							e1.printStackTrace();
-					    } finally {
-					            try {
-					            	outKatedre.close();
-					            } catch (Exception e1) {
-					    			e1.printStackTrace();
-					            }
-					    }
 			}
 			
 			
