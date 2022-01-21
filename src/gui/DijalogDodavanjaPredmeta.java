@@ -310,7 +310,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 			    	String sifra = txtSifra.getText();
 			    	for(Predmet i : BazaPredmeta.getInstance().getPredmeti()) {
 			    		if(i.getSifra_predmeta().equals(sifra)) {
-			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("postoji") + sifra);
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("postoji_sa_sifrom"));
 			    			return;
 			    		}
 			    	}

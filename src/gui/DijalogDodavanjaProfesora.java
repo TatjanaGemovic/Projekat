@@ -570,7 +570,7 @@ public class DijalogDodavanjaProfesora extends JDialog{
 			    	String brojLicneKarte = txtBrLicneKarte.getText();
 			    	for(Profesor i : BazaProfesora.getInstance().getProfesori()) {
 			    		if(i.getBroj_licne_karte().equals(brojLicneKarte)) {
-			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("br_licne_postoji") + brojLicneKarte);
+			    			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Postoji profesor sa istih brojm licne karte");
 			    			return;
 			    		}
 			    	}
