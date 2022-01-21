@@ -31,7 +31,7 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 	private static final long serialVersionUID = -4141971147148640617L;
 
 	public DijalogBrisanjaEntiteta(Frame parent, String title, boolean modal) {
-		super(parent, "Brisanje " + TabbedPane.tabIndex + "a", modal);
+		super(parent, MainFrame.getInstance().getResourceBundle().getString("brisanje_entiteta") + " " + TabbedPane.tabIndex, modal);
 		
 		Dimension parentSize = parent.getSize();
 		int diaWidth = parentSize.width;
