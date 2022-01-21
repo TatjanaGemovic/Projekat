@@ -30,7 +30,7 @@ public class BazaKatedri{
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Naziv katedre");
-		this.kolone.add("Sef katedre");
+		this.kolone.add("Šef katedre");
 		id=0;
 		
 		initKatedre();
@@ -85,7 +85,7 @@ public class BazaKatedri{
 					return katedra.getNaziv_katedre();
 				case 1:
 					if(katedra.getSef_katedre()==null)
-						return "nema sefa";
+						return "nema šefa";
 					return katedra.getSef_katedre().getImeIPrezime();
 				default:
 					return null;

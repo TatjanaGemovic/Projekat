@@ -149,7 +149,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtSifra.getText()).matches("[A-ZČĆŠĐŽa-zčćžšđ0-9 ]+")) {
+				if((txtSifra.getText()).matches("[A-ZČĆŠĐŽa-zčćšđž0-9 ]+")) {
 	                dobrasifra = true;
 	                if(dobarbroj && dobarnaziv && dobrasifra)
 	                    potvrda.setEnabled(true);
@@ -179,7 +179,7 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtNaziv.getText()).matches("([A-ZČĆŠĐŽ][a-zčćžšđ0-9 ]+)+")) {
+				if((txtNaziv.getText()).matches("([A-ZČĆŠĐŽ][a-zčćšđž0-9 ]+)+")) {
 	                dobarnaziv = true;
 	                if(dobarbroj && dobarnaziv && dobrasifra)
 	                    potvrda.setEnabled(true);

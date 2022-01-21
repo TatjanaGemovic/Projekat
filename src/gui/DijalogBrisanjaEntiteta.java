@@ -64,7 +64,7 @@ public class DijalogBrisanjaEntiteta extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 
 			int dialogButton = JOptionPane.YES_NO_OPTION;
-			           int dialogResult = JOptionPane.showConfirmDialog(null, "siguran", "potvrda", dialogButton);
+			           int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 
 			           if (dialogResult == JOptionPane.YES_OPTION) {
 			        	   dispose();

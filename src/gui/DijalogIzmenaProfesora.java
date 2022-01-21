@@ -201,7 +201,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
+				if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćšđž]+")) {
 					dobroime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -237,7 +237,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćžšđ]+")) {
+				if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćšđž]+")) {
 					dobroprezime = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);
@@ -387,7 +387,7 @@ public class DijalogIzmenaProfesora extends JDialog {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[.]?[a-zA-Z0-9ČĆŠĐŽčćžšđ]+[@]([a-z]+[.])+[a-z]+")) {
+				if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9čćšđžČĆŠĐŽ]+[.]?[a-zA-Z0-9čćšđžČĆŠĐŽ]+[@]([a-z]+[.])+[a-z]+")) {
 					dobarmail = true;
 					if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobra_adresa2 && dobarbrlicne && dobrozvanje && dobarstaz)
 						potvrda.setEnabled(true);

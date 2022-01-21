@@ -213,7 +213,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtIme.getText()).matches("[A-ZÄŒÄ†Å Ä�Å½][a-zÄ�Ä‡Å¾Å¡Ä‘]+")) {
+					if((txtIme.getText()).matches("[A-ZČĆŠĐŽ][a-zčćšđž]+")) {
 						dobroime = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -247,7 +247,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if((txtPrezime.getText()).matches("[A-ZÄŒÄ†Å Ä�Å½][a-zÄ�Ä‡Å¾Å¡Ä‘]+")) {
+					if((txtPrezime.getText()).matches("[A-ZČĆŠĐŽ][a-zčćšđž]+")) {
 						dobroprezime = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -358,7 +358,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 
 				@Override
 				public void keyReleased(KeyEvent e) {//[A-ZÄŒÄ†Å Ä�Å½][a-zÄ�Ä‡Å¾Å¡Ä‘]+
-					if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ÄŒÄ†Å Ä�Å½Ä�Ä‡Å¾Å¡Ä‘]+[.]?[a-zA-Z0-9ÄŒÄ†Å Ä�Å½Ä�Ä‡Å¾Å¡Ä‘]+[@]([a-z]+[.])+[a-z]+")) {
+					if((txtEmailAdresa.getText()).matches("[a-zA-Z0-9ČĆŠĐŽčćšđž]+[.]?[a-zA-Z0-9ČĆŠĐŽčćšđž]+[@]([a-z]+[.])+[a-z]+")) {
 						dobarmail = true;
 						if(dobroime && dobroprezime && dobardatum && dobra_adresa && dobarbroj && dobarmail && dobarindex && dobragodina)
 							potvrda.setEnabled(true);
@@ -496,7 +496,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    } );
 		    
 		    
-		    String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treca)","IV (Cetvrta)"};
+		    String godinaStudija[]= {"I (Prva)","II (Druga)","III (Treća)","IV (Četvrta)"};
 		    JComboBox<String> godStud=new JComboBox<>(godinaStudija);
 		    
 		    GridBagConstraints grd1 = new GridBagConstraints();
@@ -508,7 +508,7 @@ public class DijalogIzmenaStudenta extends JDialog {
 		    
 		    panelCenter.add(godStud,grd1);
 		    
-		    String status[]= {"Budzet","Samofinansiranje"};
+		    String status[]= {"Budžet","Samofinansiranje"};
 		    JComboBox<String> NacinFinansiranja=new JComboBox<>(status);
 		    
 		    GridBagConstraints grd2 = new GridBagConstraints();

@@ -32,7 +32,7 @@ public class BazaPredmeta{
 	public BazaPredmeta() {
 		 
 		this.kolone = new ArrayList<String>();
-		this.kolone.add("Sifra");
+		this.kolone.add("Šifra");
 		this.kolone.add("Naziv predmeta");
 		this.kolone.add("Broj ESPB bodova");
 		this.kolone.add("Godina");

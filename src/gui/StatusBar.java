@@ -21,7 +21,7 @@ public class StatusBar extends JMenuBar {
 	public StatusBar() {
 		JPanel nazivAplikacijePanel = new JPanel();
 		nazivAplikacijePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		nazivApp = new JLabel("  Studentska sluzba");
+		nazivApp = new JLabel("  Studentska služba");
 		nazivAplikacijePanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,Color.BLACK));
 		nazivAplikacijePanel.add(nazivApp);
 		nazivAplikacijePanel.add(nazivTaba);

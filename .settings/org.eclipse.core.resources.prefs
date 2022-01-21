@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
+encoding//src/gui/DijalogDodavanjaPredmeta.java=UTF-8
 encoding//src/gui/DijalogDodavanjaProfesora.java=UTF-8
 encoding//src/gui/DijalogDodavanjaStudenta.java=UTF-8
 encoding//src/gui/DijalogIzmenaPredmeta.java=UTF-8
+encoding//src/gui/DijalogIzmenaProfesora.java=UTF-8
 encoding//src/gui/DijalogIzmenaStudenta.java=UTF-8
+encoding//src/gui/MenuBar.java=UTF-8
+encoding//src/gui/MessageResources/MessageResources_sr_RS.properties=UTF-8
 encoding//src/gui/StudentiJTable.java=UTF-8

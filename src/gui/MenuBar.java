@@ -92,7 +92,7 @@ public class MenuBar extends JMenuBar {
 		
 		
 		icn = new ImageIcon("ikonice/save.png");
-		file_save = new JMenuItem("Sacuvaj", icn);
+		file_save = new JMenuItem("Sačuvaj", icn);
 		file_save.setMnemonic(KeyEvent.VK_S);
 		file_save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
 		file_save.addActionListener(new ActionListener() {
@@ -282,7 +282,7 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		icn = new ImageIcon("ikonice/trash.png");
-		delete_entity = new JMenuItem("Obrisi", icn);
+		delete_entity = new JMenuItem("Obriši", icn);
 		delete_entity.setMnemonic(KeyEvent.VK_D);
 		delete_entity.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
 		delete_entity.addActionListener(new ActionListener() {
@@ -320,10 +320,10 @@ public class MenuBar extends JMenuBar {
 		edit.addSeparator();
 		edit.add(delete_entity);
 		
-		help = new JMenu("Pomoc");
+		help = new JMenu("Pomoć");
 		help.setMnemonic(KeyEvent.VK_H);
 		icn = new ImageIcon("ikonice/help.png");
-		help_help = new JMenuItem("Pomoc", icn);
+		help_help = new JMenuItem("Pomoć", icn);
 		help_help.setMnemonic(KeyEvent.VK_H);
 		help_help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
 		help_help.addActionListener(new ActionListener() {
@@ -331,7 +331,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				JDialog d = new JDialog(new JFrame(),"Pomoc");
+				JDialog d = new JDialog(new JFrame(),"Pomoć");
 				Dimension parentSize = parent.getSize();
 				int diaWidth = parentSize.width;
 				int diaHeight = parentSize.height;
@@ -340,40 +340,40 @@ public class MenuBar extends JMenuBar {
 				JTextArea textArea = new JTextArea();
 				textArea.setEditable(false);
 				textArea.setText("\n     Funkcionalnosti koje aplikacija poseduje:\n"
-		                 +"     - Za cuvanje programa kliknite 'File'->'Save'\n"
+		                 +"     - Za čuvanje programa kliknite 'File'->'Save'\n"
 		                 +"     - Za prikaz taba studenati kliknite 'Edit'->'Open'->'Students'\n"
 		                 +"     - Za prikaz taba profesori kliknite 'Edit'->'Open'->'Profesors'\n"
 		                 +"     - Za prikaz taba predmeti kliknite 'Edit'->'Open'->'Subjects'\n"
 		                 +"     - Za prikaz katedri kliknite 'Edit'->'Open'->'Chairs'\n"
-		                 +"     - Za gasenje programa kliknite 'File'->'Close'\n"
+		                 +"     - Za gašenje programa kliknite 'File'->'Close'\n"
 		                 +"     - Za dodavanje novog entiteta kliknite 'File'->'Add'\n"
-		                 +"     - Za izmenu postojeceg entiteta kliknite 'Edit'->'Edit'\n"
-						 +"     - Za brisanje postojeceg entiteta kliknite 'Edit'->'Delete'\n"
-						 +"     - Za pomoc pri radu kliknite 'Help'->'Help'\n"
+		                 +"     - Za izmenu postojećeg entiteta kliknite 'Edit'->'Edit'\n"
+						 +"     - Za brisanje postojećeg entiteta kliknite 'Edit'->'Delete'\n"
+						 +"     - Za pomoć pri radu kliknite 'Help'->'Help'\n"
 						 +"     - Za informacije o nama kliknite 'Help'->'About'\n"
 
 
-						 +"\n    Precice koje aplikacija poseduje:\n"
-		                 +"     - Za cuvanje podataka: (CTRL + S)\n"
+						 +"\n    Prečice koje aplikacija poseduje:\n"
+		                 +"     - Za čuvanje podataka: (CTRL + S)\n"
 		                 +"     - Za prikaz taba studenati: (CTRL + M)\n"
 		                 +"     - Za prikaz taba profesori: (CTRL + L) \n"
 		                 +"     - Za prikaz taba predmeti: (CTRL + J)\n"
 		                 +"     - Za prikaz katedri: (CTRL + K)\n"
-		                 +"     - Za gasenje programa: (CTRL + C)\n"
+		                 +"     - Za gašenje programa: (CTRL + C)\n"
 		                 +"     - Za dodavanje novog entiteta: (CTRL + N)\n"
-		                 +"     - Za izmenu postojeceg entiteta: (CTRL + E)\n"
-						 +"     - Za brisanje postojeceg entiteta: (CTRL + D)\n"
-						 +"     - Za pomoc pri radu: (CTRL + H)\n"
+		                 +"     - Za izmenu postojećeg entiteta: (CTRL + E)\n"
+						 +"     - Za brisanje postojećeg entiteta: (CTRL + D)\n"
+						 +"     - Za pomoć pri radu: (CTRL + H)\n"
 						 +"     - Za informacije o nama: (CTRL + A) \n\n"
 				
 						 +"      Za pretragu Studenta: [Prezime], [Prezime,Ime], [Indeks,Ime,Prezime]\n"
 						 +"      Za pretragu Profesora: [Prezime], [Prezime,Ime]\n"
-						 +"      Za pretragu Predmeta: [Naziv], [Naziv,Sifra]\n"
+						 +"      Za pretragu Predmeta: [Naziv], [Naziv,Šifra]\n"
 						 +"\n   Napomena za unos [format]\n"
 						 +"                       Datum: dd/mm/yyyy\n"
 						 +"                       Adresa: Ulica, broj, grad, drzava\n"
 						 +"                       Broj telefona: xxx/yyy-yyy\n"
-						 +"\n     * Postoji mogucnost izmene jezika u programu na opciju 'Jezik' u MenuBar-u");
+						 +"\n     * Postoji mogućnost izmene jezika u programu na opciju 'Jezik' u MenuBar-u");
 								
 				d.add(textArea);
 				d.setVisible(true);
@@ -398,17 +398,17 @@ public class MenuBar extends JMenuBar {
 				JTextArea textArea = new JTextArea();
 				textArea.setEditable(false);
 				textArea.setText("\n\n"
-								+"     Autori:\n\n     Tatjana Gemovic\n"
-								+"     - rodjena 16.03.2000. u Novom Sadu\n"
-								+"     - zavrsila je gimnaziju 'Jovan Jovanovic Zmaj' u Novom Sadu\n"
-								+"     - upisala je Fakultet tehnickih nauka 2019. godine\n"
-								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n"
+								+"     Autori:\n\n     Tatjana Gemović\n"
+								+"     - rođena 16.03.2000. u Novom Sadu\n"
+								+"     - završila je gimnaziju 'Jovan Jovanović Zmaj' u Novom Sadu\n"
+								+"     - upisala je Fakultet tehničkih nauka 2019. godine\n"
+								+"     - trenutno je 3. godina na smeru Računarstvo i automatika (PRNI)\n"
 								+"     - aktivno se bavi sportom - Odbojka\n"
 								+ "\n\n     Filip Stefanov\n"
-								+"     - rodjen 27.05.2000. u Pirotu\n"
-								+"     - zavrsio je gimnaziju 'Jovan Jovanovic Zmaj' u Novom Sadu\n"
-								+"     - upisao je Fakultet tehnickih nauka 2019. godine\n"
-								+"     - trenutno je 3. godina na smeru Racunarstvo i automatika (PRNI)\n");
+								+"     - rođen 27.05.2000. u Pirotu\n"
+								+"     - završio je gimnaziju 'Jovan Jovanović Zmaj' u Novom Sadu\n"
+								+"     - upisao je Fakultet tehničkih nauka 2019. godine\n"
+								+"     - trenutno je 3. godina na smeru Računarstvo i automatika (PRNI)\n");
 								
 				d.add(textArea);
 				d.setVisible(true);
