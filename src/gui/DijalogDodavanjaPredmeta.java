@@ -284,8 +284,9 @@ public class DijalogDodavanjaPredmeta extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogBrisanjaProfesoraSaPredmeta BrisanjeProfesora = new DijalogBrisanjaProfesoraSaPredmeta(parent, MainFrame.getInstance().getResourceBundle().getString("ukloni_profesora"), true);
-				BrisanjeProfesora.setVisible(true);
+				DijalogDodavanjaPredmeta.profesorLista.setText(null);
+			    DijalogDodavanjaPredmeta.btnRemoveProfesor.setEnabled(false);
+			    DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(true);
 			}
 			
 		});

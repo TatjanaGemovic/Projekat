@@ -718,24 +718,18 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	
-					int dialogButton = JOptionPane.YES_NO_OPTION;
-				    int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
+					//int dialogButton = JOptionPane.YES_NO_OPTION;
+				    //int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 	
-				    if (dialogResult == JOptionPane.YES_OPTION) {
+				    //if (dialogResult == JOptionPane.YES_OPTION) {
 				    	dispose();
-				    }
+				    //}
 			             
 				}
 			});
 		
 		JPanel panelButton = new JPanel();
-		panelButton.add(potvrda);
-		panelButton.add(odustanak);
-	    this.add(panelButton, BorderLayout.SOUTH);
 		
-	    ProfesoriNaPredmetuJTable profesori = new ProfesoriNaPredmetuJTable();
-		JScrollPane profesoriProzor = new JScrollPane(profesori);
-		this.add(profesoriProzor, BorderLayout.CENTER);
 		
 		potvrda.addActionListener(new ActionListener() {
 
@@ -743,12 +737,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 			    
 			    if(ProfesoriNaPredmetuJTable.rowSelectedIndex >=0 && ProfesoriNaPredmetuJTable.rowSelectedIndex < BazaProfesora.getInstance().getProfesori().size()) {
-			    	
-			    	int dialogButton = JOptionPane.YES_NO_OPTION;
-			    	int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
-			    	
-			    	if (dialogResult == JOptionPane.YES_OPTION) {
-			    		
+
 			    		if(i == 0) {
 			    			Profesor p = BazaProfesora.getInstance().getProfesori().get(ProfesoriNaPredmetuJTable.rowSelectedIndex);
 			    			Predmet pred = BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.rowSelectedIndex);
@@ -765,14 +754,20 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    			DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(false);
 			    			DijalogDodavanjaPredmeta.k = 2;
 			    		}
-			    		
-			    	}
+
 			    }
 			    ProfesoriNaPredmetuJTable.rowSelectedIndex = -1;
 			    dispose();
 			}
 			
 		});
+		panelButton.add(potvrda);
+		panelButton.add(odustanak);
+	    this.add(panelButton, BorderLayout.SOUTH);
+		
+	    ProfesoriNaPredmetuJTable profesori = new ProfesoriNaPredmetuJTable();
+		JScrollPane profesoriProzor = new JScrollPane(profesori);
+		this.add(profesoriProzor, BorderLayout.CENTER);
 	}
 	
 }

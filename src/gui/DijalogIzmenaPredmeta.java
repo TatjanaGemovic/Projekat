@@ -61,7 +61,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		JButton odustanak=new JButton(MainFrame.getInstance().getResourceBundle().getString("cancel"));
 
 		odustanak.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -69,9 +69,9 @@ public class DijalogIzmenaPredmeta extends JDialog {
 				    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"), MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 	
 				    if (dialogResult == JOptionPane.YES_OPTION) {
-				    	dispose();
+				    	
 				    }
-			             
+			        dispose();   
 				}
 			});
 		
@@ -308,8 +308,9 @@ public class DijalogIzmenaPredmeta extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DijalogBrisanjaProfesoraSaPredmeta BrisanjeProfesora = new DijalogBrisanjaProfesoraSaPredmeta(parent,MainFrame.getInstance().getResourceBundle().getString("ukloni_profesora"), true);
-				BrisanjeProfesora.setVisible(true);
+				DijalogIzmenaPredmeta.profesorLista.setText(null);
+			    DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(false);
+			    DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(true);
 			}
 			
 		});
