@@ -63,6 +63,29 @@ public class PredmetiJTable extends JTable{
                                 return 1;
                             else
                                 return -1;
+                        } else if(column==0) {
+                            try{
+                                Integer.parseInt(o1.substring(1,2));
+                                try {
+                                    Integer.parseInt(o2.substring(1,2));
+                                    if(o1.substring(0,1).equals(o2.substring(0,1)))
+                                        return Integer.parseInt(o1.substring(1))-Integer.parseInt(o2.substring(1));
+                                    return o1.compareTo(o2);
+                                }
+                                catch(NumberFormatException e) {
+                                    return o1.compareTo(o2);
+                                }
+                            }catch(NumberFormatException e) {
+                                try {
+                                    Integer.parseInt(o2.substring(1,2));
+                                    return o1.compareTo(o2);
+                                }
+                                catch(NumberFormatException e1) {
+                                    if(o1.substring(0,2).equals(o2.substring(0,2)))
+                                        return Integer.parseInt(o1.substring(2))-Integer.parseInt(o2.substring(2));
+                                    return o1.compareTo(o2);
+                                }
+                            }
                         } else {
                         	return o1.compareTo(o2); 
                         }
