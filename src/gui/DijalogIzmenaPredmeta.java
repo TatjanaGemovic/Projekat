@@ -325,7 +325,7 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-			    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("potvrda"),MainFrame.getInstance().getResourceBundle().getString("sifra_predmeta"), dialogButton);
+			    int dialogResult = JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("siguran"),MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
 			    
 			    
 
