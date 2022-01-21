@@ -102,7 +102,7 @@ public class Toolbar extends JToolBar {
 		addSeparator();
 
 		btnDelete = new JButton();
-		btnDelete.setToolTipText("Obriöi");
+		btnDelete.setToolTipText("Obri≈°i");
 		btnDelete.setIcon(new ImageIcon("ikonice/trash.png"));
 		btnDelete.addActionListener(new ActionListener() {
 
@@ -159,7 +159,7 @@ public class Toolbar extends JToolBar {
 		addSeparator();
 
 		btnSearch = new JButton();
-		btnSearch.setToolTipText("Pretraûi");
+		btnSearch.setToolTipText("Pretra≈æi");
 		btnSearch.setIcon(new ImageIcon("ikonice/search-2.png"));
 		btnSearch.addActionListener(new ActionListener() {
 

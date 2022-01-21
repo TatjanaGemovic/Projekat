@@ -74,7 +74,7 @@ public class MainFrame extends JFrame{
 			int screenWidth = screenSize.width;
 			
 			this.setSize(screenWidth / 4 * 3, screenHeight / 4 * 3);
-			this.setTitle("Studentska sluûba");
+			this.setTitle("Studentska slu≈æba");
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
