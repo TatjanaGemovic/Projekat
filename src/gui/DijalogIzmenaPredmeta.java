@@ -262,9 +262,6 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		btnRemoveProfesor.setPreferredSize(new Dimension(30,20));
 		JPanel panelButton2 = new JPanel();
 		panelButton2.setLayout(new FlowLayout());
-		panelButton2.add(btnRemoveProfesor, FlowLayout.LEFT);
-		panelButton2.add(btnAddProfesor, FlowLayout.LEFT);
-		panelButton2.add(profesorLista, FlowLayout.LEFT);
 		
 		GridBagConstraints gbcTxtProfesor = new GridBagConstraints();
 		gbcTxtProfesor .gridx = 1;
@@ -273,6 +270,28 @@ public class DijalogIzmenaPredmeta extends JDialog {
 		gbcTxtProfesor.fill = GridBagConstraints.HORIZONTAL;
 		gbcTxtProfesor .insets = new Insets(20, 120, 0, 70);
 		panelCenter.add(panelButton2, gbcTxtProfesor);
+		
+		//ispis podataka za selektovani predmet
+    	Predmet predmet = BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex);
+    	txtSifra.setText(predmet.getSifra_predmeta());
+		txtNaziv.setText(predmet.getNaziv());
+		txtBrojESPB.setText(String.valueOf(predmet.getEspb()));
+		godStud.setSelectedIndex(predmet.getGodina_izvodjenja()-1);
+		int t=1;
+		if(predmet.getSemestar().equals(Semestar.zimski)) {
+			t=2;
+		}
+		semestarStud.setSelectedIndex(k-1);
+		if(predmet.getPredmetni_profesor()!=null) {
+			profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
+			btnRemoveProfesor.setEnabled(true);
+			btnAddProfesor.setEnabled(false);
+		} else{
+			profesorLista.setText(null);
+			btnRemoveProfesor.setEnabled(false);
+			btnAddProfesor.setEnabled(true);
+			
+		}
 		
 		btnAddProfesor.addActionListener(new ActionListener() {
 
@@ -295,30 +314,9 @@ public class DijalogIzmenaPredmeta extends JDialog {
 			
 		});
 		
-		//ispis podataka za selektovani predmet
-    	Predmet predmet = BazaPredmeta.getInstance().getRow(PredmetiJTable.rowSelectedIndex);
-    	txtSifra.setText(predmet.getSifra_predmeta());
-		txtNaziv.setText(predmet.getNaziv());
-		txtBrojESPB.setText(String.valueOf(predmet.getEspb()));
-		godStud.setSelectedIndex(predmet.getGodina_izvodjenja()-1);
-		int k=1;
-		if(predmet.getSemestar().equals(Semestar.zimski)) {
-			k=2;
-		}
-		semestarStud.setSelectedIndex(k-1);
-		if(predmet.getPredmetni_profesor()!=null) {
-			for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-				if(p.getBroj_licne_karte().equals(predmet.getPredmetni_profesor().getBroj_licne_karte())) {
-					profesorLista.setText(predmet.getPredmetni_profesor().getImeIPrezime());
-				}
-			}
-			btnRemoveProfesor.setEnabled(true);
-					btnAddProfesor.setEnabled(false);
-		} else{
-			profesorLista.setText(null);
-			btnRemoveProfesor.setEnabled(false);
-			btnAddProfesor.setEnabled(true);
-		}
+		panelButton2.add(btnRemoveProfesor, FlowLayout.LEFT);
+		panelButton2.add(btnAddProfesor, FlowLayout.LEFT);
+		panelButton2.add(profesorLista, FlowLayout.LEFT);
 		
 		potvrda.addActionListener(new ActionListener() {
 

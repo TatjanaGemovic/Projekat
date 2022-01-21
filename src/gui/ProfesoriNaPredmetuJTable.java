@@ -76,7 +76,7 @@ class ProfesoriNaKatedriJTable extends JTable{
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				tabelaProfesora = (ProfesoriNaPredmetuJTable) e.getComponent();
+				tabelaProfesora = (JTable) e.getComponent();
 				if(tabelaProfesora.getSelectedRow()!=-1) {
 					rowSelectedIndex = tabelaProfesora.convertRowIndexToModel(tabelaProfesora.getSelectedRow());
 				}

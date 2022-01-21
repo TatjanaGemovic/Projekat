@@ -157,7 +157,7 @@ class DijalogDodavanjaKatedre extends JDialog {
 		gbcTxtSifra .gridy = 0;
 		gbcTxtSifra .weightx = 100;
 		gbcTxtSifra .fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtSifra .insets = new Insets(20,120, 0, 70);
+		gbcTxtSifra .insets = new Insets(20,80, 0, 70);
 		panelPotencijalni.add(txtSifra, gbcTxtSifra );
 		
 		GridBagConstraints gbcTxtNaziv = new GridBagConstraints();
@@ -165,7 +165,7 @@ class DijalogDodavanjaKatedre extends JDialog {
 		gbcTxtNaziv.gridy = 1;
 		gbcTxtNaziv .weightx = 100;
 		gbcTxtNaziv.fill = GridBagConstraints.HORIZONTAL;
-		gbcTxtNaziv .insets = new Insets(20, 120, 0, 70);
+		gbcTxtNaziv .insets = new Insets(20, 80, 0, 70);
 		panelPotencijalni.add(txtNaziv, gbcTxtNaziv );
 		
 		dodajKatedru.addActionListener(new ActionListener() {
@@ -297,7 +297,7 @@ class DijalogDodavanjaProfesoraKatedri extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String ime_prezime = BazaProfesora.getInstance().getValueAt2(ProfesoriNaPredmetuJTable.rowSelectedIndex, 0);
+				String ime_prezime = BazaProfesora.getInstance().getValueAt4(ProfesoriNaKatedriJTable.rowSelectedIndex, 0);
 				
 				int i = 0;
 				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {

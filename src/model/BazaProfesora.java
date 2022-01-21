@@ -156,7 +156,7 @@ public class BazaProfesora{
 	public String getValueAt4(int row, int column) {
 		potencijalni = new ArrayList<Profesor>();
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-			if(p.getId_katedre()!=BazaKatedri.getInstance().getRow(KatedreJTable.rowSelectedIndex).getId())
+			//if(p.getId_katedre()!=BazaKatedri.getInstance().getRow(KatedreJTable.rowSelectedIndex).getId())
 				potencijalni.add(p);
 		}
 		if(row < potencijalni.size()) {

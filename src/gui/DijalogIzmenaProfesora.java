@@ -742,7 +742,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			    
-			    if(ProfesoriNaPredmetuJTable.rowSelectedIndex != -1 && ProfesoriNaPredmetuJTable.rowSelectedIndex < BazaProfesora.getInstance().getProfesori().size()) {
+			    if(ProfesoriNaPredmetuJTable.rowSelectedIndex >=0 && ProfesoriNaPredmetuJTable.rowSelectedIndex < BazaProfesora.getInstance().getProfesori().size()) {
 			    	
 			    	int dialogButton = JOptionPane.YES_NO_OPTION;
 			    	int dialogResult = JOptionPane.showConfirmDialog(null,  MainFrame.getInstance().getResourceBundle().getString("siguran"),  MainFrame.getInstance().getResourceBundle().getString("potvrda"), dialogButton);
@@ -768,6 +768,7 @@ class DijalogDodavanjeProfesoraNaPredmet extends JDialog {
 			    		
 			    	}
 			    }
+			    ProfesoriNaPredmetuJTable.rowSelectedIndex = -1;
 			    dispose();
 			}
 			
@@ -819,14 +820,14 @@ class DijalogBrisanjaProfesoraSaPredmeta extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			    dispose();	
+			    	
 			    DijalogIzmenaPredmeta.profesorLista.setText(null);
 			    DijalogIzmenaPredmeta.btnRemoveProfesor.setEnabled(false);
 			    DijalogIzmenaPredmeta.btnAddProfesor.setEnabled(true);
 			    DijalogDodavanjaPredmeta.profesorLista.setText(null);
 			    DijalogDodavanjaPredmeta.btnRemoveProfesor.setEnabled(false);
 			    DijalogDodavanjaPredmeta.btnAddProfesor.setEnabled(true);
-			    
+			    dispose();
 			}
 			
 		});
