@@ -59,6 +59,26 @@ public class StudentiJTable extends JTable{
 		                                return -1;
 		                            else
 		                                return 1;
+		                        } else if(column == 0) {
+		                        	String[] parts1 = o1.split("/");
+		                        	String[] parts2 = o2.split("/");
+		                        	String[] parts11 = parts1[0].split(" ");
+		                        	String[] parts21 = parts2[0].split(" ");
+		                        	if(parts11[0].equals(parts21[0])) {
+		                        		if(parts1[1].equals(parts2[1])) {
+		                        			int p1 = Integer.parseInt(parts11[1]);
+		                        			int p2 = Integer.parseInt(parts21[1]);
+		                        			if(p1>p2) {
+		                        				return 1;
+		                        			} else {
+		                        				return -1;
+		                        			}
+		                        		} else {
+		                        			return parts1[1].compareTo(parts2[1]);
+		                        		}
+		                        	} else {
+		                        		return parts11[0].compareTo(parts21[0]);
+		                        	}
 		                        } else {
 		                        	return o1.compareTo(o2); 
 		                        }
