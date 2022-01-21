@@ -24,7 +24,7 @@ public class BazaPolozenih {
 	public BazaPolozenih() {
 		
 		this.kolone = new ArrayList<String>();
-		this.kolone.add("Šifra predmeta");
+		this.kolone.add("Å ifra predmeta");
 		this.kolone.add("Naziv predmeta");
 		this.kolone.add("ESPB");
 		this.kolone.add("Ocena");
